@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Pinegrow Web Editor - SAAS Bootstrap v5 Template">
+    <meta name="author" content="">
+    <title>Mtambo</title>
+    <!-- Link to local Font Awesome CSS -->
+    <link href="{{ url_for('static', filename='css/fontawesome.min.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <!-- Additional styles -->
+    {% block head %}{% endblock %}
+</head>
+<body class="bg-gray-100">
+
+    <!-- Main Content -->
+    {% block content %}
+    <!-- Content will be injected here -->
+    {% endblock %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>
