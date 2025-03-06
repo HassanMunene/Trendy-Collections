@@ -1,0 +1,26 @@
+{
+  "name": "reddit2-server",
+  "version": "1.0.0",
+  "description": "Reddit 2.0",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "start": "node dist/index.js",
+    "dev": "nodemon dist/index.js" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HassanMunene/Reddit2-server.git"
+  },
+  "author": "Hassan Munene",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HassanMunene/Reddit2-server/issues"
+  },
+  "homepage": "https://github.com/HassanMunene/Reddit2-server#readme",
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "nodemon": "^3.1.9",
+    "typescript": "^5.8.2"
+  }
+}
