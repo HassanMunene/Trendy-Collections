@@ -37,9 +37,9 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 150px;
+    width: 170px;
     height: 60px;
-    min-width: 150px;
+    min-width: 170px;
     color: #000 !important;
     border: 1px solid rgba(0, 0, 0, 0.2) !important;
     border-radius: 6px;
@@ -64,4 +64,41 @@ a {
     text-transform: capitalize;
     font-weight: 700;
     line-height: 16px;
+}
+
+.header .headerSearch {
+    position: relative;
+    width: 60%;
+    height: 60px;
+    background: #e5e5e5;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+.header .headerSearch input{
+    background: transparent !important;
+    outline: none !important;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 40px;
+    border: 0px !important;
+    padding: 0px 20px;
+}
+
+.header .headerSearch button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 100;
+    min-width: 40px !important;
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 50% !important;
+    color: #000; 
+}
+
+.header .headerSearch button svg{
+    font-size: 25px !important;
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { IoIosSearch } from "react-icons/io";
+import Button from '@mui/material/Button';
 
 import Logo from '../../assets/images/trendy_collections_logo4.png';
 import CountyDropdown from '../CountyDropdown/CountyDropdown';
@@ -18,6 +20,14 @@ const Header = () => {
                             </div>
                             <div className='col-sm-10 d-flex align-items-center part2'>
                                 <CountyDropdown />
+                                {/* header search starts here */}
+                                <div className='headerSearch ms-3 me-3'>
+                                    <input type='text' placeholder='Search for products...'/>
+                                    <Button>
+                                        <IoIosSearch />
+                                    </Button>
+                                </div>
+                                {/* header search ends here */}
                             </div>
                         </div>
                     </div>

@@ -10,7 +10,7 @@ const CountyDropdown = () => {
                 <span className="name">Nairobi</span>
             </div>
             <span>
-                <FaAngleDown className="ml-auto"/>
+                <FaAngleDown className="ms-auto"/>
             </span>
         </Button>
     );
