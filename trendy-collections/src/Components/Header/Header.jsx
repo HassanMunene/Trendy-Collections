@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IoIosSearch } from "react-icons/io";
 import Button from '@mui/material/Button';
 import { IoCartOutline } from "react-icons/io5";
 
 import Logo from '../../assets/images/trendy_collections_logo6.png';
 import CountyDropdown from '../CountyDropdown/CountyDropdown';
+import SearchBox from './SearchBox/SearchBox';
+import Navigation from './Navigation/Navigation';
 
 const Header = () => {
     return (
@@ -28,14 +29,7 @@ const Header = () => {
                             </div>
                             <div className='col-sm-10 d-flex align-items-center part2'>
                                 <CountyDropdown />
-                                {/* header search starts here */}
-                                <div className='headerSearch ms-3 me-3'>
-                                    <input type='text' placeholder='Search for products...' />
-                                    <Button>
-                                        <IoIosSearch />
-                                    </Button>
-                                </div>
-                                {/* header search ends here */}
+                                <SearchBox />
 
                                 <div className='part3 ms-auto'>
                                     <div className='ms-auto cartTab d-flex align-items-center'>
@@ -50,6 +44,7 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
+                <Navigation />
             </div>
         </>
     )
