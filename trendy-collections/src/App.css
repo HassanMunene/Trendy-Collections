@@ -39,7 +39,7 @@ a {
 
 .logoWrapper img {
     width: 100%;
-    height: auto;
+    height: 100px;
 }
 
 .headerWrapper .header .part2 .selectLocation {
@@ -102,8 +102,8 @@ a {
 
 .header .headerSearch button {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 5px;
+    right: 10px;
     z-index: 100;
     min-width: 40px !important;
     height: 40px !important;

@@ -4,7 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 import Button from '@mui/material/Button';
 import { IoCartOutline } from "react-icons/io5";
 
-import Logo from '../../assets/images/trendy_collections_logo4.png';
+import Logo from '../../assets/images/trendy_collections_logo6.png';
 import CountyDropdown from '../CountyDropdown/CountyDropdown';
 
 const Header = () => {
