@@ -15,32 +15,50 @@ const Navigation = () => {
         <nav>
             <div className="container">
                 <div className="row">
-                    <div className="col-sm-3 navPart1">
+                    <div className="col-sm-2 navPart1">
                         <Button className='allCatTab d-flex align-items-center'>
                             <span className="icon1 me-2"><IoIosMenu /></span>
                             <span className='text'>ALL CATEGORIES</span>
                             <span className="icon2 ms-2"><FaAngleDown /></span>
                         </Button>
                     </div>
-                    <div className="col-sm-9 navPart2 d-flex align-items-center">
-                        <ul className="list list-inline ms-auto">
+                    <div className="col-sm-10 navPart2 d-flex align-items-center">
+                        <ul className="list list-inline">
                             <li className="list-inline-item">
-                                <Link to="/"><IoMdHome /> &nbsp; Home</Link>
+                                <Link to="/">
+                                    <IoMdHome className="me-2" />
+                                    <Button>Home</Button>
+                                </Link>
                             </li>
                             <li className="list-inline-item">
-                                <Link to="/"><GiPillow /> &nbsp; Pillows</Link>
+                                <Link to="/">
+                                    <GiPillow className="me-2" />
+                                    <Button>Pillows</Button>
+                                </Link>
                             </li>
                             <li className="list-inline-item">
-                                <Link to="/"><MdCurtains /> &nbsp; Curtains</Link>
+                                <Link to="/">
+                                    <MdCurtains className="me-2" />
+                                    <Button>Curtains</Button>
+                                </Link>
                             </li>
                             <li className="list-inline-item">
-                                <Link to="/"><MdEventSeat /> &nbsp; Seat Pads</Link>
+                                <Link to="/">
+                                    <MdEventSeat className="me-2" />
+                                    <Button>Seat Pads</Button>
+                                </Link>
                             </li>
                             <li className="list-inline-item">
-                                <Link to="/"><FcAbout /> &nbsp; About Us</Link>
+                                <Link to="/">
+                                    <FcAbout className="me-2" />
+                                    <Button>About Us</Button>
+                                </Link>
                             </li>
                             <li className="list-inline-item">
-                                <Link to="/"><IoIosCall /> &nbsp; Contact Us</Link>
+                                <Link to="/">
+                                    <IoIosCall className="me-2" />
+                                    <Button>Contact Us</Button>
+                                </Link>
                             </li>
                         </ul>
                     </div>
