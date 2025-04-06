@@ -246,7 +246,7 @@ nav .navPart2 ul li a {
     text-transform: uppercase;
     display: flex;
     align-items: center;
-    padding: 10px 15px;
+    padding: 10px 10px;
     transition: all 0.3s ease-in-out;
     border-radius: 6px;
 }
