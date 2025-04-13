@@ -21,8 +21,8 @@ const MainLayout = () => {
         <div className="flex min-h-screen flex-col bg-rose-50">
             {/* Announcement Bar */}
             <div className="bg-gradient-to-r from-rose-700 to-pink-600 py-2 text-center text-white text-sm font-medium">
-                <div className="container mx-auto px-4">
-                    Free shipping on orders over $50 | Use code TRENDY15 for 15% off your first order
+                <div className="container mx-auto px-4 text-lg">
+                    We deliver countrywide! | <a href="tel:0712403671" className="underline hover:text-gray-100">Contact us at 0712403671</a>
                 </div>
             </div>
 
