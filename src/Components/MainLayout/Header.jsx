@@ -1,6 +1,15 @@
 import React from "react";
 import { AlignJustify } from "lucide-react";
 
+import UserActions from "./UserActions";
+
+const navigationLinks = [
+    { name: 'Pillows', href: '/products?category=pillow' },
+    { name: 'Curtains', href: '/products?category=curtains' },
+    { name: 'Best Sellers', href: '/products?category=bestsellers' },
+    { name: 'New Arrivals', href: '/products/new' }
+]
+
 const Header = ({ scrolled, mobileMenuOpen, setMobileMenuOpen }) => {
     return (
         <header className={`sticky top-0 z-50 w-full transition-all duration-500 ${scrolled ? 'bg-white shadow-xl' : 'bg-white/95 backdrop-blur-md'}`}>
@@ -25,17 +34,8 @@ const Header = ({ scrolled, mobileMenuOpen, setMobileMenuOpen }) => {
 
                     {/* Navigation - Desktop with animated underline */}
                     <nav className="hidden md:flex space-x-4">
-                        {[
-                            { name: 'Pillows', href: '/products?category=pillow' },
-                            { name: 'Curtains', href: '/products?category=curtains' },
-                            { name: 'Best Sellers', href: '/products?category=bestsellers' },
-                            { name: 'New Arrivals', href: '/products/new' }
-                        ].map((item) => (
-                            <a
-                                key={item.name}
-                                href={item.href}
-                                className="relative px-4 py-2 bg-rose-50 text-gray-700 font-medium rounded-md hover:bg-rose-100 transition-all duration-300 group"
-                            >
+                        {navigationLinks.map((item) => (
+                            <a key={item.name} href={item.href} className="relative px-4 py-2 bg-rose-50 text-gray-700 font-medium rounded-md hover:bg-rose-100 transition-all duration-300 group">
                                 {item.name}
                                 <span className="absolute inset-0 border border-rose-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                                 <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-rose-700 to-pink-600 transition-all duration-300 group-hover:w-4/5 group-hover:left-[10%]"></span>
@@ -43,49 +43,8 @@ const Header = ({ scrolled, mobileMenuOpen, setMobileMenuOpen }) => {
                         ))}
                     </nav>
 
-                    {/* User Actions with tooltips */}
-                    <div className="flex items-center space-x-6">
-                        <button
-                            className="text-gray-700 hover:text-rose-700 transition-colors hidden sm:block relative group"
-                            aria-label="Search"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                            <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                Search
-                            </span>
-                        </button>
-
-                        <a
-                            href="/account"
-                            className="text-gray-700 hover:text-rose-700 transition-colors hidden sm:block relative group"
-                            aria-label="Account"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                            <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                Account
-                            </span>
-                        </a>
-
-                        <a
-                            href="/cart"
-                            className="relative text-gray-700 hover:text-rose-700 transition-colors group"
-                            aria-label="Cart"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                            </svg>
-                            <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-rose-700 to-pink-600 text-xs text-white transform transition-transform duration-200 group-hover:scale-110">
-                                3
-                            </span>
-                            <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                Cart (3)
-                            </span>
-                        </a>
-                    </div>
+                    {/* User Actions */}
+                    <UserActions />
                 </div>
 
                 {/* Enhanced Mobile Menu */}
