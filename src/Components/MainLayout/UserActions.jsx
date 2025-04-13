@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Search } from "lucide-react";
+import { Search, User } from "lucide-react";
 import { Link } from 'react-router-dom';
 
 const UserActions = () => {
@@ -60,20 +60,15 @@ const UserActions = () => {
                 {/* Account Trigger Button */}
                 <button
                     onClick={() => setIsAccountOpen(!isAccountOpen)}
-                    className="text-gray-700 hover:text-rose-700 transition-colors p-2 rounded-full hover:bg-rose-50 flex items-center justify-center"
+                    className="text-gray-700 hover:text-rose-700 transition-colors p-2 hover:bg-rose-50 rounded-full flex items-center justify-center"
                     aria-label="Account"
                     aria-expanded={isAccountOpen}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+                    <User className='h-5 w-5' />
                 </button>
 
                 {/* Dropdown Menu */}
-                <div
-                    className={`absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-xl py-2 transition-all duration-200 z-50 ${isAccountOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-1'
-                        }`}
-                >
+                <div className={`absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-xl py-2 transition-all duration-200 z-50 ${isAccountOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-1'}`}>
                     <Link
                         to="/account"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-rose-50 hover:text-rose-700"
