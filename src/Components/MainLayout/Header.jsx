@@ -1,5 +1,6 @@
 import React from "react";
 import { AlignJustify } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import UserActions from "./UserActions";
 
@@ -25,21 +26,21 @@ const Header = ({ scrolled, mobileMenuOpen, setMobileMenuOpen }) => {
                     </button>
 
                     {/* Logo when we hover we underline */}
-                    <a href="/" className="flex items-center group">
+                    <Link to="/" className="flex items-center group">
                         <span className="text-2xl font-bold bg-gradient-to-r from-rose-700 to-pink-600 bg-clip-text text-transparent relative">
                             Trendy Collections
                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-rose-700 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
                         </span>
-                    </a>
+                    </Link>
 
                     {/* Navigation - Desktop with animated underline */}
                     <nav className="hidden md:flex space-x-4">
                         {navigationLinks.map((item) => (
-                            <a key={item.name} href={item.href} className="relative px-4 py-2 bg-rose-50 text-gray-700 font-medium rounded-md hover:bg-rose-100 transition-all duration-300 group">
+                            <Link key={item.name} to={item.href} className="relative px-4 py-2 bg-rose-50 text-gray-700 font-medium rounded-md hover:bg-rose-100 transition-all duration-300 group">
                                 {item.name}
                                 <span className="absolute inset-0 border border-rose-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                                 <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-rose-700 to-pink-600 transition-all duration-300 group-hover:w-4/5 group-hover:left-[10%]"></span>
-                            </a>
+                            </Link>
                         ))}
                     </nav>
 
