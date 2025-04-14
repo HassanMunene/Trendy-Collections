@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import pillowHero from "../../assets/images/pillow_hero.jpg"
 import curtainHero from "../../assets/images/curtain_hero.webp"
 
 const HeroSection = () => {
     const [activeSlide, setActiveSlide] = useState(0);
+    const touchStartX = useRef(0);
+    const touchEndX = useRef(0);
 
     const heroSlides = [
         {
@@ -38,10 +40,29 @@ const HeroSection = () => {
         setActiveSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
     };
 
+    // Swipe handlers
+    const handleTouchStart = (e) => {
+        touchStartX.current = e.touches[0].clientX;
+    }
+
+    const handleTouchEnd = (e) => {
+        touchEndX.current = e.changedTouches[0].clientX;
+        handleSwipeGesture();
+    }
+
+    const handleSwipeGesture = () => {
+        const difference = touchStartX.current - touchEndX.current;
+        if (difference > 50) {
+            nextSlide();
+        } else if (difference < -50) {
+            prevSlide();
+        }
+    }
+
     return (
-        <section className="relative overflow-hidden">
+        <section className="relative overflow-hidden" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
             {/* Gradient background overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/30 to-black/10 z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-white/30 to-black/10 z-10 pointer-events-none"></div>
 
             {/* Slides container */}
             <div className="flex transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]"
@@ -67,7 +88,7 @@ const HeroSection = () => {
                                 </p>
                                 <Link
                                     to={slide.link}
-                                    className="inline-block bg-gradient-to-r from-rose-700 to-pink-600 hover:from-rose-800 hover:to-pink-700 text-white px-8 py-4 rounded-lg hover:shadow-lg transition-all duration-300 font-medium text-lg"
+                                    className="inline-block cursor-pointer bg-gradient-to-r from-rose-700 to-pink-600 hover:from-rose-800 hover:to-pink-700 text-white px-8 py-4 rounded-lg hover:shadow-lg transition-all duration-300 font-medium text-lg"
                                 >
                                     {slide.cta}
                                 </Link>
