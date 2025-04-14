@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import HeroSection from '../Components/MainLayout/HeroSection';
+
 const HomePage = () => {
     const [activeSlide, setActiveSlide] = useState(0);
 
@@ -119,71 +121,7 @@ const HomePage = () => {
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <section className="relative overflow-hidden bg-gradient-to-b from-rose-50 to-white">
-                <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeSlide * 100}%)` }}>
-                    {heroSlides.map((slide) => (
-                        <div
-                            key={slide.id}
-                            className={`min-w-full ${slide.backgroundColor}`}
-                        >
-                            <div className="container mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center">
-                                <div className="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                                    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center md:text-left text-gray-900">{slide.title}</h1>
-                                    <p className="text-lg md:text-xl mb-6 text-center md:text-left text-gray-700">{slide.subtitle}</p>
-                                    <div className="flex justify-center md:justify-start">
-                                        <Link
-                                            to={slide.link}
-                                            className="inline-block bg-gradient-to-r from-rose-700 to-pink-600 text-white px-8 py-4 rounded-md hover:opacity-90 transition-opacity font-medium text-lg"
-                                        >
-                                            {slide.cta}
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="w-full md:w-1/2">
-                                    <img
-                                        src={slide.image}
-                                        alt={slide.title}
-                                        className="w-full h-auto rounded-lg shadow-xl object-cover"
-                                        style={{ maxHeight: '500px' }}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Slider navigation */}
-                <button
-                    onClick={prevSlide}
-                    className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-80 p-3 rounded-full shadow-lg hover:bg-opacity-100 transition-all"
-                    aria-label="Previous slide"
-                >
-                    <svg className="w-6 h-6 text-rose-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <button
-                    onClick={nextSlide}
-                    className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-80 p-3 rounded-full shadow-lg hover:bg-opacity-100 transition-all"
-                    aria-label="Next slide"
-                >
-                    <svg className="w-6 h-6 text-rose-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-
-                {/* Dots indicator */}
-                <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-2">
-                    {heroSlides.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setActiveSlide(index)}
-                            className={`w-3 h-3 rounded-full transition-all ${index === activeSlide ? 'bg-rose-700 w-6' : 'bg-gray-300'}`}
-                            aria-label={`Go to slide ${index + 1}`}
-                        />
-                    ))}
-                </div>
-            </section>
+            <HeroSection />
 
             {/* Shop by Category */}
             <section className="py-16 bg-white">
