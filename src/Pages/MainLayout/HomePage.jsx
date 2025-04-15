@@ -1,32 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import HeroSection from '../Components/MainLayout/HeroSection';
+import HeroSection from '../../Components/MainLayout/HeroSection';
 
 const HomePage = () => {
     const [activeSlide, setActiveSlide] = useState(0);
-
-    // Hero slider data
-    const heroSlides = [
-        {
-            id: 1,
-            title: 'Elevate Your Home with Luxury',
-            subtitle: 'Discover our premium collections designed for comfort and style',
-            cta: 'Shop Now',
-            link: '/products/new',
-            image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80',
-            backgroundColor: 'bg-rose-50'
-        },
-        {
-            id: 2,
-            title: 'Summer Collection Launch',
-            subtitle: 'Fresh designs to brighten your living spaces',
-            cta: 'Explore New Arrivals',
-            link: '/products/new',
-            image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-            backgroundColor: 'bg-rose-50'
-        },
-    ];
 
     // Featured categories
     const categories = [

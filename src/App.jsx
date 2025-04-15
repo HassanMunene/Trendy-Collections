@@ -7,10 +7,9 @@ import MainLayout from './Layouts/MainLayout';
 import LoadingScreen from './Components/LoadingScreen';
 
 // Next is to load the HomePage lazily to improve performance
-const HomePage = lazy(() => import('./Pages/HomePage'));
-
-
-
+const HomePage = lazy(() => import('./Pages/MainLayout/HomePage'));
+const ProductsPage = lazy(() => import('./Pages/MainLayout/ProductsPage'))
+const ProductDetailPage = lazy(() => import('./Pages/MainLayout/ProductDetailPage'));
 
 function App() {
 	return (
@@ -20,6 +19,8 @@ function App() {
 				<Routes>
 					<Route path="/" element={<MainLayout />}>
 						<Route index element={<HomePage />} />
+						<Route path="products" element={<ProductsPage />} />
+						<Route path="products/:productId" element={<ProductDetailPage />} />
 					</Route>
 				</Routes>
 			</Suspense>
