@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { StarIcon, HeartIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { ArrowLeftIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 
-// Sample product data - in a real app this would come from your backend
 const productDatabase = {
     1: {
         id: 1,
@@ -82,52 +81,63 @@ const productDatabase = {
     }
 };
 
+
 const ProductDetailPage = () => {
     const { productId } = useParams();
     const navigate = useNavigate();
     const product = productDatabase[productId];
 
-    // State for product customization
-    const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+    // State management
+    const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || null);
     const [quantity, setQuantity] = useState(1);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isWishlisted, setIsWishlisted] = useState(false);
+    const [activeTab, setActiveTab] = useState('details');
 
-    // Handle color selection
+    // Handle color selection with safety checks
     const handleColorSelect = (color) => {
-        setSelectedColor(color);
-    };
-
-    // Handle quantity changes
-    const handleQuantityChange = (newQuantity) => {
-        if (newQuantity > 0 && newQuantity <= 10) {
-            setQuantity(newQuantity);
+        if (color.inStock) {
+            setSelectedColor(color);
         }
     };
 
-    // Navigate through product images
-    const nextImage = () => {
-        setCurrentImageIndex((prevIndex) =>
-            prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
-        );
+    // Handle quantity changes with boundaries
+    const handleQuantityChange = (newQuantity) => {
+        const validatedQuantity = Math.max(1, Math.min(10, newQuantity));
+        setQuantity(validatedQuantity);
     };
 
-    const prevImage = () => {
-        setCurrentImageIndex((prevIndex) =>
-            prevIndex === 0 ? product.images.length - 1 : prevIndex - 1
-        );
+    // Image navigation with circular looping
+    const navigateImage = (direction) => {
+        if (!product?.images?.length) return;
+
+        setCurrentImageIndex(prevIndex => {
+            if (direction === 'next') {
+                return (prevIndex + 1) % product.images.length;
+            } else {
+                return (prevIndex - 1 + product.images.length) % product.images.length;
+            }
+        });
     };
 
-    // Handle add to cart
+    // Add to cart functionality
     const handleAddToCart = () => {
+        if (!selectedColor?.inStock) return;
+
         // In a real app, this would dispatch to your cart/store
-        alert(`${quantity} ${product.name} in ${selectedColor.name} added to cart!`);
+        alert(`${quantity} ${product.name} (${selectedColor.name}) added to cart!`);
+    };
+
+    // Handle buy now action
+    const handleBuyNow = () => {
+        handleAddToCart();
+        navigate('/checkout');
     };
 
     // If product not found
     if (!product) {
         return (
-            <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white flex items-center justify-center p-4">
                 <div className="text-center max-w-md p-8 bg-white rounded-xl shadow-lg">
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">Product Not Found</h1>
                     <p className="text-gray-600 mb-6">The product you're looking for doesn't exist or has been removed.</p>
@@ -168,21 +178,22 @@ const ProductDetailPage = () => {
     return (
         <div className="bg-gradient-to-b from-rose-50 to-white min-h-screen">
             {/* Navigation */}
-            <nav className="bg-white shadow-sm py-4">
+            <nav className="bg-white shadow-sm py-4 sticky top-0 z-10">
                 <div className="container mx-auto px-4 flex justify-between items-center">
                     <button
-                        onClick={() => navigate('/products')}
+                        onClick={() => navigate(-1)}
                         className="flex items-center text-gray-600 hover:text-rose-700 transition-colors"
                     >
                         <ArrowLeftIcon className="w-5 h-5 mr-2" />
-                        Back to Products
+                        Back
                     </button>
                     <div className="flex items-center space-x-4">
                         <button
                             onClick={() => setIsWishlisted(!isWishlisted)}
-                            className="p-2 rounded-full hover:bg-rose-50 transition-colors"
+                            className={`p-2 rounded-full transition-colors ${isWishlisted ? 'text-rose-600 bg-rose-50' : 'text-gray-400 hover:bg-rose-50'}`}
+                            aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
                         >
-                            <HeartIcon className={`w-6 h-6 ${isWishlisted ? 'text-rose-600 fill-current' : 'text-gray-400'}`} />
+                            <HeartIcon className="w-6 h-6" />
                         </button>
                     </div>
                 </div>
@@ -199,28 +210,35 @@ const ProductDetailPage = () => {
                                 <img
                                     src={product.images[currentImageIndex]}
                                     alt={product.name}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover transition-opacity duration-300"
+                                    loading="eager"
                                 />
 
                                 {/* Navigation Arrows */}
-                                <button
-                                    onClick={prevImage}
-                                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 shadow-md hover:bg-white transition-colors"
-                                >
-                                    <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
-                                </button>
-                                <button
-                                    onClick={nextImage}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 shadow-md hover:bg-white transition-colors"
-                                >
-                                    <ChevronRightIcon className="w-6 h-6 text-gray-800" />
-                                </button>
+                                {product.images.length > 1 && (
+                                    <>
+                                        <button
+                                            onClick={() => navigateImage('prev')}
+                                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 shadow-md hover:bg-white transition-colors"
+                                            aria-label="Previous image"
+                                        >
+                                            <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
+                                        </button>
+                                        <button
+                                            onClick={() => navigateImage('next')}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 shadow-md hover:bg-white transition-colors"
+                                            aria-label="Next image"
+                                        >
+                                            <ChevronRightIcon className="w-6 h-6 text-gray-800" />
+                                        </button>
+                                    </>
+                                )}
 
                                 {/* Badges */}
                                 <div className="absolute top-4 left-4 flex flex-col space-y-2">
                                     {product.isNew && (
                                         <span className="bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                                            New
+                                            New Arrival
                                         </span>
                                     )}
                                     {product.isBestSeller && (
@@ -228,25 +246,34 @@ const ProductDetailPage = () => {
                                             Best Seller
                                         </span>
                                     )}
+                                    {product.salePrice < product.price && (
+                                        <span className="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                            {Math.round((1 - product.salePrice / product.price) * 100)}% Off
+                                        </span>
+                                    )}
                                 </div>
                             </div>
 
                             {/* Thumbnail Gallery */}
-                            <div className="grid grid-cols-4 gap-3">
-                                {product.images.map((image, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => setCurrentImageIndex(index)}
-                                        className={`aspect-square overflow-hidden rounded-lg border-2 ${currentImageIndex === index ? 'border-rose-500' : 'border-transparent'}`}
-                                    >
-                                        <img
-                                            src={image}
-                                            alt={`${product.name} thumbnail ${index + 1}`}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </button>
-                                ))}
-                            </div>
+                            {product.images.length > 1 && (
+                                <div className="grid grid-cols-4 gap-3">
+                                    {product.images.map((image, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => setCurrentImageIndex(index)}
+                                            className={`aspect-square overflow-hidden rounded-lg border-2 transition-all ${currentImageIndex === index ? 'border-rose-500 scale-105' : 'border-transparent hover:border-gray-300'}`}
+                                            aria-label={`View image ${index + 1}`}
+                                        >
+                                            <img
+                                                src={image}
+                                                alt={`${product.name} thumbnail ${index + 1}`}
+                                                className="w-full h-full object-cover"
+                                                loading="lazy"
+                                            />
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         {/* Product Info */}
@@ -268,11 +295,6 @@ const ProductDetailPage = () => {
                                         {product.salePrice < product.price && (
                                             <span className="text-lg text-gray-500 line-through">${product.price.toFixed(2)}</span>
                                         )}
-                                        {product.salePrice < product.price && (
-                                            <span className="ml-3 bg-rose-100 text-rose-800 text-sm font-medium px-2 py-0.5 rounded">
-                                                {Math.round((1 - product.salePrice / product.price) * 100)}% OFF
-                                            </span>
-                                        )}
                                     </div>
                                     {product.stock <= 5 && product.stock > 0 && (
                                         <div className="mt-2 text-sm text-amber-600">
@@ -291,15 +313,19 @@ const ProductDetailPage = () => {
 
                             {/* Color Selection */}
                             <div className="mb-8">
-                                <h3 className="text-sm font-medium text-gray-900 mb-3">Color: <span className="capitalize">{selectedColor.name}</span></h3>
+                                <h3 className="text-sm font-medium text-gray-900 mb-3">Color: <span className="capitalize">{selectedColor?.name || 'Not selected'}</span></h3>
                                 <div className="flex flex-wrap gap-2">
                                     {product.colors.map((color) => (
                                         <button
                                             key={color.name}
                                             onClick={() => handleColorSelect(color)}
                                             disabled={!color.inStock}
-                                            className={`w-10 h-10 rounded-full border-2 flex items-center justify-center ${selectedColor.name === color.name ? 'border-rose-500' : 'border-transparent'} ${!color.inStock ? 'opacity-50 cursor-not-allowed' : 'hover:border-gray-300'}`}
-                                            title={color.name}
+                                            className={`w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all ${selectedColor?.name === color.name
+                                                ? 'border-rose-500 scale-110'
+                                                : 'border-transparent hover:border-gray-300'
+                                                } ${!color.inStock ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                            title={`${color.name}${!color.inStock ? ' (Out of stock)' : ''}`}
+                                            aria-label={`Select ${color.name} color${!color.inStock ? ' (Out of stock)' : ''}`}
                                         >
                                             <div
                                                 className="w-8 h-8 rounded-full border border-gray-200"
@@ -308,7 +334,7 @@ const ProductDetailPage = () => {
                                         </button>
                                     ))}
                                 </div>
-                                {!selectedColor.inStock && (
+                                {selectedColor && !selectedColor.inStock && (
                                     <p className="mt-2 text-sm text-rose-600">This color is currently out of stock</p>
                                 )}
                             </div>
@@ -316,21 +342,23 @@ const ProductDetailPage = () => {
                             {/* Quantity Selector */}
                             <div className="mb-8">
                                 <h3 className="text-sm font-medium text-gray-900 mb-3">Quantity</h3>
-                                <div className="flex items-center">
+                                <div className="flex items-center max-w-xs">
                                     <button
                                         onClick={() => handleQuantityChange(quantity - 1)}
                                         disabled={quantity <= 1}
-                                        className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-l-lg bg-gray-50 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-l-lg bg-gray-50 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                        aria-label="Decrease quantity"
                                     >
                                         -
                                     </button>
-                                    <div className="w-16 h-10 flex items-center justify-center border-t border-b border-gray-300 bg-white text-gray-900 font-medium">
+                                    <div className="w-16 h-12 flex items-center justify-center border-t border-b border-gray-300 bg-white text-gray-900 font-medium">
                                         {quantity}
                                     </div>
                                     <button
                                         onClick={() => handleQuantityChange(quantity + 1)}
                                         disabled={quantity >= 10}
-                                        className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-r-lg bg-gray-50 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-r-lg bg-gray-50 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                        aria-label="Increase quantity"
                                     >
                                         +
                                     </button>
@@ -338,17 +366,27 @@ const ProductDetailPage = () => {
                             </div>
 
                             {/* Add to Cart */}
-                            <div className="flex flex-col space-y-3">
+                            <div className="flex flex-col space-y-3 max-w-md">
                                 <button
                                     onClick={handleAddToCart}
-                                    disabled={!selectedColor.inStock}
-                                    className={`w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center ${selectedColor.inStock ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white hover:opacity-90' : 'bg-gray-200 text-gray-500 cursor-not-allowed'} transition-opacity`}
+                                    disabled={!selectedColor?.inStock}
+                                    className={`w-full py-4 px-6 rounded-lg font-medium flex items-center justify-center transition-all ${selectedColor?.inStock
+                                        ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white hover:opacity-90 shadow-md hover:shadow-lg'
+                                        : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                                        }`}
                                 >
                                     <ShoppingBagIcon className="w-5 h-5 mr-2" />
-                                    {selectedColor.inStock ? 'Add to Cart' : 'Out of Stock'}
+                                    {selectedColor?.inStock ? 'Add to Cart' : 'Out of Stock'}
                                 </button>
 
-                                <button className="w-full py-3 px-6 rounded-lg font-medium border-2 border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50 transition-colors">
+                                <button
+                                    onClick={handleBuyNow}
+                                    disabled={!selectedColor?.inStock}
+                                    className={`w-full py-4 px-6 rounded-lg font-medium border-2 transition-all ${selectedColor?.inStock
+                                        ? 'border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50'
+                                        : 'border-gray-200 text-gray-400 cursor-not-allowed'
+                                        }`}
+                                >
                                     Buy Now
                                 </button>
                             </div>
@@ -359,59 +397,98 @@ const ProductDetailPage = () => {
                     <div className="border-t border-gray-200 mt-8">
                         <div className="px-6">
                             <div className="flex space-x-8 border-b border-gray-200">
-                                <button className="py-4 px-1 font-medium text-gray-900 border-b-2 border-rose-500">
+                                <button
+                                    onClick={() => setActiveTab('details')}
+                                    className={`py-4 px-1 font-medium ${activeTab === 'details' ? 'text-rose-600 border-b-2 border-rose-500' : 'text-gray-500 hover:text-gray-700'}`}
+                                >
                                     Details
                                 </button>
-                                <button className="py-4 px-1 font-medium text-gray-500 hover:text-gray-700">
-                                    Reviews
+                                <button
+                                    onClick={() => setActiveTab('reviews')}
+                                    className={`py-4 px-1 font-medium ${activeTab === 'reviews' ? 'text-rose-600 border-b-2 border-rose-500' : 'text-gray-500 hover:text-gray-700'}`}
+                                >
+                                    Reviews ({product.reviewCount})
                                 </button>
-                                <button className="py-4 px-1 font-medium text-gray-500 hover:text-gray-700">
+                                <button
+                                    onClick={() => setActiveTab('shipping')}
+                                    className={`py-4 px-1 font-medium ${activeTab === 'shipping' ? 'text-rose-600 border-b-2 border-rose-500' : 'text-gray-500 hover:text-gray-700'}`}
+                                >
                                     Shipping & Returns
                                 </button>
                             </div>
                         </div>
 
                         <div className="px-6 py-8">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div>
-                                    <h3 className="text-lg font-medium text-gray-900 mb-4">Features</h3>
-                                    <ul className="space-y-3">
-                                        {product.details.map((detail, index) => (
-                                            <li key={index} className="flex items-start">
-                                                <svg className="h-5 w-5 text-rose-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span className="text-gray-700">{detail}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
+                            {activeTab === 'details' && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div>
+                                        <h3 className="text-lg font-medium text-gray-900 mb-4">Features</h3>
+                                        <ul className="space-y-3">
+                                            {product.details.map((detail, index) => (
+                                                <li key={index} className="flex items-start">
+                                                    <svg className="h-5 w-5 text-rose-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span className="text-gray-700">{detail}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
 
-                                <div>
-                                    <h3 className="text-lg font-medium text-gray-900 mb-4">Specifications</h3>
-                                    <div className="space-y-4">
-                                        <div>
-                                            <h4 className="text-sm font-medium text-gray-500">Materials</h4>
-                                            <p className="mt-1 text-gray-700">{product.materials}</p>
-                                        </div>
-                                        <div>
-                                            <h4 className="text-sm font-medium text-gray-500">Dimensions</h4>
-                                            <p className="mt-1 text-gray-700">{product.dimensions}</p>
-                                        </div>
-                                        <div>
-                                            <h4 className="text-sm font-medium text-gray-500">Care Instructions</h4>
-                                            <p className="mt-1 text-gray-700">{product.care}</p>
+                                    <div>
+                                        <h3 className="text-lg font-medium text-gray-900 mb-4">Specifications</h3>
+                                        <div className="space-y-4">
+                                            <div>
+                                                <h4 className="text-sm font-medium text-gray-500">Materials</h4>
+                                                <p className="mt-1 text-gray-700">{product.materials}</p>
+                                            </div>
+                                            <div>
+                                                <h4 className="text-sm font-medium text-gray-500">Dimensions</h4>
+                                                <p className="mt-1 text-gray-700">{product.dimensions}</p>
+                                            </div>
+                                            <div>
+                                                <h4 className="text-sm font-medium text-gray-500">Care Instructions</h4>
+                                                <p className="mt-1 text-gray-700">{product.care}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
+
+                            {activeTab === 'reviews' && (
+                                <div className="text-center py-12">
+                                    <h3 className="text-lg font-medium text-gray-900 mb-2">Customer Reviews</h3>
+                                    <p className="text-gray-600">Reviews will be displayed here</p>
+                                </div>
+                            )}
+
+                            {activeTab === 'shipping' && (
+                                <div className="space-y-6">
+                                    <div>
+                                        <h3 className="text-lg font-medium text-gray-900 mb-2">Shipping Information</h3>
+                                        <p className="text-gray-700">
+                                            We offer free standard shipping on all orders over $100.
+                                            Orders are typically processed within 1-2 business days and
+                                            delivered within 3-5 business days via our premium carriers.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg font-medium text-gray-900 mb-2">Returns Policy</h3>
+                                        <p className="text-gray-700">
+                                            We offer a 30-day satisfaction guarantee. If you're not completely
+                                            satisfied with your purchase, you may return it in its original
+                                            condition for a full refund or exchange.
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
 
                 {/* Related Products */}
                 <div className="mt-16">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-8">You May Also Like</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-8">Complete Your Collection</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {Object.values(productDatabase)
                             .filter(p => p.id !== product.id && p.category === product.category)
@@ -427,6 +504,7 @@ const ProductDetailPage = () => {
                                                 src={relatedProduct.images[0]}
                                                 alt={relatedProduct.name}
                                                 className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                                                loading="lazy"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                             {relatedProduct.isNew && (
@@ -460,34 +538,42 @@ const ProductDetailPage = () => {
             </div>
 
             {/* Trust Badges */}
-            <div className="bg-white border-t border-gray-200 mt-16 py-8">
+            <div className="bg-white border-t border-gray-200 mt-16 py-12">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                         <div className="p-4">
-                            <svg className="w-10 h-10 mx-auto text-rose-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                            </svg>
+                            <div className="w-12 h-12 mx-auto bg-rose-50 rounded-full flex items-center justify-center text-rose-600 mb-3">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                            </div>
                             <h3 className="font-medium text-gray-900 mb-1">Premium Quality</h3>
                             <p className="text-sm text-gray-600">Crafted with the finest materials</p>
                         </div>
                         <div className="p-4">
-                            <svg className="w-10 h-10 mx-auto text-rose-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                            </svg>
+                            <div className="w-12 h-12 mx-auto bg-rose-50 rounded-full flex items-center justify-center text-rose-600 mb-3">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                </svg>
+                            </div>
                             <h3 className="font-medium text-gray-900 mb-1">Free Shipping</h3>
                             <p className="text-sm text-gray-600">On all orders over $100</p>
                         </div>
                         <div className="p-4">
-                            <svg className="w-10 h-10 mx-auto text-rose-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
+                            <div className="w-12 h-12 mx-auto bg-rose-50 rounded-full flex items-center justify-center text-rose-600 mb-3">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                            </div>
                             <h3 className="font-medium text-gray-900 mb-1">Easy Returns</h3>
                             <p className="text-sm text-gray-600">30-day satisfaction guarantee</p>
                         </div>
                         <div className="p-4">
-                            <svg className="w-10 h-10 mx-auto text-rose-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                            </svg>
+                            <div className="w-12 h-12 mx-auto bg-rose-50 rounded-full flex items-center justify-center text-rose-600 mb-3">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                </svg>
+                            </div>
                             <h3 className="font-medium text-gray-900 mb-1">Secure Payment</h3>
                             <p className="text-sm text-gray-600">100% secure checkout</p>
                         </div>
