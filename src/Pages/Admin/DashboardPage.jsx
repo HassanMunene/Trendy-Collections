@@ -1,4 +1,12 @@
 import { useState } from 'react';
+import {
+    ArrowUpRight, ArrowDownRight, DollarSign, ShoppingBag,
+    Users, Percent, Calendar, ChevronDown,
+    Package, Tag, User, Users2, Settings,
+    LogOut, Map, PieChart, LineChart,
+    BarChart2, ShoppingCart, CheckCircle2,
+    Clock, Truck, AlertCircle, MoreHorizontal
+} from 'lucide-react';
 
 // Mock data
 const recentOrders = [
@@ -19,28 +27,21 @@ const topProducts = [
 
 const StatCard = ({ title, value, change, isPositive, icon }) => {
     return (
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
                 <div>
                     <p className="text-sm font-medium text-gray-500">{title}</p>
-                    <p className="text-2xl font-semibold mt-2">{value}</p>
+                    <p className="text-2xl font-semibold mt-2 text-gray-900">{value}</p>
                     <div className={`flex items-center mt-1 ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
                         <span className="text-sm font-medium">{change}</span>
-                        <svg
-                            className="h-4 w-4 ml-1"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            {isPositive ? (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                            ) : (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                            )}
-                        </svg>
+                        {isPositive ? (
+                            <ArrowUpRight className="h-4 w-4 ml-1" />
+                        ) : (
+                            <ArrowDownRight className="h-4 w-4 ml-1" />
+                        )}
                     </div>
                 </div>
-                <div className="p-3 bg-blue-50 rounded-full">
+                <div className="p-3 bg-indigo-50 rounded-lg text-indigo-600">
                     {icon}
                 </div>
             </div>
@@ -48,139 +49,164 @@ const StatCard = ({ title, value, change, isPositive, icon }) => {
     );
 };
 
-const DashboardPage = () => {
-    const [timeRange, setTimeRange] = useState('7days');
-
-    const handleTimeRangeChange = () => {
-        setTimeRange(e.target.value);
+const StatusBadge = ({ status }) => {
+    const statusConfig = {
+        Completed: { color: 'bg-green-100 text-green-800', icon: <CheckCircle2 className="h-4 w-4 mr-1" /> },
+        Processing: { color: 'bg-yellow-100 text-yellow-800', icon: <Clock className="h-4 w-4 mr-1" /> },
+        Shipped: { color: 'bg-blue-100 text-blue-800', icon: <Truck className="h-4 w-4 mr-1" /> },
+        Cancelled: { color: 'bg-red-100 text-red-800', icon: <AlertCircle className="h-4 w-4 mr-1" /> }
     };
 
     return (
-        <div>
-            <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-                <div className="mt-4 sm:mt-0">
-                    <select
-                        value={timeRange}
-                        onChange={handleTimeRangeChange}
-                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-                    >
-                        <option value="today">Today</option>
-                        <option value="yesterday">Yesterday</option>
-                        <option value="7days">Last 7 Days</option>
-                        <option value="30days">Last 30 Days</option>
-                        <option value="quarter">This Quarter</option>
-                        <option value="year">This Year</option>
-                    </select>
+        <span className={`px-2.5 py-1 inline-flex items-center text-xs leading-4 font-medium rounded-full ${statusConfig[status]?.color || 'bg-gray-100 text-gray-800'}`}>
+            {statusConfig[status]?.icon}
+            {status}
+        </span>
+    );
+};
+
+const DashboardPage = () => {
+    const [timeRange, setTimeRange] = useState('7days');
+
+    return (
+        <div className="space-y-6">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
+                    <p className="text-gray-500">Welcome back! Here's what's happening with your store today.</p>
+                </div>
+                <div className="flex items-center gap-3">
+                    <div className="relative">
+                        <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                        <select
+                            value={timeRange}
+                            onChange={(e) => setTimeRange(e.target.value)}
+                            className="pl-10 pr-8 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none"
+                        >
+                            <option value="today">Today</option>
+                            <option value="yesterday">Yesterday</option>
+                            <option value="7days">Last 7 Days</option>
+                            <option value="30days">Last 30 Days</option>
+                            <option value="quarter">This Quarter</option>
+                            <option value="year">This Year</option>
+                        </select>
+                        <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+                    </div>
                 </div>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                 <StatCard
                     title="Total Revenue"
                     value="$48,273.21"
                     change="+14.5% from last period"
                     isPositive={true}
-                    icon={
-                        <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    }
+                    icon={<DollarSign className="h-6 w-6" />}
                 />
                 <StatCard
                     title="Orders"
                     value="542"
                     change="+7.2% from last period"
                     isPositive={true}
-                    icon={
-                        <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                        </svg>
-                    }
+                    icon={<ShoppingBag className="h-6 w-6" />}
                 />
                 <StatCard
                     title="New Customers"
                     value="128"
                     change="+12.3% from last period"
                     isPositive={true}
-                    icon={
-                        <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                    }
+                    icon={<Users className="h-6 w-6" />}
                 />
                 <StatCard
                     title="Conversion Rate"
                     value="3.42%"
                     change="-0.4% from last period"
                     isPositive={false}
-                    icon={
-                        <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                    }
+                    icon={<Percent className="h-6 w-6" />}
                 />
             </div>
 
-            {/* Revenue & Orders Chart Placeholder */}
-            <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-                <h2 className="text-lg font-medium text-gray-900 mb-4">Revenue & Orders</h2>
-                {/* In a real app, we would use a charting library like Chart.js or ReCharts */}
-                <div className="bg-gray-100 h-64 flex items-center justify-center rounded">
-                    <p className="text-gray-500">Revenue and Orders Chart would be displayed here</p>
+            {/* Charts Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                {/* Revenue Chart */}
+                <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 lg:col-span-2">
+                    <div className="flex items-center justify-between mb-4">
+                        <h2 className="text-lg font-semibold text-gray-900">Revenue Analytics</h2>
+                        <button className="text-sm text-indigo-600 hover:text-indigo-800 flex items-center">
+                            View report <ArrowUpRight className="h-4 w-4 ml-1" />
+                        </button>
+                    </div>
+                    <div className="h-64 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg flex items-center justify-center">
+                        <div className="text-center p-4">
+                            <LineChart className="h-12 w-12 mx-auto text-indigo-400 mb-2" />
+                            <p className="text-gray-500">Revenue trends visualization</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Sales Distribution */}
+                <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                    <div className="flex items-center justify-between mb-4">
+                        <h2 className="text-lg font-semibold text-gray-900">Sales Distribution</h2>
+                        <button className="text-sm text-indigo-600 hover:text-indigo-800 flex items-center">
+                            View details <ArrowUpRight className="h-4 w-4 ml-1" />
+                        </button>
+                    </div>
+                    <div className="h-64 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg flex items-center justify-center">
+                        <div className="text-center p-4">
+                            <PieChart className="h-12 w-12 mx-auto text-blue-400 mb-2" />
+                            <p className="text-gray-500">Sales by category breakdown</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {/* Two Column Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Tables Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                 {/* Recent Orders */}
-                <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div className="px-6 py-4 border-b border-gray-200">
-                        <h2 className="text-lg font-medium text-gray-900">Recent Orders</h2>
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+                        <h2 className="text-lg font-semibold text-gray-900">Recent Orders</h2>
+                        <button className="text-sm text-indigo-600 hover:text-indigo-800 flex items-center">
+                            View all <ArrowUpRight className="h-4 w-4 ml-1" />
+                        </button>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
-                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Order ID
+                                    <th scope="col" className="px-5 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Order
                                     </th>
-                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-5 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Customer
                                     </th>
-                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Date
-                                    </th>
-                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-5 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Status
                                     </th>
-                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-5 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Total
                                     </th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {recentOrders.map((order) => (
-                                    <tr key={order.id}>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">
-                                            <a href={`/admin/orders/${order.id}`}>{order.id}</a>
+                                    <tr key={order.id} className="hover:bg-gray-50">
+                                        <td className="px-5 py-4 whitespace-nowrap">
+                                            <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-900">
+                                                {order.id}
+                                            </a>
+                                            <p className="text-xs text-gray-500 mt-1">{order.date}</p>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td className="px-5 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {order.customer}
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {order.date}
+                                        <td className="px-5 py-4 whitespace-nowrap">
+                                            <StatusBadge status={order.status} />
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                        ${order.status === 'Completed' ? 'bg-green-100 text-green-800' :
-                                                    order.status === 'Processing' ? 'bg-yellow-100 text-yellow-800' :
-                                                        'bg-blue-100 text-blue-800'}`}>
-                                                {order.status}
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td className="px-5 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">
                                             {order.total}
                                         </td>
                                     </tr>
@@ -188,50 +214,50 @@ const DashboardPage = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="px-6 py-4 border-t border-gray-200">
-                        <a href="/admin/orders" className="text-sm font-medium text-blue-600 hover:text-blue-500">
-                            View all orders →
-                        </a>
-                    </div>
                 </div>
 
                 {/* Top Products */}
-                <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div className="px-6 py-4 border-b border-gray-200">
-                        <h2 className="text-lg font-medium text-gray-900">Top Products</h2>
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+                        <h2 className="text-lg font-semibold text-gray-900">Top Products</h2>
+                        <button className="text-sm text-indigo-600 hover:text-indigo-800 flex items-center">
+                            View all <ArrowUpRight className="h-4 w-4 ml-1" />
+                        </button>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
-                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-5 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Product
                                     </th>
-                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Units Sold
+                                    <th scope="col" className="px-5 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Sales
                                     </th>
-                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-5 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Revenue
                                     </th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {topProducts.map((product) => (
-                                    <tr key={product.id}>
-                                        <td className="px-6 py-4 whitespace-nowrap">
+                                    <tr key={product.id} className="hover:bg-gray-50">
+                                        <td className="px-5 py-4">
                                             <div className="flex items-center">
-                                                <div className="h-10 w-10 flex-shrink-0 bg-gray-100 rounded-lg"></div>
+                                                <div className="flex-shrink-0 h-10 w-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                    <Package className="h-5 w-5 text-gray-400" />
+                                                </div>
                                                 <div className="ml-4">
-                                                    <div className="text-sm font-medium text-gray-900">
+                                                    <div className="text-sm font-medium text-gray-900 line-clamp-1">
                                                         {product.name}
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td className="px-5 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {product.sales}
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td className="px-5 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">
                                             {product.revenue}
                                         </td>
                                     </tr>
@@ -239,68 +265,29 @@ const DashboardPage = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="px-6 py-4 border-t border-gray-200">
-                        <a href="/admin/products" className="text-sm font-medium text-blue-600 hover:text-blue-500">
-                            View all products →
-                        </a>
-                    </div>
                 </div>
             </div>
 
-            {/* Order Activity Map & Customer Insights */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-                <div className="bg-white rounded-lg shadow-sm p-6 lg:col-span-2">
-                    <h2 className="text-lg font-medium text-gray-900 mb-4">Order Activity</h2>
-                    {/* Map Placeholder */}
-                    <div className="bg-gray-100 h-64 flex items-center justify-center rounded">
-                        <p className="text-gray-500">Geographic Order Distribution Map would be displayed here</p>
+            {/* Insights Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                {/* Customer Acquisition */}
+                <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                    <h2 className="text-lg font-semibold text-gray-900 mb-4">Customer Acquisition</h2>
+                    <div className="h-64 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg flex items-center justify-center">
+                        <div className="text-center p-4">
+                            <BarChart2 className="h-12 w-12 mx-auto text-purple-400 mb-2" />
+                            <p className="text-gray-500">Customer acquisition channels</p>
+                        </div>
                     </div>
                 </div>
-                <div className="bg-white rounded-lg shadow-sm p-6">
-                    <h2 className="text-lg font-medium text-gray-900 mb-4">Customer Insights</h2>
-                    {/* Customer Demographics Placeholder */}
-                    <div className="space-y-4">
-                        <div>
-                            <p className="text-sm text-gray-500 mb-1">New vs Returning</p>
-                            <div className="relative pt-1">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
-                                            New (65%)
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200">
-                                            Returning (35%)
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200 mt-2">
-                                    <div style={{ width: "65%" }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
-                                    <div style={{ width: "35%" }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <p className="text-sm text-gray-500 mb-1">Customer Acquisition</p>
-                            <div className="relative pt-1">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-purple-600 bg-purple-200">
-                                            Organic (48%)
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200">
-                                            Paid (52%)
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200 mt-2">
-                                    <div style={{ width: "48%" }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500"></div>
-                                    <div style={{ width: "52%" }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500"></div>
-                                </div>
-                            </div>
+
+                {/* Order Activity Map */}
+                <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 lg:col-span-2">
+                    <h2 className="text-lg font-semibold text-gray-900 mb-4">Order Activity Map</h2>
+                    <div className="h-64 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg flex items-center justify-center">
+                        <div className="text-center p-4">
+                            <Map className="h-12 w-12 mx-auto text-blue-400 mb-2" />
+                            <p className="text-gray-500">Geographic order distribution</p>
                         </div>
                     </div>
                 </div>

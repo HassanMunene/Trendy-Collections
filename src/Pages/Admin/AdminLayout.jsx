@@ -111,12 +111,10 @@ const AdminLayout = () => {
     return (
         <div className="flex h-screen bg-gray-50">
             {/* Sidebar */}
-            <aside className={`
-                fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-indigo-900 to-indigo-800 text-white 
-                transform transition-transform duration-300 ease-in-out shadow-xl
-                ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
-                md:relative md:translate-x-0
-            `}>
+            <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-indigo-900 to-indigo-800 text-white 
+                transform transition-transform duration-300 ease-in-out shadow-xl ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+                md:relative md:translate-x-0 overflow-y-auto hide-scrollbar`}
+            >
                 <div className="flex items-center justify-between p-6 border-b border-indigo-700">
                     <Link to="/admin" className="flex items-center space-x-2">
                         <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-indigo-200">
@@ -259,7 +257,7 @@ const AdminLayout = () => {
                 </header>
 
                 {/* Page Content */}
-                <main className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-50 to-white p-4 sm:p-6 lg:p-8">
+                <main className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-100 to-white p-4 sm:p-6 lg:p-8">
                     <div className="max-w-7xl mx-auto">
                         <Outlet />
                     </div>
@@ -268,10 +266,7 @@ const AdminLayout = () => {
 
             {/* Mobile overlay */}
             {isMobileMenuOpen && (
-                <div
-                    className="fixed inset-0 z-40 bg-black bg-opacity-50 md:hidden"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                ></div>
+                <div className="fixed inset-0 z-40 bg-black bg-opacity-50 md:hidden" onClick={() => setIsMobileMenuOpen(false)}></div>
             )}
         </div>
     );

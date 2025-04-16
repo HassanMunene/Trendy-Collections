@@ -27,3 +27,15 @@ a {
 .animation-delay-200 {
     animation-delay: 0.2s;
 }
+
+/* The sidebar scrollbar in the admin dashboard */
+/* app.css */
+
+.hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
