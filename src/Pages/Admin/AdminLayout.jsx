@@ -82,12 +82,6 @@ const AdminLayout = () => {
                     icon: Users,
                     active: isActiveRoute('/admin/customers')
                 },
-                {
-                    name: 'Staff',
-                    path: '/admin/staff',
-                    icon: UsersRound,
-                    active: isActiveRoute('/admin/staff')
-                }
             ]
         },
         {
