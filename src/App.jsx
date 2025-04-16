@@ -16,7 +16,7 @@ const CartPage = lazy(() => import('./Pages/MainLayout/CartPage'));
 const AdminLayout = lazy(() => import('./Pages/Admin/AdminLayout'));
 const DashboardPage = lazy(() => import('./Pages/Admin/DashboardPage'));
 const OrdersPage = lazy(() => import('./Pages/Admin/OrdersPage'));
-const AdminProductsPage = lazy(() => import('./Pages/Admin/ProductsPage'));
+const AdminProductsPage = lazy(() => import('./Pages/Admin/AdminProductsPage'));
 const CustomersPage = lazy(() => import('./Pages/Admin/CustomersPage'));
 const CategoriesPage = lazy(() => import('./Pages/Admin/CategoriesPage'));
 

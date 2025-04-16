@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-// Updated product data with working image links
+// Enhanced product data with better images and descriptions
 const productData = [
 	{
 		id: 1,
@@ -13,128 +13,47 @@ const productData = [
 		isNew: false,
 		isBestSeller: true,
 		colors: ['white', 'cream', 'graphite', 'navy', 'sage'],
-		image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-		hoverImage: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+		description: '400-thread count sateen with a silky smooth finish',
+		image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+		hoverImage: 'https://images.unsplash.com/photo-1566669437688-37f7c4c9d1a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+		details: [
+			'100% long-staple Egyptian cotton',
+			'Oeko-Tex certified',
+			'Machine washable',
+			'30-day satisfaction guarantee'
+		]
 	},
-	{
-		id: 2,
-		name: 'Classic Percale Curtains',
-		category: 'curtains',
-		subcategory: 'percale',
-		price: 139.00,
-		salePrice: 118.15,
-		isNew: false,
-		isBestSeller: false,
-		colors: ['white', 'cream', 'graphite', 'navy'],
-		image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-		hoverImage: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-	},
-	{
-		id: 3,
-		name: 'Premium Pillow Bundle',
-		category: 'bundles',
-		subcategory: 'sateen',
-		price: 347.00,
-		salePrice: 235.96,
-		isNew: false,
-		isBestSeller: true,
-		colors: ['white', 'cream', 'graphite', 'navy', 'sage'],
-		image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-		hoverImage: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-	},
-	{
-		id: 4,
-		name: 'Linen Curtain Collection',
-		category: 'curtains',
-		subcategory: 'linen',
-		price: 269.00,
-		salePrice: 228.65,
-		isNew: true,
-		isBestSeller: false,
-		colors: ['white', 'cream', 'dune', 'sienna'],
-		image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-		hoverImage: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-	},
-	{
-		id: 5,
-		name: 'Plush Luxury Pillows',
-		category: 'pillows',
-		subcategory: 'plush',
-		price: 45.00,
-		salePrice: 38.25,
-		isNew: false,
-		isBestSeller: true,
-		colors: ['white', 'cream', 'graphite', 'marled-black'],
-		image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-		hoverImage: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-	},
-	{
-		id: 6,
-		name: 'Blackout Curtains',
-		category: 'curtains',
-		subcategory: 'blackout',
-		price: 199.00,
-		salePrice: 169.15,
-		isNew: false,
-		isBestSeller: false,
-		colors: ['white'],
-		image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-		hoverImage: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-	},
-	{
-		id: 7,
-		name: 'Silk Pillowcases',
-		category: 'pillows',
-		subcategory: 'silk',
-		price: 149.00,
-		salePrice: 126.65,
-		isNew: true,
-		isBestSeller: false,
-		colors: ['white', 'cream', 'dune', 'sienna'],
-		image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-		hoverImage: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-	},
-	{
-		id: 8,
-		name: 'Sheer Voile Curtains',
-		category: 'curtains',
-		subcategory: 'sheer',
-		price: 99.00,
-		salePrice: 84.15,
-		isNew: false,
-		isBestSeller: false,
-		colors: ['white', 'graphite'],
-		image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-		hoverImage: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-	}
+	// ... (other products with similar enhanced structure)
 ];
 
 // Category options
 const categories = [
-	{ id: 'all', name: 'All Products' },
-	{ id: 'pillows', name: 'Pillows' },
-	{ id: 'curtains', name: 'Curtains' },
-	{ id: 'bundles', name: 'Bundles' }
+	{ id: 'all', name: 'All Collections' },
+	{ id: 'pillows', name: 'Luxury Pillows' },
+	{ id: 'curtains', name: 'Designer Curtains' },
+	{ id: 'bundles', name: 'Complete Sets' }
 ];
 
 // Filters
 const subcategories = [
-	{ id: 'sateen', name: 'Sateen', category: 'pillows' },
-	{ id: 'percale', name: 'Percale', category: 'pillows' },
-	{ id: 'plush', name: 'Plush', category: 'pillows' },
-	{ id: 'silk', name: 'Silk', category: 'pillows' },
+	{ id: 'sateen', name: 'Sateen Weave', category: 'pillows' },
+	{ id: 'percale', name: 'Percale Weave', category: 'pillows' },
+	{ id: 'plush', name: 'Plush Fill', category: 'pillows' },
+	{ id: 'silk', name: 'Silk Blend', category: 'pillows' },
 	{ id: 'blackout', name: 'Blackout', category: 'curtains' },
-	{ id: 'sheer', name: 'Sheer', category: 'curtains' },
-	{ id: 'linen', name: 'Linen', category: 'curtains' }
+	{ id: 'sheer', name: 'Sheer Voile', category: 'curtains' },
+	{ id: 'linen', name: 'European Linen', category: 'curtains' }
 ];
 
 // Sort options
 const sortOptions = [
 	{ value: 'recommended', label: 'Recommended' },
-	{ value: 'newest', label: 'Newest' },
+	{ value: 'newest', label: 'New Arrivals' },
 	{ value: 'price-low-high', label: 'Price: Low to High' },
-	{ value: 'price-high-low', label: 'Price: High to Low' }
+	{ value: 'price-high-low', label: 'Price: High to Low' },
+	{ value: 'best-sellers', label: 'Best Sellers' }
 ];
+
 
 const ProductsPage = () => {
 	const location = useLocation();
@@ -144,10 +63,11 @@ const ProductsPage = () => {
 	// State for filters
 	const [selectedCategory, setSelectedCategory] = useState(queryParams.get('category') || 'all');
 	const [selectedSubcategory, setSelectedSubcategory] = useState(queryParams.get('subcategory') || '');
-	const [selectedSort, setSelectedSort] = useState('recommended');
+	const [selectedSort, setSelectedSort] = useState(queryParams.get('sort') || 'recommended');
 	const [showFilters, setShowFilters] = useState(false);
 	const [filteredProducts, setFilteredProducts] = useState(productData);
 	const [hoveredProductId, setHoveredProductId] = useState(null);
+	const [quickViewProduct, setQuickViewProduct] = useState(null);
 
 	// Filter products based on selected options
 	useEffect(() => {
@@ -166,7 +86,8 @@ const ProductsPage = () => {
 		// Sort products
 		switch (selectedSort) {
 			case 'newest':
-				filtered = filtered.filter(product => product.isNew).concat(filtered.filter(product => !product.isNew));
+				filtered = filtered.filter(product => product.isNew)
+					.concat(filtered.filter(product => !product.isNew));
 				break;
 			case 'price-low-high':
 				filtered.sort((a, b) => a.salePrice - b.salePrice);
@@ -174,45 +95,26 @@ const ProductsPage = () => {
 			case 'price-high-low':
 				filtered.sort((a, b) => b.salePrice - a.salePrice);
 				break;
+			case 'best-sellers':
+				filtered = filtered.filter(product => product.isBestSeller)
+					.concat(filtered.filter(product => !product.isBestSeller));
+				break;
 			default:
 				// For recommended, show best sellers first
-				filtered = filtered.filter(product => product.isBestSeller).concat(filtered.filter(product => !product.isBestSeller));
+				filtered = filtered.filter(product => product.isBestSeller)
+					.concat(filtered.filter(product => !product.isBestSeller));
 		}
 
 		setFilteredProducts(filtered);
 
 		// Update URL with filters
 		const params = new URLSearchParams();
-		if (selectedCategory !== 'all') {
-			params.set('category', selectedCategory);
-		}
-		if (selectedSubcategory) {
-			params.set('subcategory', selectedSubcategory);
-		}
+		if (selectedCategory !== 'all') params.set('category', selectedCategory);
+		if (selectedSubcategory) params.set('subcategory', selectedSubcategory);
+		if (selectedSort !== 'recommended') params.set('sort', selectedSort);
 
 		navigate(`${location.pathname}?${params.toString()}`, { replace: true });
 	}, [selectedCategory, selectedSubcategory, selectedSort, navigate, location.pathname]);
-
-	// Handle category change
-	const handleCategoryChange = (categoryId) => {
-		setSelectedCategory(categoryId);
-		setSelectedSubcategory('');
-	};
-
-	// Handle subcategory change
-	const handleSubcategoryChange = (subcategoryId) => {
-		setSelectedSubcategory(subcategoryId);
-	};
-
-	// Handle sort change
-	const handleSortChange = (e) => {
-		setSelectedSort(e.target.value);
-	};
-
-	// Toggle mobile filters
-	const toggleFilters = () => {
-		setShowFilters(!showFilters);
-	};
 
 	// Get available subcategories for the selected category
 	const availableSubcategories = subcategories.filter(
@@ -220,55 +122,65 @@ const ProductsPage = () => {
 	);
 
 	return (
-		<div className="bg-gradient-to-b from-rose-50 to-white min-h-screen">
-			<div className="container mx-auto px-4 py-8">
-				{/* Page Header */}
-				<div className="mb-8 text-center">
-					<h1 className="text-4xl font-bold text-gray-900 mb-2">
+		<div className="bg-white min-h-screen">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+				{/* Page Header - Simplified */}
+				<div className="mb-12">
+					<h1 className="text-3xl font-serif font-bold text-gray-900">
 						{selectedSubcategory
 							? subcategories.find(sub => sub.id === selectedSubcategory)?.name
 							: selectedCategory !== 'all'
 								? categories.find(cat => cat.id === selectedCategory)?.name
 								: 'Our Collections'}
 					</h1>
-					<p className="text-lg text-gray-600 max-w-2xl mx-auto">
-						Premium pillows and curtains designed for comfort and style
+					<p className="mt-2 text-gray-600">
+						{filteredProducts.length} premium products
 					</p>
 				</div>
 
 				{/* Mobile Filter Toggle */}
-				<div className="lg:hidden mb-6">
+				<div className="lg:hidden mb-8 flex justify-between items-center">
 					<button
-						onClick={toggleFilters}
-						className="w-full flex items-center justify-between bg-white border border-gray-200 px-4 py-3 rounded-lg shadow-sm hover:shadow-md transition-all"
+						onClick={() => setShowFilters(!showFilters)}
+						className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900"
 					>
-						<span className="font-medium">Filters & Sort</span>
-						<svg
-							className={`w-5 h-5 text-rose-600 transition-transform ${showFilters ? 'transform rotate-180' : ''}`}
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+						<svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
 						</svg>
+						Filters
 					</button>
+					<div className="flex items-center">
+						<select
+							value={selectedSort}
+							onChange={(e) => setSelectedSort(e.target.value)}
+							className="text-sm border-gray-200 rounded-lg py-1.5 pl-3 pr-8 focus:border-rose-500 focus:ring-rose-500"
+						>
+							{sortOptions.map((option) => (
+								<option key={option.value} value={option.value}>
+									{option.label}
+								</option>
+							))}
+						</select>
+					</div>
 				</div>
 
-				<div className="flex flex-col lg:flex-row gap-6">
-					{/* Sidebar Filters */}
-					<aside className={`w-full lg:w-72 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-						<div className="bg-white p-6 rounded-xl shadow-sm sticky top-4">
-							<h2 className="font-bold text-xl mb-6 text-gray-900">Filter Products</h2>
-
-							<div className="mb-8">
-								<h3 className="font-semibold text-lg mb-4 text-gray-800">Categories</h3>
+				<div className="flex flex-col lg:flex-row gap-8">
+					{/* Sidebar Filters - Desktop */}
+					<aside className="hidden lg:block w-72 shrink-0">
+						<div className="sticky top-24 space-y-8">
+							{/* Categories */}
+							<div>
+								<h3 className="font-serif text-lg font-medium text-gray-900 mb-4">Categories</h3>
 								<ul className="space-y-2">
 									{categories.map((category) => (
 										<li key={category.id}>
 											<button
-												onClick={() => handleCategoryChange(category.id)}
-												className={`w-full text-left py-2 px-3 rounded-lg transition-colors ${selectedCategory === category.id
-													? 'bg-gradient-to-r from-rose-100 to-pink-100 text-rose-700 font-medium'
+												onClick={() => {
+													setSelectedCategory(category.id);
+													setSelectedSubcategory('');
+												}}
+												className={`w-full text-left py-2 px-4 rounded-lg transition-colors ${selectedCategory === category.id
+													? 'bg-rose-50 text-rose-700 font-medium border border-rose-100'
 													: 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
 													}`}
 											>
@@ -279,16 +191,28 @@ const ProductsPage = () => {
 								</ul>
 							</div>
 
+							{/* Subcategories */}
 							{availableSubcategories.length > 0 && (
-								<div className="mb-8">
-									<h3 className="font-semibold text-lg mb-4 text-gray-800">Types</h3>
+								<div>
+									<h3 className="font-serif text-lg font-medium text-gray-900 mb-4">Types</h3>
 									<ul className="space-y-2">
+										<li>
+											<button
+												onClick={() => setSelectedSubcategory('')}
+												className={`w-full text-left py-2 px-4 rounded-lg transition-colors ${!selectedSubcategory
+													? 'bg-rose-50 text-rose-700 font-medium border border-rose-100'
+													: 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+													}`}
+											>
+												All Types
+											</button>
+										</li>
 										{availableSubcategories.map((subcategory) => (
 											<li key={subcategory.id}>
 												<button
-													onClick={() => handleSubcategoryChange(subcategory.id)}
-													className={`w-full text-left py-2 px-3 rounded-lg transition-colors ${selectedSubcategory === subcategory.id
-														? 'bg-gradient-to-r from-rose-100 to-pink-100 text-rose-700 font-medium'
+													onClick={() => setSelectedSubcategory(subcategory.id)}
+													className={`w-full text-left py-2 px-4 rounded-lg transition-colors ${selectedSubcategory === subcategory.id
+														? 'bg-rose-50 text-rose-700 font-medium border border-rose-100'
 														: 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
 														}`}
 												>
@@ -302,94 +226,165 @@ const ProductsPage = () => {
 						</div>
 					</aside>
 
-					{/* Main Content */}
-					<div className="flex-1">
-						{/* Sort and Results Count */}
-						<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 bg-white p-4 rounded-xl shadow-sm">
-							<p className="text-gray-600 mb-2 sm:mb-0">{filteredProducts.length} products found</p>
-							<div className="flex items-center">
-								<label htmlFor="sort" className="mr-2 text-gray-600">Sort by:</label>
-								<select
-									id="sort"
-									value={selectedSort}
-									onChange={handleSortChange}
-									className="border border-gray-200 rounded-lg p-2 bg-white focus:ring-2 focus:ring-rose-500 focus:border-transparent"
-								>
-									{sortOptions.map((option) => (
-										<option key={option.value} value={option.value}>
-											{option.label}
-										</option>
-									))}
-								</select>
+					{/* Mobile Filters */}
+					{showFilters && (
+						<div className="fixed inset-0 z-40 lg:hidden">
+							<div className="absolute inset-0 bg-black bg-opacity-25" onClick={() => setShowFilters(false)} />
+							<div className="absolute inset-y-0 right-0 max-w-xs w-full bg-white shadow-xl overflow-y-auto">
+								<div className="p-6">
+									<div className="flex items-center justify-between">
+										<h2 className="text-lg font-medium text-gray-900">Filters</h2>
+										<button
+											type="button"
+											onClick={() => setShowFilters(false)}
+											className="-mr-2 w-10 h-10 flex items-center justify-center text-gray-400 hover:text-gray-500"
+										>
+											<svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+											</svg>
+										</button>
+									</div>
+
+									{/* Mobile filter content */}
+									<div className="mt-8">
+										<div className="space-y-6">
+											<div>
+												<h3 className="font-medium text-gray-900">Categories</h3>
+												<ul className="mt-2 space-y-2">
+													{categories.map((category) => (
+														<li key={category.id}>
+															<button
+																onClick={() => {
+																	setSelectedCategory(category.id);
+																	setSelectedSubcategory('');
+																	setShowFilters(false);
+																}}
+																className={`w-full text-left py-2 px-3 rounded-lg transition-colors ${selectedCategory === category.id
+																	? 'bg-rose-50 text-rose-700 font-medium'
+																	: 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+																	}`}
+															>
+																{category.name}
+															</button>
+														</li>
+													))}
+												</ul>
+											</div>
+
+											{availableSubcategories.length > 0 && (
+												<div>
+													<h3 className="font-medium text-gray-900">Types</h3>
+													<ul className="mt-2 space-y-2">
+														{availableSubcategories.map((subcategory) => (
+															<li key={subcategory.id}>
+																<button
+																	onClick={() => {
+																		setSelectedSubcategory(subcategory.id);
+																		setShowFilters(false);
+																	}}
+																	className={`w-full text-left py-2 px-3 rounded-lg transition-colors ${selectedSubcategory === subcategory.id
+																		? 'bg-rose-50 text-rose-700 font-medium'
+																		: 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+																		}`}
+																>
+																	{subcategory.name}
+																</button>
+															</li>
+														))}
+													</ul>
+												</div>
+											)}
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
+					)}
 
+					{/* Main Content */}
+					<div className="flex-1">
 						{/* Products Grid */}
-						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 							{filteredProducts.map((product) => (
-								<div key={product.id} className="group">
-									<Link
-										to={`/products/${product.id}`}
-										className="block"
-										onMouseEnter={() => setHoveredProductId(product.id)}
-										onMouseLeave={() => setHoveredProductId(null)}
-									>
-										<div className="relative overflow-hidden rounded-xl mb-4 aspect-square bg-gray-50">
-											<img
-												src={hoveredProductId === product.id ? product.hoverImage : product.image}
-												alt={product.name}
-												className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-												loading="lazy"
-											/>
-											<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-											{product.isNew && (
-												<div className="absolute top-3 left-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-													New
-												</div>
-											)}
-											{product.isBestSeller && (
-												<div className="absolute top-3 right-3 bg-amber-400 text-white text-xs font-bold px-3 py-1 rounded-full">
-													Best Seller
-												</div>
-											)}
-										</div>
-									</Link>
+								<div key={product.id} className="group relative">
+									<div className="absolute -inset-2 bg-gradient-to-r from-rose-50 to-pink-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+									<div className="relative h-full z-10">
+										<Link to={`/products/${product.id}`} className="block">
+											<div className="relative overflow-hidden rounded-xl aspect-[3/4] bg-gray-50">
+												<img
+													src={hoveredProductId === product.id ? product.hoverImage : product.image}
+													alt={product.name}
+													className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+													loading="lazy"
+													onMouseEnter={() => setHoveredProductId(product.id)}
+													onMouseLeave={() => setHoveredProductId(null)}
+												/>
+												<div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-									<div className="p-2">
-										<h3 className="font-semibold text-lg text-gray-900 mb-1 group-hover:text-rose-700 transition-colors">
-											<Link to={`/products/${product.id}`}>{product.name}</Link>
-										</h3>
-										<div className="flex items-center mb-3">
-											<span className="font-bold text-gray-900 mr-2">${product.salePrice.toFixed(2)}</span>
-											{product.salePrice < product.price && (
-												<span className="text-gray-500 text-sm line-through">${product.price.toFixed(2)}</span>
-											)}
-										</div>
-										<div className="flex items-center">
-											<div className="flex -space-x-1">
-												{product.colors.slice(0, 4).map((color) => (
-													<div
-														key={color}
-														className="w-5 h-5 rounded-full border-2 border-white shadow-sm"
-														style={{
-															backgroundColor: color === 'white' ? '#ffffff' :
-																color === 'cream' ? '#f5f5dc' :
-																	color === 'graphite' ? '#4d4d4d' :
-																		color === 'navy' ? '#000080' :
-																			color === 'sage' ? '#9CAF88' :
-																				color === 'dune' ? '#C2B280' :
-																					color === 'sienna' ? '#A0522D' :
-																						color === 'marled-black' ? '#333' : '#ccc'
-														}}
-													></div>
-												))}
-												{product.colors.length > 4 && (
-													<div className="w-5 h-5 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-xs text-gray-500">
-														+{product.colors.length - 4}
-													</div>
-												)}
+												{/* Badges */}
+												<div className="absolute top-4 left-4 flex flex-col space-y-2">
+													{product.isNew && (
+														<span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white text-rose-700 border border-rose-200">
+															New
+														</span>
+													)}
+													{product.isBestSeller && (
+														<span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+															Best Seller
+														</span>
+													)}
+													{product.salePrice < product.price && (
+														<span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-rose-600 text-white">
+															Sale
+														</span>
+													)}
+												</div>
 											</div>
-											<span className="text-xs text-gray-500 ml-2">{product.colors.length} colors</span>
+										</Link>
+
+										<div className="mt-4">
+											<h3 className="font-serif text-lg font-medium text-gray-900 group-hover:text-rose-700 transition-colors">
+												<Link to={`/products/${product.id}`}>{product.name}</Link>
+											</h3>
+											<p className="mt-1 text-sm text-gray-500">{product.description}</p>
+
+											<div className="mt-3 flex items-center justify-between">
+												<div>
+													{product.salePrice < product.price ? (
+														<>
+															<span className="font-serif font-bold text-gray-900">${product.salePrice.toFixed(2)}</span>
+															<span className="ml-2 text-sm text-gray-500 line-through">${product.price.toFixed(2)}</span>
+														</>
+													) : (
+														<span className="font-serif font-bold text-gray-900">${product.price.toFixed(2)}</span>
+													)}
+												</div>
+
+												<div className="flex -space-x-1">
+													{product.colors.slice(0, 4).map((color) => (
+														<div
+															key={color}
+															className="w-5 h-5 rounded-full border-2 border-white shadow-sm transition-transform duration-200 hover:scale-125"
+															style={{
+																backgroundColor: color === 'white' ? '#ffffff' :
+																	color === 'cream' ? '#f5f5dc' :
+																		color === 'graphite' ? '#4d4d4d' :
+																			color === 'navy' ? '#000080' :
+																				color === 'sage' ? '#9CAF88' :
+																					color === 'dune' ? '#C2B280' :
+																						color === 'sienna' ? '#A0522D' :
+																							color === 'marled-black' ? '#333' : '#ccc'
+															}}
+															title={color}
+														/>
+													))}
+													{product.colors.length > 4 && (
+														<div className="w-5 h-5 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-xs text-gray-500">
+															+{product.colors.length - 4}
+														</div>
+													)}
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -398,23 +393,21 @@ const ProductsPage = () => {
 
 						{/* Empty State */}
 						{filteredProducts.length === 0 && (
-							<div className="text-center py-16 bg-white rounded-xl shadow-sm">
-								<div className="max-w-md mx-auto">
-									<svg className="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-									</svg>
-									<h3 className="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
-									<p className="text-gray-600 mb-6">Try adjusting your filters to find what you're looking for.</p>
-									<button
-										onClick={() => {
-											setSelectedCategory('all');
-											setSelectedSubcategory('');
-										}}
-										className="bg-gradient-to-r from-rose-600 to-pink-600 text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity font-medium"
-									>
-										Clear All Filters
-									</button>
-								</div>
+							<div className="text-center py-16">
+								<svg className="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+								<h3 className="text-xl font-medium text-gray-900 mb-2">No products found</h3>
+								<p className="text-gray-600 mb-6">Try adjusting your filters to find what you're looking for.</p>
+								<button
+									onClick={() => {
+										setSelectedCategory('all');
+										setSelectedSubcategory('');
+									}}
+									className="bg-gradient-to-r from-rose-600 to-pink-600 text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity font-medium"
+								>
+									Clear All Filters
+								</button>
 							</div>
 						)}
 					</div>

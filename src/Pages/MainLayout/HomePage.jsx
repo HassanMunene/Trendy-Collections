@@ -224,86 +224,107 @@ const HomePage = () => {
             </div>
 
             {/* Curated Collections - The new focal point */}
-            <div className="py-16 px-4">
-                <div className="container mx-auto">
+            <div className="py-24 px-4 bg-white">
+                <div className="container mx-auto max-w-7xl">
+                    {/* Collections Section */}
                     {collections.map((collection) => (
-                        <section key={collection.id} className="mb-20">
-                            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
-                                <div>
-                                    <h2 className="text-3xl font-bold text-gray-900">{collection.name}</h2>
-                                    <p className="text-lg text-gray-600 mt-2">{collection.description}</p>
+                        <section key={collection.id} className="mb-28">
+                            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+                                <div className="mb-6 md:mb-0">
+                                    <h2 className="text-4xl font-serif font-bold text-gray-900 mb-3">{collection.name}</h2>
+                                    <p className="text-xl text-gray-600 max-w-2xl">{collection.description}</p>
                                 </div>
                                 <Link
                                     to={`/products?category=${collection.id}`}
-                                    className="mt-4 md:mt-0 text-rose-700 hover:text-rose-800 font-medium flex items-center"
+                                    className="flex items-center text-lg font-medium text-rose-700 hover:text-rose-800 transition-colors group"
                                 >
-                                    View all {collection.name.toLowerCase()}
-                                    <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <span className="border-b border-transparent group-hover:border-rose-700 transition-all">
+                                        Explore the {collection.name.toLowerCase()}
+                                    </span>
+                                    <svg className="w-6 h-6 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                     </svg>
                                 </Link>
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                                 {collection.products.map((product) => (
-                                    <div key={product.id} className="group">
-                                        <Link to={`/products/${product.id}`} className="block">
-                                            <div className="relative overflow-hidden rounded-xl mb-4 aspect-square bg-gray-50">
-                                                <img
-                                                    src={product.image}
-                                                    alt={product.name}
-                                                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                                {product.salePrice && (
-                                                    <div className="absolute top-3 right-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                                                        Sale
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </Link>
-
-                                        <div className="p-2">
-                                            <h3 className="font-semibold text-lg text-gray-900 mb-1 group-hover:text-rose-700 transition-colors">
-                                                <Link to={`/products/${product.id}`}>{product.name}</Link>
-                                            </h3>
-                                            <div className="flex items-center mb-3">
-                                                {product.salePrice ? (
-                                                    <>
-                                                        <span className="font-bold text-gray-900 mr-2">${product.salePrice.toFixed(2)}</span>
-                                                        <span className="text-gray-500 text-sm line-through">${product.price.toFixed(2)}</span>
-                                                    </>
-                                                ) : (
-                                                    <span className="font-bold text-gray-900">${product.price.toFixed(2)}</span>
-                                                )}
-                                            </div>
-                                            <div className="flex items-center">
-                                                <div className="flex -space-x-1">
-                                                    {product.colors.slice(0, 4).map((color) => (
-                                                        <div
-                                                            key={color}
-                                                            className="w-5 h-5 rounded-full border-2 border-white shadow-sm"
-                                                            style={{
-                                                                backgroundColor: color === 'white' ? '#ffffff' :
-                                                                    color === 'cream' ? '#f5f5dc' :
-                                                                        color === 'graphite' ? '#4d4d4d' :
-                                                                            color === 'navy' ? '#000080' :
-                                                                                color === 'sage' ? '#9CAF88' :
-                                                                                    color === 'ivory' ? '#FFFFF0' :
-                                                                                        color === 'charcoal' ? '#36454F' :
-                                                                                            color === 'blush' ? '#DE5D83' :
-                                                                                                color === 'taupe' ? '#483C32' :
-                                                                                                    color === 'natural' ? '#E1C9B5' :
-                                                                                                        color === 'stone' ? '#928E85' :
-                                                                                                            color === 'grey' ? '#808080' :
-                                                                                                                color === 'blue' ? '#0000FF' :
-                                                                                                                    color === 'camel' ? '#C19A6B' :
-                                                                                                                        color === 'oatmeal' ? '#D3C9B5' : '#ccc'
-                                                            }}
-                                                        ></div>
-                                                    ))}
+                                    <div key={product.id} className="group relative">
+                                        <div className="absolute -inset-1 bg-gradient-to-r from-rose-50 to-pink-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                                        <div className="relative h-full z-10">
+                                            <Link to={`/products/${product.id}`} className="block">
+                                                <div className="relative overflow-hidden rounded-2xl mb-5 aspect-[4/5] bg-gray-50 shadow-sm">
+                                                    <img
+                                                        src={product.image}
+                                                        alt={product.name}
+                                                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                                                        loading="lazy"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                                    {product.salePrice && (
+                                                        <div className="absolute top-4 right-4 bg-rose-600 text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-md">
+                                                            Sale
+                                                        </div>
+                                                    )}
                                                 </div>
-                                                <span className="text-xs text-gray-500 ml-2">{product.colors.length} colors</span>
+                                            </Link>
+
+                                            <div className="px-2">
+                                                <h3 className="font-serif text-xl font-semibold text-gray-900 mb-2 group-hover:text-rose-700 transition-colors duration-200">
+                                                    <Link to={`/products/${product.id}`}>{product.name}</Link>
+                                                </h3>
+                                                <div className="flex items-center mb-4">
+                                                    {product.salePrice ? (
+                                                        <>
+                                                            <span className="font-bold text-gray-900 text-lg mr-3">${product.salePrice.toFixed(2)}</span>
+                                                            <span className="text-gray-500 text-sm line-through">${product.price.toFixed(2)}</span>
+                                                        </>
+                                                    ) : (
+                                                        <span className="font-bold text-gray-900 text-lg">${product.price.toFixed(2)}</span>
+                                                    )}
+                                                </div>
+                                                <div className="flex items-center justify-between">
+                                                    <div className="flex items-center">
+                                                        <div className="flex -space-x-2">
+                                                            {product.colors.slice(0, 4).map((color) => (
+                                                                <div
+                                                                    key={color}
+                                                                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm transition-transform duration-200 hover:scale-125 hover:z-10"
+                                                                    style={{
+                                                                        backgroundColor: color === 'white' ? '#ffffff' :
+                                                                            color === 'cream' ? '#f5f5dc' :
+                                                                                color === 'graphite' ? '#4d4d4d' :
+                                                                                    color === 'navy' ? '#000080' :
+                                                                                        color === 'sage' ? '#9CAF88' :
+                                                                                            color === 'ivory' ? '#FFFFF0' :
+                                                                                                color === 'charcoal' ? '#36454F' :
+                                                                                                    color === 'blush' ? '#DE5D83' :
+                                                                                                        color === 'taupe' ? '#483C32' :
+                                                                                                            color === 'natural' ? '#E1C9B5' :
+                                                                                                                color === 'stone' ? '#928E85' :
+                                                                                                                    color === 'grey' ? '#808080' :
+                                                                                                                        color === 'blue' ? '#0000FF' :
+                                                                                                                            color === 'camel' ? '#C19A6B' :
+                                                                                                                                color === 'oatmeal' ? '#D3C9B5' : '#ccc'
+                                                                    }}
+                                                                    title={color}
+                                                                ></div>
+                                                            ))}
+                                                        </div>
+                                                        {product.colors.length > 4 && (
+                                                            <span className="text-xs text-gray-500 ml-2">+{product.colors.length - 4} more</span>
+                                                        )}
+                                                    </div>
+                                                    <Link
+                                                        to={`/products/${product.id}`}
+                                                        className="text-sm font-medium text-rose-700 hover:text-rose-800 flex items-center"
+                                                    >
+                                                        Details
+                                                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                        </svg>
+                                                    </Link>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -313,55 +334,70 @@ const HomePage = () => {
                     ))}
 
                     {/* Best Sellers Section */}
-                    <section className="mb-20">
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
-                            <div>
-                                <h2 className="text-3xl font-bold text-gray-900">Customer Favorites</h2>
-                                <p className="text-lg text-gray-600 mt-2">Our most loved products</p>
+                    <section className="mb-28">
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+                            <div className="mb-6 md:mb-0">
+                                <h2 className="text-4xl font-serif font-bold text-gray-900 mb-3">Customer Favorites</h2>
+                                <p className="text-xl text-gray-600">Our most loved products by discerning clients</p>
                             </div>
                             <Link
                                 to="/products?sort=bestsellers"
-                                className="mt-4 md:mt-0 text-rose-700 hover:text-rose-800 font-medium flex items-center"
+                                className="flex items-center text-lg font-medium text-rose-700 hover:text-rose-800 transition-colors group"
                             >
-                                View all best sellers
-                                <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <span className="border-b border-transparent group-hover:border-rose-700 transition-all">
+                                    View all best sellers
+                                </span>
+                                <svg className="w-6 h-6 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
                             </Link>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
                             {bestSellers.map((product) => (
                                 <div key={product.id} className="group relative">
-                                    <div className="absolute -inset-2 bg-gradient-to-r from-rose-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                    <div className="relative bg-white rounded-xl p-6 h-full">
-                                        <Link to={`/products/${product.id}`} className="block mb-4">
-                                            <div className="relative overflow-hidden rounded-xl aspect-square bg-gray-50">
+                                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-50 to-rose-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                                    <div className="relative h-full z-10 bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+                                        <Link to={`/products/${product.id}`} className="block mb-5">
+                                            <div className="relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-50">
                                                 <img
                                                     src={product.image}
                                                     alt={product.name}
-                                                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                                                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                                                    loading="lazy"
                                                 />
-                                                <div className="absolute top-3 right-3 bg-amber-400 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                                <div className="absolute top-4 right-4 bg-amber-500 text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-md flex items-center">
+                                                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
                                                     Best Seller
                                                 </div>
                                             </div>
                                         </Link>
 
-                                        <div className="p-2">
-                                            <h3 className="font-semibold text-lg text-gray-900 mb-1 group-hover:text-rose-700 transition-colors">
+                                        <div className="px-2">
+                                            <h3 className="font-serif text-xl font-semibold text-gray-900 mb-2 group-hover:text-rose-700 transition-colors duration-200">
                                                 <Link to={`/products/${product.id}`}>{product.name}</Link>
                                             </h3>
-                                            <div className="flex items-center mb-3">
+                                            <div className="flex items-center mb-4">
                                                 {product.salePrice ? (
                                                     <>
-                                                        <span className="font-bold text-gray-900 mr-2">${product.salePrice.toFixed(2)}</span>
+                                                        <span className="font-bold text-gray-900 text-lg mr-3">${product.salePrice.toFixed(2)}</span>
                                                         <span className="text-gray-500 text-sm line-through">${product.price.toFixed(2)}</span>
                                                     </>
                                                 ) : (
-                                                    <span className="font-bold text-gray-900">${product.price.toFixed(2)}</span>
+                                                    <span className="font-bold text-gray-900 text-lg">${product.price.toFixed(2)}</span>
                                                 )}
                                             </div>
+                                            <Link
+                                                to={`/products/${product.id}`}
+                                                className="inline-flex items-center text-sm font-medium text-rose-700 hover:text-rose-800 border-b border-transparent hover:border-rose-700 transition-all"
+                                            >
+                                                Discover why customers love this
+                                                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -371,52 +407,75 @@ const HomePage = () => {
 
                     {/* New Arrivals Section */}
                     <section>
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
-                            <div>
-                                <h2 className="text-3xl font-bold text-gray-900">New Arrivals</h2>
-                                <p className="text-lg text-gray-600 mt-2">Fresh additions to our collection</p>
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+                            <div className="mb-6 md:mb-0">
+                                <h2 className="text-4xl font-serif font-bold text-gray-900 mb-3">New Arrivals</h2>
+                                <p className="text-xl text-gray-600">Fresh additions to elevate your home</p>
                             </div>
                             <Link
                                 to="/products?sort=newest"
-                                className="mt-4 md:mt-0 text-rose-700 hover:text-rose-800 font-medium flex items-center"
+                                className="flex items-center text-lg font-medium text-rose-700 hover:text-rose-800 transition-colors group"
                             >
-                                View all new arrivals
-                                <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <span className="border-b border-transparent group-hover:border-rose-700 transition-all">
+                                    View all new arrivals
+                                </span>
+                                <svg className="w-6 h-6 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
                             </Link>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
                             {newArrivals.map((product) => (
-                                <div key={product.id} className="group">
-                                    <Link to={`/products/${product.id}`} className="block">
-                                        <div className="relative overflow-hidden rounded-xl mb-4 aspect-square bg-gray-50">
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                            <div className="absolute top-3 left-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                                                New
+                                <div key={product.id} className="group relative">
+                                    <div className="absolute -inset-1 bg-gradient-to-r from-rose-50 to-pink-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                                    <div className="relative h-full z-10">
+                                        <Link to={`/products/${product.id}`} className="block">
+                                            <div className="relative overflow-hidden rounded-2xl mb-5 aspect-[4/5] bg-gray-50 shadow-sm">
+                                                <img
+                                                    src={product.image}
+                                                    alt={product.name}
+                                                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                                                    loading="lazy"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                                <div className="absolute top-4 left-4 bg-white text-rose-700 text-sm font-bold px-4 py-1.5 rounded-full shadow-md flex items-center">
+                                                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                                    </svg>
+                                                    New Arrival
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Link>
+                                        </Link>
 
-                                    <div className="p-2">
-                                        <h3 className="font-semibold text-lg text-gray-900 mb-1 group-hover:text-rose-700 transition-colors">
-                                            <Link to={`/products/${product.id}`}>{product.name}</Link>
-                                        </h3>
-                                        <div className="flex items-center mb-3">
-                                            {product.salePrice ? (
-                                                <>
-                                                    <span className="font-bold text-gray-900 mr-2">${product.salePrice.toFixed(2)}</span>
-                                                    <span className="text-gray-500 text-sm line-through">${product.price.toFixed(2)}</span>
-                                                </>
-                                            ) : (
-                                                <span className="font-bold text-gray-900">${product.price.toFixed(2)}</span>
-                                            )}
+                                        <div className="px-2">
+                                            <h3 className="font-serif text-xl font-semibold text-gray-900 mb-2 group-hover:text-rose-700 transition-colors duration-200">
+                                                <Link to={`/products/${product.id}`}>{product.name}</Link>
+                                            </h3>
+                                            <div className="flex items-center mb-4">
+                                                {product.salePrice ? (
+                                                    <>
+                                                        <span className="font-bold text-gray-900 text-lg mr-3">${product.salePrice.toFixed(2)}</span>
+                                                        <span className="text-gray-500 text-sm line-through">${product.price.toFixed(2)}</span>
+                                                    </>
+                                                ) : (
+                                                    <span className="font-bold text-gray-900 text-lg">${product.price.toFixed(2)}</span>
+                                                )}
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="text-sm text-gray-500">
+                                                    Limited stock available
+                                                </div>
+                                                <Link
+                                                    to={`/products/${product.id}`}
+                                                    className="text-sm font-medium text-rose-700 hover:text-rose-800 flex items-center"
+                                                >
+                                                    Shop now
+                                                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
