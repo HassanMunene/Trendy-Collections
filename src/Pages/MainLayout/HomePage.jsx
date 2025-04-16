@@ -1,317 +1,567 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import HeroSection from '../../Components/MainLayout/HeroSection';
-
 const HomePage = () => {
-    const [activeSlide, setActiveSlide] = useState(0);
-
-    // Featured categories
-    const categories = [
+    // Featured collections with curated product selections
+    const collections = [
         {
-            id: 1,
-            name: 'Bed Collections',
-            image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80',
-            link: '/products?category=bed'
+            id: 'pillows',
+            name: 'Luxury Pillow Collection',
+            description: 'Engineered for perfect comfort and support',
+            products: [
+                {
+                    id: 1,
+                    name: 'Sateen Pillowcases',
+                    price: 49.99,
+                    salePrice: 39.99,
+                    image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                    colors: ['white', 'cream', 'graphite']
+                },
+                {
+                    id: 2,
+                    name: 'Silk Pillowcases',
+                    price: 89.99,
+                    image: 'https://images.unsplash.com/photo-1566669437688-37f7c4c9d1a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                    colors: ['ivory', 'blush', 'charcoal']
+                },
+                {
+                    id: 3,
+                    name: 'Plush Pillows',
+                    price: 129.99,
+                    salePrice: 109.99,
+                    image: 'https://images.unsplash.com/photo-1586449480561-6d7f57a6b3cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                    colors: ['white', 'taupe']
+                }
+            ]
         },
         {
-            id: 2,
-            name: 'Bath Essentials',
-            image: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-            link: '/products?category=bath'
+            id: 'curtains',
+            name: 'Designer Curtains',
+            description: 'Transform your space with light-filtering elegance',
+            products: [
+                {
+                    id: 4,
+                    name: 'Linen Sheer Curtains',
+                    price: 149.99,
+                    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                    colors: ['white', 'oatmeal']
+                },
+                {
+                    id: 5,
+                    name: 'Blackout Drapes',
+                    price: 179.99,
+                    salePrice: 159.99,
+                    image: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                    colors: ['navy', 'charcoal', 'cream']
+                },
+                {
+                    id: 6,
+                    name: 'Velvet Curtains',
+                    price: 199.99,
+                    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                    colors: ['emerald', 'sapphire', 'burgundy']
+                }
+            ]
         },
         {
-            id: 3,
-            name: 'Living Room',
-            image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-            link: '/products?category=living'
-        },
-        {
-            id: 4,
-            name: 'Best Sellers',
-            image: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-            link: '/products?category=bestsellers'
+            id: 'bundles',
+            name: 'Complete Sets',
+            description: 'Everything you need for a coordinated look',
+            products: [
+                {
+                    id: 7,
+                    name: 'Bedding Bundle',
+                    price: 349.99,
+                    salePrice: 299.99,
+                    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                    colors: ['white', 'stone']
+                },
+                {
+                    id: 8,
+                    name: 'Bath Collection',
+                    price: 229.99,
+                    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                    colors: ['white', 'grey']
+                },
+                {
+                    id: 9,
+                    name: 'Window Treatment Set',
+                    price: 279.99,
+                    salePrice: 249.99,
+                    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                    colors: ['ivory', 'taupe']
+                }
+            ]
         }
     ];
 
-    // Featured products
-    const featuredProducts = [
+    // Best sellers
+    const bestSellers = [
         {
-            id: 1,
-            name: 'Luxury Sateen Sheets',
-            description: '400 thread count for ultimate softness and durability',
-            price: '$129.99',
-            image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-            link: '/products/luxury-sateen-sheets'
+            id: 10,
+            name: 'Signature Down Pillow',
+            price: 159.99,
+            image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+            colors: ['white', 'cream']
         },
         {
-            id: 2,
-            name: 'Organic Cotton Duvet',
-            description: 'Breathable and hypoallergenic for perfect sleep',
-            price: '$189.99',
+            id: 11,
+            name: 'Organic Cotton Sheets',
+            price: 199.99,
+            salePrice: 179.99,
             image: 'https://images.unsplash.com/photo-1583845112203-454c7c581fad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-            link: '/products/organic-cotton-duvet'
+            colors: ['white', 'natural']
         },
         {
-            id: 3,
-            name: 'Plush Bath Towels',
-            description: 'Ultra-absorbent and quick-drying for spa-like luxury',
-            price: '$49.99',
-            image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-            link: '/products/plush-bath-towels'
+            id: 12,
+            name: 'Weighted Blanket',
+            price: 249.99,
+            image: 'https://images.unsplash.com/photo-1566669437688-37f7c4c9d1a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+            colors: ['grey', 'blue']
         }
     ];
 
-    // Reviews
-    const reviews = [
+    // New arrivals
+    const newArrivals = [
+        {
+            id: 13,
+            name: 'Cashmere Throw',
+            price: 179.99,
+            image: 'https://images.unsplash.com/photo-1586449480561-6d7f57a6b3cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+            colors: ['cream', 'camel']
+        },
+        {
+            id: 14,
+            name: 'Bamboo Sheet Set',
+            price: 229.99,
+            salePrice: 199.99,
+            image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+            colors: ['white', 'sage']
+        },
+        {
+            id: 15,
+            name: 'Embroidered Duvet',
+            price: 299.99,
+            image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+            colors: ['ivory', 'blush']
+        }
+    ];
+
+    // Testimonials data
+    const testimonials = [
         {
             id: 1,
-            title: 'Absolutely Luxurious',
-            text: 'The quality exceeded my expectations. These sheets are worth every penny!',
-            author: 'Sarah M.',
-            rating: 5
+            name: "Sarah J.",
+            role: "Interior Designer",
+            location: "New York, NY",
+            rating: 5,
+            content: "The quality of these sheets is unmatched. I've never slept better and they've held up beautifully after dozens of washes. Worth every penny!",
+            image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
         },
         {
             id: 2,
-            title: 'Best Purchase Ever',
-            text: 'I sleep so much better since upgrading to Trendy Collections bedding.',
-            author: 'Michael T.',
-            rating: 5
+            name: "Michael T.",
+            role: "Hotel Owner",
+            location: "Miami, FL",
+            rating: 5,
+            content: "We outfitted all our suites with these linens and our guests won't stop complimenting them. The durability matches the comfort perfectly.",
+            image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
         },
         {
             id: 3,
-            title: 'Customer for Life',
-            text: 'From ordering to delivery to product quality - everything was perfect.',
-            author: 'Jennifer K.',
-            rating: 5
+            name: "Emma R.",
+            role: "Home Stager",
+            location: "San Francisco, CA",
+            rating: 5,
+            content: "These window treatments transform any space instantly. The light filtering is magical and the craftsmanship is evident in every detail.",
+            image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
         }
     ];
 
-    // Slider navigation
-    const nextSlide = () => {
-        setActiveSlide((prevSlide) => (prevSlide === heroSlides.length - 1 ? 0 : prevSlide + 1));
-    };
-
-    const prevSlide = () => {
-        setActiveSlide((prevSlide) => (prevSlide === 0 ? heroSlides.length - 1 : prevSlide - 1));
-    };
 
     return (
-        <div className="flex flex-col">
-            {/* Hero Section */}
-            <HeroSection />
+        <div className="bg-white">
+            {/* Minimal Hero - Just a headline and CTA */}
+            <div className="relative overflow-hidden">
+                {/* Background image with overlay */}
+                <div className="absolute inset-0">
+                    <img
+                        src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80"
+                        alt="Luxury bedding"
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/30"></div>
+                </div>
 
-            {/* Shop by Category */}
-            <section className="py-16 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Shop By Category</h2>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">Discover our carefully curated collections for every room in your home</p>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {categories.map((category) => (
-                            <Link to={category.link} key={category.id} className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-                                <div className="aspect-square overflow-hidden">
-                                    <img
-                                        src={category.image}
-                                        alt={category.name}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
-                                </div>
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                                    <h3 className="text-xl font-semibold text-white">{category.name}</h3>
-                                </div>
+                {/* Hero content */}
+                <div className="relative z-10 py-32 px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-3xl mx-auto text-center">
+                        <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">
+                            Sleep Like Royalty
+                        </h1>
+                        <p className="text-xl md:text-2xl text-rose-100 mb-8 max-w-2xl mx-auto">
+                            Handcrafted luxury bedding designed for those who appreciate the finer things in life
+                        </p>
+                        <div className="flex flex-col sm:flex-row justify-center gap-4">
+                            <Link
+                                to="/products"
+                                className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-rose-700 hover:bg-rose-800 shadow-lg transition-all duration-300 transform hover:scale-105"
+                            >
+                                Explore Collections
                             </Link>
-                        ))}
+                            <Link
+                                to="/about"
+                                className="inline-flex items-center justify-center px-8 py-4 border border-2 border-white text-lg font-medium rounded-md text-white hover:bg-white/10 transition-all duration-300"
+                            >
+                                Our Craftsmanship
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            {/* Featured Products */}
-            <section className="py-16 bg-rose-50">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Our Signature Collection</h2>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">Premium quality home essentials you'll love</p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {featuredProducts.map((product) => (
-                            <div key={product.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                                <Link to={product.link} className="block overflow-hidden">
-                                    <img
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="w-full h-80 object-cover transition-transform duration-500 hover:scale-105"
-                                    />
+                {/* Decorative elements */}
+                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
+            </div>
+
+            {/* Curated Collections - The new focal point */}
+            <div className="py-16 px-4">
+                <div className="container mx-auto">
+                    {collections.map((collection) => (
+                        <section key={collection.id} className="mb-20">
+                            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
+                                <div>
+                                    <h2 className="text-3xl font-bold text-gray-900">{collection.name}</h2>
+                                    <p className="text-lg text-gray-600 mt-2">{collection.description}</p>
+                                </div>
+                                <Link
+                                    to={`/products?category=${collection.id}`}
+                                    className="mt-4 md:mt-0 text-rose-700 hover:text-rose-800 font-medium flex items-center"
+                                >
+                                    View all {collection.name.toLowerCase()}
+                                    <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
                                 </Link>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-semibold mb-2 text-gray-900">{product.name}</h3>
-                                    <p className="text-gray-600 mb-4">{product.description}</p>
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-lg font-bold text-rose-700">{product.price}</span>
-                                        <Link
-                                            to={product.link}
-                                            className="text-sm font-medium bg-gradient-to-r from-rose-700 to-pink-600 text-white px-4 py-2 rounded-md hover:opacity-90 transition-opacity"
-                                        >
-                                            Shop Now
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {collection.products.map((product) => (
+                                    <div key={product.id} className="group">
+                                        <Link to={`/products/${product.id}`} className="block">
+                                            <div className="relative overflow-hidden rounded-xl mb-4 aspect-square bg-gray-50">
+                                                <img
+                                                    src={product.image}
+                                                    alt={product.name}
+                                                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                                {product.salePrice && (
+                                                    <div className="absolute top-3 right-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                                        Sale
+                                                    </div>
+                                                )}
+                                            </div>
                                         </Link>
+
+                                        <div className="p-2">
+                                            <h3 className="font-semibold text-lg text-gray-900 mb-1 group-hover:text-rose-700 transition-colors">
+                                                <Link to={`/products/${product.id}`}>{product.name}</Link>
+                                            </h3>
+                                            <div className="flex items-center mb-3">
+                                                {product.salePrice ? (
+                                                    <>
+                                                        <span className="font-bold text-gray-900 mr-2">${product.salePrice.toFixed(2)}</span>
+                                                        <span className="text-gray-500 text-sm line-through">${product.price.toFixed(2)}</span>
+                                                    </>
+                                                ) : (
+                                                    <span className="font-bold text-gray-900">${product.price.toFixed(2)}</span>
+                                                )}
+                                            </div>
+                                            <div className="flex items-center">
+                                                <div className="flex -space-x-1">
+                                                    {product.colors.slice(0, 4).map((color) => (
+                                                        <div
+                                                            key={color}
+                                                            className="w-5 h-5 rounded-full border-2 border-white shadow-sm"
+                                                            style={{
+                                                                backgroundColor: color === 'white' ? '#ffffff' :
+                                                                    color === 'cream' ? '#f5f5dc' :
+                                                                        color === 'graphite' ? '#4d4d4d' :
+                                                                            color === 'navy' ? '#000080' :
+                                                                                color === 'sage' ? '#9CAF88' :
+                                                                                    color === 'ivory' ? '#FFFFF0' :
+                                                                                        color === 'charcoal' ? '#36454F' :
+                                                                                            color === 'blush' ? '#DE5D83' :
+                                                                                                color === 'taupe' ? '#483C32' :
+                                                                                                    color === 'natural' ? '#E1C9B5' :
+                                                                                                        color === 'stone' ? '#928E85' :
+                                                                                                            color === 'grey' ? '#808080' :
+                                                                                                                color === 'blue' ? '#0000FF' :
+                                                                                                                    color === 'camel' ? '#C19A6B' :
+                                                                                                                        color === 'oatmeal' ? '#D3C9B5' : '#ccc'
+                                                            }}
+                                                        ></div>
+                                                    ))}
+                                                </div>
+                                                <span className="text-xs text-gray-500 ml-2">{product.colors.length} colors</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    ))}
+
+                    {/* Best Sellers Section */}
+                    <section className="mb-20">
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
+                            <div>
+                                <h2 className="text-3xl font-bold text-gray-900">Customer Favorites</h2>
+                                <p className="text-lg text-gray-600 mt-2">Our most loved products</p>
+                            </div>
+                            <Link
+                                to="/products?sort=bestsellers"
+                                className="mt-4 md:mt-0 text-rose-700 hover:text-rose-800 font-medium flex items-center"
+                            >
+                                View all best sellers
+                                <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </Link>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                            {bestSellers.map((product) => (
+                                <div key={product.id} className="group relative">
+                                    <div className="absolute -inset-2 bg-gradient-to-r from-rose-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="relative bg-white rounded-xl p-6 h-full">
+                                        <Link to={`/products/${product.id}`} className="block mb-4">
+                                            <div className="relative overflow-hidden rounded-xl aspect-square bg-gray-50">
+                                                <img
+                                                    src={product.image}
+                                                    alt={product.name}
+                                                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                                                />
+                                                <div className="absolute top-3 right-3 bg-amber-400 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                                    Best Seller
+                                                </div>
+                                            </div>
+                                        </Link>
+
+                                        <div className="p-2">
+                                            <h3 className="font-semibold text-lg text-gray-900 mb-1 group-hover:text-rose-700 transition-colors">
+                                                <Link to={`/products/${product.id}`}>{product.name}</Link>
+                                            </h3>
+                                            <div className="flex items-center mb-3">
+                                                {product.salePrice ? (
+                                                    <>
+                                                        <span className="font-bold text-gray-900 mr-2">${product.salePrice.toFixed(2)}</span>
+                                                        <span className="text-gray-500 text-sm line-through">${product.price.toFixed(2)}</span>
+                                                    </>
+                                                ) : (
+                                                    <span className="font-bold text-gray-900">${product.price.toFixed(2)}</span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* New Arrivals Section */}
+                    <section>
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
+                            <div>
+                                <h2 className="text-3xl font-bold text-gray-900">New Arrivals</h2>
+                                <p className="text-lg text-gray-600 mt-2">Fresh additions to our collection</p>
+                            </div>
+                            <Link
+                                to="/products?sort=newest"
+                                className="mt-4 md:mt-0 text-rose-700 hover:text-rose-800 font-medium flex items-center"
+                            >
+                                View all new arrivals
+                                <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </Link>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                            {newArrivals.map((product) => (
+                                <div key={product.id} className="group">
+                                    <Link to={`/products/${product.id}`} className="block">
+                                        <div className="relative overflow-hidden rounded-xl mb-4 aspect-square bg-gray-50">
+                                            <img
+                                                src={product.image}
+                                                alt={product.name}
+                                                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                            <div className="absolute top-3 left-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                                New
+                                            </div>
+                                        </div>
+                                    </Link>
+
+                                    <div className="p-2">
+                                        <h3 className="font-semibold text-lg text-gray-900 mb-1 group-hover:text-rose-700 transition-colors">
+                                            <Link to={`/products/${product.id}`}>{product.name}</Link>
+                                        </h3>
+                                        <div className="flex items-center mb-3">
+                                            {product.salePrice ? (
+                                                <>
+                                                    <span className="font-bold text-gray-900 mr-2">${product.salePrice.toFixed(2)}</span>
+                                                    <span className="text-gray-500 text-sm line-through">${product.price.toFixed(2)}</span>
+                                                </>
+                                            ) : (
+                                                <span className="font-bold text-gray-900">${product.price.toFixed(2)}</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            {/* Value Proposition Banner */}
+            <div className="bg-gradient-to-r from-rose-700 to-pink-600 py-16 px-4 text-white">
+                <div className="container mx-auto max-w-7xl">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <h3 className="text-2xl font-serif font-semibold mb-3">Premium Quality</h3>
+                            <p className="text-rose-100 max-w-xs">Only the finest materials sourced from ethical suppliers worldwide</p>
+                        </div>
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                </svg>
+                            </div>
+                            <h3 className="text-2xl font-serif font-semibold mb-3">Free Shipping</h3>
+                            <p className="text-rose-100 max-w-xs">Complimentary delivery on all orders over $100 with white-glove service available</p>
+                        </div>
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                            </div>
+                            <h3 className="text-2xl font-serif font-semibold mb-3">Easy Returns</h3>
+                            <p className="text-rose-100 max-w-xs">365-night trial with free returns - we want you to love your purchase</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Testimonial Section */}
+            <div className="py-24 px-4 bg-white">
+                <div className="container mx-auto max-w-7xl">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-serif font-bold text-gray-900 mb-4">Our Discerning Clients</h2>
+                        <div className="w-20 h-1 bg-rose-600 mx-auto"></div>
+                        <p className="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
+                            Join thousands of satisfied customers who have transformed their homes with our luxury textiles
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {testimonials.map((testimonial) => (
+                            <div key={testimonial.id} className="group relative">
+                                <div className="absolute -inset-1 bg-gradient-to-r from-rose-100 to-pink-100 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="relative bg-white rounded-xl p-8 h-full shadow-sm hover:shadow-md transition-shadow duration-300">
+                                    <div className="flex items-center mb-6">
+                                        <img
+                                            src={testimonial.image}
+                                            alt={testimonial.name}
+                                            className="w-14 h-14 rounded-full object-cover mr-4"
+                                        />
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                                            <p className="text-sm text-gray-500">{testimonial.role}, {testimonial.location}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex mb-4">
+                                        {[...Array(testimonial.rating)].map((_, i) => (
+                                            <svg key={i} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        ))}
+                                    </div>
+                                    <blockquote className="text-gray-700 italic mb-6">
+                                        “{testimonial.content}”
+                                    </blockquote>
+                                    <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <svg className="w-10 h-10 text-rose-200" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                        </svg>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
-                </div>
-            </section>
 
-            {/* Reviews Section */}
-            <section className="py-16 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Loved by Thousands</h2>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">Don't just take our word for it - hear from our customers</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {reviews.map((review) => (
-                            <div
-                                key={review.id}
-                                className="bg-white p-8 rounded-xl shadow-md border border-rose-100 hover:shadow-lg transition-shadow duration-300"
-                            >
-                                <div className="flex mb-4">
-                                    {[...Array(5)].map((_, i) => (
-                                        <svg
-                                            key={i}
-                                            className={`w-5 h-5 ${i < review.rating ? 'text-amber-400' : 'text-gray-300'}`}
-                                            fill="currentColor"
-                                            viewBox="0 0 20 20"
-                                        >
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    ))}
-                                </div>
-                                <h4 className="text-xl font-semibold mb-3 text-gray-900">{review.title}</h4>
-                                <p className="text-gray-600 mb-6">"{review.text}"</p>
-                                <p className="text-gray-800 font-medium">— {review.author}</p>
+                    {/* Trust indicators */}
+                    <div className="mt-20 pt-12 border-t border-gray-200">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center">
+                            <div className="text-center">
+                                <div className="text-4xl font-bold text-gray-900 mb-2">10K+</div>
+                                <div className="text-gray-600">Happy Customers</div>
                             </div>
-                        ))}
+                            <div className="text-center">
+                                <div className="text-4xl font-bold text-gray-900 mb-2">4.9/5</div>
+                                <div className="text-gray-600">Average Rating</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-4xl font-bold text-gray-900 mb-2">15</div>
+                                <div className="text-gray-600">Countries Served</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-4xl font-bold text-gray-900 mb-2">24/7</div>
+                                <div className="text-gray-600">Customer Support</div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
 
-                    <div className="text-center mt-12">
+            {/* Final CTA */}
+            <div className="relative py-32 px-4 bg-gray-50 overflow-hidden">
+                <div className="absolute inset-0">
+                    <img
+                        src="https://images.unsplash.com/photo-1583845112203-454c7c581fad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80"
+                        alt="Luxury bedroom"
+                        className="w-full h-full object-cover opacity-20"
+                    />
+                </div>
+                <div className="relative z-10 max-w-4xl mx-auto text-center">
+                    <h2 className="text-4xl font-serif font-bold text-gray-900 mb-6">Experience Unparalleled Comfort</h2>
+                    <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                        Your dream bedroom awaits - discover our collection of premium home textiles today
+                    </p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-4">
                         <Link
-                            to="/reviews"
-                            className="inline-block border-2 border-rose-700 text-rose-700 px-8 py-3 rounded-md hover:bg-rose-700 hover:text-white transition-colors font-medium"
+                            to="/products"
+                            className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-rose-700 hover:bg-rose-800 shadow-lg transition-all duration-300 transform hover:scale-105"
                         >
-                            Read More Reviews
+                            Shop Now
+                        </Link>
+                        <Link
+                            to="/contact"
+                            className="inline-flex items-center justify-center px-8 py-4 border border-2 border-gray-900 text-lg font-medium rounded-md text-gray-900 hover:bg-gray-900/5 transition-all duration-300"
+                        >
+                            Personal Stylist
                         </Link>
                     </div>
                 </div>
-            </section>
-
-            {/* Value Propositions */}
-            <section className="py-16 bg-gradient-to-b from-white to-rose-50">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                        <div className="text-center">
-                            <div className="flex justify-center mb-6">
-                                <div className="w-20 h-20 bg-gradient-to-r from-rose-100 to-pink-100 rounded-full flex items-center justify-center">
-                                    <svg className="w-10 h-10 text-rose-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900">Premium Quality</h3>
-                            <p className="text-gray-600">Only the finest materials crafted for lasting comfort and style</p>
-                        </div>
-
-                        <div className="text-center">
-                            <div className="flex justify-center mb-6">
-                                <div className="w-20 h-20 bg-gradient-to-r from-rose-100 to-pink-100 rounded-full flex items-center justify-center">
-                                    <svg className="w-10 h-10 text-rose-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900">365-Day Guarantee</h3>
-                            <p className="text-gray-600">Love it or your money back - no questions asked</p>
-                        </div>
-
-                        <div className="text-center">
-                            <div className="flex justify-center mb-6">
-                                <div className="w-20 h-20 bg-gradient-to-r from-rose-100 to-pink-100 rounded-full flex items-center justify-center">
-                                    <svg className="w-10 h-10 text-rose-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900">Fast, Free Shipping</h3>
-                            <p className="text-gray-600">Free delivery on all orders over $50</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Instagram Section */}
-            <section className="py-16 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">#TrendyAtHome</h2>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">Tag us to be featured in our gallery</p>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {[
-                            'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-                            'https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-                            'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-                            'https://images.unsplash.com/photo-1583845112203-454c7c581fad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80'
-                        ].map((image, index) => (
-                            <div key={index} className="aspect-square overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                                <img
-                                    src={image}
-                                    alt={`Instagram post ${index + 1}`}
-                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                                />
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="text-center mt-12">
-                        <a
-                            href="https://www.instagram.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block bg-gradient-to-r from-rose-700 to-pink-600 text-white px-8 py-3 rounded-md hover:opacity-90 transition-opacity font-medium"
-                        >
-                            Follow Us @TrendyCollections
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            {/* Newsletter */}
-            <section className="py-16 bg-gradient-to-r from-rose-700 to-pink-600">
-                <div className="container mx-auto px-4 text-center text-white">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Our Community</h2>
-                    <p className="text-lg mb-8 max-w-2xl mx-auto">Subscribe to receive exclusive offers, styling tips, and first access to new collections</p>
-                    
-                    <form className="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                        <input
-                            type="email"
-                            placeholder="Your email address"
-                            className="flex-1 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-gray-900"
-                            required
-                        />
-                        <button
-                            type="submit"
-                            className="bg-white text-rose-700 px-6 py-3 rounded-md hover:bg-opacity-90 transition-opacity font-medium"
-                        >
-                            Subscribe
-                        </button>
-                    </form>
-                    
-                    <p className="text-sm mt-4 opacity-80">We respect your privacy. Unsubscribe at any time.</p>
-                </div>
-            </section>
+            </div>
         </div>
     );
 };
