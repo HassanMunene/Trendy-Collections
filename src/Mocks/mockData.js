@@ -1,3 +1,73 @@
+// The following below is a suggested schema for the data we will have in our
+//  database and the relationships they will have:
+
+// PRODUCTS TABLE
+
+// Column	        Type	        Notes
+// id	            INT(PK)	        Auto - increment
+// name	            VARCHAR(255)	Product name
+// description	    TEXT	        Optional
+// price	        DECIMAL(10, 2)	Regular price
+// sale_price	    DECIMAL(10, 2)	Nullable
+// image_url	    TEXT	        Primary product image
+// rating	        FLOAT	        Optional
+// review_count     INT	            Optional
+// is_best_seller	BOOLEAN	        Flag for homepage
+// is_new	        BOOLEAN	        Flag for homepage
+// stock	        INT	            Units available
+// category_id	    INT(FK)	        Foreign key to categories
+// subcategory	    VARCHAR(255)	Optional grouping inside category
+
+
+
+// CATEGORIES TABLE. We can start by defining the categories of the products
+// We will be selling for trendy so that on each product we can link it to a specific
+// Category.
+
+// Column	        Type	        Notes
+// id	            INT (PK)	    "pillows", "curtains", etc.
+// name	            VARCHAR(255)	Display name
+// description	    TEXT	        Optional
+
+
+
+// PRODUCT COLORS TABLE. Here we will define the colors we have in our store and specify
+// The specific product that we are linking it too.
+
+// Column	        Type	        Notes
+// id	            INT (PK)	    Autoincrement
+// product_id	    INT (FK)	    Links to products
+// name	            VARCHAR(50)	    e.g. "white"
+// hex	            CHAR(7)	        Optional — for color swatch
+// in_stock	        BOOLEAN	        Optional per color
+
+
+
+// PRODUCT IMAGES. Here we will store the urls images for a specific product.
+
+// Column	        Type	        Notes
+// id               INT (PK)	    Autoincrement
+// product_id	    INT (FK)	    Links to products
+// url	TEXT	    Image           URL
+// is_primary	    BOOLEAN	        Optional
+
+
+// COLLECTIONS TABLE
+
+// Column	        Type	        Notes
+// id	            VARCHAR(50)	    e.g. "pillows"
+// name	            VARCHAR(255)	e.g. "Luxury Pillow Collection"
+// description	    TEXT	        Description
+
+
+// COLLECTION_PRODUCTS (MANY-TO-MANY JOIN)
+
+// Column	        Type	        Notes
+// collection_id	VARCHAR(50) (FK)	
+// product_id	    INT (FK)
+
+
+
 export const productDatabase = {
     1: {
         id: 1,
@@ -75,3 +145,14 @@ export const productDatabase = {
         stock: 8
     }
 };
+
+// export const fetchPosts = (): Promise<TweetProps[]> => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       const userTweets = TWEETS.filter(
+//         (tweet) => tweet.user.username === username
+//       );
+//       resolve(userTweets);
+//     }, 800);
+//   });
+// };

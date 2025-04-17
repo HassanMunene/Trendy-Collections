@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/24/solid';
 import { ChevronLeft, ChevronRight, Minus, Plus, ShoppingCart } from 'lucide-react';
@@ -8,7 +8,6 @@ import { productDatabase } from '../../Mocks/mockData';
 
 const ProductDetailPage = () => {
     const { productId } = useParams();
-    const navigate = useNavigate();
     const product = productDatabase[productId];
 
     // State management ]
