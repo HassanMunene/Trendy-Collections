@@ -3,91 +3,15 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { StarIcon, HeartIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { ArrowLeftIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 
-const productDatabase = {
-    1: {
-        id: 1,
-        name: 'Luxe Sateen Pillow Set',
-        category: 'pillows',
-        subcategory: 'sateen',
-        price: 149.00,
-        salePrice: 126.65,
-        description: 'Experience unparalleled softness with our premium sateen pillow set. Made from 100% long-staple cotton with a 600 thread count for luxurious comfort that lasts.',
-        details: [
-            'Set of 2 standard pillowcases',
-            '100% long-staple cotton',
-            '600 thread count',
-            'Sateen weave for silky smoothness',
-            'Double-stitched seams for durability',
-            'Hidden zipper closure'
-        ],
-        materials: '100% Egyptian Cotton',
-        dimensions: '20" x 26" (Standard)',
-        care: 'Machine wash cold, tumble dry low',
-        colors: [
-            { name: 'white', hex: '#ffffff', inStock: true },
-            { name: 'cream', hex: '#f5f5dc', inStock: true },
-            { name: 'graphite', hex: '#4d4d4d', inStock: true },
-            { name: 'navy', hex: '#000080', inStock: false },
-            { name: 'sage', hex: '#9CAF88', inStock: true }
-        ],
-        images: [
-            'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-            'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-            'https://images.unsplash.com/photo-1566669437688-37f7c4c9d1a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-            'https://images.unsplash.com/photo-1586449480561-6d7f57a6b3cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-        ],
-        rating: 4.8,
-        reviewCount: 142,
-        isNew: false,
-        isBestSeller: true,
-        stock: 12
-    },
-    7: {
-        id: 7,
-        name: 'Silk Pillowcases',
-        category: 'pillows',
-        subcategory: 'silk',
-        price: 149.00,
-        salePrice: 126.65,
-        description: 'Indulge in the ultimate sleep experience with our 100% pure mulberry silk pillowcases. Naturally hypoallergenic and temperature regulating for healthier hair and skin.',
-        details: [
-            '100% Grade 6A Mulberry Silk',
-            '22 momme weight for durability',
-            'Hidden zipper closure',
-            'Double-sided silk (both sides equally luxurious)',
-            'Reduces hair breakage and sleep wrinkles',
-            'Naturally hypoallergenic and dust mite resistant'
-        ],
-        materials: '100% Mulberry Silk (Grade 6A, 22 momme)',
-        dimensions: '20" x 26" (Standard)',
-        care: 'Hand wash cold with mild detergent, lay flat to dry',
-        colors: [
-            { name: 'white', hex: '#ffffff', inStock: true },
-            { name: 'cream', hex: '#f5f5dc', inStock: true },
-            { name: 'dune', hex: '#C2B280', inStock: false },
-            { name: 'sienna', hex: '#A0522D', inStock: true }
-        ],
-        images: [
-            'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-            'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-            'https://images.unsplash.com/photo-1566669437688-37f7c4c9d1a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-            'https://images.unsplash.com/photo-1586449480561-6d7f57a6b3cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-        ],
-        rating: 4.9,
-        reviewCount: 89,
-        isNew: true,
-        isBestSeller: false,
-        stock: 8
-    }
-};
-
+import NoProductFound from './NoProductFoundComponent';
+import { productDatabase } from '../../Mocks/mockData';
 
 const ProductDetailPage = () => {
     const { productId } = useParams();
     const navigate = useNavigate();
     const product = productDatabase[productId];
 
-    // State management
+    // State management ]
     const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || null);
     const [quantity, setQuantity] = useState(1);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -123,35 +47,16 @@ const ProductDetailPage = () => {
     // Add to cart functionality
     const handleAddToCart = () => {
         if (!selectedColor?.inStock) return;
-
-        // In a real app, this would dispatch to your cart/store
-        alert(`${quantity} ${product.name} (${selectedColor.name}) added to cart!`);
+        console.log("handling adding to cart..")
     };
 
     // Handle buy now action
     const handleBuyNow = () => {
-        handleAddToCart();
-        navigate('/checkout');
+        console.log("Handling buy now!");
     };
 
     // If product not found
-    if (!product) {
-        return (
-            <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white flex items-center justify-center p-4">
-                <div className="text-center max-w-md p-8 bg-white rounded-xl shadow-lg">
-                    <h1 className="text-2xl font-bold text-gray-900 mb-4">Product Not Found</h1>
-                    <p className="text-gray-600 mb-6">The product you're looking for doesn't exist or has been removed.</p>
-                    <button
-                        onClick={() => navigate('/products')}
-                        className="bg-gradient-to-r from-rose-600 to-pink-600 text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity font-medium inline-flex items-center"
-                    >
-                        <ArrowLeftIcon className="w-5 h-5 mr-2" />
-                        Back to Products
-                    </button>
-                </div>
-            </div>
-        );
-    }
+    if (!product) { return <NoProductFound />; }
 
     // Render stars for ratings
     const renderStars = () => {
@@ -177,28 +82,6 @@ const ProductDetailPage = () => {
 
     return (
         <div className="bg-gradient-to-b from-rose-50 to-white min-h-screen">
-            {/* Navigation */}
-            <nav className="bg-white shadow-sm py-4 sticky top-0 z-10">
-                <div className="container mx-auto px-4 flex justify-between items-center">
-                    <button
-                        onClick={() => navigate(-1)}
-                        className="flex items-center text-gray-600 hover:text-rose-700 transition-colors"
-                    >
-                        <ArrowLeftIcon className="w-5 h-5 mr-2" />
-                        Back
-                    </button>
-                    <div className="flex items-center space-x-4">
-                        <button
-                            onClick={() => setIsWishlisted(!isWishlisted)}
-                            className={`p-2 rounded-full transition-colors ${isWishlisted ? 'text-rose-600 bg-rose-50' : 'text-gray-400 hover:bg-rose-50'}`}
-                            aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-                        >
-                            <HeartIcon className="w-6 h-6" />
-                        </button>
-                    </div>
-                </div>
-            </nav>
-
             {/* Main Product Section */}
             <div className="container mx-auto px-4 py-8">
                 <div className="bg-white rounded-xl shadow-sm overflow-hidden">
