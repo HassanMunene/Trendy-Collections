@@ -146,13 +146,219 @@ export const productDatabase = {
     }
 };
 
-// export const fetchPosts = (): Promise<TweetProps[]> => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       const userTweets = TWEETS.filter(
-//         (tweet) => tweet.user.username === username
-//       );
-//       resolve(userTweets);
-//     }, 800);
-//   });
-// };
+export const collections = [
+    {
+        id: 'pillows',
+        name: 'Luxury Pillow Collection',
+        description: 'Engineered for perfect comfort and support',
+        products: [
+            {
+                id: 1,
+                name: 'Velvet Pillowcases',
+                price: 250.0,
+                salePrice: 200.0,
+                image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                colors: ['white', 'cream', 'graphite']
+            },
+            {
+                id: 2,
+                name: 'Silk Pillowcases',
+                price: 280.0,
+                image: 'https://images.unsplash.com/photo-1566669437688-37f7c4c9d1a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                colors: ['ivory', 'blush', 'charcoal']
+            },
+            {
+                id: 3,
+                name: 'Fluffy Pillows',
+                price: 250.0,
+                salePrice: 200.0,
+                image: 'https://images.unsplash.com/photo-1586449480561-6d7f57a6b3cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                colors: ['white', 'taupe']
+            }
+        ]
+    },
+    {
+        id: 'cushions_inserts',
+        name: 'Cushions Collection',
+        description: 'Engineered for perfect comfort and support',
+        products: [
+            {
+                id: 4,
+                name: 'Down Cushion Insert',
+                price: 199.0,
+                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                colors: ['white', 'cream']
+            }
+        ]
+    },
+    {
+        id: 'curtains',
+        name: 'Designer Curtains',
+        description: 'Transform your space with light-filtering elegance',
+        products: [
+            {
+                id: 5,
+                name: 'Linen Sheer Curtains',
+                price: 149.99,
+                image: 'https://i.ebayimg.com/images/g/oAwAAOSwSUBmmk-4/s-l1600.webp',
+                colors: ['white', 'oatmeal']
+            },
+            {
+                id: 6,
+                name: 'Blackout Drapes',
+                price: 179.99,
+                salePrice: 159.99,
+                image: 'https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/59/4473632/1.jpg?0619',
+                colors: ['navy', 'charcoal', 'cream']
+            },
+            {
+                id: 7,
+                name: 'Velvet Curtains',
+                price: 199.99,
+                image: 'https://i.ebayimg.com/images/g/gYoAAOSw95xnkREC/s-l1600.webp',
+                colors: ['emerald', 'sapphire', 'burgundy']
+            }
+        ]
+    },
+    {
+        id: 'fleece_blankets',
+        name: 'Fleece Blankets',
+        description: 'Everything you need for a coordinated look',
+        products: [
+            {
+                id: 8,
+                name: 'Knighted Blanket',
+                price: 349.99,
+                salePrice: 299.99,
+                image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                colors: ['white', 'stone']
+            },
+            {
+                id: 9,
+                name: 'Soft Fleece',
+                price: 229.99,
+                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                colors: ['white', 'grey']
+            }
+        ]
+    },
+    {
+        id: 'decorative_pillows',
+        name: 'Decorative Pillows',
+        description: 'Everything you need for a coordinated look',
+        products: [
+            {
+                id: 10,
+                name: 'Sausage Pillow',
+                price: 349.99,
+                salePrice: 299.99,
+                image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                colors: ['white', 'stone']
+            },
+            {
+                id: 11,
+                name: 'Round Pillow',
+                price: 229.99,
+                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                colors: ['white', 'grey']
+            },
+            {
+                id: 12,
+                name: 'Knot Pillow',
+                price: 229.99,
+                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                colors: ['white', 'grey']
+            },
+            {
+                id: 13,
+                name: 'Bow Tie Pillow',
+                price: 229.99,
+                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                colors: ['white', 'grey']
+            }
+        ]
+    }
+];
+
+// Best sellers
+export const bestSellers = [
+    {
+        id: 10,
+        name: 'Signature Down Pillow',
+        price: 159.99,
+        image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+        colors: ['white', 'cream']
+    },
+    {
+        id: 11,
+        name: 'Organic Cotton Sheets',
+        price: 199.99,
+        salePrice: 179.99,
+        image: 'https://images.unsplash.com/photo-1583845112203-454c7c581fad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+        colors: ['white', 'natural']
+    },
+    {
+        id: 12,
+        name: 'Weighted Blanket',
+        price: 249.99,
+        image: 'https://images.unsplash.com/photo-1566669437688-37f7c4c9d1a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+        colors: ['grey', 'blue']
+    }
+];
+
+// New arrivals
+export const newArrivals = [
+    {
+        id: 13,
+        name: 'Cashmere Throw',
+        price: 179.99,
+        image: 'https://images.unsplash.com/photo-1586449480561-6d7f57a6b3cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+        colors: ['cream', 'camel']
+    },
+    {
+        id: 14,
+        name: 'Bamboo Sheet Set',
+        price: 229.99,
+        salePrice: 199.99,
+        image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+        colors: ['white', 'sage']
+    },
+    {
+        id: 15,
+        name: 'Embroidered Duvet',
+        price: 299.99,
+        image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+        colors: ['ivory', 'blush']
+    }
+];
+
+// Testimonials data
+export const testimonials = [
+    {
+        id: 1,
+        name: "Sarah J.",
+        role: "Interior Designer",
+        location: "New York, NY",
+        rating: 5,
+        content: "The quality of these sheets is unmatched. I've never slept better and they've held up beautifully after dozens of washes. Worth every penny!",
+        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+    },
+    {
+        id: 2,
+        name: "Michael T.",
+        role: "Hotel Owner",
+        location: "Miami, FL",
+        rating: 5,
+        content: "We outfitted all our suites with these linens and our guests won't stop complimenting them. The durability matches the comfort perfectly.",
+        image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+    },
+    {
+        id: 3,
+        name: "Emma R.",
+        role: "Home Stager",
+        location: "San Francisco, CA",
+        rating: 5,
+        content: "These window treatments transform any space instantly. The light filtering is magical and the craftsmanship is evident in every detail.",
+        image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+    }
+];
