@@ -9,7 +9,7 @@ import {
 // Simulate Api delay
 const simulateDelay = () => new Promise(resolve => setTimeout(resolve, 300));
 
-export const fetchCollection = async () => {
+export const fetchCollections = async () => {
     await simulateDelay();
     return collections;
 };

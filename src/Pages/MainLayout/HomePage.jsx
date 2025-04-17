@@ -1,8 +1,54 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import {
+    fetchCollections,
+    fetchBestSellers,
+    fetchNewArrivals,
+    fetchTestimonials
+} from "../../api/api"
+
 const HomePage = () => {
-    // Featured collections with curated product selections
+    const [collections, setCollections] = useState([]);
+    const [bestSellers, setBestSellers] = useState([]);
+    const [newArrivals, setNewArrivals] = useState([]);
+    const [testimonials, setTestimonials] = useState([]);
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+                const [collectionsData, bestSellersData, newArrivalsData, testimonialsData] = await Promise.all([
+                    fetchCollections(),
+                    fetchBestSellers(),
+                    fetchNewArrivals(),
+                    fetchTestimonials()
+                ]);
+                setCollections(collectionsData);
+                setBestSellers(bestSellersData);
+                setNewArrivals(newArrivalsData);
+                setTestimonials(testimonialsData);
+            } catch (error) {
+                setError(error.message);
+                console.log("error fetching the data");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchData();
+    }, [])
+
+    if (loading) {
+        return <div className="text-center py-20">Loading...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center py-20 text-red-500">Error: {error}</div>;
+    }
 
     return (
         <div className="bg-white">
