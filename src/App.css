@@ -9,6 +9,10 @@ a {
     color: inherit;
 }
 
+button {
+    border-radius: inherit;
+}
+
 /* Loader Animation Styling here */
 @keyframes spin {
     to {

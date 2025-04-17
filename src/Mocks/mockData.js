@@ -4,8 +4,8 @@ export const productDatabase = {
         name: 'Luxe Sateen Pillow Set',
         category: 'pillows',
         subcategory: 'sateen',
-        price: 149.00,
-        salePrice: 126.65,
+        price: 250.00,
+        salePrice: 200.00,
         description: 'Experience unparalleled softness with our premium sateen pillow set. Made from 100% long-staple cotton with a 600 thread count for luxurious comfort that lasts.',
         details: [
             'Set of 2 standard pillowcases',
@@ -35,7 +35,7 @@ export const productDatabase = {
         reviewCount: 142,
         isNew: false,
         isBestSeller: true,
-        stock: 12
+        stock: 4
     },
     7: {
         id: 7,
