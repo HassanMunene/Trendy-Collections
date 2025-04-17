@@ -121,9 +121,9 @@ const HomePage = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {collection.products.map((product) => (
                                     <div key={product.id} className="group relative">
-                                        <div className="absolute -inset-1 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
-                                        <div className="relative h-full z-10">
-                                            <Link to={`/products/${product.id}`} className="block">
+                                        <div className="absolute -inset-1 bg-gradient-to-r from-amber-50 to-rose-50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                                        <div className="relative h-full z-10 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
+                                            <Link to={`/products/${product.id}`} className="block mb-4">
                                                 <div className="relative overflow-hidden rounded-xl mb-4 aspect-[1/1] bg-gray-50">
                                                     <img
                                                         src={product.image}
@@ -299,8 +299,8 @@ const HomePage = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                             {newArrivals.map((product) => (
                                 <div key={product.id} className="group relative">
-                                    <div className="absolute -inset-1 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
-                                    <div className="relative h-full z-10">
+                                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-50 to-rose-50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                                    <div className="relative h-full z-10 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
                                         <Link to={`/products/${product.id}`} className="block">
                                             <div className="relative overflow-hidden rounded-xl mb-4 aspect-[1/1] bg-gray-50">
                                                 <img
