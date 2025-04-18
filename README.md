@@ -1,1 +1,1 @@
-Reddit 2.0
+![trendy collections ](https://github.com/user-attachments/assets/90244f11-8a95-4eb7-a7f4-a6cd8afca158)
