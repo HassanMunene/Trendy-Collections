@@ -157,14 +157,14 @@ export const collections = [
                 name: 'Velvet Pillowcases',
                 price: 250.0,
                 salePrice: 200.0,
-                image: 'https://images.unsplash.com/photo-1616627561839-074385245ff6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://smithyhomecouture.com/cdn/shop/files/2-26.jpg?v=1723558559&width=750',
                 colors: ['white', 'cream', 'graphite']
             },
             {
                 id: 2,
                 name: 'Silk Pillowcases',
                 price: 280.0,
-                image: 'https://images.unsplash.com/photo-1566669437688-37f7c4c9d1a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/16/8515181/3.jpg?9999',
                 colors: ['ivory', 'blush', 'charcoal']
             },
             {
@@ -172,8 +172,44 @@ export const collections = [
                 name: 'Fluffy Pillows',
                 price: 250.0,
                 salePrice: 200.0,
-                image: 'https://images.unsplash.com/photo-1586449480561-6d7f57a6b3cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://image.kilimall.com/kenya/shop/store/goods/8539/2023/09/16951118331689754310adad044a895a6df0c2e476334.jpg?x-image-process=image/format,webp/resize,w_720',
                 colors: ['white', 'taupe']
+            }
+        ]
+    },
+    {
+        id: 'decorative_pillows',
+        name: 'Decorative Pillows',
+        description: 'Everything you need for a coordinated look',
+        products: [
+            {
+                id: 10,
+                name: 'Sausage Pillow',
+                price: 349.99,
+                salePrice: 299.99,
+                image: 'https://scontent.fnbo11-1.fna.fbcdn.net/v/t39.30808-6/486452784_122193179492042016_4828494671882089767_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeE6Y_9BhTeGSDYk6GpCdACy0-Dn8aLaifbT4OfxotqJ9lH2gRrILJc6QC5SUi9oPmj7QRdUoBIpMlgmxkNuhZeT&_nc_ohc=FA8CuBXmPm4Q7kNvwFGGmLC&_nc_oc=AdmsnvtfdyMbz96DWaAFPs_RRAeINVVNsBY05EDQX21nayNsbLL160sgXNicILx_xkc&_nc_zt=23&_nc_ht=scontent.fnbo11-1.fna&_nc_gid=clfTdr_jmEksAT5254337A&oh=00_AfGcOd-ecsjACExVgESPTwCZu-mTdw-owV7mw4g_qRQcqQ&oe=6807D236',
+                colors: ['white', 'stone']
+            },
+            {
+                id: 11,
+                name: 'Round Pillow',
+                price: 229.99,
+                image: 'https://image.kilimall.com/kenya/shop/store/goods/5645/2019/12/5645_06307787285329740.jpg?x-image-process=image/format,webp/resize,w_720#',
+                colors: ['white', 'grey']
+            },
+            {
+                id: 12,
+                name: 'Knot Pillow',
+                price: 229.99,
+                image: 'https://scontent.fnbo11-1.fna.fbcdn.net/v/t39.30808-6/485361510_122193181334042016_3630068797050101427_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFEh8cTUT0PPppHoMkPaU2JNqbcPhVa1EE2ptw-FVrUQW0Omn7D9VfI0RXb3MmPJzwCAsPM1PIJ5UVO5FQyl9vb&_nc_ohc=ksuGCmw2rL0Q7kNvwGzyMqi&_nc_oc=AdnCo6q5GP3uNr6QaOW7Q1SllVIkLHS3gb2FSONzDl3wRkaN92RgR9BUNaLUhY8NW0Y&_nc_zt=23&_nc_ht=scontent.fnbo11-1.fna&_nc_gid=wklvqJP_IJTubcevF1jFnw&oh=00_AfHVqQwopkEAddcShD-Lp5K-KjWW1UU328IATM9d8aoYEA&oe=6807F14E',
+                colors: ['white', 'grey', 'blue']
+            },
+            {
+                id: 13,
+                name: 'Bow Tie Pillow',
+                price: 229.99,
+                image: 'https://scontent.fnbo11-1.fna.fbcdn.net/v/t39.30808-6/491840420_122196471050042016_1675332266822406876_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF-r49787XwzEqtlf5CUqQc5jTM62BW5i3mNMzrYFbmLRjI6gM7P_hcLgUaM3pLMKaPR6gQk_K8YiT9mHRrO_7s&_nc_ohc=Gvnjt-jUVO8Q7kNvwFRCVJ3&_nc_oc=Adkj9nzJOk3WmhVtw0HwcJ5wLmNdI9Z4_iE3LqojY1v8Zh45xRuHEuEfrAnKt0XBYS4&_nc_zt=23&_nc_ht=scontent.fnbo11-1.fna&_nc_gid=_GWrq1ZGCPpv6DIfxWdiVA&oh=00_AfGcI6XsjQ3oBfPhxaZWxRCLSfp_TaSemz4K8XUKO9nukQ&oe=6807F533',
+                colors: ['white', 'grey']
             }
         ]
     },
@@ -186,7 +222,7 @@ export const collections = [
                 id: 4,
                 name: 'Down Cushion Insert',
                 price: 199.0,
-                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://i.ebayimg.com/images/g/fxkAAeSwDuxnvI-9/s-l960.webp',
                 colors: ['white', 'cream']
             }
         ]
@@ -230,54 +266,18 @@ export const collections = [
                 name: 'Knighted Blanket',
                 price: 349.99,
                 salePrice: 299.99,
-                image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://image.kilimall.com/kenya/shop/store/goods/8788/2024/01/17059079410480b73dd7a2a8f4c6bbf65f00e0f456514.jpg?x-image-process=image/format,webp/resize,w_720#',
                 colors: ['white', 'stone']
             },
             {
                 id: 9,
                 name: 'Soft Fleece',
                 price: 229.99,
-                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://glahpe-suppliers.com/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-18-at-13.01.07-700x933.jpeg',
                 colors: ['white', 'grey']
             }
         ]
     },
-    {
-        id: 'decorative_pillows',
-        name: 'Decorative Pillows',
-        description: 'Everything you need for a coordinated look',
-        products: [
-            {
-                id: 10,
-                name: 'Sausage Pillow',
-                price: 349.99,
-                salePrice: 299.99,
-                image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                colors: ['white', 'stone']
-            },
-            {
-                id: 11,
-                name: 'Round Pillow',
-                price: 229.99,
-                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                colors: ['white', 'grey']
-            },
-            {
-                id: 12,
-                name: 'Knot Pillow',
-                price: 229.99,
-                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                colors: ['white', 'grey']
-            },
-            {
-                id: 13,
-                name: 'Bow Tie Pillow',
-                price: 229.99,
-                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                colors: ['white', 'grey']
-            }
-        ]
-    }
 ];
 
 // Best sellers

@@ -7,7 +7,7 @@ import MainLayout from './Layouts/MainLayout';
 import LoadingScreen from './Components/LoadingScreen';
 
 // Next is to load the HomePage lazily to improve performance
-const HomePage = lazy(() => import('./Pages/MainLayout/HomePage'));
+const HomePage = lazy(() => import('./Pages/MainLayout/HomePage/index'));
 const ProductsPage = lazy(() => import('./Pages/MainLayout/ProductsPage'))
 const ProductDetailPage = lazy(() => import('./Pages/MainLayout/ProductDetailPage'));
 const CartPage = lazy(() => import('./Pages/MainLayout/CartPage'));
