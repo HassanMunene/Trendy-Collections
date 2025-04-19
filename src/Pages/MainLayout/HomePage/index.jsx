@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import MinimalHeroSection from './MinimalHeroSection';
+import Sidebar from './Sidebar';
 import OurCollections from './OurCollection';
 import BestSellers from './BestSellers';
 import NewArrivals from './NewArrivals';
@@ -62,67 +63,10 @@ const HomePage = () => {
 
             <div className="flex flex-col lg:flex-row w-full min-h-screen bg-gray-50">
                 {/* Sidebar */}
-                <aside className="lg:w-72 w-full px-4 py-8 lg:sticky top-0 self-start">
-                    <div className="bg-white rounded-lg shadow-xl border border-rose-100 py-6 px-2 h-full flex flex-col justify-between">
-                        {/* Top: Value Props */}
-                        <div className="flex flex-col gap-8">
-                            <h4 className="font-bold !text-rose-600 text-center font-serif mb-2">Why Shop With Us?</h4>
-                            <div className="space-y-6">
-                                {/* Feature 1 */}
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center">
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-base font-semibold">Premium Quality</h3>
-                                        <p className="text-sm text-gray-600">Crafted with top-tier materials from ethical sources.</p>
-                                    </div>
-                                </div>
-
-                                {/* Feature 2 */}
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center">
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4..." />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-base font-semibold">Free Shipping</h3>
-                                        <p className="text-sm text-gray-600">On all orders over $100 — fast and insured.</p>
-                                    </div>
-                                </div>
-
-                                {/* Feature 3 */}
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center">
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h..." />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-base font-semibold">Easy Returns</h3>
-                                        <p className="text-sm text-gray-600">365-day risk-free trial for every purchase.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Bottom: Trust & Badge */}
-                        <div className="mt-10 pt-6 border-t border-gray-100">
-                            <p className="text-xs text-gray-400 mb-2">Trusted by 10,000+ happy customers</p>
-                            <img
-                                src="/images/trust-badge.svg" // <-- replace with actual badge if needed
-                                alt="Trust Badge"
-                                className="h-8"
-                            />
-                        </div>
-                    </div>
-                </aside>
+                <Sidebar />
 
                 {/* Main Content */}
-                <main className="flex-1 py-10">
+                <main className="flex-1 py-8">
                     <OurCollections />
                     <div className="mt-8">
                         <BestSellers />
