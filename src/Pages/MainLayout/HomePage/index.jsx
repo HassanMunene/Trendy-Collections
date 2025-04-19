@@ -56,56 +56,81 @@ const HomePage = () => {
     }
 
     return (
-        <div className="bg-white">
+        <div className="bg-gray-100">
             {/* Minimal Hero section - A headline and CTA */}
             <MinimalHeroSection />
 
-            <div className="py-16 bg-gray-100">
-                {/* Collections Section */}
-                <OurCollections />
+            <div className="flex flex-col lg:flex-row w-full min-h-screen bg-gray-50">
+                {/* Sidebar */}
+                <aside className="lg:w-72 w-full px-4 py-8 lg:sticky top-0 self-start">
+                    <div className="bg-white rounded-lg shadow-xl border border-rose-100 py-6 px-2 h-full flex flex-col justify-between">
+                        {/* Top: Value Props */}
+                        <div className="flex flex-col gap-8">
+                            <h4 className="font-bold !text-rose-600 text-center font-serif mb-2">Why Shop With Us?</h4>
+                            <div className="space-y-6">
+                                {/* Feature 1 */}
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center">
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-base font-semibold">Premium Quality</h3>
+                                        <p className="text-sm text-gray-600">Crafted with top-tier materials from ethical sources.</p>
+                                    </div>
+                                </div>
 
-                {/* Best Sellers Section */}
-                <div className='mt-8'>
-                    <BestSellers />
-                </div>
+                                {/* Feature 2 */}
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center">
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4..." />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-base font-semibold">Free Shipping</h3>
+                                        <p className="text-sm text-gray-600">On all orders over $100 — fast and insured.</p>
+                                    </div>
+                                </div>
 
-                {/* New Arrivals Section */}
-                <NewArrivals />
-            </div>
-
-            {/* Value Proposition Banner */}
-            <div className="bg-gradient-to-r from-rose-700 to-pink-600 py-16 px-4 text-white">
-                <div className="container mx-auto max-w-7xl">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                        <div className="flex flex-col items-center text-center">
-                            <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6">
-                                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-                                </svg>
+                                {/* Feature 3 */}
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center">
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h..." />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-base font-semibold">Easy Returns</h3>
+                                        <p className="text-sm text-gray-600">365-day risk-free trial for every purchase.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 className="text-2xl font-serif font-semibold mb-3">Premium Quality</h3>
-                            <p className="text-rose-100 max-w-xs">Only the finest materials sourced from ethical suppliers worldwide</p>
                         </div>
-                        <div className="flex flex-col items-center text-center">
-                            <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6">
-                                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                                </svg>
-                            </div>
-                            <h3 className="text-2xl font-serif font-semibold mb-3">Free Shipping</h3>
-                            <p className="text-rose-100 max-w-xs">Complimentary delivery on all orders over $100 with white-glove service available</p>
-                        </div>
-                        <div className="flex flex-col items-center text-center">
-                            <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6">
-                                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                </svg>
-                            </div>
-                            <h3 className="text-2xl font-serif font-semibold mb-3">Easy Returns</h3>
-                            <p className="text-rose-100 max-w-xs">365-night trial with free returns - we want you to love your purchase</p>
+
+                        {/* Bottom: Trust & Badge */}
+                        <div className="mt-10 pt-6 border-t border-gray-100">
+                            <p className="text-xs text-gray-400 mb-2">Trusted by 10,000+ happy customers</p>
+                            <img
+                                src="/images/trust-badge.svg" // <-- replace with actual badge if needed
+                                alt="Trust Badge"
+                                className="h-8"
+                            />
                         </div>
                     </div>
-                </div>
+                </aside>
+
+                {/* Main Content */}
+                <main className="flex-1 py-10">
+                    <OurCollections />
+                    <div className="mt-8">
+                        <BestSellers />
+                    </div>
+                    <div className="mt-8">
+                        <NewArrivals />
+                    </div>
+                </main>
             </div>
 
             {/* Testimonial Section */}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 
 import { fetchNewArrivals } from "../../../api/api";
 
@@ -26,30 +27,24 @@ const NewArrivals = () => {
     }, []);
 
     return (
-        <section>
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10">
+        <section className="container mx-auto max-w-8xl space-y-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end">
                 <div className="mb-6 md:mb-0">
-                    <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-2">New Arrivals</h2>
-                    <p className="text-lg text-gray-600">Fresh additions to elevate your home</p>
+                    <p className="text-md text-gray-600">Fresh additions to elevate your home</p>
                 </div>
-                <Link
-                    to="/products?sort=newest"
-                    className="flex items-center text-base md:text-lg font-medium text-rose-700 hover:text-rose-800 transition-colors group"
-                >
-                    <span className="border-b border-transparent group-hover:border-rose-700 transition-all">
+                <Link to="/products?sort=newest" className="flex items-center text-base md:text-md font-medium text-rose-700 hover:text-rose-800 transition-colors group">
+                    <span className="border-b group-hover:border-rose-700 transition-all">
                         View all new arrivals
                     </span>
-                    <svg className="w-5 h-5 ml-1.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                    <ChevronRight className="h-5 w-5" />
                 </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {newArrivals.map((product) => (
                     <div key={product.id} className="group relative">
                         <div className="absolute -inset-1 bg-gradient-to-r from-amber-50 to-rose-50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
-                        <div className="relative h-full z-10 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
+                        <div className="relative h-full z-10 bg-white rounded-xl p-2 shadow-sm hover:shadow-md transition-shadow duration-300">
                             <Link to={`/products/${product.id}`} className="block">
                                 <div className="relative overflow-hidden rounded-xl mb-4 aspect-[1/1] bg-gray-50">
                                     <img
