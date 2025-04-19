@@ -18,7 +18,7 @@ const MainLayout = () => {
     }, []);
 
     return (
-        <div className="flex min-h-screen flex-col bg-rose-50">
+        <div className="flex min-h-screen flex-col bg-gray-100">
             {/* Announcement Bar */}
             <div className="bg-gradient-to-r from-rose-700 to-pink-600 py-2 text-center text-white text-sm font-medium">
                 <div className="container mx-auto px-4 text-lg">
