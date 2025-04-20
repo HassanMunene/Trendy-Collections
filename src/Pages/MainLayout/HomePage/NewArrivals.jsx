@@ -70,25 +70,20 @@ const NewArrivals = () => {
                                 <div className="flex items-center mb-3">
                                     {product.salePrice ? (
                                         <>
-                                            <span className="font-bold text-gray-900 text-base mr-2">${product.salePrice.toFixed(2)}</span>
-                                            <span className="text-gray-500 text-xs line-through">${product.price.toFixed(2)}</span>
+                                            <span className="font-bold text-gray-900 text-base mr-2">ksh {product.salePrice.toFixed(2)}</span>
+                                            <span className="text-gray-500 text-xs line-through">ksh {product.price.toFixed(2)}</span>
                                         </>
                                     ) : (
-                                        <span className="font-bold text-gray-900 text-base">${product.price.toFixed(2)}</span>
+                                        <span className="font-bold text-gray-900 text-base">ksh {product.price.toFixed(2)}</span>
                                     )}
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="text-xs text-gray-500">
                                         Limited stock available
                                     </div>
-                                    <Link
-                                        to={`/products/${product.id}`}
-                                        className="text-xs font-medium text-rose-700 hover:text-rose-800 flex items-center"
-                                    >
+                                    <Link to={`/products/${product.id}`} className="text-xs font-medium !text-rose-700 !hover:text-rose-800 flex items-center">
                                         Shop now
-                                        <svg className="w-3 h-3 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
+                                        <ChevronRight className="w-3 h-3 ml-0.5" />
                                     </Link>
                                 </div>
                             </div>

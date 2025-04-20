@@ -123,28 +123,6 @@ const HomePage = () => {
                             </div>
                         ))}
                     </div>
-
-                    {/* Trust indicators */}
-                    <div className="mt-20 pt-12 border-t border-gray-200">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center">
-                            <div className="text-center">
-                                <div className="text-4xl font-bold text-gray-900 mb-2">10K+</div>
-                                <div className="text-gray-600">Happy Customers</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-4xl font-bold text-gray-900 mb-2">4.9/5</div>
-                                <div className="text-gray-600">Average Rating</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-4xl font-bold text-gray-900 mb-2">15</div>
-                                <div className="text-gray-600">Countries Served</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-4xl font-bold text-gray-900 mb-2">24/7</div>
-                                <div className="text-gray-600">Customer Support</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -152,7 +130,7 @@ const HomePage = () => {
             <div className="relative py-32 px-4 bg-gray-50 overflow-hidden">
                 <div className="absolute inset-0">
                     <img
-                        src="https://images.unsplash.com/photo-1583845112203-454c7c581fad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80"
+                        src="https://www.home-beddings-and-curtains.com/cdn/shop/files/02_taloa_kaki_mobile_1600x.jpg?v=1725106460"
                         alt="Luxury bedroom"
                         className="w-full h-full object-cover opacity-20"
                     />
