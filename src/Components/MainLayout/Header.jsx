@@ -14,7 +14,7 @@ const navigationLinks = [
 const Header = ({ scrolled, mobileMenuOpen, setMobileMenuOpen }) => {
     return (
         <header className={`sticky top-0 z-50 w-full transition-all duration-500 ${scrolled ? 'bg-white shadow-xl' : 'bg-white/95 backdrop-blur-md'}`}>
-            <div className="container mx-auto px-4">
+            <div className="mx-auto px-4">
                 <div className="flex items-center justify-between py-4">
                     {/* Mobile menu button on mobile screens */}
                     <button

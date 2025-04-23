@@ -99,10 +99,10 @@ const Sidebar = () => {
                         <a href="https://www.facebook.com/profile.php?id=61551260480648" target='_blank' className="w-9 h-9 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center hover:bg-rose-100 transition-colors" aria-label="Follow us on facebook">
                             <FaFacebookF className="w-5 h-5" />
                         </a>
-                        <a href="https://www.facebook.com/profile.php?id=61551260480648" target='_blank' className="w-9 h-9 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center hover:bg-rose-100 transition-colors" aria-label="Follow us on instagram">
+                        <a href="https://www.instagram.com/trendy.collection01?igsh=MXNjOGs1bDM3d2YwZg%3D%3D" target='_blank' className="w-9 h-9 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center hover:bg-rose-100 transition-colors" aria-label="Follow us on instagram">
                             <FaInstagram className="w-5 h-5" />
                         </a>
-                        <a href="https://www.facebook.com/profile.php?id=61551260480648" target='_blank' className="w-9 h-9 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center hover:bg-rose-100 transition-colors" aria-label="Follow us on tiktok">
+                        <a href="tiktok.com/@trendy.collections01" target='_blank' className="w-9 h-9 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center hover:bg-rose-100 transition-colors" aria-label="Follow us on tiktok">
                             <FaTiktok className="w-5 h-5" />
                         </a>
                     </div>
