@@ -360,5 +360,14 @@ export const testimonials = [
         rating: 5,
         content: "These window treatments transform any space instantly. The light filtering is magical and the craftsmanship is evident in every detail.",
         image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+    },
+    {
+        id: 3,
+        name: "Emma R.",
+        role: "Home Stager",
+        location: "San Francisco, CA",
+        rating: 5,
+        content: "These window treatments transform any space instantly. The light filtering is magical and the craftsmanship is evident in every detail.",
+        image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
     }
 ];
