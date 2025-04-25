@@ -91,35 +91,35 @@ const MainTopbar = () => {
                                         src="https://ui-avatars.com/api/?name=Admin+User&background=4f46e5&color=fff"
                                         alt="Admin User"
                                     />
-                                    <span className="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-500 ring-2 ring-white dark:ring-gray-900"></span>
+                                    <span className="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-500 ring-2 ring-white"></span>
                                 </div>
-                                <span className="ml-2 text-gray-700 dark:text-gray-300 hidden md:inline font-medium">Admin User</span>
-                                <ChevronDown className={`ml-1 h-4 w-4 text-gray-500 dark:text-gray-400 hidden md:inline transition-transform ${isProfileDropdownOpen ? 'rotate-180' : ''}`} />
+                                <span className="ml-2 text-gray-700 hidden md:inline font-medium">Admin User</span>
+                                <ChevronDown className={`ml-1 h-4 w-4 text-gray-500 hidden md:inline transition-transform ${isProfileDropdownOpen ? 'rotate-180' : ''}`} />
                             </button>
                         </div>
 
                         {isProfileDropdownOpen && (
-                            <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50 overflow-hidden transition-all duration-200">
+                            <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 overflow-hidden transition-all duration-200">
                                 <div className="py-1">
                                     <Link
                                         to="/admin/profile"
-                                        className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                                     >
-                                        <User className="h-4 w-4 mr-3 text-gray-500 dark:text-gray-400" />
+                                        <User className="h-4 w-4 mr-3 text-gray-500" />
                                         Your Profile
                                     </Link>
                                     <Link
                                         to="/admin/settings"
-                                        className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                                     >
-                                        <Settings className="h-4 w-4 mr-3 text-gray-500 dark:text-gray-400" />
+                                        <Settings className="h-4 w-4 mr-3 text-gray-500" />
                                         Settings
                                     </Link>
                                     <button
                                         onClick={handleLogout}
-                                        className="w-full flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                        className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                                     >
-                                        <LogOut className="h-4 w-4 mr-3 text-gray-500 dark:text-gray-400" />
+                                        <LogOut className="h-4 w-4 mr-3 text-gray-500" />
                                         Sign out
                                     </button>
                                 </div>
