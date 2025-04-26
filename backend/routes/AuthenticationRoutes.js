@@ -1,5 +1,8 @@
 import express from 'express';
-import { loginController, registerController } from '../controllers/AuthenticationController.js';
+import {
+    loginController,
+    registerController
+} from '../controllers/AuthenticationController.js';
 import rateLimit from 'express-rate-limit';
 // import { verifyToken } from '../middleware/verifyToken.js';
 // import { verifyAdmin } from '../middleware/verifyAdmin.js';
@@ -19,9 +22,9 @@ const authLimiter = rateLimit({
 
 
 // POST /api/auth/register
-router.post('/register', validateRegister, registerController);
+router.post('/register', registerController);
 
 // POST /api/auth/login
-router.post('/login', authLimiter, validateLogin, loginController);
+router.post('/login', authLimiter, loginController);
 
 export default router;

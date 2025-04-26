@@ -1,4 +1,4 @@
-import databasePool from "../Configurations/database";
+import databasePool from "../configurations/database.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
