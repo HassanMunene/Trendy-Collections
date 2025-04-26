@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Lock, Mail, Eye, EyeOff } from "lucide-react";
+import { Lock, Mail, Eye, EyeOff, ChevronRight } from "lucide-react";
 
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -23,25 +23,30 @@ const LoginPage = () => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-rose-50 to-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <Link to="/" className="flex justify-center">
-                    <span className="text-3xl font-bold bg-gradient-to-r from-rose-700 to-pink-600 bg-clip-text text-transparent">
+                <Link to="/" className="flex justify-center group">
+                    <span className="text-2xl font-bold bg-gradient-to-r from-rose-700 to-pink-600 bg-clip-text text-transparent relative">
                         Trendy Collections
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-rose-700 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
                     </span>
                 </Link>
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    Sign in to your account
-                </h2>
-                <p className="mt-2 text-center text-sm text-gray-600">
-                    Or{" "}
+                <div className="mt-3 flex items-center justify-center space-x-2">
+                    <span className="h-px w-8 bg-gray-300"></span>
+                    <span className="text-sm text-gray-500">
+                        New to Trendy Collections?
+                    </span>
+                    <span className="h-px w-8 bg-gray-300"></span>
+                </div>
+
+                <div className="mt-2 text-center">
                     <Link
                         to="/register"
-                        className="font-medium text-rose-600 hover:text-rose-500 transition-colors"
+                        className="inline-flex items-center text-sm font-medium !text-rose-600 !hover:text-rose-500 group transition-colors"
                     >
-                        create a new account
+                        Create an account
+                        <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
-                </p>
+                </div>
             </div>
-
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10 border border-rose-100">
                     <form className="space-y-6" onSubmit={handleSubmit}>

@@ -6,11 +6,15 @@ import './App.css';
 import MainLayout from './Layouts/MainLayout';
 import LoadingScreen from './Components/LoadingScreen';
 
-// Next is to load the HomePage lazily to improve performance
+// Main Layout pages
 const HomePage = lazy(() => import('./Pages/MainLayout/HomePage/index'));
 const ProductsPage = lazy(() => import('./Pages/MainLayout/ProductsPage'))
 const ProductDetailPage = lazy(() => import('./Pages/MainLayout/ProductDetailPage'));
 const CartPage = lazy(() => import('./Pages/MainLayout/CartPage'));
+
+// Login and Register pages
+const LoginPage = lazy(() => import('./Pages/LoginPage'));
+const RegistePage = lazy(() => import('./Pages/RegisterPage'));
 
 // Admin pages
 const AdminLayout = lazy(() => import('./Pages/Admin/AdminLayout'));
@@ -37,6 +41,8 @@ function App() {
 
 				{/* the next one is the admin layout page */}
 				<Routes>
+					<Route path='/login' element={<LoginPage />} />
+					<Route path='/register' element={<RegistePage />} />
 					<Route path='/admin' element={<AdminLayout />}>
 						<Route index element={<DashboardPage />} />
 						<Route path='orders' element={<OrdersPage />} />

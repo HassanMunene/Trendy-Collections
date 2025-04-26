@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff, ChevronRight } from "lucide-react";
 
 const RegisterPage = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -24,23 +24,41 @@ const RegisterPage = () => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-rose-50 to-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <Link to="/" className="flex justify-center">
-                    <span className="text-3xl font-bold bg-gradient-to-r from-rose-700 to-pink-600 bg-clip-text text-transparent">
+                {/* Logo with animated underline (matches header) */}
+                <Link to="/" className="flex justify-center group">
+                    <span className="text-2xl font-bold bg-gradient-to-r from-rose-700 to-pink-600 bg-clip-text text-transparent relative">
                         Trendy Collections
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-rose-700 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
                     </span>
                 </Link>
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    Create a new account
-                </h2>
-                <p className="mt-2 text-center text-sm text-gray-600">
-                    Or{" "}
+
+                {/* Visual separator with animation */}
+                <div className="mt-3 relative">
+                    <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div className="w-full border-t border-gray-200 relative">
+                            <span className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-rose-100 rounded-full transition-all duration-300 hover:bg-rose-200 hover:scale-110"></span>
+                        </div>
+                    </div>
+                    <div className="relative flex justify-center">
+                        <span className="px-3 bg-white text-sm text-gray-500 font-medium">
+                            Already a member?
+                        </span>
+                    </div>
+                </div>
+
+                {/* Animated login link */}
+                <div className="mt-4 text-center">
                     <Link
                         to="/login"
-                        className="font-medium text-rose-600 hover:text-rose-500 transition-colors"
+                        className="inline-flex items-center text-sm font-medium !text-rose-600 !hover:text-rose-500 group transition-all duration-300"
                     >
-                        sign in to your existing account
+                        <span className="relative">
+                            Sign in to your account
+                            <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
+                        </span>
+                        <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
-                </p>
+                </div>
             </div>
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
