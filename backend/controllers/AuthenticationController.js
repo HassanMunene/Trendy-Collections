@@ -69,9 +69,16 @@ export const loginController = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
-
+        
+        const { username, email: userEmail, role, created_at } = user[0];
+        const userData = {
+            "username": username,
+            "email": userEmail,
+            "role": role,
+            "createdAt": created_at
+        }
         // on the return statement I would like to return the user details and the token too.
-        return res.status(200).json({ "user": user[0], "token": token})
+        return res.status(200).json({ "user": userData, "token": token})
     } catch (error) {
         console.error("Error logging in user:", error);
         return res.status(500).json({ message: "Internal server error" });
