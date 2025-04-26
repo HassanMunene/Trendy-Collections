@@ -5,6 +5,18 @@
 -- products (1) -------- (∞) product_images
 -- collections (1) ---- (∞) collection_products (∞) ---- (1) products
 
+-- USERS TABLE
+-- users table will use UUID instead of auto increment int ID
+CREATE TABLE IF NOT EXISTS users (
+    id VARCHAR(50) PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('customer', 'admin') DEFAULT 'customer',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 -- CATEGORIES TABLE
 CREATE TABLE IF NOT EXISTS categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -12,6 +24,7 @@ CREATE TABLE IF NOT EXISTS categories (
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 -- PRODUCTS TABLE
 CREATE TABLE IF NOT EXISTS products (
