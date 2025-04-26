@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
+import AuthenticationRoutes from './routes/AuthenticationRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,8 +13,8 @@ app.use(express.json());
 
 // Now we define the routes
 app.use('/api/auth', AuthenticationRoutes);
-app.use('/api/products', ProductRoutes);
-app.use('/api/admin', AdminRoutes);
+// app.use('/api/products', ProductRoutes);
+// app.use('/api/admin', AdminRoutes);
 
 // Next is the error handling middleware 
 // Why is it here and not above routes is because
