@@ -1,13 +1,20 @@
-
 -- This SQL schema is designed for an e-commerce platform with a focus on products, categories, and collections.
+
 -- categories (1) ------ (∞) products
 -- products (1) -------- (∞) product_colors
 -- products (1) -------- (∞) product_images
 -- collections (1) ---- (∞) collection_products (∞) ---- (1) products
 
+-- CATEGORIES TABLE
+CREATE TABLE IF NOT EXISTS categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 -- PRODUCTS TABLE
-CREATE TABLE products (
+CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
@@ -26,16 +33,8 @@ CREATE TABLE products (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
--- CATEGORIES TABLE
-CREATE TABLE categories (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
 -- PRODUCT COLORS TABLE
-CREATE TABLE product_colors (
+CREATE TABLE IF NOT EXISTS product_colors (
     id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
     name VARCHAR(50) NOT NULL,
@@ -46,7 +45,7 @@ CREATE TABLE product_colors (
 );
 
 -- PRODUCT IMAGES TABLE
-CREATE TABLE product_images (
+CREATE TABLE IF NOT EXISTS product_images (
     id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
     url TEXT NOT NULL,
@@ -56,7 +55,7 @@ CREATE TABLE product_images (
 );
 
 -- COLLECTIONS TABLE
-CREATE TABLE collections (
+CREATE TABLE IF NOT EXISTS collections (
     id VARCHAR(50) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
@@ -64,7 +63,7 @@ CREATE TABLE collections (
 );
 
 -- COLLECTION_PRODUCTS JOIN TABLE
-CREATE TABLE collection_products (
+CREATE TABLE IF NOT EXISTS collection_products (
     collection_id VARCHAR(50) NOT NULL,
     product_id INT NOT NULL,
     PRIMARY KEY (collection_id, product_id),
