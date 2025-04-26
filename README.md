@@ -67,3 +67,29 @@ The hosting provider we will be using has also influence our decision of using M
 2. **Manual relationship handling** (joins, eager loading)
 3. **No automatic migrations** (need separate migration system)
 4. **Tight coupling to MySQL** (harder to switch databases later)
+
+
+# 📚 Database Configuration Guide
+
+## 1. Install MySQL
+Make sure you have **MySQL installed** and running on your local machine.
+
+If you don't have it installed yet, you can download it from: [https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04)
+
+---
+
+## 2. Set Up Environment Variables
+Inside the `backend/.env` file, add your database configuration:
+
+```env
+DB_HOST=your_hostname
+DB_USER=your_username
+DB_PASSWORD=your_database_password
+DATABASE_NAME=your_database_name
+```
+## 3. Initialize the Database Schema
+
+```
+cd database
+node initiateDatabase.js
+```
