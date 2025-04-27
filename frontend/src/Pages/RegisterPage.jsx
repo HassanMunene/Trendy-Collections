@@ -1,36 +1,139 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { User, Mail, Lock, Eye, EyeOff, ChevronRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { User, Mail, Lock, Eye, EyeOff, ChevronRight, CheckCircle } from "lucide-react";
+
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const RegisterPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
-        name: "",
+        username: "",
         email: "",
         password: "",
+        confirmPassword: "",
     });
+    const [errors, setErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+    const navigate = useNavigate();
+
+    const validateForm = () => {
+        const newErrors = {};
+
+        // Username validation
+        if (!formData.username.trim()) {
+            newErrors.username = "Username is required";
+        } else if (formData.username.length < 3) {
+            newErrors.username = "Username must be at least 3 characters";
+        }
+
+        // Email validation
+        if (!formData.email.trim()) {
+            newErrors.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = "Please enter a valid email";
+        }
+
+        // Password validation
+        if (!formData.password) {
+            newErrors.password = "Password is required";
+        } else if (formData.password.length < 8) {
+            newErrors.password = "Password must be at least 8 characters";
+        }
+
+        // Confirm password
+        if (formData.password !== formData.confirmPassword) {
+            newErrors.confirmPassword = "Passwords don't match";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    useEffect(() => {
+        if (formData.password || formData.confirmPassword) {
+            const timer = setTimeout(() => {
+                validateForm();
+            }, 300);
+            return () => clearTimeout(timer);
+        }
+    }, [formData.confirmPassword]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData((prev) => {
+            return (
+                {
+                    ...prev,
+                    [name]: value
+                }
+            )
+        });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle registration logic here
-        console.log("Registration submitted:", formData);
+        if (!validateForm()) return;
+        setIsLoading(true);
+        try {
+            const response = await fetch(`${API_URL}/auth/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: formData.username,
+                    email: formData.email,
+                    password: formData.password,
+                })
+            })
+            const data = await response.json();
+            console.log(data);
+            // if data.message contains the message "user already exists" then set error
+            if (data.status === "fail") {
+                setErrors({ submit: data.message });
+                return;
+            }
+            // if data.status is success then set success
+            if (data.status === "success") {
+                setIsSuccess(true);
+                setTimeout(() => {
+                    navigate("/login");
+                }, 2000);
+                return;
+            }
+        } catch (error) {
+            setErrors({ submit: error.message });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-rose-50 to-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                {/* Logo with animated underline (matches header) */}
+                {/* Logo with animated underline */}
                 <Link to="/" className="flex justify-center group">
                     <span className="text-2xl font-bold bg-gradient-to-r from-rose-700 to-pink-600 bg-clip-text text-transparent relative">
                         Trendy Collections
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-rose-700 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
                     </span>
                 </Link>
+
+                {/* Success message */}
+                {isSuccess && (
+                    <div className="rounded-md bg-green-50 p-4 mt-4">
+                        <div className="flex">
+                            <div className="flex-shrink-0">
+                                <CheckCircle className="h-5 w-5 text-green-400" />
+                            </div>
+                            <div className="ml-3">
+                                <p className="text-sm font-medium text-green-800">
+                                    Registration successful! Redirecting...
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Visual separator with animation */}
                 <div className="mt-3 relative">
@@ -47,7 +150,7 @@ const RegisterPage = () => {
                 </div>
 
                 {/* Animated login link */}
-                <div className="mt-4 text-center">
+                <div className="mt-3 text-center">
                     <Link
                         to="/login"
                         className="inline-flex items-center text-sm font-medium !text-rose-600 !hover:text-rose-500 group transition-all duration-300"
@@ -61,39 +164,34 @@ const RegisterPage = () => {
                 </div>
             </div>
 
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10 border border-rose-100">
-                    <form className="space-y-6" onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label
-                                htmlFor="name"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Full Name
+                            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                                Username
                             </label>
                             <div className="mt-1 relative rounded-md shadow-sm">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <User className="h-5 w-5 text-gray-400" />
                                 </div>
                                 <input
-                                    id="name"
-                                    name="name"
+                                    autoFocus
+                                    id="username"
+                                    name="username"
                                     type="text"
-                                    autoComplete="name"
+                                    autoComplete="username"
                                     required
-                                    value={formData.name}
+                                    value={formData.username}
                                     onChange={handleChange}
-                                    className="py-3 pl-10 block w-full border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500 focus:outline-none transition duration-300"
-                                    placeholder="John Doe"
+                                    className="py-3 pl-10 block w-full border border-gray-300 rounded-md focus:ring-rose-500 focus:!border-rose-500 focus:outline-none transition duration-300"
+                                    placeholder="username"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label
-                                htmlFor="email"
-                                className="block text-sm font-medium text-gray-700"
-                            >
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                 Email address
                             </label>
                             <div className="mt-1 relative rounded-md shadow-sm">
@@ -108,17 +206,14 @@ const RegisterPage = () => {
                                     required
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="py-3 pl-10 block w-full border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500 focus:outline-none transition duration-300"
+                                    className="py-3 pl-10 block w-full border border-gray-300 rounded-md focus:ring-rose-500 focus:!border-rose-500 focus:outline-none transition duration-300"
                                     placeholder="your@email.com"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label
-                                htmlFor="password"
-                                className="block text-sm font-medium text-gray-700"
-                            >
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                 Password
                             </label>
                             <div className="mt-1 relative rounded-md shadow-sm">
@@ -133,12 +228,13 @@ const RegisterPage = () => {
                                     required
                                     value={formData.password}
                                     onChange={handleChange}
-                                    className="py-3 pl-10 pr-10 block w-full border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500 focus:outline-none transition duration-300"
+                                    className="py-3 pl-10 pr-10 block w-full border border-gray-300 rounded-md focus:ring-rose-500 focus:!border-rose-500 focus:outline-none transition duration-300"
                                     placeholder="••••••••"
                                 />
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
                                     <button
                                         type="button"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
                                         className="text-gray-400 hover:text-rose-600 transition-colors"
                                         onClick={() => setShowPassword(!showPassword)}
                                     >
@@ -150,104 +246,78 @@ const RegisterPage = () => {
                                     </button>
                                 </div>
                             </div>
-                            <p className="mt-2 text-xs text-gray-500">
-                                Password must be at least 8 characters long
-                            </p>
+                            {errors.password && (
+                                <p className="mt-1 text-sm text-rose-600">{errors.password}</p>
+                            )}
                         </div>
 
-                        <div className="flex items-center">
-                            <input
-                                id="terms"
-                                name="terms"
-                                type="checkbox"
-                                required
-                                className="h-4 w-4 text-rose-600 focus:ring-rose-500 border-gray-300 rounded"
-                            />
-                            <label
-                                htmlFor="terms"
-                                className="ml-2 block text-sm text-gray-700"
-                            >
-                                I agree to the{" "}
-                                <Link
-                                    to="/terms"
-                                    className="font-medium text-rose-600 hover:text-rose-500 transition-colors"
-                                >
-                                    Terms of Service
-                                </Link>{" "}
-                                and{" "}
-                                <Link
-                                    to="/privacy"
-                                    className="font-medium text-rose-600 hover:text-rose-500 transition-colors"
-                                >
-                                    Privacy Policy
-                                </Link>
+                        <div>
+                            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                                Confirm Password
                             </label>
+                            <div className="mt-1 relative rounded-md shadow-sm">
+                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <Lock className="h-5 w-5 text-gray-400" />
+                                </div>
+                                <input
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    type={showPassword ? "text" : "password"}
+                                    autoComplete="new-password"
+                                    required
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                    className="py-3 pl-10 pr-10 block w-full border border-gray-300 rounded-md focus:ring-rose-500 focus:!border-rose-500 focus:outline-none transition duration-300"
+                                    placeholder="••••••••"
+                                />
+                                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <button
+                                        type="button"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        className="text-gray-400 hover:text-rose-600 transition-colors"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? (
+                                            <EyeOff className="h-5 w-5" />
+                                        ) : (
+                                            <Eye className="h-5 w-5" />
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+                            {errors.confirmPassword && (
+                                <p className="mt-1 text-sm text-rose-600">{errors.confirmPassword}</p>
+                            )}
                         </div>
+
+                        {errors.submit && (
+                            <div className="rounded-md p-3 bg-red-50 text-red-800 mt-4">
+                                <p className="text-sm font-medium">
+                                    {errors.submit}
+                                </p>
+                            </div>
+                        )}
 
                         <div>
                             <button
                                 type="submit"
-                                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-rose-700 to-pink-600 hover:from-rose-800 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 transition-all duration-300 transform hover:scale-[1.01]"
+                                disabled={isLoading}
+                                className={`w-full flex justify-center py-3 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-rose-700 to-pink-600 hover:from-rose-800 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 transition-all duration-300 transform hover:scale-[1.01] ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
                             >
-                                Create Account
+                                {isLoading ? (
+                                    <span className="flex items-center">
+                                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Creating...
+                                    </span>
+                                ) : (
+                                    'Create Account'
+                                )}
                             </button>
                         </div>
                     </form>
-
-                    <div className="mt-6">
-                        <div className="relative">
-                            <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-gray-300"></div>
-                            </div>
-                            <div className="relative flex justify-center text-sm">
-                                <span className="px-2 bg-white text-gray-500">
-                                    Or sign up with
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="mt-6 grid grid-cols-2 gap-3">
-                            <div>
-                                <button
-                                    type="button"
-                                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 transition-all duration-200"
-                                >
-                                    <svg
-                                        className="w-5 h-5"
-                                        aria-hidden="true"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.933.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.14 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <div>
-                                <button
-                                    type="button"
-                                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 transition-all duration-200"
-                                >
-                                    <svg
-                                        className="w-5 h-5"
-                                        aria-hidden="true"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.933.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.14 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
