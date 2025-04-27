@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './Components/ProtectedRoute';
 import MainLayout from './Layouts/MainLayout';
 import LoadingScreen from './Components/LoadingScreen';
 
@@ -27,32 +29,35 @@ const CategoriesPage = lazy(() => import('./Pages/Admin/CategoriesPage'));
 function App() {
 	return (
 		<BrowserRouter>
-			{/* Suspense is used to show a fallback loading while the component is being loaded */}
-			<Suspense fallback={<LoadingScreen />}>
-				{/* This is the main layouts page */}
-				<Routes>
-					<Route path="/" element={<MainLayout />}>
-						<Route index element={<HomePage />} />
-						<Route path="products" element={<ProductsPage />} />
-						<Route path="products/:productId" element={<ProductDetailPage />} />
-						<Route path="/cart" element={<CartPage />} />
-					</Route>
-				</Routes>
+			<AuthProvider>
+				{/* Suspense is used to show a fallback loading while the component is being loaded */}
+				<Suspense fallback={<LoadingScreen />}>
+					{/* This is the main layouts page */}
+					<Routes>
+						<Route path="/" element={<MainLayout />}>
+							<Route index element={<HomePage />} />
+							<Route path="products" element={<ProductsPage />} />
+							<Route path="products/:productId" element={<ProductDetailPage />} />
+							<Route path="/cart" element={<CartPage />} />
+						</Route>
 
-				{/* the next one is the admin layout page */}
-				<Routes>
-					<Route path='/login' element={<LoginPage />} />
-					<Route path='/register' element={<RegistePage />} />
-					<Route path='/admin' element={<AdminLayout />}>
-						<Route index element={<DashboardPage />} />
-						<Route path='orders' element={<OrdersPage />} />
-						<Route path='products' element={<AdminProductsPage />} />
-						<Route path='customers' element={<CustomersPage />} />
-						<Route path="categories" element={<CategoriesPage />} />
-					</Route>
-				</Routes>
-			</Suspense>
+						{/* Authentication Routes */}
+						<Route path='/login' element={<LoginPage />} />
+						<Route path="/register" element={<RegistePage />} />
 
+						{/* the next one is the admin layout page */}
+						<Route element={<ProtectedRoute />}>
+							<Route path='/admin' element={<AdminLayout />}>
+								<Route index element={<DashboardPage />} />
+								<Route path='orders' element={<OrdersPage />} />
+								<Route path='products' element={<AdminProductsPage />} />
+								<Route path='customers' element={<CustomersPage />} />
+								<Route path="categories" element={<CategoriesPage />} />
+							</Route>
+						</Route>
+					</Routes>
+				</Suspense>
+			</AuthProvider>
 		</BrowserRouter>
 	)
 }

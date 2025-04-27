@@ -1,11 +1,11 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
 import LoadingScreen from "./LoadingScreen";
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = () => {
     const { isAuthenticated, loading } = useAuth();
-
+    
     if (loading) {
         return (
             <>
@@ -16,15 +16,11 @@ const ProtectedRoute = ({ children }) => {
 
     if (!isAuthenticated) {
         return (
-            <Navigate to="/auth/login" replace />
+            <Navigate to="/login" replace />
         )
     }
 
-    return (
-        <>
-            {children}
-        </>
-    )
+    return <Outlet />
 }
 
 export default ProtectedRoute;
