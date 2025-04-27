@@ -1,60 +1,153 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Lock, Mail, Eye, EyeOff, ChevronRight } from "lucide-react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Lock, Mail, Eye, EyeOff, ChevronRight, AlertCircle } from "lucide-react";
+
+import { useAuth } from "../context/AuthContext";
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const LoginPage = () => {
+    const { login } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
+    const [errors, setErrors] = useState({});
+    const [successMessage, setSuccessMessage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!formData.email.trim()) {
+            newErrors.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = "Please enter a valid email";
+        }
+
+        if (!formData.password) {
+            newErrors.password = "Password is required";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle login logic here
-        console.log("Login submitted:", formData);
+        if (!validateForm()) return;
+
+        setIsLoading(true);
+        try {
+            const response = await fetch(`${API_URL}/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    password: formData.password,
+                }),
+            });
+
+            const data = await response.json();
+
+            console.log("Login response:", data);
+
+            if (data.status === "fail") {
+                setErrors({ submit: data.message });
+                return;
+            }
+
+            if (data.status === "success") {
+                setSuccessMessage(data.message);
+                // after successful login, store the token and user data on the local storage
+                // And login the user using the login function from the AuthContext
+                const { token, user } = data;
+                localStorage.setItem("token", token);
+                localStorage.setItem("user", JSON.stringify(user));
+                login(token, user);
+
+                await new Promise((resolve) => setTimeout(resolve, 1500));
+
+                // navigate the user to the admin page
+                navigate("/admin")
+            }
+        } catch (error) {
+            console.log("Error in the Login process:", error);
+            setErrors({ submit: "Network error. Please try again." });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-rose-50 to-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                {/* Logo with animated underline */}
                 <Link to="/" className="flex justify-center group">
                     <span className="text-2xl font-bold bg-gradient-to-r from-rose-700 to-pink-600 bg-clip-text text-transparent relative">
                         Trendy Collections
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-rose-700 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
                     </span>
                 </Link>
-                <div className="mt-3 flex items-center justify-center space-x-2">
-                    <span className="h-px w-8 bg-gray-300"></span>
-                    <span className="text-sm text-gray-500">
-                        New to Trendy Collections?
-                    </span>
-                    <span className="h-px w-8 bg-gray-300"></span>
+
+                {/* Visual separator with animation */}
+                <div className="mt-3 relative">
+                    <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div className="w-full border-t border-gray-200 relative">
+                            <span className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-rose-100 rounded-full transition-all duration-300 hover:bg-rose-200 hover:scale-110"></span>
+                        </div>
+                    </div>
+                    <div className="relative flex justify-center">
+                        <span className="px-3 bg-white text-sm text-gray-500 font-medium">
+                            New to Trendy Collections?
+                        </span>
+                    </div>
                 </div>
 
-                <div className="mt-2 text-center">
+                {/* Animated register link */}
+                <div className="mt-3 text-center">
                     <Link
                         to="/register"
-                        className="inline-flex items-center text-sm font-medium !text-rose-600 !hover:text-rose-500 group transition-colors"
+                        state={{ from: location.state?.from }}
+                        className="inline-flex items-center text-sm font-medium !text-rose-600 !hover:text-rose-500 group transition-all duration-300"
                     >
-                        Create an account
+                        <span className="relative">
+                            Create an account
+                            <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
+                        </span>
                         <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
             </div>
+
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10 border border-rose-100">
-                    <form className="space-y-6" onSubmit={handleSubmit}>
+                    {/* Error message */}
+                    {errors.submit && (
+                        <div className="mb-6 rounded-md p-3 flex items-start bg-red-50 text-red-800">
+                            <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                            <div className="ml-3">
+                                <p className="text-sm font-medium">
+                                    {errors.submit}
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
+                    <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label
-                                htmlFor="email"
-                                className="block text-sm font-medium text-gray-700"
-                            >
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                 Email address
                             </label>
                             <div className="mt-1 relative rounded-md shadow-sm">
@@ -69,10 +162,14 @@ const LoginPage = () => {
                                     required
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="py-3 pl-10 block w-full border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500 focus:outline-none transition duration-300"
+                                    className={`py-3 pl-10 block w-full border ${errors.email ? 'border-red-300' : 'border-gray-300'
+                                        } rounded-md focus:ring-rose-500 focus:border-rose-500 focus:outline-none transition duration-300`}
                                     placeholder="your@email.com"
                                 />
                             </div>
+                            {errors.email && (
+                                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                            )}
                         </div>
 
                         <div>
@@ -94,12 +191,14 @@ const LoginPage = () => {
                                     required
                                     value={formData.password}
                                     onChange={handleChange}
-                                    className="py-3 pl-10 pr-10 block w-full border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500 focus:outline-none transition duration-300"
+                                    className={`py-3 pl-10 pr-10 block w-full border ${errors.password ? 'border-red-300' : 'border-gray-300'
+                                        } rounded-md focus:ring-rose-500 focus:border-rose-500 focus:outline-none transition duration-300`}
                                     placeholder="••••••••"
                                 />
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
                                     <button
                                         type="button"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
                                         className="text-gray-400 hover:text-rose-600 transition-colors"
                                         onClick={() => setShowPassword(!showPassword)}
                                     >
@@ -111,6 +210,9 @@ const LoginPage = () => {
                                     </button>
                                 </div>
                             </div>
+                            {errors.password && (
+                                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                            )}
                         </div>
 
                         <div className="flex items-center justify-between">
@@ -142,67 +244,24 @@ const LoginPage = () => {
                         <div>
                             <button
                                 type="submit"
-                                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-rose-700 to-pink-600 hover:from-rose-800 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 transition-all duration-300 transform hover:scale-[1.01]"
+                                disabled={isLoading}
+                                className={`w-full flex justify-center py-3 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-rose-700 to-pink-600 hover:from-rose-800 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 transition-all duration-300 transform hover:scale-[1.01] ${isLoading ? 'opacity-75 cursor-not-allowed' : ''
+                                    }`}
                             >
-                                Sign in
+                                {isLoading ? (
+                                    <span className="flex items-center">
+                                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Signing in...
+                                    </span>
+                                ) : (
+                                    'Sign in'
+                                )}
                             </button>
                         </div>
                     </form>
-
-                    <div className="mt-6">
-                        <div className="relative">
-                            <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-gray-300"></div>
-                            </div>
-                            <div className="relative flex justify-center text-sm">
-                                <span className="px-2 bg-white text-gray-500">
-                                    Or continue with
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="mt-6 grid grid-cols-2 gap-3">
-                            <div>
-                                <button
-                                    type="button"
-                                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 transition-all duration-200"
-                                >
-                                    <svg
-                                        className="w-5 h-5"
-                                        aria-hidden="true"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.933.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.14 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <div>
-                                <button
-                                    type="button"
-                                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 transition-all duration-200"
-                                >
-                                    <svg
-                                        className="w-5 h-5"
-                                        aria-hidden="true"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.933.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.14 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

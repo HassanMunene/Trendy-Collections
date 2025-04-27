@@ -87,7 +87,6 @@ const RegisterPage = () => {
                 })
             })
             const data = await response.json();
-            console.log(data);
             // if data.message contains the message "user already exists" then set error
             if (data.status === "fail") {
                 setErrors({ submit: data.message });

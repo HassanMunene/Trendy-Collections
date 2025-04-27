@@ -18,7 +18,7 @@ export const registerController = async (req, res) => {
         );
 
         if (existingUser.length > 0) {
-            return res.status(409).json({ message: "User already exists" });
+            return res.status(409).json({ status: "fail", message: "User already exists" });
         }
 
         // Hash the password
@@ -34,7 +34,7 @@ export const registerController = async (req, res) => {
 
         await databasePool.query("INSERT INTO users SET ?", newUser);
 
-        return res.status(201).json({ message: "User registered successfully" });
+        return res.status(201).json({ status: "success", message: "User registered successfully" });
     } catch (error) {
         console.error("Error registering user:", error);
         return res.status(500).json({ message: "Internal server error" });
@@ -53,14 +53,14 @@ export const loginController = async (req, res) => {
         );
 
         if (user.length === 0) {
-            return res.status(401).json({ message: "Invalid credentials" });
+            return res.status(401).json({ status: "fail", message: "Invalid credentials" });
         }
 
         // Compare the password with the hashed password
         const isPasswordValid = await bcrypt.compare(password, user[0].password);
 
         if (!isPasswordValid) {
-            return res.status(401).json({ message: "Invalid credentials" });
+            return res.status(401).json({status: "fail", message: "Invalid credentials" });
         }
 
         // Generate a JWT token
@@ -78,9 +78,9 @@ export const loginController = async (req, res) => {
             "createdAt": created_at
         }
         // on the return statement I would like to return the user details and the token too.
-        return res.status(200).json({ "user": userData, "token": token})
+        return res.status(200).json({status: "success", "user": userData, "token": token})
     } catch (error) {
         console.error("Error logging in user:", error);
-        return res.status(500).json({ message: "Internal server error" });
+        return res.status(500).json({status: "server fail", message: "Internal server error" });
     }
 };
