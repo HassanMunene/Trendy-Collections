@@ -15,8 +15,8 @@ const ProductDetailPage = lazy(() => import('./Pages/MainLayout/ProductDetailPag
 const CartPage = lazy(() => import('./Pages/MainLayout/CartPage'));
 
 // Login and Register pages
-const LoginPage = lazy(() => import('./Pages/LoginPage'));
-const RegistePage = lazy(() => import('./Pages/RegisterPage'));
+const LoginPage = lazy(() => import('./Pages/Authentication/LoginPage'));
+const RegistePage = lazy(() => import('./Pages/Authentication/RegisterPage'));
 
 // Admin pages
 const AdminLayout = lazy(() => import('./Pages/Admin/AdminLayout'));
