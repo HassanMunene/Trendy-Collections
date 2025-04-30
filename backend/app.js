@@ -13,6 +13,7 @@ app.use(express.json());
 
 // Now we define the routes
 app.use('/api/auth', AuthenticationRoutes);
+app.use('/api/profile', UserProfileRoutes)
 // app.use('/api/products', ProductRoutes);
 // app.use('/api/admin', AdminRoutes);
 
