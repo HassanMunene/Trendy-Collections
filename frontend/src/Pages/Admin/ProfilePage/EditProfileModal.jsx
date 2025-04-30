@@ -52,7 +52,7 @@ const EditProfileModal = ({ user, onClose, onSave}) => {
                     <h3 className="text-xl font-semibold text-gray-900">Edit Profile</h3>
                     <button
                         onClick={onClose}
-                        className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+                        className="p-1 !rounded-full hover:bg-gray-100 transition-colors"
                     >
                         <X className="w-5 h-5 text-gray-500" />
                     </button>

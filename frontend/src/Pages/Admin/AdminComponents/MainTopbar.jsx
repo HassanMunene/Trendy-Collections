@@ -6,6 +6,7 @@ const MainTopbar = () => {
     const navigate = useNavigate();
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const searchRef = useRef(null);
 
     const handleLogout = () => {

@@ -6,16 +6,15 @@ import { useAuth } from "../../../context/AuthContext";
 import LogoutConfirmationModal from "../AdminComponents/LogoutConfirmationModal";
 import OverviewTab from "./OverviewTab";
 import SecurityTab from "./SecurityTab";
+import EditProfileModal from "./EditProfileModal";
 
 const ProfilePage = () => {
     const [activeTab, setActiveTab] = useState('overview');
     const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [showMobileMenu, setShowMobileMenu] = useState(false);
-
-    const { logout } = useAuth();
-
-    const currentUser = {
+    const [showProfileEditModal, setShowProfileEditModal] = useState(false);
+    const [currentUser, setCurrentUser] = useState({
         name: 'Aziza Khamisi',
         email: 'nkatha.khamisi@gmail.com',
         avatar: 'https://static.vecteezy.com/system/resources/previews/046/656/564/non_2x/women-hijab-icon-beautiful-muslim-girl-avatar-free-vector.jpg',
@@ -27,7 +26,9 @@ const ProfilePage = () => {
             tasks: 142,
             connections: 86
         }
-    };
+    });
+
+    const { logout } = useAuth();
 
     const handleLogout = () => {
         logout();
@@ -50,6 +51,13 @@ const ProfilePage = () => {
     const cancelLogout = () => {
         setShowLogoutConfirmation(false);
     };
+
+    const handleSaveProfile = (updateData) => {
+        setCurrentUser((prev) => ({
+            ...prev,
+            ...updateData
+        }));
+    }
 
     return (
         <div className="flex flex-col h-full">
@@ -77,7 +85,7 @@ const ProfilePage = () => {
 
                         {/* Mobile menu button */}
                         <button
-                            className="md:hidden p-2 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors"
+                            className="md:hidden p-2 !rounded-full bg-gray-50 hover:bg-gray-100 transition-colors"
                             onClick={() => setShowMobileMenu(!showMobileMenu)}
                         >
                             <Menu className="w-5 h-5 text-gray-600" />
@@ -139,8 +147,11 @@ const ProfilePage = () => {
                                 alt={currentUser.name}
                                 className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-xl"
                             />
-                            <button className="absolute bottom-0 right-0 bg-indigo-600 text-white p-1 md:p-2 rounded-full shadow-md hover:bg-indigo-700 transition-all transform hover:scale-105">
-                                <Edit className="w-4 h-4 md:w-5 md:h-5" />
+                            <button
+                                onClick={() => setShowProfileEditModal(true)}
+                                className="absolute bottom-2 right-0 bg-indigo-600 text-white p-1 md:p-2 !rounded-full shadow-md hover:bg-indigo-700 transition-all transform hover:scale-105"
+                            >
+                                <Edit className="w-3 h-3 md:w-5 md:h-5" />
                             </button>
                         </div>
                     </div>
@@ -161,7 +172,10 @@ const ProfilePage = () => {
                                 </span>
                             </div>
                         </div>
-                        <button className="self-start md:self-auto flex items-center px-4 py-2 md:px-5 md:py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all transform hover:-translate-y-0.5 shadow-md text-sm md:text-base">
+                        <button
+                            onClick={() => setShowProfileEditModal(true)}
+                            className="self-start md:self-auto flex items-center px-4 py-2 md:px-5 md:py-2.5 bg-indigo-600 text-white !rounded-lg hover:bg-indigo-700 transition-all transform hover:-translate-y-0.5 shadow-md text-sm md:text-base"
+                        >
                             <Edit className="w-3 h-3 md:w-4 md:h-4 mr-2" />
                             Edit Profile
                         </button>
@@ -201,6 +215,14 @@ const ProfilePage = () => {
                     cancelLogout={cancelLogout}
                     isLoggingOut={isLoggingOut}
                     confirmLogout={confirmLogout}
+                />
+            )}
+
+            {showProfileEditModal && (
+                <EditProfileModal
+                    user={currentUser}
+                    onClose={() => setShowProfileEditModal(false)}
+                    onSave={handleSaveProfile}
                 />
             )}
         </div>

@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Menu, Bell, Search, ChevronDown } from "lucide-react";
 
 import AdminSidebar from './Sidebar/AdminSidebar';
 import MainTopbar from './AdminComponents/MainTopbar';
 
 const AdminLayout = () => {
-    const navigate = useNavigate();
     const location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -20,10 +19,6 @@ const AdminLayout = () => {
         return location.pathname === route;
     };
 
-    const handleLogout = () => {
-        navigate('/login');
-    };
-
     return (
         <div className="flex h-screen bg-gray-50">
             {/* Sidebar */}
@@ -31,7 +26,6 @@ const AdminLayout = () => {
                 isMobileMenuOpen={isMobileMenuOpen}
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
                 isActiveRoute={isActiveRoute}
-                handleLogout={handleLogout}
             />
 
             {/* Main Content */}
