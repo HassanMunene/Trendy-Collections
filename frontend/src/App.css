@@ -9,12 +9,13 @@ a {
     color: inherit;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0px;
-}
-
-button {
-    border-radius: inherit;
 }
 
 /* Loader Animation Styling here */
@@ -40,10 +41,35 @@ button {
 /* app.css */
 
 .hide-scrollbar {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
+    display: none;
+    /* Chrome, Safari */
+}
+
+/* for admin tooltip */
+.clip-triangle-left {
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+/* Add these to your global CSS */
+.hide-scrollbar {
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.clip-triangle-left {
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
 }
