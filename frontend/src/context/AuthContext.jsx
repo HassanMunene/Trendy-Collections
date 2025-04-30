@@ -7,6 +7,8 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         const userData = localStorage.getItem("user");
@@ -33,8 +35,32 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(false);
     }
 
+    const updateProfile = async (profileData) => {
+        try {
+            const response = await fetch(`${API_URL}/profile/update`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(profileData)
+            });
+
+            if(!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to Update profile');
+            }
+
+            const data = await response.json();
+            setUser(data.user);
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, user, loading, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, user, loading, login, logout, updateProfile }}>
             {children}
         </AuthContext.Provider>
     )
