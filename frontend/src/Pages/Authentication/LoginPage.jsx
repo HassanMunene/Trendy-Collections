@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 
 import { useAuth } from "../../context/AuthContext";
@@ -9,6 +9,7 @@ import LoginForm from "./LoginForm";
 const LoginPage = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const [loginError, setLoginError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -36,8 +37,19 @@ const LoginPage = () => {
                 return;
             }
 
-            const { user, token } = data; 
+            const { user, token } = data;
             login(user, token);
+            // Check for return path from session expired
+            const preAuthPath = sessionStorage.getItem('preAuthPath');
+            const unsavedChanges = sessionStorage.getItem('unsavedProfileChanges');
+
+            if (location.state?.from === 'session_expired' || preAuthPath) {
+                sessionStorage.removeItem('preAuthPath');
+                sessionStorage.removeItem('unsavedProfileChanges');
+                navigate(preAuthPath || location.state?.returnTo || '/dashboard');
+            } else {
+                navigate('/dashboard');
+            }
             setSuccessMessage("Login successful! Redirecting...");
             await new Promise((resolve) => setTimeout(resolve, 1500));
             navigate("/admin")

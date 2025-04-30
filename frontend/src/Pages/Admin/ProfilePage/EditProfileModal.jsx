@@ -1,18 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, User, Mail, Save, Loader2, Edit } from "lucide-react";
 
 import { useAuth } from "../../../context/AuthContext";
+import SessionExpiredModal from "../AdminComponents/SessionExpiredModal";
 
-const EditProfileModal = ({ user, onClose, onSave}) => {
-    const { updateProfile } = useAuth();
+const EditProfileModal = ({ user, onClose, onSave }) => {
+    const { updateProfile, isAuthenticated } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
-    const [formData, setFormData] = useState({
-        username: user.username,
-        email: user.email,
-        avatar: user.avatar,
+    const [sessionExpired, setSessionExpired] = useState(false);
+    const [formData, setFormData] = useState(() => {
+        // checked unsaved changes from  the session storage.
+        const savedData = sessionStorage.getItem('unsavedProfileChanges');
+        return savedData ? JSON.parse(savedData) : {
+            username: user.username,
+            email: user.email,
+            avatar: user.avatar,
+        }
     });
+
+    useEffect(() => {
+        // Clear session storage when modal closes
+        return () => {
+            sessionStorage.removeItem('unsavedProfileChanges');
+        };
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -37,13 +50,34 @@ const EditProfileModal = ({ user, onClose, onSave}) => {
                 onclose();
             }, 1500);
         } catch (error) {
-            console.log("Error updating profile", error);
-            setError(error.message || 'failed to update profile')
+            if (error.message.includes('Token expired') || error.message.includes('Unauthorized')) {
+                setSessionExpired(true);
+            } else {
+                console.log("Error updating profile", error);
+                setError(error.message || 'failed to update profile')
+            }
         } finally {
             setIsLoading(false);
         }
     }
 
+    const handleLoginSuccess = (savedData) => {
+        setSessionExpired(false);
+        setFormData(savedData);
+        // Retry the update automatically if coming back from login
+        handleSubmit(new Event('submit'));
+    }
+
+    if (sessionExpired) {
+        return (
+            <>
+                <SessionExpiredModal
+                    onLoginSuccess={handleLoginSuccess}
+                    formData={formData}
+                />;
+            </>
+        )
+    }
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
             <div className="bg-white rounded-xl shadow-2xl w-full max-w-md transform transition-all duration-300 animate-fade-in">
@@ -87,14 +121,14 @@ const EditProfileModal = ({ user, onClose, onSave}) => {
 
                     {/* Name Field */}
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <User className="h-5 w-5 text-gray-400" />
                             </div>
                             <input
                                 type="text"
-                                name="name"
+                                name="username"
                                 value={formData.username}
                                 onChange={handleChange}
                                 className="pl-10 w-full py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"

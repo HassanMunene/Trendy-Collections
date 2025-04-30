@@ -5,15 +5,17 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
+        const storedToken = localStorage.getItem("token");
+        setToken(storedToken);
         const userData = localStorage.getItem("user");
 
-        if (token && userData) {
+        if (storedToken && userData) {
             setIsAuthenticated(true);
             setUser(JSON.parse(userData));
         }
@@ -37,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
     const updateProfile = async (profileData) => {
         try {
-            const response = await fetch(`${API_URL}/profile/update`, {
+            const response = await fetch(`${API_URL}/profile/update-profile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

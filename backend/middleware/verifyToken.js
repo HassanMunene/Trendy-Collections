@@ -5,6 +5,9 @@ dotenv.config();
 
 export const verifyToken = (req, res, next) => {
     // get the token from the header
+    console.log("Authorization header:", req.headers.authorization);
+    console.log("Extracted token:", token);
+
     const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) {
@@ -27,6 +30,7 @@ export const verifyToken = (req, res, next) => {
         // proceed to the next middleware or controller
         next();
     } catch (error) {
+        console.log("Error verifying token", error);
         // Handle different JWT error cases
         let message = 'Invalid token';
 

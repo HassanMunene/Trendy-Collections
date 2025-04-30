@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import databasePool from '../configurations/database';
+import databasePool from '../configurations/database.js';
 
 export const updateProfileController = async (req, res) => {
     const userId = req.user.id;

@@ -5,7 +5,7 @@ import { verifyToken } from '../middleware/verifyToken.js';
 
 const router = express.Router();
 
-
-
 // PUT /api/profile/update
 router.put('/update-profile', verifyToken, updateProfileController);
+
+export default router;

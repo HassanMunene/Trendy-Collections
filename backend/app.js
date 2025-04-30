@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 import AuthenticationRoutes from './routes/AuthenticationRoutes.js';
+import UserProfileRoutes from './routes/UserProfileRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
