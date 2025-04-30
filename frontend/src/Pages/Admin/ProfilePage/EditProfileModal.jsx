@@ -1,6 +1,170 @@
 import { useState } from "react";
-import { X, User, Mail, Save, Loader2 } from "lucide-react";
+import { X, User, Mail, Save, Loader2, Edit } from "lucide-react";
 
 import { useAuth } from "../../../context/AuthContext";
 
+const EditProfileModal = ({ user, onClose, onSave}) => {
+    const { updateProfile } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+    const [formData, setFormData] = useState({
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+    });
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError(null);
+        setSuccess(null);
+
+        try {
+            // we will call our backend api endpoint to update profile.
+            await updateProfile(formData)
+            setSuccess("Profile updated Successfully");
+            setTimeout(() => {
+                onSave(formData);
+                onclose();
+            }, 1500);
+        } catch (error) {
+            console.log("Error updating profile", error);
+            setError(error.message || 'failed to update profile')
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+            <div className="bg-white rounded-xl shadow-2xl w-full max-w-md transform transition-all duration-300 animate-fade-in">
+                {/* Modal Header */}
+                <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                    <h3 className="text-xl font-semibold text-gray-900">Edit Profile</h3>
+                    <button
+                        onClick={onClose}
+                        className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+                    >
+                        <X className="w-5 h-5 text-gray-500" />
+                    </button>
+                </div>
+
+                {/* Modal Body */}
+                <form onSubmit={handleSubmit} className="p-6">
+                    {/* Avatar Upload */}
+                    <div className="flex flex-col items-center mb-6">
+                        <div className="relative mb-4">
+                            <img
+                                src={formData.avatar}
+                                alt="Profile"
+                                className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+                            />
+                            <button
+                                type="button"
+                                className="absolute bottom-0 right-0 bg-indigo-600 text-white p-2 !rounded-full shadow-md hover:bg-indigo-700 transition-all"
+                            >
+                                <Edit className="w-4 h-4" />
+                            </button>
+                        </div>
+                        <input
+                            type="text"
+                            name="avatar"
+                            value={formData.avatar}
+                            onChange={handleChange}
+                            placeholder="Image URL"
+                            className="text-sm w-full max-w-xs px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:outline-none focus:ring-indigo-500"
+                        />
+                    </div>
+
+                    {/* Name Field */}
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <User className="h-5 w-5 text-gray-400" />
+                            </div>
+                            <input
+                                type="text"
+                                name="name"
+                                value={formData.username}
+                                onChange={handleChange}
+                                className="pl-10 w-full py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    {/* Email Field */}
+                    <div className="mb-6">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <Mail className="h-5 w-5 text-gray-400" />
+                            </div>
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="pl-10 w-full py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    {/* Status Messages */}
+                    {error && (
+                        <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm">
+                            {error}
+                        </div>
+                    )}
+                    {success && (
+                        <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-lg text-sm">
+                            {success}
+                        </div>
+                    )}
+
+                    {/* Form Actions */}
+                    <div className="flex justify-end !space-x-3">
+                        <button
+                            type="button"
+                            onClick={onClose}
+                            className="px-4 py-2 border border-gray-300 !rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                            disabled={isLoading}
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            className="px-4 py-2 bg-indigo-600 text-white !rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center min-w-[100px]"
+                            disabled={isLoading}
+                        >
+                            {isLoading ? (
+                                <>
+                                    <Loader2 className="animate-spin h-4 w-4 mr-2" />
+                                    Saving...
+                                </>
+                            ) : (
+                                <>
+                                    <Save className="h-4 w-4 mr-2" />
+                                    Save Changes
+                                </>
+                            )}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
+}
+
+export default EditProfileModal;
