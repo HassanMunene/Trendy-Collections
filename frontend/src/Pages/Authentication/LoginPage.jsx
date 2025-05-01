@@ -39,6 +39,7 @@ const LoginPage = () => {
 
             const { user, token } = data;
             login(user, token);
+
             // Check for return path from session expired
             const preAuthPath = sessionStorage.getItem('preAuthPath');
             const unsavedChanges = sessionStorage.getItem('unsavedProfileChanges');
@@ -46,13 +47,12 @@ const LoginPage = () => {
             if (location.state?.from === 'session_expired' || preAuthPath) {
                 sessionStorage.removeItem('preAuthPath');
                 sessionStorage.removeItem('unsavedProfileChanges');
-                navigate(preAuthPath || location.state?.returnTo || '/dashboard');
+                navigate(preAuthPath || location.state?.returnTo || '/admin');
             } else {
-                navigate('/dashboard');
+                setSuccessMessage("Login successful! Redirecting...");
+                await new Promise((resolve) => setTimeout(resolve, 1500));
+                navigate("/admin")
             }
-            setSuccessMessage("Login successful! Redirecting...");
-            await new Promise((resolve) => setTimeout(resolve, 1500));
-            navigate("/admin")
         } catch (error) {
             console.log("Error in the login Logic", error);
             setLoginError("Connection error, Please try again.");
