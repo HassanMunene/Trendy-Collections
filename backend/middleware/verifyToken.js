@@ -5,9 +5,6 @@ dotenv.config();
 
 export const verifyToken = (req, res, next) => {
     // get the token from the header
-    console.log("Authorization header:", req.headers.authorization);
-    console.log("Extracted token:", token);
-
     const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) {
@@ -20,13 +17,11 @@ export const verifyToken = (req, res, next) => {
     try {
         // Verify the token using our secret key
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
         // Attach the decoded payload data to the request object.
         req.user = {
             id: decoded.id,
             email: decoded.email
         };
-
         // proceed to the next middleware or controller
         next();
     } catch (error) {

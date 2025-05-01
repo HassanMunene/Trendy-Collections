@@ -14,21 +14,9 @@ const ProfilePage = () => {
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [showProfileEditModal, setShowProfileEditModal] = useState(false);
-    const [currentUser, setCurrentUser] = useState({
-        name: 'Aziza Khamisi',
-        email: 'nkatha.khamisi@gmail.com',
-        avatar: 'https://static.vecteezy.com/system/resources/previews/046/656/564/non_2x/women-hijab-icon-beautiful-muslim-girl-avatar-free-vector.jpg',
-        role: 'Administrator',
-        joinDate: 'March 15, 2023',
-        lastActive: 'Active now',
-        stats: {
-            projects: 24,
-            tasks: 142,
-            connections: 86
-        }
-    });
+    const { logout, updateUserToLocalstorage, user } = useAuth();
 
-    const { logout } = useAuth();
+    console.log("useeeeeeer", user);
 
     const handleLogout = () => {
         logout();
@@ -53,10 +41,8 @@ const ProfilePage = () => {
     };
 
     const handleSaveProfile = (updateData) => {
-        setCurrentUser((prev) => ({
-            ...prev,
-            ...updateData
-        }));
+        // call a function in the AuthContext that saves the user data to the localstorage
+        updateUserToLocalstorage(updateData);
     }
 
     return (
@@ -143,8 +129,8 @@ const ProfilePage = () => {
                     <div className="absolute -bottom-12 md:-bottom-16 left-4 md:left-6">
                         <div className="relative">
                             <img
-                                src={currentUser.avatar}
-                                alt={currentUser.name}
+                                src={user.avatar}
+                                alt={user.username}
                                 className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-xl"
                             />
                             <button
@@ -161,14 +147,10 @@ const ProfilePage = () => {
                 <div className="mt-16 md:mt-20 px-4 md:px-6">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6 md:mb-8">
                         <div className="mb-4 md:mb-0">
-                            <h1 className="text-xl md:text-2xl font-bold text-gray-900">{currentUser.name}</h1>
+                            <h2 className="text-xl md:text-2xl font-bold text-gray-900">{user.username}</h2>
                             <div className="flex items-center mt-2">
                                 <span className="px-2 py-0.5 md:px-3 md:py-1 bg-indigo-100 text-indigo-800 text-xs md:text-sm font-medium rounded-full">
-                                    {currentUser.role}
-                                </span>
-                                <span className="ml-2 md:ml-3 text-xs md:text-sm text-gray-500 flex items-center">
-                                    <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full mr-1 md:mr-2"></span>
-                                    {currentUser.lastActive}
+                                    {user.role}
                                 </span>
                             </div>
                         </div>
@@ -203,7 +185,7 @@ const ProfilePage = () => {
 
                     {/* Tab Content - Mobile Responsive */}
                     <div className="pb-8 md:pb-12">
-                        {activeTab === 'overview' && <OverviewTab user={currentUser} />}
+                        {activeTab === 'overview' && <OverviewTab user={user} />}
                         {activeTab === 'security' && <SecurityTab />}
                     </div>
                 </div>
@@ -220,7 +202,7 @@ const ProfilePage = () => {
 
             {showProfileEditModal && (
                 <EditProfileModal
-                    user={currentUser}
+                    user={user}
                     onClose={() => setShowProfileEditModal(false)}
                     onSave={handleSaveProfile}
                 />

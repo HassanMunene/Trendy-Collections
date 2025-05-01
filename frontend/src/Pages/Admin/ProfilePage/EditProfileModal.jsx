@@ -47,7 +47,7 @@ const EditProfileModal = ({ user, onClose, onSave }) => {
             setSuccess("Profile updated Successfully");
             setTimeout(() => {
                 onSave(formData);
-                onclose();
+                onClose();
             }, 1500);
         } catch (error) {
             if (error.message.includes('Token expired') || error.message.includes('Unauthorized')) {

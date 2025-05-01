@@ -29,7 +29,7 @@ export const updateProfileController = async (req, res) => {
         }
 
         // Update user in database
-        const [result] = await pool.execute(
+        const [result] = await databasePool.execute(
             `UPDATE users SET username = ?, email = ?, avatar = ?, updated_at = CURRENT_TIMESTAMP 
          WHERE id = ?`,
             [username, email, avatar || null, userId]
@@ -43,7 +43,7 @@ export const updateProfileController = async (req, res) => {
         }
 
         // Fetch updated user data
-        const [updatedUser] = await pool.execute(
+        const [updatedUser] = await databasePool.execute(
             'SELECT id, username, email, avatar, role FROM users WHERE id = ?',
             [userId]
         );

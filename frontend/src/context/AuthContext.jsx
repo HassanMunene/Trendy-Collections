@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    const login = (token, userData) => {
+    const login = (userData, token) => {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(userData));
         setIsAuthenticated(true);
@@ -38,17 +38,18 @@ export const AuthProvider = ({ children }) => {
     }
 
     const updateProfile = async (profileData) => {
+        const storedToken = localStorage.getItem("token");
         try {
             const response = await fetch(`${API_URL}/profile/update-profile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${storedToken}`
                 },
                 body: JSON.stringify(profileData)
             });
 
-            if(!response.ok) {
+            if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Failed to Update profile');
             }
@@ -61,8 +62,20 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const updateUserToLocalstorage = (userData) => {
+        localStorage.setItem('user', JSON.stringify(userData));
+    }
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, user, loading, login, logout, updateProfile }}>
+        <AuthContext.Provider value={{
+            isAuthenticated,
+            user,
+            loading,
+            login,
+            logout,
+            updateProfile,
+            updateUserToLocalstorage
+        }}>
             {children}
         </AuthContext.Provider>
     )

@@ -61,27 +61,6 @@ const OverviewTab = ({ user }) => {
                     </div>
                 </div>
             </div>
-
-            <div className="bg-white p-4 md:p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
-                <h3 className="font-medium text-base md:text-lg mb-4 md:mb-5 flex items-center text-gray-800">
-                    <Activity className="w-4 h-4 md:w-5 md:h-5 mr-2 text-indigo-600" />
-                    Quick Stats
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6">
-                    <div className="bg-indigo-50 p-3 md:p-5 rounded-lg text-center transition-transform hover:scale-[1.02]">
-                        <div className="text-2xl md:text-3xl font-bold text-indigo-700">{user.stats.projects}</div>
-                        <div className="text-xs md:text-sm text-gray-600 mt-1">Active Projects</div>
-                    </div>
-                    <div className="bg-purple-50 p-3 md:p-5 rounded-lg text-center transition-transform hover:scale-[1.02]">
-                        <div className="text-2xl md:text-3xl font-bold text-purple-700">{user.stats.tasks}</div>
-                        <div className="text-xs md:text-sm text-gray-600 mt-1">Tasks Completed</div>
-                    </div>
-                    <div className="bg-blue-50 p-3 md:p-5 rounded-lg text-center transition-transform hover:scale-[1.02]">
-                        <div className="text-2xl md:text-3xl font-bold text-blue-700">{user.stats.connections}</div>
-                        <div className="text-xs md:text-sm text-gray-600 mt-1">Team Connections</div>
-                    </div>
-                </div>
-            </div>
         </div>
     )
 };

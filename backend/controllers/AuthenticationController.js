@@ -70,13 +70,15 @@ export const loginController = async (req, res) => {
             { expiresIn: "1h" }
         );
         
-        const { username, email: userEmail, role, created_at } = user[0];
+        const { username, email: userEmail, role, avatar, created_at } = user[0];
         const userData = {
             "username": username,
             "email": userEmail,
             "role": role,
+            "avatar": avatar, 
             "createdAt": created_at
         }
+
         // on the return statement I would like to return the user details and the token too.
         return res.status(200).json({status: "success", "user": userData, "token": token})
     } catch (error) {
