@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(false);
     }
 
+    // this is the update profile function
     const updateProfile = async (profileData) => {
         const storedToken = localStorage.getItem("token");
         try {
@@ -61,10 +62,36 @@ export const AuthProvider = ({ children }) => {
             throw error;
         }
     }
-
     const updateUserToLocalstorage = (userData) => {
         localStorage.setItem('user', JSON.stringify(userData));
     }
+    // this is the change password function
+    const updatePassword = async (currentPassword, newPassword) => {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await fetch(`${API_URL}/auth/change-password`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ 
+                    currentPassword: currentPassword, 
+                    newPassword: newPassword 
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.log("Error changing password", errorData);
+                throw new Error(errorData.message || 'Failed to change password');
+            }
+            return await response.json();
+        } catch (error) {
+            console.log("Error changing password", error);
+            throw error;
+        }
+    };
 
     return (
         <AuthContext.Provider value={{
@@ -74,7 +101,8 @@ export const AuthProvider = ({ children }) => {
             login,
             logout,
             updateProfile,
-            updateUserToLocalstorage
+            updateUserToLocalstorage,
+            updatePassword
         }}>
             {children}
         </AuthContext.Provider>

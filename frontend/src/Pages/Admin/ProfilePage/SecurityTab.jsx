@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { Lock, Shield, Bell } from "lucide-react";
 
+import TwoFactorComingSoonModal from "./TwoFactorComingSoonModal.jsx";
+import ChangePasswordModal from "./ChangePasswordModal.jsx";
+
 const SecurityTab = () => {
+    const [show2FAModal, setShow2FAModal] = useState(false);
+    const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+
     return (
         <div className="space-y-4 md:space-y-6">
             <div className="bg-white p-4 md:p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
@@ -14,7 +21,10 @@ const SecurityTab = () => {
                             <p className="font-medium text-sm md:text-base">Password</p>
                             <p className="text-xs md:text-sm text-gray-500">Last changed 3 months ago</p>
                         </div>
-                        <button className="px-3 py-1 md:px-4 md:py-2 bg-indigo-600 text-white rounded-lg text-xs md:text-sm hover:bg-indigo-700 whitespace-nowrap transition-colors">
+                        <button
+                            onClick={() => setShowChangePasswordModal(true)}
+                            className="px-3 py-1 md:px-4 md:py-2 bg-indigo-600 text-white !rounded-lg text-xs md:text-sm hover:bg-indigo-700 whitespace-nowrap transition-colors"
+                        >
                             Change Password
                         </button>
                     </div>
@@ -24,7 +34,10 @@ const SecurityTab = () => {
                             <p className="font-medium text-sm md:text-base">Two-Factor Authentication</p>
                             <p className="text-xs md:text-sm text-gray-500">Add an extra layer of security</p>
                         </div>
-                        <button className="px-3 py-1 md:px-4 md:py-2 border border-gray-300 rounded-lg text-xs md:text-sm hover:bg-gray-50 whitespace-nowrap transition-colors">
+                        <button
+                            onClick={() => setShow2FAModal(true)}
+                            className="px-3 py-1 md:px-4 md:py-2 border border-gray-300 !rounded-lg text-xs md:text-sm hover:bg-gray-50 whitespace-nowrap transition-colors"
+                        >
                             Set Up 2FA
                         </button>
                     </div>
@@ -65,6 +78,14 @@ const SecurityTab = () => {
                     </div>
                 </div>
             </div>
+
+            {show2FAModal && (
+                <TwoFactorComingSoonModal onClose={() => setShow2FAModal(false)} />
+            )}
+
+            {showChangePasswordModal && (
+                <ChangePasswordModal onClose={() => setShowChangePasswordModal(false)} />
+            )}
         </div>
     )
 };
