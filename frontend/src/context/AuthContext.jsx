@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const token = localStorage.getItem("token");
             const response = await fetch(`${API_URL}/auth/change-password`, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -81,12 +81,15 @@ export const AuthProvider = ({ children }) => {
                 })
             });
 
+            console.log("We are herreeee", response);
             if (!response.ok) {
                 const errorData = await response.json();
+                console.log("We are herreeee", errorData);
                 console.log("Error changing password", errorData);
                 throw new Error(errorData.message || 'Failed to change password');
             }
-            return await response.json();
+            const data = await response.json()
+            return data;
         } catch (error) {
             console.log("Error changing password", error);
             throw error;

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Lock, Shield, Bell } from "lucide-react";
+import { format } from "date-fns";
 
 import TwoFactorComingSoonModal from "./TwoFactorComingSoonModal.jsx";
 import ChangePasswordModal from "./ChangePasswordModal.jsx";
@@ -7,6 +8,21 @@ import ChangePasswordModal from "./ChangePasswordModal.jsx";
 const SecurityTab = () => {
     const [show2FAModal, setShow2FAModal] = useState(false);
     const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+
+    const userDataString = localStorage.getItem("user");
+    const userData = JSON.parse(userDataString);
+
+    const passwordLastChanged = userData?.password_changed_at;
+    let formattedPasswordLastChanged = 'Never changed';
+    if (passwordLastChanged) {
+        const parsedDate = new Date(passwordLastChanged);
+        if (!isNaN(parsedDate)) {
+            formattedPasswordLastChanged = format(parsedDate, 'PPP');
+        }
+    }
+
+    console.log("By the wings", passwordLastChanged);
+    console.log("Formatted date", formattedPasswordLastChanged);
 
     return (
         <div className="space-y-4 md:space-y-6">
@@ -19,7 +35,7 @@ const SecurityTab = () => {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between p-2 md:p-3 bg-gray-50 rounded-lg">
                         <div className="mb-2 sm:mb-0">
                             <p className="font-medium text-sm md:text-base">Password</p>
-                            <p className="text-xs md:text-sm text-gray-500">Last changed 3 months ago</p>
+                            <p className="text-xs md:text-sm text-gray-500">{`Last changed ${formattedPasswordLastChanged}`} </p>
                         </div>
                         <button
                             onClick={() => setShowChangePasswordModal(true)}
