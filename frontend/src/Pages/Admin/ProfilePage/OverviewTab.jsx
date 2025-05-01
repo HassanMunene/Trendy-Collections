@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { User, Shield } from "lucide-react";
 import { format } from 'date-fns'
 
+import TwoFactorComingSoonModal from "./TwoFactorComingSoonModal.jsx";
+
 const OverviewTab = ({ user }) => {
+    const [show2FAModal, setShow2FAModal] = useState(false);
     const rawCreatedAt = user.createdAt;
     const formattedCreatedAt = format(new Date(rawCreatedAt), 'PPP')
     return (
@@ -53,10 +57,19 @@ const OverviewTab = ({ user }) => {
                             <p className="font-medium text-sm md:text-base">Two-Factor Authentication</p>
                             <p className="text-xs md:text-sm text-gray-500">Add an extra layer of security</p>
                         </div>
-                        <button className="text-xs md:text-sm text-indigo-600 hover:text-indigo-800 font-medium">Enable</button>
+                        <button
+                            onClick={() => setShow2FAModal(true)}
+                            className="text-xs md:text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+                        >
+                            Enable
+                        </button>
                     </div>
                 </div>
             </div>
+
+            {show2FAModal && (
+                <TwoFactorComingSoonModal onClose={() => setShow2FAModal(false)}/>
+            )}
         </div>
     )
 };
