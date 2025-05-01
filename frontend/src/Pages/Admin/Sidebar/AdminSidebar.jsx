@@ -188,6 +188,7 @@ const AdminSidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen, isActiveRoute }) 
             <UserMenu
                 userMenuRef={userMenuRef}
                 userMenuOpen={userMenuOpen}
+                setUserMenuOpen={setUserMenuOpen}
                 isMobileMenuOpen={isMobileMenuOpen}
             />
 

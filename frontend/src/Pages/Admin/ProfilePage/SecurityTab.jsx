@@ -21,9 +21,6 @@ const SecurityTab = () => {
         }
     }
 
-    console.log("By the wings", passwordLastChanged);
-    console.log("Formatted date", formattedPasswordLastChanged);
-
     return (
         <div className="space-y-4 md:space-y-6">
             <div className="bg-white p-4 md:p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
@@ -86,7 +83,7 @@ const SecurityTab = () => {
                         <div className="flex-1">
                             <p className="font-medium text-sm md:text-base">Password updated</p>
                             <p className="text-xs md:text-sm text-gray-500">Your password was changed</p>
-                            <p className="text-2xs md:text-xs text-gray-400 mt-1">3 months ago</p>
+                            <p className="text-2xs md:text-xs text-gray-400 mt-1">{formattedPasswordLastChanged}</p>
                         </div>
                         <button className="text-xs md:text-sm text-blue-600 hover:text-blue-800 font-medium">
                             Details
