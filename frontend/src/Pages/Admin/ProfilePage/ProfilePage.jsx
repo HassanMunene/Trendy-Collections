@@ -16,8 +16,6 @@ const ProfilePage = () => {
     const [showProfileEditModal, setShowProfileEditModal] = useState(false);
     const { logout, updateUserToLocalstorage, user } = useAuth();
 
-    console.log("useeeeeeer", user);
-
     const handleLogout = () => {
         logout();
     }
