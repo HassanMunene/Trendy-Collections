@@ -1,23 +1,13 @@
 import { useState, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
-import UserProfile from './UserProfile';
-// import NavSection from './NavSection';
-// import SystemStatus from './SystemStatus';
-import UserMenu from './UserMenu';
-// import Tooltip from './Tooltip';
 import {
     X, House, ShoppingBag, ShoppingBasket,
     Users, Tag, Settings, LogOut
 } from "lucide-react";
 
+import UserProfile from './UserProfile';
+import UserMenu from './UserMenu';
+
 const AdminSidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen, isActiveRoute }) => {
-    const location = useLocation();
-    const [expandedSections, setExpandedSections] = useState({
-        General: true,
-        Catalog: true,
-        Users: true,
-        System: true
-    });
     const [activeTooltip, setActiveTooltip] = useState(null);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const sidebarRef = useRef(null);
@@ -112,23 +102,6 @@ const AdminSidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen, isActiveRoute }) 
         }
     ];
 
-    //Expand or Collape a sidebar section. On mobile screen collapse all the section.
-    //Before expanding the one clicked and on desktop screens only toggle the one clicked
-    //And preserve the state of the the other sections.
-    const toggleSection = (sectionTitle) => {
-        if (window.innerWidth < 768) {
-            setExpandedSections(prev => ({
-                ...Object.fromEntries(Object.keys(prev).map(key => [key, false])),
-                [sectionTitle]: !prev[sectionTitle]
-            }));
-        } else {
-            setExpandedSections(prev => ({
-                ...prev,
-                [sectionTitle]: !prev[sectionTitle]
-            }));
-        }
-    };
-
     // If the section title is provided we expand the section and regardless display the
     // tooltip for the hovered item.
     const handleItemHover = (itemId, sectionTitle = null) => {
@@ -164,25 +137,7 @@ const AdminSidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen, isActiveRoute }) 
                         handleItemHover={handleItemHover}
                         setActiveTooltip={setActiveTooltip}
                     />
-
-                    {/* Navigation */}
-                    {/* <nav className="relative px-4 pb-24">
-                        {navItems.map((section, index) => (
-                            <NavSection
-                                key={index}
-                                section={section}
-                                expanded={expandedSections[section.title]}
-                                toggleSection={toggleSection}
-                                isActiveRoute={isActiveRoute}
-                                setIsMobileMenuOpen={setIsMobileMenuOpen}
-                                handleItemHover={handleItemHover}
-                                setActiveTooltip={setActiveTooltip}
-                            />
-                        ))}
-                    </nav> */}
                 </div>
-
-                {/* <SystemStatus /> */}
             </aside>
 
             <UserMenu
@@ -191,12 +146,6 @@ const AdminSidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen, isActiveRoute }) 
                 setUserMenuOpen={setUserMenuOpen}
                 isMobileMenuOpen={isMobileMenuOpen}
             />
-
-            {/* <Tooltip
-                activeTooltip={activeTooltip}
-                isMobileMenuOpen={isMobileMenuOpen}
-                navItems={navItems}
-            /> */}
         </>
     );
 };

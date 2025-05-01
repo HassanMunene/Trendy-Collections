@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Menu, Bell, Search, ChevronDown } from "lucide-react";
+import { useState, useEffect, useContext } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import AdminSidebar from './Sidebar/AdminSidebar';
 import MainTopbar from './AdminComponents/MainTopbar';
+import { MobileContext } from '../../context/MobileContext';
 
 const AdminLayout = () => {
     const location = useLocation();
+    const { isMobile } = useContext(MobileContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     // Close mobile menu when route changes
