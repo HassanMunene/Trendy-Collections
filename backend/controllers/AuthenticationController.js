@@ -70,12 +70,13 @@ export const loginController = async (req, res) => {
             { expiresIn: "1h" }
         );
 
-        const { username, email: userEmail, role, avatar, created_at } = user[0];
+        const { username, email: userEmail, role, avatar, password_changed_at, created_at } = user[0];
         const userData = {
             "username": username,
             "email": userEmail,
             "role": role,
             "avatar": avatar,
+            "password_changed_at": password_changed_at,
             "createdAt": created_at
         }
 
