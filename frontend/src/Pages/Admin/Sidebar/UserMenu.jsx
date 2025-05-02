@@ -46,7 +46,7 @@ const UserMenu = ({ userMenuOpen, setUserMenuOpen, isAdminSidebarForMobile }) =>
                     {isAdminSidebarForMobile && (
                         <div onClick={closeMenu} className="fixed inset-0 bg-black/50 z-40 md:hidden"></div>
                     )}
-                    <div className={`fixed z-50 w-64 bg-white shadow-2xl rounded-lg overflow-hidden transition-all duration-200 border border-gray-500 ${isAdminSidebarForMobile ? 'left-4 top-4' : 'left-70 top-12'}`}>
+                    <div className={`fixed z-50 w-64 bg-white shadow-2xl rounded-lg overflow-hidden transition-all duration-200 border border-gray-500 ${isAdminSidebarForMobile ? 'left-4 top-4' : 'left-65 top-16'}`}>
                         {/* Header with close button */}
                         <div className="flex justify-between items-center p-4 bg-gradient-to-r from-indigo-50 to-white border-b border-gray-100">
                             <div className="flex items-center space-x-3">

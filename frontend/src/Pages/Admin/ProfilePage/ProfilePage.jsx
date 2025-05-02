@@ -46,7 +46,7 @@ const ProfilePage = () => {
     return (
         <div className="flex flex-col h-full">
             {/* Header section */}
-            <div className="bg-white border-b border-gray-100">
+            <div className="bg-white border-b border-gray-100 rounded-md mb-1">
                 <div className="px-4 py-3 md:px-6 md:py-4">
                     <div className="flex items-center justify-between">
                         <Link
@@ -120,7 +120,7 @@ const ProfilePage = () => {
                 </div>
             )}
 
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1 overflow-auto rounded-md">
                 {/* Profile Header seaction*/}
                 <div className="relative">
                     <div className="h-40 md:h-48 bg-gradient-to-r from-indigo-600 to-purple-700"></div>
@@ -142,7 +142,7 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Profile Info section */}
-                <div className="mt-16 md:mt-20 px-4 md:px-6">
+                <div className="mt-16 md:mt-20 md:px-6">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6 md:mb-8">
                         <div className="mb-4 md:mb-0">
                             <h2 className="text-xl md:text-2xl font-bold text-gray-900">{user.username}</h2>
