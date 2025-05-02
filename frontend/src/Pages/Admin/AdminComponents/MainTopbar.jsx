@@ -2,24 +2,20 @@ import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Menu, Search, X, Bell, ChevronDown, User, Settings, LogOut } from "lucide-react";
 
-const MainTopbar = () => {
+const MainTopbar = ({ setIsAdminSidebarForMobile, isAdminSidebarForMobile}) => {
     const navigate = useNavigate();
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const searchRef = useRef(null);
 
     const handleLogout = () => {
-        navigate('/login');
+        console.log("Handle logging out");
     };
 
     return (
         <header className="bg-white shadow-sm z-10 ">
             {/* Search dropdown on mobile screens */}
-            <div
-                className={`md:hidden fixed top-0 left-0 right-0 bg-white shadow-lg transition-all duration-300 ease-out z-40 ${isSearchOpen ? 'translate-y-0' : '-translate-y-full'}`}
-                ref={searchRef}
-            >
+            <div className={`md:hidden fixed top-0 left-0 right-0 bg-white shadow-lg transition-all duration-300 ease-out z-40 ${isSearchOpen ? 'translate-y-0' : '-translate-y-full'}`} ref={searchRef}>
                 <div className="px-4 py-3 flex items-center">
                     <div className="relative flex-1">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -45,7 +41,7 @@ const MainTopbar = () => {
             <div className="px-4 py-3 sm:px-6 lg:px-8 flex justify-between items-center">
                 <div className="flex items-center">
                     {/* Menu button when on mobile screen */}
-                    <button className="md:hidden text-gray-600 hover:text-gray-900 mr-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                    <button className="md:hidden text-gray-600 hover:text-gray-900 mr-2" onClick={() => setIsAdminSidebarForMobile(!isAdminSidebarForMobile)}>
                         <Menu className="h-6 w-6" />
                     </button>
 

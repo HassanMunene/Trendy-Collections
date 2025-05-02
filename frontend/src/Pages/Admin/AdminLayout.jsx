@@ -9,10 +9,12 @@ const AdminLayout = () => {
     const location = useLocation();
     const { isMobile } = useContext(MobileContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isAdminSidebarForMobile, setIsAdminSidebarForMobile] = useState(false);
 
-    // Close mobile menu when route changes
+    // In mobile screens close the admin sidebar when the route changes
     useEffect(() => {
-        setIsMobileMenuOpen(false);
+        console.log("location has changed!")
+        setIsAdminSidebarForMobile(false);
     }, [location.pathname]);
 
     // Check if route is active
@@ -24,6 +26,8 @@ const AdminLayout = () => {
         <div className="flex h-screen bg-gray-50">
             {/* Sidebar */}
             <AdminSidebar
+                isAdminSidebarForMobile={isAdminSidebarForMobile}
+                setIsAdminSidebarForMobile={setIsAdminSidebarForMobile}
                 isMobileMenuOpen={isMobileMenuOpen}
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
                 isActiveRoute={isActiveRoute}
@@ -33,8 +37,8 @@ const AdminLayout = () => {
             <div className="flex-1 flex flex-col overflow-hidden">
                 {/* Top Navigation */}
                 <MainTopbar
-                    setIsMobileMenuOpen={setIsMobileMenuOpen}
-                    isMobileMenuOpen={isMobileMenuOpen}
+                    setIsAdminSidebarForMobile={setIsAdminSidebarForMobile}
+                    isAdminSidebarForMobile={isAdminSidebarForMobile}
                 />
 
                 {/* Page Content */}

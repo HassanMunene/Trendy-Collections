@@ -7,11 +7,9 @@ import {
 import UserProfile from './UserProfile';
 import UserMenu from './UserMenu';
 
-const AdminSidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen, isActiveRoute }) => {
-    const [activeTooltip, setActiveTooltip] = useState(null);
+const AdminSidebar = ({ isAdminSidebarForMobile, setIsAdminSidebarForMobile, isActiveRoute }) => {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const sidebarRef = useRef(null);
-    const userMenuRef = useRef(null);
 
     const handleLogout = () => {
         console.log("will handle logout on here")
@@ -102,49 +100,45 @@ const AdminSidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen, isActiveRoute }) 
         }
     ];
 
-    // If the section title is provided we expand the section and regardless display the
-    // tooltip for the hovered item.
-    const handleItemHover = (itemId, sectionTitle = null) => {
-        if (sectionTitle) {
-            setExpandedSections(prev => ({ ...prev, [sectionTitle]: true }));
-        }
-        setActiveTooltip(itemId);
-    };
-
     return (
         <>
             <aside
                 ref={sidebarRef}
-                className={`fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-indigo-900 to-indigo-800 
-                    text-white transform transition-all duration-300 ease-in-out shadow-xl
-                    ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} 
-                    md:relative md:translate-x-0 flex flex-col`}
+                className={`fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-indigo-900 to-indigo-800 text-white transform transition-all 
+                duration-300 ease-in-out shadow-xl ${isAdminSidebarForMobile ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 flex flex-col`}
             >
-                {/* Mobile close button */}
-                <button
-                    className="md:hidden absolute top-4 right-4 p-1 rounded-full bg-white/10 hover:bg-white/20"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                >
-                    <X className="w-5 h-5" />
-                </button>
+                {/* Header section with close button that is visible on moile screens */}
+                <div className="relative pt-4 px-4 flex-shrink-0">
+                    {/* A button to close the admin sidebar on mobile screens */}
+                    <button
+                        className="md:hidden absolute top-4 right-4 p-2 !rounded-full bg-white/10 hover:bg-white/20 z-60"
+                        onClick={() => setIsAdminSidebarForMobile(false)}
+                    >
+                        <X className="w-5 h-5" />
+                    </button>
 
-                {/* Scrollable Content Area */}
-                <div className="flex-1 overflow-y-auto hide-scrollbar">
                     <UserProfile
-                        userMenuRef={userMenuRef}
                         userMenuOpen={userMenuOpen}
                         setUserMenuOpen={setUserMenuOpen}
-                        handleItemHover={handleItemHover}
-                        setActiveTooltip={setActiveTooltip}
                     />
+                </div>
+
+                {/* Scrollable Content Area (nav items) */}
+                <div className="flex-1 overflow-y-auto hide-scrollbar pt-2 px-4">
+                    {/* Render your nav items here */}
+                    {navItems.map((section) => (
+                        <div key={section.title} className="mb-6">
+                            {/* Section rendering */}
+                        </div>
+                    ))}
                 </div>
             </aside>
 
             <UserMenu
-                userMenuRef={userMenuRef}
                 userMenuOpen={userMenuOpen}
                 setUserMenuOpen={setUserMenuOpen}
-                isMobileMenuOpen={isMobileMenuOpen}
+                sidebarRef={sidebarRef}
+                isAdminSidebarForMobile={isAdminSidebarForMobile}
             />
         </>
     );
