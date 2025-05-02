@@ -11,7 +11,6 @@ const AdminLayout = () => {
 
     // In mobile screens close the admin sidebar when the route changes
     useEffect(() => {
-        console.log("location has changed!")
         setIsAdminSidebarForMobile(false);
     }, [location.pathname]);
 
