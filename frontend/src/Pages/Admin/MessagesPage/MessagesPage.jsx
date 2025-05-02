@@ -1,0 +1,396 @@
+import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+    MessageSquare, Mail, Check, CheckCheck, X, ChevronLeft,
+    Send, Search, MoreVertical, ArrowUpRight, Paperclip, Mic,
+    Smile, Video, Phone, UserPlus, Star, Trash2, Archive
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { WhatsAppIcon } from "./ WhatsAppIcon";
+
+import MessagesPageHeader from "./MessagesPageHeader";
+
+const MessagesPage = ({ onClose }) => {
+    const [activeTab, setActiveTab] = useState('all');
+    const [selectedMessage, setSelectedMessage] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [replyText, setReplyText] = useState('');
+    const [showOptions, setShowOptions] = useState(false);
+    const optionsRef = useRef(null);
+
+    // Mock data
+    const messages = [
+        {
+            id: 1,
+            sender: 'John Doe',
+            platform: 'whatsapp',
+            avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
+            content: 'Hi there! I wanted to ask about my order #12345',
+            time: '10:30 AM',
+            date: 'Today',
+            unread: true,
+            status: 'new'
+        },
+        {
+            id: 2,
+            sender: 'Acme Store',
+            platform: 'store',
+            avatar: 'https://randomuser.me/api/portraits/lego/2.jpg',
+            content: 'Your order #12345 has been shipped! Tracking number: AB123456789',
+            time: 'Yesterday',
+            date: 'May 15',
+            unread: false,
+            status: 'read'
+        },
+        {
+            id: 3,
+            sender: 'Sarah Smith',
+            platform: 'whatsapp',
+            avatar: 'https://randomuser.me/api/portraits/women/3.jpg',
+            content: 'When will the new summer collection be available? I\'m really excited to see it!',
+            time: 'May 14',
+            date: 'May 14',
+            unread: true,
+            status: 'delivered'
+        },
+        {
+            id: 4,
+            sender: 'Support Team',
+            platform: 'store',
+            avatar: 'https://randomuser.me/api/portraits/lego/4.jpg',
+            content: 'Your return request #RET456 has been approved. We\'ll process your refund within 3-5 business days.',
+            time: 'May 12',
+            date: 'May 12',
+            unread: false,
+            status: 'read'
+        }
+    ];
+
+    const filteredMessages = activeTab === 'all'
+        ? messages.filter(msg =>
+            msg.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            msg.content.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        : messages.filter(msg =>
+            msg.platform === activeTab &&
+            (msg.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                msg.content.toLowerCase().includes(searchQuery.toLowerCase())));
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+                setShowOptions(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const handleSendReply = () => {
+        if (replyText.trim()) {
+            // Here you would normally send the message
+            console.log("Sending reply:", replyText);
+            setReplyText('');
+        }
+    };
+
+    return (
+        <div className="flex flex-col h-full">
+            {/* Header */}
+            <MessagesPageHeader />
+
+            {/* Tabs */}
+            <div className="flex border-b border-gray-200 bg-gray-50">
+                <button
+                    onClick={() => setActiveTab('all')}
+                    className={`flex-1 py-3 text-sm font-medium flex items-center justify-center ${activeTab === 'all' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500 hover:text-gray-700'}`}
+                >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    All
+                </button>
+                <button
+                    onClick={() => setActiveTab('whatsapp')}
+                    className={`flex-1 py-3 text-sm font-medium flex items-center justify-center ${activeTab === 'whatsapp' ? 'text-green-600 border-b-2 border-green-600' : 'text-gray-500 hover:text-gray-700'}`}
+                >
+                    <WhatsAppIcon className="w-4 h-4 mr-2" />
+                    WhatsApp
+                </button>
+                <button
+                    onClick={() => setActiveTab('store')}
+                    className={`flex-1 py-3 text-sm font-medium flex items-center justify-center ${activeTab === 'store' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                >
+                    <Mail className="w-4 h-4 mr-2" />
+                    Store
+                </button>
+            </div>
+
+            {/* Search */}
+            <div className="p-3 bg-white border-b border-gray-200 sticky top-0 z-10">
+                <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                        type="text"
+                        placeholder="Search messages..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    />
+                </div>
+            </div>
+
+            {/* Messages List */}
+            <div className="flex-1 overflow-y-auto bg-gray-50">
+                {filteredMessages.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center h-full p-6 text-center">
+                        <MessageSquare className="w-12 h-12 mb-4 text-gray-300" />
+                        <h3 className="text-lg font-medium text-gray-500">No messages found</h3>
+                        <p className="text-sm text-gray-400 mt-1">
+                            {searchQuery ? 'Try a different search term' : 'All caught up!'}
+                        </p>
+                    </div>
+                ) : (
+                    <div className="divide-y divide-gray-200">
+                        {filteredMessages.map((message) => (
+                            <motion.div
+                                key={message.id}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.2 }}
+                                onClick={() => setSelectedMessage(message)}
+                                className={`p-3 cursor-pointer transition-colors ${message.unread ? 'bg-blue-50' : 'bg-white hover:bg-gray-50'}`}
+                            >
+                                <div className="flex items-start space-x-3">
+                                    <div className="relative flex-shrink-0">
+                                        <img
+                                            src={message.avatar}
+                                            alt={message.sender}
+                                            className="w-12 h-12 rounded-full border-2 border-white shadow-sm"
+                                        />
+                                        <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-2 border-white flex items-center justify-center ${message.platform === 'whatsapp' ? 'bg-green-500' : 'bg-blue-500'
+                                            }`}>
+                                            {message.platform === 'whatsapp' ? (
+                                                <WhatsAppIcon size={10} color="#fff" />
+                                            ) : (
+                                                <Mail className="w-3 h-3 text-white" />
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <div className="flex justify-between items-baseline">
+                                            <h3 className={`text-sm font-medium truncate ${message.unread ? 'text-gray-900' : 'text-gray-700'}`}>
+                                                {message.sender}
+                                            </h3>
+                                            <span className="text-xs text-gray-500 whitespace-nowrap ml-2">
+                                                {message.time}
+                                            </span>
+                                        </div>
+                                        <p className={`text-sm mt-1 ${message.unread ? 'font-medium text-gray-800' : 'text-gray-600'}`}>
+                                            {message.content.length > 60
+                                                ? `${message.content.substring(0, 60)}...`
+                                                : message.content}
+                                        </p>
+                                        <div className="flex justify-between items-center mt-2">
+                                            <span className="text-xs text-gray-400">{message.date}</span>
+                                            <div className="flex items-center space-x-2">
+                                                {message.unread && (
+                                                    <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                                                )}
+                                                {message.platform === 'whatsapp' && (
+                                                    message.status === 'new' ? (
+                                                        <Check className="w-3.5 h-3.5 text-gray-400" />
+                                                    ) : message.status === 'delivered' ? (
+                                                        <CheckCheck className="w-3.5 h-3.5 text-gray-400" />
+                                                    ) : (
+                                                        <CheckCheck className="w-3.5 h-3.5 text-blue-500" />
+                                                    )
+                                                )}
+                                                {message.platform === 'store' && message.unread && (
+                                                    <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            {/* Selected Message View */}
+            <AnimatePresence>
+                {selectedMessage && (
+                    <motion.div
+                        initial={{ x: '100%' }}
+                        animate={{ x: 0 }}
+                        exit={{ x: '100%' }}
+                        transition={{ type: 'spring', damping: 30 }}
+                        className="absolute inset-0 bg-white z-20 flex flex-col"
+                    >
+                        {/* Message Header */}
+                        <div className="flex items-center justify-between p-3 bg-gradient-to-r from-indigo-600 to-indigo-500">
+                            <button
+                                onClick={() => setSelectedMessage(null)}
+                                className="p-1.5 rounded-full hover:bg-indigo-700 transition-colors"
+                            >
+                                <ChevronLeft className="w-5 h-5 text-white" />
+                            </button>
+                            <div className="flex items-center space-x-3">
+                                <img
+                                    src={selectedMessage.avatar}
+                                    alt={selectedMessage.sender}
+                                    className="w-9 h-9 rounded-full border-2 border-white"
+                                />
+                                <div>
+                                    <h3 className="text-sm font-medium text-white">{selectedMessage.sender}</h3>
+                                    <p className="text-xs text-indigo-100 flex items-center">
+                                        {selectedMessage.platform === 'whatsapp' ? (
+                                            <WhatsAppIcon size={12} color="#fff" className="mr-1" />
+                                        ) : (
+                                            <Mail className="w-3 h-3 mr-1 text-indigo-200" />
+                                        )}
+                                        {selectedMessage.platform}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="relative" ref={optionsRef}>
+                                <button
+                                    onClick={() => setShowOptions(!showOptions)}
+                                    className="p-1.5 rounded-full hover:bg-indigo-700 transition-colors"
+                                >
+                                    <MoreVertical className="w-5 h-5 text-white" />
+                                </button>
+                                {showOptions && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 border border-gray-200"
+                                    >
+                                        <div className="py-1">
+                                            <button className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                                                <Star className="w-4 h-4 mr-2 text-gray-500" />
+                                                Mark as favorite
+                                            </button>
+                                            <button className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                                                <Archive className="w-4 h-4 mr-2 text-gray-500" />
+                                                Archive chat
+                                            </button>
+                                            <button className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100 w-full text-left">
+                                                <Trash2 className="w-4 h-4 mr-2" />
+                                                Delete chat
+                                            </button>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Message Content */}
+                        <div className="flex-1 p-4 overflow-y-auto bg-[#f0f2f5]">
+                            <div className="flex flex-col space-y-4">
+                                {/* Date indicator */}
+                                <div className="flex justify-center">
+                                    <span className="px-3 py-1 text-xs font-medium bg-white text-gray-500 rounded-full shadow-sm">
+                                        {selectedMessage.date} • {selectedMessage.time}
+                                    </span>
+                                </div>
+
+                                {/* Message bubble */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className={`flex ${selectedMessage.platform === 'whatsapp' ? 'justify-start' : 'justify-end'}`}
+                                >
+                                    <div className={`max-w-xs md:max-w-md rounded-2xl px-4 py-3 ${selectedMessage.platform === 'whatsapp' ? 'bg-white' : 'bg-indigo-100'}`}>
+                                        <p className={`text-sm ${selectedMessage.platform === 'whatsapp' ? 'text-gray-800' : 'text-indigo-800'}`}>
+                                            {selectedMessage.content}
+                                        </p>
+                                        <div className="flex justify-end items-center mt-1 space-x-1">
+                                            <span className="text-xs text-gray-400">
+                                                {selectedMessage.time}
+                                            </span>
+                                            {selectedMessage.platform === 'whatsapp' && (
+                                                selectedMessage.status === 'new' ? (
+                                                    <Check className="w-3 h-3 text-gray-400" />
+                                                ) : selectedMessage.status === 'delivered' ? (
+                                                    <CheckCheck className="w-3 h-3 text-gray-400" />
+                                                ) : (
+                                                    <CheckCheck className="w-3 h-3 text-blue-500" />
+                                                )
+                                            )}
+                                        </div>
+                                    </div>
+                                </motion.div>
+
+                                {/* Suggested replies for WhatsApp */}
+                                {selectedMessage.platform === 'whatsapp' && (
+                                    <div className="flex flex-wrap gap-2">
+                                        <button className="px-3 py-1.5 text-sm bg-white text-gray-700 rounded-full border border-gray-200 hover:bg-gray-50">
+                                            Thanks for reaching out!
+                                        </button>
+                                        <button className="px-3 py-1.5 text-sm bg-white text-gray-700 rounded-full border border-gray-200 hover:bg-gray-50">
+                                            Let me check on that
+                                        </button>
+                                        <button className="px-3 py-1.5 text-sm bg-white text-gray-700 rounded-full border border-gray-200 hover:bg-gray-50">
+                                            Can you share more details?
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Reply Area */}
+                        <div className="p-3 bg-white border-t border-gray-200">
+                            <div className="flex items-center space-x-2">
+                                <button className="p-2 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-100">
+                                    <Paperclip className="w-5 h-5" />
+                                </button>
+                                <button className="p-2 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-100">
+                                    <Smile className="w-5 h-5" />
+                                </button>
+                                <input
+                                    type="text"
+                                    value={replyText}
+                                    onChange={(e) => setReplyText(e.target.value)}
+                                    placeholder="Type a message..."
+                                    className="flex-1 px-4 py-2.5 text-sm border border-gray-200 rounded-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    onKeyPress={(e) => e.key === 'Enter' && handleSendReply()}
+                                />
+                                {replyText ? (
+                                    <button
+                                        onClick={handleSendReply}
+                                        className="p-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-colors"
+                                    >
+                                        <Send className="w-5 h-5" />
+                                    </button>
+                                ) : (
+                                    <button className="p-2 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-100">
+                                        <Mic className="w-5 h-5" />
+                                    </button>
+                                )}
+                            </div>
+                            {selectedMessage.platform === 'whatsapp' && (
+                                <div className="flex justify-center mt-2">
+                                    <a
+                                        href={`https://wa.me/${selectedMessage.sender.replace(/\D/g, '')}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center px-3 py-1 text-xs bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors"
+                                    >
+                                        <WhatsAppIcon size={14} className="mr-1" />
+                                        Open in WhatsApp
+                                        <ArrowUpRight className="w-3 h-3 ml-1" />
+                                    </a>
+                                </div>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
+
+export default MessagesPage;

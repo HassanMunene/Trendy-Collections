@@ -3,11 +3,9 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import AdminSidebar from './Sidebar/AdminSidebar';
 import MainTopbar from './AdminComponents/MainTopbar';
-import { MobileContext } from '../../context/MobileContext';
 
 const AdminLayout = () => {
     const location = useLocation();
-    const { isMobile } = useContext(MobileContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isAdminSidebarForMobile, setIsAdminSidebarForMobile] = useState(false);
 
