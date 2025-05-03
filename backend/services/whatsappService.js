@@ -18,18 +18,14 @@ const pino = require('pino');
 
 class WhatsAppService {
     constructor() {
-        this.socket = null;              // WebSocket connection instance
+        this.socket = null;
         this.connectionState = {
             isConnected: false,
             lastActive: null,
             qrGenerations: 0,
             connectionHistory: []
         };
-        this.activeQR = null;            // Holds current QR code
-        this.qrPromise = null;           // Promise that gets resolved once QR Code is available
-        this.qrResolver = null;          // Function to resolve qrPromise
-
-        this.initQRPromise();            // Initialize QR Promise on creation
+        this.initQRPromise();
     }
 
     /**
