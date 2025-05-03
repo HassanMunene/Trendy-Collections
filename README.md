@@ -93,3 +93,37 @@ DATABASE_NAME=your_database_name
 cd database
 node initiateDatabase.js
 ```
+
+## Architecture Recommendation For Intergrating the Whatsapp backend.
+```
+[WhatsApp Client] ↔ [WebSocket/MQTT] ↔ [Backend API] ↔ [Database]
+       ↑
+[Baileys Library]
+```
+
+### Why Did We Choose This Structure?
+1. Separation of Concerns: Keeps WhatsApp logic isolated from our main API
+2. Scalability: Can handle multiple WhatsApp connections later
+3. Resilience: WhatsApp client can reconnect independently if crashes. This doesnt have to crash our Main API also because whatsapp has crashed.
+
+
+## Implementation
+### Firstly we will create a whatsapp service wrapper
+// services/whatsappService.js
+
+The purpose of this wrapper is to simplify and manage all whatsapp messaging logic in on place.
+
+### For now
+✅ 1. Connect to WhatsApp
+It logs in via QR code like how WhatsApp Web works.
+It saves authentication info so you don’t have to scan the QR every time.
+
+📩 2. Receive Messages
+When someone sends you a WhatsApp message, it captures it.
+Then it passes the message to a function you provide (so you can decide what to do with it—reply, log, trigger an action, etc.).
+
+📤 3. Send Messages
+It gives you a method (sendMessage) to send messages to people on WhatsApp.
+
+### Then establish an API Endpoints for WhatsApp Control
+// routes/whatsappRoutes.js
