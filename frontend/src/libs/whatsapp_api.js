@@ -6,13 +6,14 @@ export const getStatus = async () => {
         console.log("Error checking the status of whatsapp", await response.json());
         throw new Error('Failed to fetch status');
     }
-    return await response.json();
+    const dataResponse = await response.json();
+    return dataResponse;
 };
 
 export const getQR = async () => {
     const response = await fetch(`${API_URL}/whatsapp/qr`);
     if (!response.ok) {
-        console.log("Error getting QR code to connect to whatsapp", await response.json());
+        // console.log("Error getting QR code to connect to whatsapp", await response.json());
         throw new Error('Failed to fetch QR');
     }
     const blob = await response.blob();

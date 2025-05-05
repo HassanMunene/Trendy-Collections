@@ -156,6 +156,14 @@ class WhatsAppService {
     }
 
 
+    /**
+     * This getStatus will give us a snapshot of whether the connection is live
+     * when was the connnection last acive.
+     * How times the Qr code was shown.
+     * a reverse list of all connection event from the latest to the first event.
+     * We are reversing because we usually care about the most recent event.
+     * @returns 
+     */
     getStatus() {
         return {
             ...this.connectionState,

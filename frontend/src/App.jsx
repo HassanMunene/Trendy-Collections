@@ -23,7 +23,7 @@ const RegistePage = lazy(() => import('./Pages/Authentication/RegisterPage'));
 const AdminLayout = lazy(() => import('./Pages/Admin/AdminLayout'));
 const DashboardPage = lazy(() => import('./Pages/Admin/DashboardPage'));
 const ProfilePage = lazy(() => import('./Pages/Admin/ProfilePage/ProfilePage'));
-const MessagesPage = lazy(() => import('./Pages/Admin/MessagesPage/MessagesPage'));
+const MessagesPage = lazy(() => import('./Pages/Admin/MessagesPage/index'));
 const OrdersPage = lazy(() => import('./Pages/Admin/OrdersPage'));
 const AdminProductsPage = lazy(() => import('./Pages/Admin/AdminProductsPage'));
 const CustomersPage = lazy(() => import('./Pages/Admin/CustomersPage'));
