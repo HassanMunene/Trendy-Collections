@@ -8,9 +8,7 @@
  * (pino): a logger library used by baileys for logging events.
 */
 
-import { timeStamp } from 'console';
-import * as crypto from 'crypto';
-global.crypto = crypto;
+import crypto from 'crypto';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const { default: makeWASocket, useMultiFileAuthState } = require('@whiskeysockets/baileys');
