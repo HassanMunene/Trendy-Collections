@@ -210,7 +210,11 @@ export default function WhatsAppConnectionFlow({ whatsAppIsConnected }) {
 
                         {/* QR Ready State - made responsive */}
                         {state.status === 'qr-ready' && (
-                            <QrCodeReadyStatus />
+                            <QrCodeReadyStatus
+                                state={state}
+                                fetchQrCodeToConnect={fetchQrCodeToConnect}
+                                checkIfWhatsappIsConnected={checkIfWhatsappIsConnected}
+                            />
                         )}
 
                         {/* Connected State - made responsive */}

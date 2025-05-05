@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Shield, Clock, RotateCw, CheckCircle } from "lucide-react";
 
-const QrCodeReadyStatus = () => {
+const QrCodeReadyStatus = ({ state, fetchQrCodeToConnect, checkIfWhatsappIsConnected }) => {
     return (
         <motion.div className="flex flex-col items-center">
             <div className="relative mb-6 sm:mb-8">
@@ -47,7 +47,7 @@ const QrCodeReadyStatus = () => {
                     Refresh
                 </button>
                 <button
-                    onClick={checkStatus}
+                    onClick={checkIfWhatsappIsConnected}
                     className="px-3 py-2 sm:px-4 sm:py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex items-center justify-center gap-1 sm:gap-2 transition-all text-sm sm:text-base"
                 >
                     <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
