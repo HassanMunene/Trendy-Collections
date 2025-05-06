@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Wifi, WifiOff, QrCode, RotateCw } from 'lucide-react';
-
-import { getStatus, getQR, disconnect as disconnectAPI } from '../../../../libs/whatsapp_api';
-
+import socket from '../../../../libs/socket';
 import ConnectionHistoryCard from './ConnectionHistoryCard';
 import QrCodeReadyStatus from './QrCodeReadyStatus';
 import ErrorState from './ErrorState';
@@ -11,105 +9,92 @@ import SuccessfullyConnectedState from './SuccessfullyConnectedState';
 
 export default function WhatsAppConnectionFlow({ whatsAppIsConnected }) {
     const [state, setState] = useState({
-        status: 'checking',
+        status: 'checking', // checking, loading, qr-ready, connected, disconnected, error
         qrImage: null,
         error: null,
         history: [],
         progress: 0
     });
 
-    // prevent repeating qr fetching
-    const hasQrCodeBeenFetched = useRef(false);
-
+    // Handle all socket events
     useEffect(() => {
-        let isMounted = true;
-
-        const checkandUpdate = async () => {
-            const connected = await checkIfWhatsappIsConnected();
-            if (connected && isMounted) {
-                clearInterval(interval);
-            }
-        }
-        // Trigger the first check to start checking immediately.
-        checkandUpdate();
-
-        // Start a repeat check after every 5 seconds if not connnected.
-        const interval = setInterval(() => {
-            checkandUpdate();
-        }, 5000);
-
-        // When the component unmounts flag is as no longer active
-        // Clear the interval so no background checks can continue happening.
-        return () => {
-            isMounted = false
-            clearInterval(interval)
-        };
-    }, []);
-
-    const checkIfWhatsappIsConnected = async () => {
-        try {
-            const data = await getStatus();
-            // console.log("Data from getStatus() endpoint", data);
-            if (data.isConnected) {
-                setState((prev) => ({
-                    ...prev,
-                    status: 'connected',
-                    progress: 100
-                }));
-                // Reset QR flag in case user disconnects later
-                hasFetchedQR.current = false;
-                whatsAppIsConnected();
-            } else {
-                if (!hasQrCodeBeenFetched.current) {
-                    // if we dont have a QR code fetch it again.
-                    fetchQrCodeToConnect();
-                }
-            }
-            return data.isConnected;
-        } catch (error) {
-            console.log("Error Checking the connection status of whatsapp.", error);
-            setState((prev) => ({
+        // Initial connection status
+        const handleStatus = (status) => {
+            setState(prev => ({
                 ...prev,
-                status: 'error',
-                error: 'Connection check failed!'
-            }))
-            return false;
-        }
-    }
+                status: status === 'open' ? 'connected' : status
+            }));
+            if (status === 'open') whatsAppIsConnected();
+        };
 
-    const fetchQrCodeToConnect = async () => {
-        setState((prev) => ({
-            ...prev,
-            status: 'loading',
-            error: null,
-            progress: 0
-        }));
-        try {
-            const qrImageUrl = await getQR();
-            setState((prev) => ({
+        // QR Code received
+        const handleQR = (qrData) => {
+            setState(prev => ({
                 ...prev,
                 status: 'qr-ready',
-                qrImage: qrImageUrl,
+                qrImage: qrData,
                 progress: 100
             }));
-            hasQrCodeBeenFetched.current = true;
-        } catch (error) {
-            console.log("Error fetching QR", error);
-            setState((prev) => ({
+        };
+
+        // Connection established
+        const handleConnected = () => {
+            setState(prev => ({
+                ...prev,
+                status: 'connected',
+                progress: 100
+            }));
+            whatsAppIsConnected();
+        };
+
+        // Disconnection occurred
+        const handleDisconnected = () => {
+            setState(prev => ({
+                ...prev,
+                status: 'disconnected',
+                error: 'WhatsApp connection was terminated'
+            }));
+        };
+
+        // Error occurred
+        const handleError = (errorMsg) => {
+            setState(prev => ({
                 ...prev,
                 status: 'error',
-                error: 'Failed to load QR code'
+                error: errorMsg
             }));
-        }
-    }
+        };
 
-    const handleDisconnect = async () => {
-        await disconnectAPI();
-        setState((prev) => ({
-            ...prev,
-            status: 'disconnected'
-        }));
-    };
+        // Socket connection error
+        const handleConnectError = () => {
+            setState(prev => ({
+                ...prev,
+                status: 'error',
+                error: 'Failed to connect to server'
+            }));
+        };
+
+        // Set up all event listeners
+        socket.on("status", handleStatus);
+        socket.on("qr", handleQR);
+        socket.on("connected", handleConnected);
+        socket.on("disconnected", handleDisconnected);
+        socket.on("error", handleError);
+        socket.on("connect_error", handleConnectError);
+
+        // Request initial status
+        socket.emit("get-status");
+
+        return () => {
+            // Clean up all listeners
+            socket.off("status", handleStatus);
+            socket.off("qr", handleQR);
+            socket.off("connected", handleConnected);
+            socket.off("disconnected", handleDisconnected);
+            socket.off("error", handleError);
+            socket.off("connect_error", handleConnectError);
+        };
+    }, [whatsAppIsConnected]);
 
     // Status configurations
     const statusConfig = {
@@ -153,11 +138,39 @@ export default function WhatsAppConnectionFlow({ whatsAppIsConnected }) {
 
     const currentStatus = statusConfig[state.status] || statusConfig.checking;
 
+    // Handler functions
+    const handleGenerateQR = () => {
+        socket.emit('generate-qr');
+        setState(prev => ({
+            ...prev,
+            status: 'loading',
+            progress: 0
+        }));
+    };
+
+    const handleDisconnect = () => {
+        socket.emit('disconnect-whatsapp');
+        setState(prev => ({
+            ...prev,
+            status: 'disconnected'
+        }));
+    };
+
+    const handleRetry = () => {
+        socket.emit('generate-qr');
+        setState(prev => ({
+            ...prev,
+            status: 'loading',
+            progress: 0,
+            error: null
+        }));
+    };
+
     return (
         <div className="max-w-2xl mx-auto py-4 sm:py-8 px-3 sm:px-4">
             {/* Main Connection Card */}
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl overflow-hidden">
-                {/* Header part of the connection card. */}
+                {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 border-b border-gray-700 gap-3 sm:gap-0">
                     <div className="flex items-center space-x-3">
                         <div className={`p-2 rounded-lg ${currentStatus.color} bg-opacity-20`}>
@@ -176,7 +189,7 @@ export default function WhatsAppConnectionFlow({ whatsAppIsConnected }) {
                     </div>
                 </div>
 
-                {/* Progress Bar to show the Loading state when getting QR code. */}
+                {/* Progress Bar */}
                 {(state.status === 'checking' || state.status === 'loading') && (
                     <div className="h-1 bg-gray-700">
                         <motion.div
@@ -188,10 +201,10 @@ export default function WhatsAppConnectionFlow({ whatsAppIsConnected }) {
                     </div>
                 )}
 
-                {/* Content section of the Card. */}
+                {/* Content section */}
                 <div className="p-4 sm:p-6">
                     <AnimatePresence mode="wait">
-                        {/* When we are in the checking state Checking/Loading State */}
+                        {/* Loading State */}
                         {(state.status === 'checking' || state.status === 'loading') && (
                             <motion.div className="flex flex-col items-center py-6 sm:py-8">
                                 <div className="relative mb-4 sm:mb-6">
@@ -208,30 +221,34 @@ export default function WhatsAppConnectionFlow({ whatsAppIsConnected }) {
                             </motion.div>
                         )}
 
-                        {/* QR Ready State - made responsive */}
+                        {/* QR Ready State */}
                         {state.status === 'qr-ready' && (
                             <QrCodeReadyStatus
-                                state={state}
-                                fetchQrCodeToConnect={fetchQrCodeToConnect}
-                                checkIfWhatsappIsConnected={checkIfWhatsappIsConnected}
+                                qrImage={state.qrImage}
+                                onRetry={handleGenerateQR}
                             />
                         )}
 
-                        {/* Connected State - made responsive */}
+                        {/* Connected State */}
                         {state.status === 'connected' && (
-                            <SuccessfullyConnectedState handleDisconnect={handleDisconnect} />
+                            <SuccessfullyConnectedState
+                                onDisconnect={handleDisconnect}
+                            />
                         )}
 
-                        {/* Error State - made responsive */}
+                        {/* Error State */}
                         {state.status === 'error' && (
-                            <ErrorState state={state} fetchQrCodeToConnect={fetchQrCodeToConnect} />
+                            <ErrorState
+                                error={state.error}
+                                onRetry={handleRetry}
+                            />
                         )}
                     </AnimatePresence>
                 </div>
             </div>
 
-            {/* Connection History - made responsive */}
-            <ConnectionHistoryCard state={state} />
+            {/* Connection History */}
+            <ConnectionHistoryCard history={state.history} />
         </div>
     );
 }

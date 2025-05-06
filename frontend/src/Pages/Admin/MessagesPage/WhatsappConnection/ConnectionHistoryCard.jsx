@@ -1,6 +1,6 @@
 import { Clock, Wifi, WifiOff, ChevronRight } from "lucide-react";
 
-const ConnectionHistoryCard = ({ state }) => {
+const ConnectionHistoryCard = ({ history }) => {
     return (
         <div className="mt-4 sm:mt-6 bg-gray-900 rounded-lg sm:rounded-xl shadow-lg overflow-hidden">
             <div className="p-3 sm:p-4 border-b border-gray-800 flex items-center justify-between">
@@ -10,7 +10,7 @@ const ConnectionHistoryCard = ({ state }) => {
                 </h3>
             </div>
             <div className="divide-y divide-gray-800">
-                {state.history.length > 0 ? (
+                {history.length > 0 ? (
                     state.history.map((event, i) => (
                         <div key={i} className="p-3 sm:p-4 hover:bg-gray-800 transition-colors cursor-pointer">
                             <div className="flex items-center justify-between">

@@ -1,56 +1,79 @@
+// Import required modules
 import express from 'express';
 import cors from 'cors';
+import http from 'http';
+import { Server as SocketIoServer } from 'socket.io';
 
+// Import route handlers and services
 import AuthenticationRoutes from './routes/AuthenticationRoutes.js';
 import UserProfileRoutes from './routes/UserProfileRoutes.js';
-import WhatsappRoutes from './routes/whatsappRoutes.js';
+import whatsappService from './services/whatsappService.js';
 
+// Initialize Express application
 const app = express();
+
+// Create HTTP server using Express app
+const server = http.createServer(app);
+
+// Initialize Socket.IO server with CORS configuration
+const io = new SocketIoServer(server, {
+    cors: {
+        origin: "*", // Allow connections from any origin (in production restrict this!)
+        methods: ["GET", "POST"] // Allow only GET and POST methods
+    }
+});
+
 const PORT = process.env.PORT || 5000;
 
-// Apply middlewares
-app.use(cors());
-app.use(express.json());
+// Apply middleware
+app.use(cors()); // Enable CORS for all routes
+app.use(express.json()); // Parse JSON bodies in incoming requests
 
-// Register routes
+// Set up route handlers
 app.use('/api/auth', AuthenticationRoutes);
 app.use('/api/profile', UserProfileRoutes);
-app.use('/api/whatsapp', WhatsappRoutes);
 
-// Centralized error handler
+// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
 
-// Start server and initialize WhatsApp
-app.listen(PORT, () => {
-    // Log server status and access URL to the console
-    console.log(`Server is running on port ${PORT}`);
-    console.log(`http://localhost:${PORT}`);
+// Socket.IO connection handler
+io.on('connection', async (socket) => {
+    console.log(`🟢 Client connected: ${socket.id}`);
 
-    /**
-     * Dynamically import the WhatsApp service after the server has started.
-     * This ensures that all Express middlewares and routes are registered
-     * before the WhatsApp connection is attempted. Ensure that if Whataspp
-     * connection fails then other routes are safe though.
-     */
-    import('./services/whatsappService.js')
-        .then(({ default: whatsapp }) => {
-            /**
-             * Initialize the WhatsApp connection.
-             * - `onQrCode`: A callback that will be triggered when a new QR code is generated.
-             *   In this case, we log a message instructing users where to fetch the QR visually.
-             * - `onNewMessage`: A callback to handle incoming WhatsApp messages.
-             *   For now, we just log that the handler is active.
-             */
-            whatsapp.initialize({
-                onQrCode: (qr) => console.log('QR received, visit /api/whatsapp/qr to see it'),
-                onNewMessage: () => console.log('Incoming WhatsApp message handler ready')
-            });
-        })
-        .catch((err) => {
-            // Catch and log any errors that occur during dynamic import or WhatsApp initialization
-            console.error('Failed to initialize WhatsApp service:', err);
-        });
+    // Emit current status
+    socket.emit("status", whatsappService.getStatus());
+
+    // Setup WhatsApp event handlers
+    await whatsappService.initialize({
+        onQrCode: (qr) => socket.emit('qr', qr),
+        onNewMessage: (msg) => socket.emit('message', msg),
+        onConnected: () => socket.emit('connected'),
+        onDisconnected: () => socket.emit('disconnected'),
+        onError: (err) => socket.emit('error', err?.message || 'Unknown error')
+    });
+
+    // Socket commands from client
+    socket.on('generate-qr', async () => {
+        await whatsappService.generateQR();
+    });
+
+    socket.on('disconnect-whatsapp', async () => {
+        await whatsappService.disconnect();
+        socket.emit('disconnected');
+    });
+
+    socket.on('send-message', async ({ jid, text }) => {
+        await whatsappService.sendMessage(jid, text);
+    });
+
+    socket.on('disconnect', () => {
+        console.log(`🔴 Client disconnected: ${socket.id}`);
+    });
+});
+
+server.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
 });

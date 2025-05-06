@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 import { Shield, Clock, RotateCw, CheckCircle } from "lucide-react";
 
-const QrCodeReadyStatus = ({ state, fetchQrCodeToConnect, checkIfWhatsappIsConnected }) => {
+const QrCodeReadyStatus = ({  qrImage, onRetry }) => {
     return (
         <motion.div className="flex flex-col items-center">
             <div className="relative mb-6 sm:mb-8">
-                {state.qrImage && (
+                {qrImage && (
                     <>
                         <div className="absolute inset-0 rounded-lg sm:rounded-xl bg-purple-500 blur-xl opacity-20 animate-pulse" />
                         <img
-                            src={state.qrImage}
+                            src={qrImage}
                             alt="WhatsApp QR Code"
                             className="relative z-10 border-4 border-white rounded-lg sm:rounded-xl shadow-lg w-48 h-48 sm:w-64 sm:h-64"
                         />
@@ -40,14 +40,14 @@ const QrCodeReadyStatus = ({ state, fetchQrCodeToConnect, checkIfWhatsappIsConne
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-xs">
                 <button
-                    onClick={fetchQrCodeToConnect}
+                    onClick={onRetry}
                     className="px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg flex items-center justify-center gap-1 sm:gap-2 transition-all text-sm sm:text-base"
                 >
                     <RotateCw className="w-4 h-4 sm:w-5 sm:h-5" />
                     Refresh
                 </button>
                 <button
-                    onClick={checkIfWhatsappIsConnected}
+                    onClick={onRetry}
                     className="px-3 py-2 sm:px-4 sm:py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex items-center justify-center gap-1 sm:gap-2 transition-all text-sm sm:text-base"
                 >
                     <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />

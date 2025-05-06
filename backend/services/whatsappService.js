@@ -1,177 +1,121 @@
-/***
- * Baileys uses node's crypto module for encryption
- * And when using ES module crypto is not automiatically available
- * As it it is while using commonjs so we manually import it and
- * And assign it to global.crypto so baileys can use it.
- * (makeWASocket): creates a WhatsApp WebSocket client.
- * (useMultiFileAuthState): manages session/authentication files.
- * (pino): a logger library used by baileys for logging events.
-*/
-
-import crypto from 'crypto';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const { default: makeWASocket, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+import crypto from 'crypto';
 const pino = require('pino');
+import QRCode from 'qrcode';
+
 
 class WhatsAppService {
-    constructor() {
-        this.socket = null;
-        this.connectionState = {
-            isConnected: false,
-            lastActive: null,
-            qrGenerations: 0,
-            connectionHistory: []
-        };
-        this.initQRPromise();
-    }
+    sock = null;
+    status = 'disconnected';
 
-    /**
-     * Initializes a new promise for QR code delivery.
-     * This allows external callers to await the QR asynchronously.
-     */
-    initQRPromise() {
-        this.qrPromise = new Promise((resolve) => {
-            this.qrResolver = resolve;
+    onQrCode = null;
+    onNewMessage = null;
+    onConnected = null;
+    onDisconnected = null;
+    onError = null;
+
+    async initialize({ onQrCode, onNewMessage, onConnected, onDisconnected, onError }) {
+        this.onQrCode = onQrCode;
+        this.onNewMessage = onNewMessage;
+        this.onConnected = onConnected;
+        this.onDisconnected = onDisconnected;
+        this.onError = onError;
+        this.status = 'loading';
+
+        const { state, saveCreds } = await useMultiFileAuthState('auth_info');
+
+        this.sock = makeWASocket({
+            auth: state,
+            logger: pino({ level: 'info' }),
+            printQRInTerminal: false,
+            getMessage: async () => ({ conversation: 'Hello from InboxFlow' })
         });
-    }
 
-    /**
-     * Initializes the WhatsApp connection.
-     * Sets up authentication, socket instance, and event handlers.
-     * Accepts callback functions:
-     * onQrCode: what to do when a QR is received.
-     * onNewMessage: what to do when a new WhatsApp message comes in.
-     * Uses useMultiFileAuthState to: Load or create auth files from the auth_info directory.
-     * These files keep your login saved so you don’t scan the QR every time.
-     * Calls makeWASocket() to: Create a connection to WhatsApp Web.
-     * Sets up event listeners via this.setupEventHandlers().
-    */
-    async initialize({ onQrCode, onNewMessage }) {
-        try {
-            // Load or create auth state - stores login credentials.
-            const { state, saveCreds } = await useMultiFileAuthState('auth_info');
+        this.sock.ev.on('creds.update', saveCreds);
 
-            // Create socket with silent logging
-            this.socket = makeWASocket({
-                auth: state,
-                logger: pino({ level: 'silent' }), // we will not display the logs for now.
-                printQRInTerminal: false,
-                getMessage: async (key) => ({ conversation: 'Hello from Trendy Collections.' })
-            });
+        this.sock.ev.on('connection.update', async ({ connection, lastDisconnect, qr }) => {
+            try {
+                if (qr) {
+                    this.status = 'loading';
+                    // Generate image from QR string
+                    const qrImage = await QRCode.toDataURL(qr);
 
-            // Setup listeners for QR, messages, etc.
-            this.setupEventHandlers(saveCreds, onQrCode, onNewMessage);
-        } catch (error) {
-            console.error('Initialization error:', error);
-            await delay(5000);
-            console.log("Re-initializing Again...");
-            this.initialize({ onQrCode, onNewMessage });
-        }
-    }
-
-    setupEventHandlers(saveCreds, onQrCode, onNewMessage) {
-        this.socket.ev.on('connection.update', (update) => {
-            const event = {
-                timeStamp: new Date(),
-                type: 'connection',
-                data: update
-            }
-            this.connectionState.connectionHistory.push(event);
-
-            if (update.qr) {
-                this.connectionState.qrGenerations++;
-                this.connectionState.isConnected = false;
-                this.activeQR = update.qr;
-
-                if (onQrCode) onQrCode(update.qr);
-                // Resolve QR promise if one is pending
-                if (this.qrResolver) {
-                    this.qrResolver(update.qr);
-                    this.qrResolver = null;
+                    // Send the base64 image to frontend
+                    if (this.onQrCode) this.onQrCode(qrImage);
                 }
-            }
 
-            // Connected successfully
-            if (update.connection === 'open') {
-                this.connectionState.isConnected = true;
-                this.connectionState.lastActive = new Date();
-                // Clear QR after connection is Established successfully
-                this.activeQR = null;
-                console.log('Successfully connected to WhatsApp');
-            }
+                if (connection === 'open') {
+                    this.status = 'connected';
+                    if (this.onConnected) this.onConnected();
+                }
 
-            if (update.connection === 'close') {
-                this.connectionState.isConnected = false;
-                setTimeout(() => this.restart(), 5000);
+                if (connection === 'close') {
+                    this.status = 'disconnected';
+                    if (this.onDisconnected) this.onDisconnected();
+                }
+            } catch (error) {
+                this.status = 'error';
+                if (this.onError) this.onError(error);
             }
         });
 
-        // Handle incoming messages
-        this.socket.ev.on('messages.upsert', async (m) => {
-            if (onNewMessage) await onNewMessage(m.messages[0]);
-            this.connectionState.lastActive = new Date();
+        this.sock.ev.on('messages.upsert', async ({ messages }) => {
+            const msg = messages[0];
+            if (!msg.message || msg.key.fromMe || msg.key.remoteJid === 'status@broadcast') return;
+
+            const messageText = msg.message.conversation || msg.message.extendedTextMessage?.text || '';
+            const timestamp = msg.messageTimestamp * 1000;
+
+            const messageData = {
+                sender: msg.key.remoteJid,
+                text: messageText,
+                timestamp: timestamp
+            };
+
+            console.log(`📥 Received message: ${messageText} from ${remoteJid}`);
+
+            if (this.onNewMessage) {
+                this.onNewMessage(messageData);
+            }
         });
-
-        // Save updated credentials
-        this.socket.ev.on('creds.update', saveCreds);
-    }
-
-    /**
-     * Returns the QR code if it's already available.
-     * If not, waits for up to 30 seconds for a QR code to be generated.
-     * If still no QR, throws a timeout error.
-    */
-    async getQR() {
-        console.log('Fetching QR code...');
-        if (this.activeQR) return this.activeQR;
-
-        // If QR promise is not initialized, recreate it
-        if (!this.qrResolver) this.initQRPromise();
-        return Promise.race([
-            this.qrPromise,
-            new Promise((_, reject) =>
-                setTimeout(() => reject(new Error('QR generation timeout')), 30000)
-            )
-        ]);
-    }
-
-    async disconnect() {
-        if (this.socket) {
-            await this.socket.end();
-            this.connectionState.isConnected = false;
-            this.connectionState.connectionHistory.push({
-                timestamp: new Date(),
-                type: 'disconnected'
-            });
-        }
     }
 
     async restart() {
-        await this.disconnect();
-        return this.initialize({
+        if (this.sock?.end) {
+            this.sock.end();
+        }
+        await this.initialize({
             onQrCode: this.onQrCode,
-            onNewMessage: this.onNewMessage
+            onNewMessage: this.onNewMessage,
+            onConnected: this.onConnected,
+            onDisconnected: this.onDisconnected,
+            onError: this.onError
         });
     }
 
+    async generateQR() {
+        await this.restart();
+    }
 
-    /**
-     * This getStatus will give us a snapshot of whether the connection is live
-     * when was the connnection last acive.
-     * How times the Qr code was shown.
-     * a reverse list of all connection event from the latest to the first event.
-     * We are reversing because we usually care about the most recent event.
-     * @returns 
-     */
+    async sendMessage(jid, text) {
+        if (!this.sock) return;
+        await this.sock.sendMessage(jid, { text });
+    }
+
+    async disconnect() {
+        if (this.sock?.logout) {
+            await this.sock.logout();
+        }
+        this.status = 'disconnected';
+        if (this.onDisconnected) this.onDisconnected();
+    }
+
     getStatus() {
-        return {
-            ...this.connectionState,
-            history: [...this.connectionState.connectionHistory].reverse()
-        };
+        return this.status;
     }
 }
 
-// Export a single instance of the service (singleton pattern)
 const whatsappService = new WhatsAppService();
 export default whatsappService;
