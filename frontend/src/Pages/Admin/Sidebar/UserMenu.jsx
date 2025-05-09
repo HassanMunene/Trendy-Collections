@@ -96,14 +96,14 @@ const UserMenu = ({ userMenuOpen, setUserMenuOpen, isAdminSidebarForMobile }) =>
                                 <span>Messages</span>
                                 <span className="ml-auto px-2 py-0.5 text-xs font-medium bg-indigo-600 text-white rounded-full">3</span>
                             </Link>
-                            <a
-                                href="#"
+                            <Link
+                                to="/admin/profile"
                                 onClick={closeMenu}
                                 className="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-150"
                             >
                                 <Settings className="w-5 h-5 mr-3 text-indigo-600" />
                                 Account Settings
-                            </a>
+                            </Link>
                             <a
                                 href="#"
                                 onClick={closeMenu}
