@@ -1,30 +1,42 @@
-// components/LoadingScreen.jsx
-import React from 'react';
+import { motion } from "framer-motion";
 
 function LoadingScreen() {
-	return (
-		<div className="flex items-center justify-center h-screen bg-gradient-to-b from-rose-100 to-white">
-			<div className="text-center">
-				<div className="relative w-20 h-20 mx-auto mb-6">
-					<div className="absolute inset-0 rounded-full border-4 border-rose-200 animate-spin"></div>
-					<div className="absolute inset-1 rounded-full border-4 border-transparent border-t-rose-600 border-r-pink-600 animate-spin animation-delay-200"></div>
-				</div>
-				<h3 className="text-xl font-medium text-gray-800 flex justify-center">
-					Loading
-					<span className="flex space-x-1 ml-1">
-						<span className="animate-bounce">.</span>
-						<span className="animate-bounce animation-delay-100">.</span>
-						<span className="animate-bounce animation-delay-200">.</span>
-					</span>
-				</h3>
-				<p className="mt-4 text-sm text-gray-500">
-					<span className="font-bold bg-gradient-to-r from-rose-700 to-pink-600 bg-clip-text text-transparent">
-						Trendy Collections
-					</span>
-				</p>
-			</div>
-		</div>
-	);
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-b from-rose-100 to-white z-50">
+      <motion.div
+        className="bg-pink-600 size-16 rounded-lg flex items-center justify-center"
+        animate={{
+          rotate: 360,
+          scale: [1, 1.05, 1]
+        }}
+        transition={{
+          rotate: {
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "linear"
+          },
+          scale: {
+            duration: 1.2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }
+        }}
+      >
+        <motion.div 
+          className="size-8 rounded-full bg-white"
+          animate={{
+            scale: [1, 0.9, 1]
+          }}
+          transition={{
+            duration: 1.2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.2
+          }}
+        />
+      </motion.div>
+    </div>
+  );
 }
 
 export default LoadingScreen;
