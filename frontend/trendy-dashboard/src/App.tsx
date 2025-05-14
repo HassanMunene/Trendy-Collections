@@ -46,7 +46,7 @@ function Sidebar() {
           aria-label="Toggle Sidebar"
           onClick={() => setCollapsed(!collapsed)}
         >
-          <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
         <button
           className="hidden md:block text-white focus:outline-none ml-2"
@@ -54,7 +54,7 @@ function Sidebar() {
           onClick={() => setCollapsed(!collapsed)}
         >
           <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M4 6h16M4 12h16M4 18h16"/>
+            <path d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
@@ -134,9 +134,7 @@ function Topbar() {
     }
   }, [dark]);
   return (
-    <header
-      className={`h-16 flex items-center justify-between px-6 border-b sticky top-0 z-10 shadow-md bg-white/70 backdrop-blur-md dark:bg-black/80 dark:border-gray-800 transition-colors`}
-    >
+    <header className={`h-16 flex items-center justify-between px-6 border-b sticky top-0 z-10 shadow-md bg-white/70 backdrop-blur-md dark:bg-black/80 dark:border-gray-800 transition-colors`}>
       <div className="font-bold text-xl tracking-tight text-rose-600 dark:text-rose-400 select-none">Dashboard</div>
       <div className="flex items-center gap-4">
         <button className="relative group focus:outline-none" aria-label="Notifications">

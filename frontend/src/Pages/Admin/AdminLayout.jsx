@@ -20,14 +20,8 @@ const AdminLayout = () => {
     };
 
     return (
-        <div className="flex h-screen bg-gray-50">
-            {/* Sidebar */}
+        <div className="flex h-screen w-screen bg-gradient-to-br from-white via-rose-50 to-black overflow-hidden dark:from-black dark:via-gray-900 dark:to-rose-900 transition-colors">            {/* Sidebar */}
             <AdminSidebar
-                isAdminSidebarForMobile={isAdminSidebarForMobile}
-                setIsAdminSidebarForMobile={setIsAdminSidebarForMobile}
-                isMobileMenuOpen={isMobileMenuOpen}
-                setIsMobileMenuOpen={setIsMobileMenuOpen}
-                isActiveRoute={isActiveRoute}
             />
 
             {/* Main Content */}
