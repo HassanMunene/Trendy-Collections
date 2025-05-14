@@ -69,7 +69,7 @@ const AdminSidebar = () => {
             {isMobile && sidebarState === 'hidden' && (
                 <button
                     onClick={() => setSidebarState('collapsed')}
-                    className="fixed z-30 left-4 top-4 p-2 rounded-lg bg-gray-800 text-white shadow-lg md:hidden"
+                    className="fixed z-30 left-4 top-4 p-2 !rounded-md bg-gray-800 text-white shadow-lg md:hidden"
                     aria-label="Open menu"
                 >
                     <Menu size={24} />

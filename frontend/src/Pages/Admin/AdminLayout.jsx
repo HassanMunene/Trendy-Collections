@@ -20,30 +20,14 @@ const AdminLayout = () => {
     };
 
     return (
-        <div className="flex h-screen w-screen bg-gradient-to-br from-white via-rose-50 to-black overflow-hidden dark:from-black dark:via-gray-900 dark:to-rose-900 transition-colors">            {/* Sidebar */}
-            <AdminSidebar
-            />
-
-            {/* Main Content */}
-            <div className="flex-1 flex flex-col overflow-hidden">
-                {/* Top Navigation */}
-                <MainTopbar
-                    setIsAdminSidebarForMobile={setIsAdminSidebarForMobile}
-                    isAdminSidebarForMobile={isAdminSidebarForMobile}
-                />
-
-                {/* Page Content */}
-                <main className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-100 to-white p-4 sm:p-6 lg:p-8">
-                    <div className="max-w-7xl mx-auto">
-                        <Outlet />
-                    </div>
+        <div className="flex h-screen w-screen bg-gradient-to-br from-white via-rose-50 to-black overflow-hidden dark:from-black dark:via-gray-900 dark:to-rose-900 transition-colors">
+            <AdminSidebar />
+            <div className="flex-1 flex flex-col transition-all duration-300">
+                <MainTopbar />
+                <main className="flex-1 p-4 overflow-auto bg-white/80 dark:bg-black/70 transition-colors">
+                    <Outlet />
                 </main>
             </div>
-
-            {/* Mobile overlay */}
-            {isMobileMenuOpen && (
-                <div className="fixed inset-0 z-40 bg-black bg-opacity-50 md:hidden" onClick={() => setIsMobileMenuOpen(false)}></div>
-            )}
         </div>
     );
 };
