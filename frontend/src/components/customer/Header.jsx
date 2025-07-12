@@ -15,9 +15,11 @@ const promotions = [
     "New collection just landed!",
 ]
 
-const Header = ({ mobileMenuOpen, setMobileMenuOpen }) => {
+const Header = () => {
     const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
     const [fade, setFade] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
 
     useEffect(() => {
         const interval = setInterval(() => {

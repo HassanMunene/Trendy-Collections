@@ -20,7 +20,7 @@ const MainLayout = () => {
     return (
         <div className="flex min-h-screen flex-col bg-gray-100">
             {/* Header */}
-            <Header scrolled={scrolled} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
+            <Header />
 
 
             {/* Main Content */}
