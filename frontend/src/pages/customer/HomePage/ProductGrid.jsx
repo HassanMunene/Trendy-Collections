@@ -3,25 +3,25 @@ const ProductGrid = () => {
         {
             id: 1,
             name: "Wexler chair",
-            price: "£450",
+            price: "ksh 450",
             image: "https://ext.same-assets.com/4184859447/3939488370.jpeg"
         },
         {
             id: 2,
             name: "Thea chair",
-            price: "£299",
+            price: "ksh 299",
             image: "https://ext.same-assets.com/4184859447/1822223879.jpeg"
         },
         {
             id: 3,
             name: "Rhye chair",
-            price: "£399",
+            price: "ksh 399",
             image: "https://ext.same-assets.com/4184859447/2465237693.jpeg"
         },
         {
             id: 4,
             name: "Eva chair",
-            price: "£275",
+            price: "ksh 275",
             image: "https://ext.same-assets.com/4184859447/224701922.jpeg"
         }
     ]
@@ -30,25 +30,25 @@ const ProductGrid = () => {
         {
             id: 5,
             name: "Briz flush ceiling light",
-            price: "£79",
+            price: "ksh 79",
             image: "https://ext.same-assets.com/4184859447/494289311.jpeg"
         },
         {
             id: 6,
             name: "Sydney ceiling light",
-            price: "£69",
+            price: "ksh 69",
             image: "https://ext.same-assets.com/4184859447/2078189019.jpeg"
         },
         {
             id: 7,
             name: "Layla ceiling light",
-            price: "£329",
+            price: "ks 329",
             image: "https://ext.same-assets.com/4184859447/4133126367.jpeg"
         },
         {
             id: 8,
             name: "Globe ceiling light",
-            price: "£79",
+            price: "ksh 79",
             image: "https://ext.same-assets.com/4184859447/3996853176.jpeg"
         }
     ]
@@ -57,32 +57,32 @@ const ProductGrid = () => {
         {
             id: 9,
             name: "Eero table lamp",
-            price: "£99",
+            price: "ksh 99",
             image: "https://ext.same-assets.com/4184859447/1819160200.jpeg"
         },
         {
             id: 10,
             name: "Lila pleated table lamp",
-            price: "£169",
+            price: "ksh 169",
             image: "https://ext.same-assets.com/4184859447/3259582105.jpeg"
         },
         {
             id: 11,
             name: "Piper table lamp",
-            price: "£59",
+            price: "ksh 59",
             image: "https://ext.same-assets.com/4184859447/1440530325.jpeg"
         },
         {
             id: 12,
             name: "Briz table lamp",
-            price: "£59",
+            price: "ksh 59",
             image: "https://ext.same-assets.com/4184859447/3319993950.jpeg"
         }
     ]
 
     return (
         <section className="py-16 bg-white">
-            <div className="made-container">
+            <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Three Category Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
                     {/* Sofas Section */}
