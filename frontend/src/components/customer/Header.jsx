@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 const navigationLinks = [
-    { name: 'shop all', href: "/products" },
+    { name: 'Shop all', href: "/products" },
     { name: 'Pillows', href: '/products?category=pillow' },
     { name: 'Curtains', href: '/products?category=curtains' },
     { name: 'Best Sellers', href: '/products?category=bestsellers' },
