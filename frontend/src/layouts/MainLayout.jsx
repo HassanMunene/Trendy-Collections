@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import Header from '../Components/MainLayout/Header';
+import Header from '../components/customer/Header';
 
 const MainLayout = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -19,13 +19,6 @@ const MainLayout = () => {
 
     return (
         <div className="flex min-h-screen flex-col bg-gray-100">
-            {/* Announcement Bar */}
-            <div className="bg-gradient-to-r from-rose-700 to-pink-600 py-2 text-center text-white text-sm font-medium">
-                <div className="container mx-auto px-4 text-lg">
-                    We deliver countrywide! | <a href="tel:0712403671" className="underline hover:text-gray-100">Contact us at 0712403671</a>
-                </div>
-            </div>
-
             {/* Header */}
             <Header scrolled={scrolled} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
 
