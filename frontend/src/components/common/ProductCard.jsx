@@ -78,9 +78,9 @@ export default function ProductCard({ product, isFavorite, onToggleFavorite }) {
                     </div>
                 </div>
 
-                <h3 className="text-sm font-medium text-gray-900 mb-3 line-clamp-2">
+                <h4 className="text-sm font-medium text-gray-900 mb-3 line-clamp-2">
                     {product.name}
-                </h3>
+                </h4>
 
                 {/* Color options */}
                 <div className="flex items-center gap-2 mb-3">
