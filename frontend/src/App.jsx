@@ -11,7 +11,7 @@ import MainLayout from './layouts/MainLayout';
 
 // Main Layout pages
 const HomePage = lazy(() => import('./pages/customer/HomePage/index'));
-const ProductsPage = lazy(() => import('./pages/customer/ProductsPage'))
+const ProductsPage = lazy(() => import('./pages/customer/productsPage/ProductsPage'))
 const ProductDetailPage = lazy(() => import('./pages/customer/ProductDetailPage'));
 const CartPage = lazy(() => import('./pages/customer/CartPage'));
 
