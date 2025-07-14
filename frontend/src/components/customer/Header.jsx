@@ -63,9 +63,8 @@ const Header = () => {
 
                                 {/* Logo */}
                                 <Link to="/" className="flex items-center group">
-                                    <span className="text-2xl font-bold bg-gradient-to-r from-rose-700 to-pink-600 bg-clip-text text-transparent relative">
+                                    <span className="text-3xl font-medium tracking-tight bg-clip-text relative">
                                         TRENDY
-                                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-rose-700 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
                                     </span>
                                 </Link>
 
@@ -74,7 +73,7 @@ const Header = () => {
                                     <input
                                         type="text"
                                         placeholder="Search"
-                                        className="w-full border border-black py-2 px-4 pl-10 focus:outline-none focus:ring-1 focus:ring-[#9a6546] focus:border-[#9a6546] text-sm"
+                                        className="w-full border border-gray-900 py-2 px-4 pl-10 focus:outline-none focus:ring-1 focus:ring-[#9a6546] focus:border-[#9a6546] text-sm"
                                     />
                                     <Search className="h-4 w-4 absolute right-3" />
                                 </div>

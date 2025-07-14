@@ -7,6 +7,7 @@ export const products = [
     colors: ["Grey Stripe", "Grey", "Off White Boucle", "White"],
     category: "garden",
     rating: 4.5,
+    isNew: Math.random() < 0.5,
   },
   {
     id: "2",
@@ -16,6 +17,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop",
     colors: ["Natural Oak", "Dark Oak"],
     category: "bedroom",
+    isNew: Math.random() < 0.5,
   },
   {
     id: "3",
@@ -25,6 +27,7 @@ export const products = [
     colors: ["Blue", "Grey Stripe", "Off White", "White"],
     category: "garden",
     rating: 4.2,
+    isNew: Math.random() < 0.5,
   },
   {
     id: "4",
@@ -33,6 +36,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&h=300&fit=crop",
     colors: ["Natural Wood"],
     category: "lighting",
+    isNew: Math.random() < 0.5,
   },
   {
     id: "5",
@@ -41,6 +45,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop",
     colors: ["Natural Oak"],
     category: "dining-room",
+    isNew: Math.random() < 0.5,
   },
   {
     id: "6",
@@ -50,6 +55,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop",
     colors: ["Natural Oak", "Dark Oak"],
     category: "bedroom",
+    isNew: Math.random() < 0.5,
   },
   {
     id: "7",
@@ -58,6 +64,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1549497538-303791108f95?w=400&h=300&fit=crop",
     colors: ["Natural Oak"],
     category: "dining-room",
+    isNew: Math.random() < 0.5,
   },
   {
     id: "8",
@@ -67,6 +74,7 @@ export const products = [
     colors: ["Natural", "Dark Oak", "Green", "Brown", "Natural"],
     category: "dining-room",
     rating: 5.0,
+    isNew: Math.random() < 0.5,
   },
   {
     id: "9",
@@ -76,6 +84,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop",
     colors: ["Light Natural"],
     category: "bedroom",
+    isNew: Math.random() < 0.5,
   },
   {
     id: "10",
@@ -84,6 +93,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
     colors: ["Forest Green", "Blue", "Grey", "Navy", "Natural", "Light Grey"],
     category: "living-room",
+    isNew: Math.random() < 0.5,
   },
   {
     id: "11",
@@ -93,6 +103,7 @@ export const products = [
     colors: ["Natural Oak", "Dark Oak"],
     category: "home-office",
     rating: 5.0,
+    isNew: Math.random() < 0.5,
   },
   {
     id: "12",
@@ -101,6 +112,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&h=300&fit=crop",
     colors: ["Cream", "Pink"],
     category: "lighting",
+    isNew: Math.random() < 0.5,
   },
 ];
 
