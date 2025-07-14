@@ -12,7 +12,6 @@ export default function ProductDetail() {
   const { addItem } = useCart();
 
   const product = products.find(p => p.id === productId);
-  console.log("Yooooo products", product);
   const relatedProducts = products.filter(p => p.category === product?.category && p.id !== productId).slice(0, 4);
 
   const [selectedColor, setSelectedColor] = useState(product?.colors[0] || '');
@@ -34,7 +33,7 @@ export default function ProductDetail() {
     );
   }
 
-  const formatPrice = (price) => `£${price.toLocaleString()}`;
+  const formatPrice = (price) => `ksh ${price.toLocaleString()}`;
 
   const productImages = [
     product.image,
