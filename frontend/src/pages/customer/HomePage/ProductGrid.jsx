@@ -89,7 +89,7 @@ const ProductGrid = () => {
                     <div className="relative group cursor-pointer">
                         <div className="aspect-square bg-[#f6f2f0] relative overflow-hidden">
                             <img
-                                src="https://ext.same-assets.com/4184859447/3939488370.jpeg"
+                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/High-Quality-Square-Pillows-Cushions-Top-Grain-Leather-Sofa-Seats-Cushions.webp"
                                 alt="Sofas"
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
@@ -117,7 +117,7 @@ const ProductGrid = () => {
                     <div className="relative group cursor-pointer">
                         <div className="aspect-square bg-[#f6f2f0] relative overflow-hidden">
                             <img
-                                src="https://ext.same-assets.com/4184859447/1440530325.jpeg"
+                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/High-Quality-Square-Pillows-Cushions-Top-Grain-Leather-Sofa-Seats-Cushions.webp"
                                 alt="Lighting"
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
