@@ -1,9 +1,5 @@
-// components/ProductCard.tsx
-import { Heart, Star, ShoppingCart } from 'lucide-react';
+import { Heart, Star } from 'lucide-react';
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 
 export function ProductCard({ product, isFavorite, onToggleFavorite }) {
     const formatPrice = (price) => `Ksh ${price.toLocaleString()}`;
