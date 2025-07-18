@@ -138,15 +138,23 @@ export default function ProductsPage() {
 							/>
 							<Label htmlFor="newProducts">New Products</Label>
 						</div>
-
-						{/* On Offer */}
-						<div className="flex items-center gap-3 px-4 py-2 border-r border-gray-300 text-sm text-black">
-							<Checkbox
-								id="Offer"
-								checked={onOfferChecked}
-								onCheckedChange={setOnOfferChecked}
-							/>
-							<Label htmlFor="Offer">On Offer</Label>
+						
+						{/* Material */}
+						<div className="px-4 py-2 flex items-center border-r border-gray-300">
+							<Select
+								value={filters.material}
+								onValueChange={(value) => setFilters(prev => ({ ...prev, material: value }))}
+							>
+								<SelectTrigger className="!border-0 shadow-none hover:bg-transparent w-full text-sm text-black ring-0">
+									<SelectValue placeholder="Material" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="velvet">Velvet</SelectItem>
+									<SelectItem value="linen">Linen</SelectItem>
+									<SelectItem value="cotton">Cotton</SelectItem>
+									<SelectItem value="polyester">Polyester</SelectItem>
+								</SelectContent>
+							</Select>
 						</div>
 
 						{/* Category */}
@@ -223,22 +231,14 @@ export default function ProductsPage() {
 					{/* Additional Filters - Conditionally Shown */}
 					{showMoreFilters && (
 						<div className="grid grid-cols-6 border-t border-gray-300">
-							{/* Material */}
-							<div className="px-4 py-2 flex items-center border-r border-gray-300">
-								<Select
-									value={filters.material}
-									onValueChange={(value) => setFilters(prev => ({ ...prev, material: value }))}
-								>
-									<SelectTrigger className="!border-0 shadow-none hover:bg-transparent w-full text-sm text-black ring-0">
-										<SelectValue placeholder="Material" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="velvet">Velvet</SelectItem>
-										<SelectItem value="linen">Linen</SelectItem>
-										<SelectItem value="cotton">Cotton</SelectItem>
-										<SelectItem value="polyester">Polyester</SelectItem>
-									</SelectContent>
-								</Select>
+							{/* On Offer */}
+							<div className="flex items-center gap-3 px-4 py-2 border-r border-gray-300 text-sm text-black">
+								<Checkbox
+									id="Offer"
+									checked={onOfferChecked}
+									onCheckedChange={setOnOfferChecked}
+								/>
+								<Label htmlFor="Offer">On Offer</Label>
 							</div>
 
 							{/* Add more filter columns here as needed */}
