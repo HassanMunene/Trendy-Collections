@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Breadcrumbs from "../../../components/common/Breadcrumbs";
-import { products, categories } from "../../../Mocks/products";
+import { products } from "../../../Mocks/products";
 import ProductCard from "../../../components/common/ProductCard";
+import { useSearchParams } from "react-router-dom";
 
 const ProductsPage = () => {
-	const [selectedCategory, setSelectedCategory] = useState('all');
+	const [searchParams] = useSearchParams();
+	const categoryFromUrl = searchParams.get("category") || "all";
+	const [selectedCategory, setSelectedCategory] = useState(categoryFromUrl);
 	const [searchQuery, setSearchQuery] = useState('');
 	const [favorites, setFavorites] = useState([]);
+
+	// Update selectedCategory when URL changes
+	useEffect(() => {
+		setSelectedCategory(categoryFromUrl);
+	}, [categoryFromUrl]);
 
 	const filteredProducts = products.filter(product => {
 		const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory

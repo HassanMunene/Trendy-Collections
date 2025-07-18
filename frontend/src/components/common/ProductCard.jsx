@@ -106,16 +106,6 @@ export default function ProductCard({ product, isFavorite, onToggleFavorite }) {
                     {product.name}
                 </p>
 
-                {/* Color options */}
-                <div className="flex items-center gap-2 mb-3">
-                    {getColorDots(product.colors)}
-                    {product.colors.length > 4 && (
-                        <span className="text-xs text-gray-500 hover:underline">
-                            +{product.colors.length - 4}
-                        </span>
-                    )}
-                </div>
-
                 {/* Rating */}
                 <div className="flex items-center gap-1">
                     <div className="flex">
