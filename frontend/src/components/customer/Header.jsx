@@ -1,18 +1,19 @@
 import { Search, User, Heart, ShoppingBag, AlignJustify } from 'lucide-react'
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import { PillowsMegaMenu } from '../common/PillowsMegaMenu';
 
 const navigationLinks = [
     { name: 'Shop all', href: "/products" },
-    { name: 'Pillows', href: '/products?category=pillow' },
     { name: 'Curtains', href: '/products?category=curtains' },
-    { name: 'Best Sellers', href: '/products?category=bestsellers' },
+    { name: 'Collections', href: '/collections' },
     { name: 'New Arrivals', href: '/products/new' }
 ]
 
 const promotions = [
     "Free shipping on orders over Ksh. 5000",
-    "New collection just landed!",
+    "New luxury pillow collection just landed!",
+    "Bundle offer: Mix & match 3 pillows for Ksh. 2000"
 ]
 
 const Header = () => {
@@ -108,7 +109,7 @@ const Header = () => {
 
                         {/* Desktop Navigation - Centered */}
                         <nav className="hidden md:flex justify-center pt-3 pb-1">
-                            <div className="flex space-x-8">
+                            <div className="flex space-x-8 items-center">
                                 {navigationLinks.map((item) => (
                                     <Link
                                         key={item.name}
@@ -119,6 +120,8 @@ const Header = () => {
                                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#9a6546] transition-all duration-300 group-hover:w-full"></span>
                                     </Link>
                                 ))}
+                                {/* Add the mega dropdown here */}
+                                <PillowsMegaMenu />
                             </div>
                         </nav>
 

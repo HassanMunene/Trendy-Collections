@@ -1,129 +1,138 @@
+// components/ProductCard.tsx
 import { Heart, Star, ShoppingCart } from 'lucide-react';
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
-
-export default function ProductCard({ product, isFavorite, onToggleFavorite }) {
-    const formatPrice = (price) => `ksh${price.toLocaleString()}`;
-    const navigate = useNavigate();
-
-    const getColorDots = (colors) => {
-        const colorMap = {
-            'Grey': '#6B7280',
-            'Grey Stripe': '#9CA3AF',
-            'White': '#FFFFFF',
-            'Off White': '#F9FAFB',
-            'Off White Boucle': '#F3F4F6',
-            'Natural Oak': '#D2B48C',
-            'Dark Oak': '#8B4513',
-            'Blue': '#3B82F6',
-            'Forest Green': '#16A34A',
-            'Navy': '#1E3A8A',
-            'Natural': '#F5F5DC',
-            'Light Grey': '#E5E7EB',
-            'Natural Wood': '#CD853F',
-            'Cream': '#FFFDD0',
-            'Pink': '#EC4899',
-            'Light Natural': '#FAF7F0'
-        };
-
-        return colors.slice(0, 4).map((color) => (
-            <div
-                key={color}
-                className="w-4 h-4 rounded-full border border-gray-300"
-                style={{ backgroundColor: colorMap[color] || '#D1D5DB' }}
-                title={color}
-                aria-label={color}
-            />
-        ))
-    }
-
-    const handleProductClick = (productId) => {
-        console.log("Clickkkeekekekd");
-        navigate(`/products/${productId}`);
-    }
+export function ProductCard({ product, isFavorite, onToggleFavorite }) {
+    const formatPrice = (price) => `Ksh ${price.toLocaleString()}`;
 
     return (
-        <div
-            className="bg-white overflow-hidden hover:shadow-lg transition-shadow duration-200 cursor-pointer relative"
-            onClick={() => handleProductClick(product.id)}
-        >
+        <div className="group relative">
             {/* Badges */}
-            <div className="absolute top-3 left-3 flex gap-2 z-10">
+            <div className="absolute top-3 left-3 z-10 flex gap-2">
                 {product.isNew && (
-                    <span className="bg-green-500 text-white px-2 py-1 text-xs font-medium rounded">
-                        NEW
-                    </span>
+                    <Badge variant="new">Newkkk</Badge>
                 )}
-                {product.onSale && !product.isNew && (
-                    <span className="bg-red-500 text-white px-2 py-1 text-xs font-medium rounded">
-                        {product.discountPercent ? `-${product.discountPercent}%` : 'SALE'}
-                    </span>
+                {product.stock && product.stock <= 5 && (
+                    <Badge variant="stock">
+                        {product.stock === 0 ? 'Sold Out' : `Only ${product.stock}`}
+                    </Badge>
                 )}
             </div>
-            {/* Stock Status */}
-            {product.stock <= 5 && (
-                <div className="absolute top-3 right-10 bg-amber-100 text-amber-800 px-2 py-1 text-xs font-medium rounded">
-                    {product.stock === 0 ? 'Sold Out' : `Only ${product.stock}`}
-                </div>
-            )}
-            <div className="relative group overflow-hidden">
-                <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-            </div>
-            {/* Product Info */}
-            <div className="p-4">
-                <div className="flex items-start justify-between mb-2">
-                    <div>
-                        {product.originalPrice && (
-                            <span className="text-sm text-gray-400 line-through mr-2">
-                                {formatPrice(product.originalPrice)}
-                            </span>
-                        )}
-                        <span className="text-lg font-bold text-gray-900">
-                            {formatPrice(product.price)}
-                        </span>
-                    </div>
 
-                    <button
+            {/* Image */}
+            <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
+                <Link to={`/products/${product.id}`}>
+                    <img
+                        src={product.image}
+                        alt={product.name}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                </Link>
+
+                {/* Quick actions */}
+                <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <Button variant="secondary" size="sm" className="rounded-full shadow-sm">
+                        <ShoppingCart className="h-4 w-4" />
+                    </Button>
+                    <Button
+                        variant="secondary"
+                        size="sm"
+                        className="rounded-full shadow-sm"
                         onClick={(e) => {
-                            e.stopPropagation();
+                            e.preventDefault();
                             onToggleFavorite(product.id);
                         }}
-                        className={`p-1 rounded-full ${isFavorite
-                            ? 'text-red-500'
-                            : 'text-gray-700 hover:text-red-300'
-                            }`}
-                        aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
                     >
-                        <Heart className={`h-6 w-6 ${isFavorite ? 'fill-current' : ''}`} />
-                    </button>
-                </div>
-
-                <p className="text-sm font-medium text-gray-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
-                    {product.name}
-                </p>
-
-                {/* Rating */}
-                <div className="flex items-center gap-1">
-                    <div className="flex">
-                        {Array.from({ length: 5 }, (_, i) => (
-                            <Star
-                                key={`${product.id}-star-${i + 1}`}
-                                className={`h-3 w-3 ${i < Math.floor(product.rating || 0)
-                                        ? 'text-yellow-400 fill-current'
-                                        : 'text-gray-300'
-                                    }`}
-                            />
-                        ))}
-                    </div>
-                    <span className="text-xs text-gray-500">
-                        ({product.reviewCount || 0})
-                    </span>
+                        <Heart className={cn(
+                            "h-4 w-4",
+                            isFavorite ? "fill-red-500 text-red-500" : "text-gray-700"
+                        )} />
+                    </Button>
                 </div>
             </div>
+
+            {/* Product info */}
+            <div className="mt-4">
+                <Link to={`/products/${product.id}`}>
+                    <h3 className="text-sm font-medium text-gray-900 line-clamp-2 hover:text-primary transition-colors">
+                        {product.name}
+                    </h3>
+                </Link>
+
+                {/* Price */}
+                <div className="mt-1 flex items-center gap-2">
+                    {product.originalPrice && (
+                        <span className="text-sm text-muted-foreground line-through">
+                            {formatPrice(product.originalPrice)}
+                        </span>
+                    )}
+                    <span className="font-medium text-gray-900">
+                        {formatPrice(product.price)}
+                    </span>
+                </div>
+
+                {/* Rating */}
+                {product.rating && (
+                    <div className="mt-2 flex items-center gap-1">
+                        <div className="flex">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <Star
+                                    key={star}
+                                    className={cn(
+                                        "h-3 w-3",
+                                        star <= Math.floor(product.rating || 0)
+                                            ? "fill-yellow-400 text-yellow-400"
+                                            : "text-gray-300"
+                                    )}
+                                />
+                            ))}
+                        </div>
+                        <span className="text-xs text-muted-foreground">
+                            ({product.reviewCount || 0})
+                        </span>
+                    </div>
+                )}
+
+                {/* Color options */}
+                {product.colors && product.colors.length > 0 && (
+                    <div className="mt-2 flex gap-1">
+                        {product.colors.slice(0, 4).map((color) => (
+                            <div
+                                key={color}
+                                className="h-4 w-4 rounded-full border border-gray-200"
+                                style={{ backgroundColor: getColorValue(color) }}
+                                title={color}
+                            />
+                        ))}
+                        {product.colors.length > 4 && (
+                            <div className="flex items-center justify-center h-4 w-4 rounded-full border border-gray-200 text-xs">
+                                +{product.colors.length - 4}
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
-    )
+    );
+}
+
+function getColorValue(colorName) {
+    const colorMap = {
+        'Grey': '#6B7280',
+        'Grey Stripe': '#9CA3AF',
+        'White': '#FFFFFF',
+        'Off White': '#F9FAFB',
+        'Off White Boucle': '#F3F4F6',
+        'Blue': '#3B82F6',
+        'Forest Green': '#16A34A',
+        'Navy': '#1E3A8A',
+        'Natural': '#F5F5DC',
+        'Light Grey': '#E5E7EB',
+        'Cream': '#FFFDD0',
+        'Pink': '#EC4899',
+    };
+    return colorMap[colorName] || '#D1D5DB';
 }
