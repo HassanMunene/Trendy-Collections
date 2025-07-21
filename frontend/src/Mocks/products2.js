@@ -296,7 +296,24 @@ export const products = [
         sizes: ["18×18"],
         stock: 7
       },
-      // Add more variants (e.g., Blue, Green, etc.) as needed
+      {
+        id: "46",
+        name: "Light Purple Plain Throw Pillow",
+        color: "Lavender",
+        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Light-purple-plain-design.webp",
+        price: 300,
+        sizes: ["18×18"],
+        stock: 9
+      },
+      {
+        id: "47",
+        name: "Light Beige Plain Throw Pillow",
+        color: "Oatmeal",
+        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Light-beige-plain-design.webp",
+        price: 300,
+        sizes: ["18×18"],
+        stock: 15
+      }
     ],
     description: "A timeless collection of solid-color throw pillows for a clean, versatile look. Perfect for layering with patterned pillows or standalone minimalism. Made with ultra-soft, durable fabric that resists fading.",
     category: "pillow",
@@ -306,13 +323,12 @@ export const products = [
     rating: 4.3,
     reviews: 89,
     isNew: false,
-    tags: ["minimalist", "solid", "versatile", "modern", "neutral", "scandinavian"],
+    tags: ["minimalist", "solid", "versatile", "modern", "neutral", "scandinavian", "pastel"],
     dimensions: {
       insertSize: "18×18 inches",
       pillowcaseSize: "19×19 inches"
     },
-    weight: "1.1 lbs",
-    designStory: "Designed for simplicity and adaptability, these pillows complement any decor style—from boho to modern farmhouse."
+    designStory: "Designed for simplicity and adaptability, these pillows complement any decor style—from boho to modern farmhouse. The muted tones add warmth without overpowering a space."
   },
   {
     id: "urban-wave-series",
@@ -422,6 +438,56 @@ export const products = [
     tags: ["geometric", "bold", "contrast", "modern"]
   },
   {
+    id: "floral-series",
+    name: "Botanical Floral Throw Pillow Collection",
+    variants: [
+      {
+        id: "35",
+        name: "Classic Floral Throw Pillow",
+        color: "Multicolor",
+        pattern: "Traditional Floral",
+        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design.webp",
+        price: 300,
+        sizes: ["18×18"],
+        stock: 10
+      },
+      {
+        id: "37",
+        name: "Watercolor Floral Throw Pillow",
+        color: "Pastel",
+        pattern: "Abstract Floral",
+        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design2.webp",
+        price: 300,
+        sizes: ["18×18"],
+        stock: 8
+      },
+      {
+        id: "49",
+        name: "Tropical Floral Throw Pillow",
+        color: "Vibrant",
+        pattern: "Tropical Blooms",
+        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design3.webp",
+        price: 300,
+        sizes: ["18×18"],
+        stock: 6
+      }
+    ],
+    description: "A vibrant collection of floral throw pillows featuring hand-drawn botanical prints. Each design brings a touch of nature indoors, perfect for adding a pop of color to sofas, beds, or reading nooks. Made with fade-resistant ink and plush fabric.",
+    category: "pillow",
+    subcategory: "floral",
+    materials: ["Polyester canvas", "Eco-friendly dyes"],
+    careInstructions: "Spot clean or dry clean only to preserve print vibrancy",
+    rating: 4.7,
+    reviews: 145,
+    isNew: true,
+    tags: ["botanical", "blooms", "garden", "vintage", "romantic", "spring", "tropical"],
+    dimensions: {
+      insertSize: "18×18 inches",
+      pillowcaseSize: "19×19 inches"
+    },
+    designStory: "Inspired by English garden roses, tropical hibiscus, and watercolor illustrations. Each pillow is a wearable piece of art for your home."
+  },
+  {
     id: "26",
     name: "Savanna Sunset Zigzag Pillow",
     description: "Warm-toned zigzag pattern inspired by African sunsets",
@@ -438,5 +504,4 @@ export const products = [
     stock: 11,
     tags: ["ethnic", "zigzag", "tribal", "warm tones"]
   },
-  // ... continue for all remaining products
 ];
