@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogTitle, DialogHeader, DialogDescription } from "@/components/ui/dialog";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { SlidersHorizontal, ArrowUpDown, X } from "lucide-react";
 
 export default function ProductsPage() {
 	const [searchParams] = useSearchParams();
@@ -21,43 +24,34 @@ export default function ProductsPage() {
 	const [showMoreFilters, setShowMoreFilters] = useState(false);
 	const [newProductsChecked, setNewProductsChecked] = useState(false);
 	const [onOfferChecked, setOnOfferChecked] = useState(false);
+	const [mobileSortOpen, setMobileSortOpen] = useState(false);
+	const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-	// Combine all products and their variants into a single array.
-	// - If a product has variants, include each variant with a reference to its parent product.
-	// - If a product has no variants, include the product itself.
-	// Add a flag `isVariant` to help distinguish between variants and standalone products.
-	const allItems = [];
-	for (const product of products) {
-		if (product.variants && product.variants.length > 0) {
-			for (const variant of product.variants) {
-				allItems.push({
-					...variant,
-					parentProduct: product,
-					isVariant: true
-				});
-			}
-		} else {
-			allItems.push({
-				...product,
-				isVariant: false
-			});
-		}
-	}
+	// Combine all products and their variants
+	const allItems = products.flatMap(product =>
+		product.variants
+			? product.variants.map(variant => ({
+				...variant,
+				parentProduct: product,
+				isVariant: true
+			}))
+			: [{ ...product, isVariant: false }]
+	);
 
 	const filteredItems = allItems.filter(item => {
 		const parent = item.isVariant ? item.parentProduct : item;
-		const categoryMatch = filters.category === 'all' || parent.category === filters.category;
-		const subcategoryMatch = !filters.subcategory || parent.subcategory === filters.subcategory;
-		const priceMatch = !filters.price || (
-			(filters.price === "500" && item.price < 500) ||
-			(filters.price === "1000" && item.price >= 500 && item.price <= 1000) ||
-			(filters.price === "over1000" && item.price > 1000)
-		);
-		const colorMatch = !filters.color || (item.colors && item.colors.includes(filters.color));
-		const newProductsMatch = !newProductsChecked || parent.isNew;
-		const offerMatch = !onOfferChecked || item.onSale;
 		return (
-			categoryMatch && subcategoryMatch && priceMatch && colorMatch && newProductsMatch && offerMatch
+			(filters.category === 'all' || parent.category === filters.category) &&
+			(!filters.subcategory || parent.subcategory === filters.subcategory) &&
+			(!filters.price || (
+				(filters.price === "500" && item.price < 500) ||
+				(filters.price === "1000" && item.price >= 500 && item.price <= 1000) ||
+				(filters.price === "over1000" && item.price > 1000)
+			)) &&
+			(!filters.color || (item.colors || []).includes(filters.color)) &&
+			(!filters.material || (parent.materials || []).includes(filters.material)) &&
+			(!newProductsChecked || parent.isNew) &&
+			(!onOfferChecked || item.onSale)
 		);
 	});
 
@@ -69,16 +63,12 @@ export default function ProductsPage() {
 			case "price-low": return a.price - b.price;
 			case "price-high": return b.price - a.price;
 			case "newest":
-				return new Date(parentB.createdAt) - new Date(parentA.createdAt);
+				return new Date(parentB.createdAt || 0) - new Date(parentA.createdAt || 0);
 			case "rating":
 				return (parentB.rating || 0) - (parentA.rating || 0);
 			default: return 0;
 		}
 	});
-
-	const toggleFavorite = (productId) => {
-		setFavorites(prev => prev.includes(productId) ? prev.filter(id => id !== productId) : [...prev, productId]);
-	};
 
 	const clearAllFilters = () => {
 		setFilters({
@@ -89,14 +79,39 @@ export default function ProductsPage() {
 			color: "",
 			material: "",
 		});
+		setNewProductsChecked(false);
+		setOnOfferChecked(false);
 	};
 
 	return (
-		<div className="max-w-7xl mx-auto px-4 py-8">
-			{/* Main Content */}
-			<div className="flex-1">
-				{/* Header with filters */}
-				<div className="flex items-center justify-between mb-4">
+		<>
+			{/* Mobile Filter/Sort Bar - Hidden on desktop */}
+			<div className="md:hidden flex items-center gap-2 mb-4 sticky top-16 z-40 bg-white border-t border-b">
+				<div className="flex-1 flex items-center justify-center border-r py-2">
+					<Button
+						variant="outline"
+						className="flex-1 gap-2 border-0 shadow-none"
+						onClick={() => setMobileSortOpen(true)}
+					>
+						<ArrowUpDown className="h-4 w-4" />
+						Sort
+					</Button>
+				</div>
+				<div className="flex-1 flex items-center justify-center py-2">
+					<Button
+						variant="outline"
+						className="flex-1 gap-2 border-0 shadow-none"
+						onClick={() => setMobileFilterOpen(true)}
+					>
+						<SlidersHorizontal className="h-4 w-4" />
+						Filter
+					</Button>
+				</div>
+			</div>
+			<div className="max-w-7xl mx-auto px-4 py-8">
+
+				{/* Desktop Header */}
+				<div className="hidden md:flex items-center justify-between mb-4">
 					<div>
 						<p className="font-semibold">
 							{filters.subcategory || filters.category === 'all' ? 'All Products' : filters.category.charAt(0).toUpperCase() + filters.category.slice(1)}
@@ -119,8 +134,8 @@ export default function ProductsPage() {
 					</div>
 				</div>
 
-				<div className="border border-gray-700 my-4">
-					{/* First Row - Always Visible */}
+				{/* Desktop Filters */}
+				<div className="hidden md:block border border-gray-700 my-4">
 					<div className="grid grid-cols-6 border-1 border-gray-300 overflow-hidden">
 						{/* New Products */}
 						<div className="flex items-center gap-3 px-4 py-2 border-r border-gray-300 text-sm text-black">
@@ -152,7 +167,10 @@ export default function ProductsPage() {
 
 						{/* Category */}
 						<div className="px-4 py-2 flex items-center border-r border-gray-300">
-							<Select onValueChange={(value) => setFilters(prev => ({ ...prev, subcategory: value }))}>
+							<Select
+								value={filters.subcategory}
+								onValueChange={(value) => setFilters(prev => ({ ...prev, subcategory: value }))}
+							>
 								<SelectTrigger className="!border-0 shadow-none hover:bg-transparent w-full text-sm text-black">
 									<SelectValue placeholder="Style" />
 								</SelectTrigger>
@@ -176,10 +194,10 @@ export default function ProductsPage() {
 									<SelectValue placeholder="Color" />
 								</SelectTrigger>
 								<SelectContent>
-									<SelectItem value="grey-stripes">Grey Stripes</SelectItem>
+									<SelectItem value="grey-stripe">Grey Stripe</SelectItem>
 									<SelectItem value="grey">Grey</SelectItem>
 									<SelectItem value="white">White</SelectItem>
-									<SelectItem value="emarald-green">Emerald Green</SelectItem>
+									<SelectItem value="emerald-green">Emerald Green</SelectItem>
 									<SelectItem value="blue">Blue</SelectItem>
 									<SelectItem value="red">Red</SelectItem>
 									<SelectItem value="gold">Gold</SelectItem>
@@ -198,7 +216,7 @@ export default function ProductsPage() {
 								onValueChange={(value) => setFilters(prev => ({ ...prev, price: value }))}
 							>
 								<SelectTrigger className="!border-0 shadow-none hover:bg-transparent w-full text-sm text-black ring-0">
-									<SelectValue placeholder="price" />
+									<SelectValue placeholder="Price" />
 								</SelectTrigger>
 								<SelectContent>
 									<SelectItem value="500">Under Ksh 500</SelectItem>
@@ -220,10 +238,8 @@ export default function ProductsPage() {
 						</div>
 					</div>
 
-					{/* Additional Filters - Conditionally Shown */}
 					{showMoreFilters && (
 						<div className="grid grid-cols-6 border-t border-gray-300">
-							{/* On Offer */}
 							<div className="flex items-center gap-3 px-4 py-2 border-r border-gray-300 text-sm text-black">
 								<Checkbox
 									id="Offer"
@@ -232,12 +248,229 @@ export default function ProductsPage() {
 								/>
 								<Label htmlFor="Offer">On Offer</Label>
 							</div>
-
-							{/* Add more filter columns here as needed */}
 							<div className="col-span-5"></div>
 						</div>
 					)}
 				</div>
+
+				{/* Mobile Sort Dialog */}
+				<Dialog open={mobileSortOpen} onOpenChange={setMobileSortOpen}>
+					<DialogContent className="sm:max-w-[425px]">
+						<DialogHeader>
+							<DialogTitle>Sort Products</DialogTitle>
+							<DialogDescription>
+								Choose how you want to sort the product list.
+							</DialogDescription>
+						</DialogHeader>
+
+						<div className="space-y-4 mt-4">
+							<div className="space-y-2">
+								{[
+									{ value: "relevant", label: "Most Relevant" },
+									{ value: "price-low", label: "Price: Low to High" },
+									{ value: "price-high", label: "Price: High to Low" },
+									{ value: "newest", label: "Newest First" }
+								].map((option) => (
+									<button
+										key={option.value}
+										className={`w-full text-left p-3 rounded-md ${filters.sort === option.value ? 'bg-gray-100 font-medium' : 'hover:bg-gray-50'}`}
+										onClick={() => {
+											setFilters(prev => ({ ...prev, sort: option.value }));
+											setMobileSortOpen(false);
+										}}
+									>
+										{option.label}
+									</button>
+								))}
+							</div>
+						</div>
+					</DialogContent>
+				</Dialog>
+
+				{/* Mobile Filter Sheet */}
+				<Sheet open={mobileFilterOpen} onOpenChange={setMobileFilterOpen}>
+					<SheetContent
+						side="right"
+						className="w-full sm:w-[420px] overflow-y-auto p-0 bg-white"
+					>
+						{/* Header with close button */}
+						<div className="sticky top-0 z-10 bg-white border-b border-gray-200 px-2">
+							<div className="flex items-center justify-between">
+								<SheetHeader>
+									<SheetTitle className="text-xl !p-0 font-bold text-gray-900 m-0">Filters</SheetTitle>
+								</SheetHeader>
+								<button
+									onClick={() => setMobileFilterOpen(false)}
+									className="!rounded-full p-2 hover:bg-gray-100 transition-colors"
+									aria-label="Close filters"
+								>
+									<X className="h-5 w-5 text-gray-500" />
+								</button>
+							</div>
+						</div>
+						<div className="px-6 py-4 space-y-8">
+							{/* New products and offers */}
+							<div className="grid grid-cols-2 gap-4">
+								{/* New Products */}
+								<div className="space-y-3">
+									<Label className="text-sm font-medium text-gray-700">Availability</Label>
+									<div className="flex items-center gap-2 space-x-3">
+										<Checkbox
+											id="mobileNewProducts"
+											checked={newProductsChecked}
+											onCheckedChange={setNewProductsChecked}
+										/>
+										<Label htmlFor="mobileNewProducts" className="text-sm text-gray-700">New Products</Label>
+									</div>
+								</div>
+
+								{/* On Offer */}
+								<div className="space-y-3">
+									<Label className="text-sm font-medium text-gray-700">Special Offers</Label>
+									<div className="flex items-center gap-3 space-x-3">
+										<Checkbox
+											id="mobileOffer"
+											checked={onOfferChecked}
+											onCheckedChange={setOnOfferChecked}
+										/>
+										<Label htmlFor="mobileOffer" className="text-sm text-gray-700">On Offer</Label>
+									</div>
+								</div>
+							</div>
+							{/* Price Range */}
+							<div className="space-y-3">
+								<Label className="text-sm font-medium text-gray-700">Price Range</Label>
+								<Select
+									value={filters.price}
+									onValueChange={(value) => setFilters({ ...filters, price: value })}
+								>
+									<SelectTrigger className="w-full h-11 rounded-lg border-gray-300 focus:ring-2 focus:ring-pink-500 focus:border-pink-500">
+										<SelectValue placeholder="Select price range" />
+									</SelectTrigger>
+									<SelectContent className="rounded-lg shadow-lg border border-gray-200">
+										<SelectItem
+											value="500"
+											className="px-4 py-2 hover:bg-pink-50 focus:bg-pink-50"
+										>
+											Under Ksh 500
+										</SelectItem>
+										<SelectItem
+											value="1000"
+											className="px-4 py-2 hover:bg-pink-50 focus:bg-pink-50"
+										>
+											Ksh 500 - 1000
+										</SelectItem>
+										<SelectItem
+											value="over1000"
+											className="px-4 py-2 hover:bg-pink-50 focus:bg-pink-50"
+										>
+											Over 1000
+										</SelectItem>
+									</SelectContent>
+								</Select>
+							</div>
+							{/* Color Selector */}
+							<div className="space-y-3">
+								<Label className="text-sm font-medium text-gray-700">Colors</Label>
+								<Select
+									value={filters.color}
+									onValueChange={(value) => setFilters({ ...filters, color: value })}
+								>
+									<SelectTrigger className="w-full h-11 rounded-lg border-gray-300">
+										<SelectValue placeholder="Select color" />
+									</SelectTrigger>
+									<SelectContent className="rounded-lg shadow-lg border border-gray-200 max-h-60">
+										{[
+											{ value: "grey-stripe", label: "Grey Stripe" },
+											{ value: "grey", label: "Grey" },
+											{ value: "white", label: "White" },
+											{ value: "emerald-green", label: "Emerald Green" },
+											{ value: "blue", label: "Blue" },
+											{ value: "red", label: "Red" },
+											{ value: "gold", label: "Gold" },
+											{ value: "white-gold", label: "White & Gold" },
+											{ value: "black-white", label: "Black & White" },
+											{ value: "mustard", label: "Mustard" },
+											{ value: "cream", label: "Cream" }
+										].map((color) => (
+											<SelectItem
+												key={color.value}
+												value={color.value}
+												className="px-4 py-2 hover:bg-pink-50 focus:bg-pink-50"
+											>
+												{color.label}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							</div>
+							{/* Material Selector */}
+							<div className="space-y-3">
+								<Label className="text-sm font-medium text-gray-700">Material</Label>
+								<Select
+									value={filters.material}
+									onValueChange={(value) => setFilters({ ...filters, material: value })}
+								>
+									<SelectTrigger className="w-full h-11 rounded-lg border-gray-300">
+										<SelectValue placeholder="Select material" />
+									</SelectTrigger>
+									<SelectContent className="rounded-lg shadow-lg border border-gray-200">
+										{["velvet", "linen", "cotton", "polyester"].map((material) => (
+											<SelectItem
+												key={material}
+												value={material}
+												className="px-4 py-2 hover:bg-pink-50 focus:bg-pink-50 capitalize"
+											>
+												{material}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							</div>
+							{/* Style Selector */}
+							<div className="space-y-3">
+								<Label className="text-sm font-medium text-gray-700">Style</Label>
+								<Select
+									value={filters.subcategory}
+									onValueChange={(value) => setFilters({ ...filters, subcategory: value })}
+								>
+									<SelectTrigger className="w-full h-11 rounded-lg border-gray-300">
+										<SelectValue placeholder="Select style" />
+									</SelectTrigger>
+									<SelectContent className="rounded-lg shadow-lg border border-gray-200">
+										{["luxury", "geometric", "floral", "modern", "plain"].map((style) => (
+											<SelectItem
+												key={style}
+												value={style}
+												className="px-4 py-2 hover:bg-pink-50 focus:bg-pink-50 capitalize"
+											>
+												{style}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							</div>
+						</div>
+						{/* Sticky footer with action buttons */}
+						<div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4">
+							<div className="flex gap-3">
+								<Button
+									variant="outline"
+									className="flex-1 h-12 rounded-lg border-gray-300 text-gray-700 hover:bg-gray-50"
+									onClick={clearAllFilters}
+								>
+									Reset All
+								</Button>
+								<Button
+									className="flex-1 h-12 rounded-lg bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white shadow-sm"
+									onClick={() => setMobileFilterOpen(false)}
+								>
+									Show Results
+								</Button>
+							</div>
+						</div>
+					</SheetContent>
+				</Sheet>
 
 				{/* Products Grid */}
 				{sortedItems.length === 0 ? (
@@ -261,7 +494,6 @@ export default function ProductsPage() {
 								key={item.id}
 								product={{
 									...item,
-									// Spread parent product properties if it's a variant
 									...(item.isVariant ? {
 										description: item.parentProduct.description,
 										rating: item.parentProduct.rating,
@@ -282,6 +514,6 @@ export default function ProductsPage() {
 					</div>
 				)}
 			</div>
-		</div>
+		</>
 	);
 }
