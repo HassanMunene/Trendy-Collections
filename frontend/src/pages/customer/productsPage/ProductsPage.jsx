@@ -152,9 +152,9 @@ export default function ProductsPage() {
 
 						{/* Category */}
 						<div className="px-4 py-2 flex items-center border-r border-gray-300">
-							<Select onValueChange={(value) => setFilters(prev => ({ ...prev, category: value }))}>
+							<Select onValueChange={(value) => setFilters(prev => ({ ...prev, subcategory: value }))}>
 								<SelectTrigger className="!border-0 shadow-none hover:bg-transparent w-full text-sm text-black">
-									<SelectValue placeholder="Category" />
+									<SelectValue placeholder="Style" />
 								</SelectTrigger>
 								<SelectContent>
 									<SelectItem value="luxury">Luxury</SelectItem>
