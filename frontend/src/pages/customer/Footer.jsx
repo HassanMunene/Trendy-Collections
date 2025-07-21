@@ -63,7 +63,7 @@ const Footer = () => {
                         <FaSquareInstagram className="w-7 h-7" />
                     </a>
                     <a
-                        href="#"
+                        href="https://www.tiktok.com/@trendy.collections01?_t=ZM-8yDf1B90px0&_r=1"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 hover:text-pink-500 transition-colors"
