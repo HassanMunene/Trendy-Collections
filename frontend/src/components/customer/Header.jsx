@@ -52,7 +52,7 @@ const Header = () => {
             </div>
 
             {/* Main Header */}
-            <header className={`sticky top-0 z-50 bg-white transition-all duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm'}`}>
+            <header className={`sticky top-0 z-50 bg-white transition-all duration-300 ${scrolled ? 'shadow-md' : 'shadow-none'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
                     {/* Top Row */}
                     <div className="flex items-center justify-between h-16 md:h-20">
@@ -99,15 +99,6 @@ const Header = () => {
                             {/* Search - Desktop */}
                             <button
                                 className="hidden md:flex items-center p-2 rounded-full hover:bg-pink-50 transition-colors"
-                                onClick={() => setSearchOpen(true)}
-                                aria-label="Search"
-                            >
-                                <Search className="h-5 w-5 text-gray-600 hover:text-pink-600" />
-                            </button>
-
-                            {/* Search - Mobile */}
-                            <button
-                                className="md:hidden p-2 rounded-full hover:bg-pink-50 transition-colors"
                                 onClick={() => setSearchOpen(true)}
                                 aria-label="Search"
                             >
