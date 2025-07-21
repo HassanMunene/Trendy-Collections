@@ -106,14 +106,14 @@ export const products = [
     materials: ["Polyester"],
     sizes: ["18×18"],
     category: "pillow",
-    subcategory: "modern",
+    subcategory: "geometric",
     rating: 4.0,
     reviews: 15,
     isNew: Math.random() < 0.5,
     onSale: Math.random() < 0.3,
     createdAt: "2023-10-15",
     stock: 14,
-    tags: ["modern", "grid", "urban", "contemporary"]
+    tags: ["modern", "geometric", "urban", "contemporary"]
   },
   {
     id: "7",

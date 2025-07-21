@@ -249,14 +249,7 @@ export default function ProductsPage() {
 						<Button
 							variant="outline"
 							className="mt-4"
-							onClick={() => setFilters({
-								category: "all",
-								subcategory: "",
-								sort: "relevant",
-								price: "",
-								color: "",
-								material: "",
-							})}
+							onClick={clearAllFilters}
 						>
 							Clear all filters
 						</Button>
