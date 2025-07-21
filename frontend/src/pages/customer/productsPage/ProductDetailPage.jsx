@@ -3,8 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Heart, Star, Minus, Plus, Share2, Facebook, Twitter, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '../../../context/CartContext';
-import { products } from '../../../Mocks/products';
-import ProductCard from '../../../components/common/ProductCard';
+import { products } from '@/src/Mocks/products2';
+import { ProductCard } from '@/src/components/common/ProductCard';
 
 export default function ProductDetail() {
   const { productId } = useParams();

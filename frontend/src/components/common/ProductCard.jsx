@@ -1,78 +1,31 @@
-import { Heart, Star, ShoppingCart } from 'lucide-react';
-import { useNavigate } from "react-router-dom";
+import { Heart, Star } from 'lucide-react';
+import { Link } from "react-router-dom";
 
-
-export default function ProductCard({ product, isFavorite, onToggleFavorite }) {
-    const formatPrice = (price) => `ksh${price.toLocaleString()}`;
-    const navigate = useNavigate();
-
-    const getColorDots = (colors) => {
-        const colorMap = {
-            'Grey': '#6B7280',
-            'Grey Stripe': '#9CA3AF',
-            'White': '#FFFFFF',
-            'Off White': '#F9FAFB',
-            'Off White Boucle': '#F3F4F6',
-            'Natural Oak': '#D2B48C',
-            'Dark Oak': '#8B4513',
-            'Blue': '#3B82F6',
-            'Forest Green': '#16A34A',
-            'Navy': '#1E3A8A',
-            'Natural': '#F5F5DC',
-            'Light Grey': '#E5E7EB',
-            'Natural Wood': '#CD853F',
-            'Cream': '#FFFDD0',
-            'Pink': '#EC4899',
-            'Light Natural': '#FAF7F0'
-        };
-
-        return colors.slice(0, 4).map((color) => (
-            <div
-                key={color}
-                className="w-4 h-4 rounded-full border border-gray-300"
-                style={{ backgroundColor: colorMap[color] || '#D1D5DB' }}
-                title={color}
-                aria-label={color}
-            />
-        ))
-    }
-
-    const handleProductClick = (productId) => {
-        console.log("Clickkkeekekekd");
-        navigate(`/products/${productId}`);
-    }
+export function ProductCard({ product, isFavorite, onToggleFavorite }) {
+    const formatPrice = (price) => `Ksh ${price.toLocaleString()}`;
 
     return (
-        <div
-            className="bg-white overflow-hidden hover:shadow-lg transition-shadow duration-200 cursor-pointer relative"
-            onClick={() => handleProductClick(product.id)}
-        >
+        <div className="group relative">
             {/* Badges */}
-            <div className="absolute top-3 left-3 flex gap-2 z-10">
+            <div className="absolute top-3 left-3 z-10 flex gap-2">
                 {product.isNew && (
                     <span className="bg-green-500 text-white px-2 py-1 text-xs font-medium rounded">
                         NEW
                     </span>
                 )}
-                {product.onSale && !product.isNew && (
-                    <span className="bg-red-500 text-white px-2 py-1 text-xs font-medium rounded">
-                        {product.discountPercent ? `-${product.discountPercent}%` : 'SALE'}
-                    </span>
-                )}
             </div>
-            {/* Stock Status */}
-            {product.stock <= 5 && (
-                <div className="absolute top-3 right-10 bg-amber-100 text-amber-800 px-2 py-1 text-xs font-medium rounded">
-                    {product.stock === 0 ? 'Sold Out' : `Only ${product.stock}`}
-                </div>
-            )}
+
+            {/* Image */}
             <div className="relative group overflow-hidden">
-                <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+                <Link to={`/products/${product.id}`}>
+                    <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                </Link>
             </div>
+
             {/* Product Info */}
             <div className="p-4">
                 <div className="flex items-start justify-between mb-2">
@@ -113,8 +66,8 @@ export default function ProductCard({ product, isFavorite, onToggleFavorite }) {
                             <Star
                                 key={`${product.id}-star-${i + 1}`}
                                 className={`h-3 w-3 ${i < Math.floor(product.rating || 0)
-                                        ? 'text-yellow-400 fill-current'
-                                        : 'text-gray-300'
+                                    ? 'text-yellow-400 fill-current'
+                                    : 'text-gray-300'
                                     }`}
                             />
                         ))}
@@ -125,5 +78,5 @@ export default function ProductCard({ product, isFavorite, onToggleFavorite }) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
