@@ -11,7 +11,6 @@ const navigationLinks = [
 
 const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [searchOpen, setSearchOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const bodyRef = useRef(document.body);
 
@@ -137,32 +136,6 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* Mobile Search Bar */}
-                {searchOpen && (
-                    <div className="absolute top-0 left-0 right-0 bg-white py-3 px-4 shadow-md flex items-center md:hidden">
-                        <input
-                            type="text"
-                            placeholder="Search products..."
-                            className="flex-1 border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                            autoFocus
-                        />
-                        <button
-                            className="bg-pink-600 text-white px-4 py-2 rounded-r-md hover:bg-pink-700 transition-colors"
-                            onClick={() => setSearchOpen(false)}
-                            aria-label="Search"
-                        >
-                            <Search className="h-5 w-5" />
-                        </button>
-                        <button
-                            className="ml-2 p-2 text-gray-500 hover:text-pink-600"
-                            onClick={() => setSearchOpen(false)}
-                            aria-label="Close search"
-                        >
-                            <X className="h-5 w-5" />
-                        </button>
-                    </div>
-                )}
 
                 {/* Mobile Menu */}
                 <div className={`fixed inset-0 z-50 transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
