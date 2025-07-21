@@ -59,25 +59,6 @@ export const products = [
     tags: ["velvet", "luxury", "golden", "statement"]
   },
   {
-    id: "4",
-    name: "Scarlet Red Geometric Web Pillow",
-    description: "Bold red pillow with contemporary web-like geometric pattern",
-    price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Red-Scarlet-Web.webp",
-    colors: ["Scarlet Red"],
-    materials: ["Polyester"],
-    sizes: ["18×18"],
-    category: "pillow",
-    subcategory: "geometric",
-    rating: 4.2,
-    reviews: 22,
-    isNew: Math.random() < 0.5,
-    onSale: Math.random() < 0.3,
-    createdAt: "2023-10-15",
-    stock: 10,
-    tags: ["modern", "geometric", "red", "contemporary"]
-  },
-  {
     id: "5",
     name: "Luxury White Pillow with Gold Foil Stripes",
     description: "Elegant white cushion with metallic gold foil stripe detailing",
