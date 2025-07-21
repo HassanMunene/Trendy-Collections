@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { Fragment } from "react";
 
 const ProductGrid = () => {
     const accentChairs = [
@@ -141,7 +142,7 @@ const ProductGrid = () => {
 
                     {/* Knot Pillows Section */}
                     <Link
-                        to="/products?subcategory=knot"
+                        to="/products?subcategory=knot-pillows"
                         className="relative group overflow-hidden rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
                         aria-label="Browse Knot Pillows"
                     >
@@ -166,13 +167,30 @@ const ProductGrid = () => {
                     </Link>
                 </div>
 
-                {/* Product Links */}
-                <div className="flex flex-wrap justify-center gap-4 mb-12 text-sm">
-                    <a href="#" className="text-gray-900 hover:text-[#9a6546] underline">Accent chairs</a>
-                    <span className="text-gray-400">|</span>
-                    <a href="#" className="text-gray-900 hover:text-[#9a6546] underline">Ceiling lights</a>
-                    <span className="text-gray-400">|</span>
-                    <a href="#" className="text-gray-900 hover:text-[#9a6546] underline">Desk & table lamps</a>
+                {/* Enhanced Product Quick Links - Mobile Friendly */}
+                <div className="flex flex-wrap justify-center gap-3 mb-12 px-4">
+                    {[
+                        { name: "Luxury", href: "/products?category=pillow&subcategory=luxury", mobileName: "Luxury" },
+                        { name: "Decorative", href: "/products?category=pillow&subcategory=decorative", mobileName: "Decor" },
+                        { name: "Glossy", href: "/products?category=curtains&subcategory=glossy", mobileName: "Glossy" },
+                        { name: "Knot", href: "/products?category=knot-pillows", mobileName: "Knot" },
+                        { name: "All Curtains", href: "/products?category=curtains", mobileName: "Curtains" }
+                    ].map((link, index) => (
+                        <Fragment key={link.name}>
+                            <Link
+                                to={link.href}
+                                className="text-gray-700 hover:text-pink-600 transition-colors duration-200 font-medium text-xs sm:text-sm relative group px-2 py-1 sm:px-0 sm:py-0"
+                            >
+                                {/* Show shorter text on mobile */}
+                                <span className="sm:hidden">{link.mobileName}</span>
+                                <span className="hidden sm:inline">{link.name}</span>
+                                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-pink-500 transition-all duration-300 group-hover:w-full sm:left-0 sm:translate-x-0"></span>
+                            </Link>
+                            {index < 4 && (
+                                <span className="text-gray-300 text-xs self-center hidden xs:inline">•</span>
+                            )}
+                        </Fragment>
+                    ))}
                 </div>
 
                 {/* Product Grids */}
