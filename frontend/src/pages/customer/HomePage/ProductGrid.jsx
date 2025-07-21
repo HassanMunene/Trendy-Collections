@@ -85,7 +85,7 @@ const ProductGrid = () => {
             <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Three Category Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-                    {/* Sofas Section */}
+                    {/* Curtains Section */}
                     <div className="relative group cursor-pointer">
                         <div className="aspect-square bg-[#f6f2f0] relative overflow-hidden">
                             <img
