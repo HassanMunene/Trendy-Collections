@@ -3,10 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { products } from "@/src/Mocks/products2";
 import { ProductCard } from "@/src/components/common/ProductCard";
 import { Button } from "@/components/ui/button";
-import {
-	Select, SelectContent, SelectItem,
-	SelectTrigger, SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
@@ -25,66 +22,62 @@ export default function ProductsPage() {
 	const [newProductsChecked, setNewProductsChecked] = useState(false);
 	const [onOfferChecked, setOnOfferChecked] = useState(false);
 
-	// Get all unique values for filters
-	const allColors = Array.from(new Set(products.flatMap(p => p.colors || [])));
-	const allMaterials = Array.from(new Set(products.flatMap(p => p.materials || [])));
-	const allSubcategories = Array.from(new Set(products.map(p => p.subcategory).filter(Boolean)));
+	// Combine all products and their variants into a single array.
+	// - If a product has variants, include each variant with a reference to its parent product.
+	// - If a product has no variants, include the product itself.
+	// Add a flag `isVariant` to help distinguish between variants and standalone products.
+	const allItems = [];
+	for (const product of products) {
+		if (product.variants && product.variants.length > 0) {
+			for (const variant of product.variants) {
+				allItems.push({
+					...variant,
+					parentProduct: product,
+					isVariant: true
+				});
+			}
+		} else {
+			allItems.push({
+				...product,
+				isVariant: false
+			});
+		}
+	}
 
-	const filteredProducts = products.filter(product => {
-		// Category filter
-		const categoryMatch = filters.category === 'all' || product.category === filters.category;
-
-		// Subcategory filter
-		const subcategoryMatch = !filters.subcategory || product.subcategory === filters.subcategory;
-
-		// Price filter
+	const filteredItems = allItems.filter(item => {
+		const parent = item.isVariant ? item.parentProduct : item;
+		const categoryMatch = filters.category === 'all' || parent.category === filters.category;
+		const subcategoryMatch = !filters.subcategory || parent.subcategory === filters.subcategory;
 		const priceMatch = !filters.price || (
-			(filters.price === "500" && product.price < 500) ||
-			(filters.price === "1000" && product.price >= 500 && product.price <= 1000) ||
-			(filters.price === "over1000" && product.price > 1000)
+			(filters.price === "500" && item.price < 500) ||
+			(filters.price === "1000" && item.price >= 500 && item.price <= 1000) ||
+			(filters.price === "over1000" && item.price > 1000)
 		);
-
-		// Color filter
-		const colorMatch = !filters.color ||
-			(product.colors && product.colors.includes(filters.color));
-
-		// New products filter
-		const newProductsMatch = !newProductsChecked || product.isNew;
-
-		// Offer filter
-		const offerMatch = !onOfferChecked || product.onSale;
-
+		const colorMatch = !filters.color || (item.colors && item.colors.includes(filters.color));
+		const newProductsMatch = !newProductsChecked || parent.isNew;
+		const offerMatch = !onOfferChecked || item.onSale;
 		return (
-			categoryMatch &&
-			subcategoryMatch &&
-			priceMatch &&
-			colorMatch &&
-			newProductsMatch &&
-			offerMatch
+			categoryMatch && subcategoryMatch && priceMatch && colorMatch && newProductsMatch && offerMatch
 		);
 	});
 
-	const sortedProducts = [...filteredProducts].sort((a, b) => {
+	const sortedItems = [...filteredItems].sort((a, b) => {
+		const parentA = a.isVariant ? a.parentProduct : a;
+		const parentB = b.isVariant ? b.parentProduct : b;
+
 		switch (filters.sort) {
-			case "price-low":
-				return a.price - b.price;
-			case "price-high":
-				return b.price - a.price;
+			case "price-low": return a.price - b.price;
+			case "price-high": return b.price - a.price;
 			case "newest":
-				return new Date(b.createdAt) - new Date(a.createdAt);
+				return new Date(parentB.createdAt) - new Date(parentA.createdAt);
 			case "rating":
-				return (b.rating || 0) - (a.rating || 0);
-			default:
-				return 0;
+				return (parentB.rating || 0) - (parentA.rating || 0);
+			default: return 0;
 		}
 	});
 
 	const toggleFavorite = (productId) => {
-		setFavorites(prev =>
-			prev.includes(productId)
-				? prev.filter(id => id !== productId)
-				: [...prev, productId]
-		);
+		setFavorites(prev => prev.includes(productId) ? prev.filter(id => id !== productId) : [...prev, productId]);
 	};
 
 	const clearAllFilters = () => {
@@ -107,7 +100,7 @@ export default function ProductsPage() {
 					<div>
 						<p className="font-semibold">
 							{filters.subcategory || filters.category === 'all' ? 'All Products' : filters.category.charAt(0).toUpperCase() + filters.category.slice(1)}
-							<span className="ms-1 font-normal">({filteredProducts.length})</span>
+							<span className="ms-1 font-normal">({filteredItems.length})</span>
 						</p>
 					</div>
 					<div className="flex items-center gap-4">
@@ -138,7 +131,7 @@ export default function ProductsPage() {
 							/>
 							<Label htmlFor="newProducts">New Products</Label>
 						</div>
-						
+
 						{/* Material */}
 						<div className="px-4 py-2 flex items-center border-r border-gray-300">
 							<Select
@@ -172,7 +165,6 @@ export default function ProductsPage() {
 								</SelectContent>
 							</Select>
 						</div>
-
 
 						{/* Color */}
 						<div className="px-4 py-2 flex items-center border-r border-gray-300">
@@ -248,7 +240,7 @@ export default function ProductsPage() {
 				</div>
 
 				{/* Products Grid */}
-				{sortedProducts.length === 0 ? (
+				{sortedItems.length === 0 ? (
 					<div className="text-center py-12 space-y-2">
 						<h3 className="text-lg font-medium">No products found</h3>
 						<p className="text-sm text-muted-foreground">
@@ -257,19 +249,41 @@ export default function ProductsPage() {
 						<Button
 							variant="outline"
 							className="mt-4"
-							onClick={clearAllFilters}
+							onClick={() => setFilters({
+								category: "all",
+								subcategory: "",
+								sort: "relevant",
+								price: "",
+								color: "",
+								material: "",
+							})}
 						>
 							Clear all filters
 						</Button>
 					</div>
 				) : (
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-						{sortedProducts.map((product) => (
+						{sortedItems.map((item) => (
 							<ProductCard
-								key={product.id}
-								product={product}
-								isFavorite={favorites.includes(product.id)}
-								onToggleFavorite={toggleFavorite}
+								key={item.id}
+								product={{
+									...item,
+									// Spread parent product properties if it's a variant
+									...(item.isVariant ? {
+										description: item.parentProduct.description,
+										rating: item.parentProduct.rating,
+										reviews: item.parentProduct.reviews,
+										tags: item.parentProduct.tags
+									} : {})
+								}}
+								isFavorite={favorites.includes(item.id)}
+								onToggleFavorite={(id) =>
+									setFavorites(prev =>
+										prev.includes(id)
+											? prev.filter(favId => favId !== id)
+											: [...prev, id]
+									)
+								}
 							/>
 						))}
 					</div>

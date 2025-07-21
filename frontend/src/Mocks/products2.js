@@ -1,4 +1,5 @@
 export const products = [
+  // Single Products
   {
     id: "1",
     name: "Serenity Blue Luxe Velvet Pillow",
@@ -13,14 +14,17 @@ export const products = [
     rating: 4.5,
     reviews: 24,
     isNew: Math.random() < 0.5,
+    onSale: Math.random() < 0.3,
     stock: 15,
-    tags: ["velvet", "luxury", "living room", "bedroom"]
+    stock: 15,
+    createdAt: "2023-10-15",
+    tags: ["velvet", "luxury", "living-room", "bedroom"]
   },
   {
     id: "2",
     name: "Emerald Green Art Splash Knot Pillow",
     description: "Handcrafted knot pillow with vibrant emerald green splash design",
-    price: 800,
+    price: 300,
     image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Art-Splash-emerald-green-knot.webp",
     colors: ["Emerald Green"],
     materials: ["Textured Polyester"],
@@ -30,14 +34,16 @@ export const products = [
     rating: 4.2,
     reviews: 18,
     isNew: true,
+    onSale: Math.random() < 0.3,
+    createdAt: "2023-10-15",
     stock: 8,
-    tags: ["artistic", "handmade", "accent piece"]
+    tags: ["artistic", "handmade", "accent-piece"]
   },
   {
     id: "3",
     name: "Golden Mist Luxury Velvet Pillow",
     description: "Opulent golden velvet pillow that adds warmth to any decor",
-    price: 1699,
+    price: 300,
     image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Golden-Mist-Cushion.webp",
     colors: ["Blue", "Grey Stripe", "Off White", "White"],
     materials: ["Velvet"],
@@ -47,6 +53,8 @@ export const products = [
     rating: 4.2,
     reviews: 15,
     isNew: Math.random() < 0.5,
+    onSale: Math.random() < 0.3,
+    createdAt: "2023-10-15",
     stock: 12,
     tags: ["velvet", "luxury", "golden", "statement"]
   },
@@ -64,6 +72,8 @@ export const products = [
     rating: 4.2,
     reviews: 22,
     isNew: Math.random() < 0.5,
+    onSale: Math.random() < 0.3,
+    createdAt: "2023-10-15",
     stock: 10,
     tags: ["modern", "geometric", "red", "contemporary"]
   },
@@ -81,6 +91,8 @@ export const products = [
     rating: 4.2,
     reviews: 30,
     isNew: Math.random() < 0.5,
+    onSale: Math.random() < 0.3,
+    createdAt: "2023-10-15",
     stock: 20,
     tags: ["gold foil", "luxury", "minimalist"]
   },
@@ -98,6 +110,8 @@ export const products = [
     rating: 4.0,
     reviews: 15,
     isNew: Math.random() < 0.5,
+    onSale: Math.random() < 0.3,
+    createdAt: "2023-10-15",
     stock: 14,
     tags: ["modern", "grid", "urban", "contemporary"]
   },
@@ -115,6 +129,8 @@ export const products = [
     rating: 4.3,
     reviews: 28,
     isNew: Math.random() < 0.5,
+    onSale: Math.random() < 0.3,
+    createdAt: "2023-10-15",
     stock: 7,
     tags: ["handmade", "textured", "knot", "accent"]
   },
@@ -132,15 +148,16 @@ export const products = [
     rating: 5.0,
     reviews: 42,
     isNew: Math.random() < 0.5,
+    onSale: Math.random() < 0.3,
+    createdAt: "2023-10-15",
     stock: 5,
     tags: ["velvet", "blue", "luxury", "statement"]
   },
-  // Continuing with the same pattern for remaining products...
   {
     id: "11",
     name: "Luxury Black Pillow with Gold Foil Stripes",
     description: "Dramatic black cushion with striking gold foil stripes",
-    price: 3000,
+    price: 300,
     image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Luxury-Black-Cushion-with-Gold-Foil.webp",
     colors: ["Black/Gold"],
     materials: ["Cotton Blend", "Metallic Foil"],
@@ -150,10 +167,12 @@ export const products = [
     rating: 5.0,
     reviews: 56,
     isNew: Math.random() < 0.5,
+    onSale: Math.random() < 0.3,
+    createdAt: "2023-10-15",
     stock: 3,
     tags: ["premium", "gold foil", "luxury", "statement"]
   },
-  // Grouped variants example:
+  // Grouped variants: Urban Geometry Series:
   {
     id: "urban-geometry-series",
     name: "Urban Geometry Throw Pillow Collection",
@@ -165,7 +184,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 8
+        stock: 8,
+        onSale: Math.random() < 0.3
       },
       {
         id: "24",
@@ -174,7 +194,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design2.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 6
+        stock: 6,
+        onSale: Math.random() < 0.3
       },
       {
         id: "25",
@@ -183,7 +204,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design3.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 5
+        stock: 5,
+        onSale: Math.random() < 0.3
       },
       {
         id: "28",
@@ -192,7 +214,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design4.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 10
+        stock: 10,
+        onSale: Math.random() < 0.3
       },
       {
         id: "29",
@@ -201,7 +224,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design5.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 7
+        stock: 7,
+        onSale: Math.random() < 0.3
       },
       {
         id: "32",
@@ -210,7 +234,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design6.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 9
+        stock: 9,
+        onSale: Math.random() < 0.3
       },
       {
         id: "36",
@@ -219,7 +244,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design7.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 4
+        stock: 4,
+        onSale: Math.random() < 0.3
       },
       {
         id: "39",
@@ -228,7 +254,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design8.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 6
+        stock: 6,
+        onSale: Math.random() < 0.3
       },
       {
         id: "40",
@@ -237,25 +264,27 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design9.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 8
+        stock: 8,
+        onSale: Math.random() < 0.3
       }
     ],
     description: "Modern geometric design pillow collection featuring contemporary abstract patterns. These versatile throw pillows add artistic flair to sofas, beds, or accent chairs. Made with durable, colorfast polyester that maintains its vibrant look.",
     category: "pillow",
     subcategory: "geometric",
-    materials: ["Polyester blend", "Cotton backing"],
+    materials: ["polyester", "cotton"],
     careInstructions: "Spot clean or dry clean only",
     rating: 4.5,
     reviews: 112,
     isNew: false,
-    tags: ["modern", "geometric", "abstract", "contemporary", "designer", "artistic"],
+    onSale: false,
+    tags: ["modern", "geometric", "abstract",],
     dimensions: {
       insertSize: "18×18 inches",
       pillowcaseSize: "19×19 inches"
     },
-    weight: "1.2 lbs",
-    designStory: "Inspired by urban architecture and contemporary art movements"
+    createdAt: "2023-09-10"
   },
+  // Grouped variant: Plain series
   {
     id: "plain-series",
     name: "Minimalist Plain Throw Pillow Collection",
@@ -267,7 +296,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/plain-design.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 12
+        stock: 12,
+        onSale: Math.random() < 0.3
       },
       {
         id: "43",
@@ -276,7 +306,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Red-plain-design.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 8
+        stock: 8,
+        onSale: Math.random() < 0.3
       },
       {
         id: "45",
@@ -285,7 +316,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Yellow-plain-design.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 10
+        stock: 10,
+        onSale: Math.random() < 0.3
       },
       {
         id: "48",
@@ -294,7 +326,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Yellow-plain-design2.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 7
+        stock: 7,
+        onSale: Math.random() < 0.3
       },
       {
         id: "46",
@@ -303,7 +336,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Light-purple-plain-design.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 9
+        stock: 9,
+        onSale: Math.random() < 0.3
       },
       {
         id: "47",
@@ -312,24 +346,26 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Light-beige-plain-design.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 15
+        stock: 15,
+        onSale: Math.random() < 0.3
       }
     ],
     description: "A timeless collection of solid-color throw pillows for a clean, versatile look. Perfect for layering with patterned pillows or standalone minimalism. Made with ultra-soft, durable fabric that resists fading.",
     category: "pillow",
     subcategory: "plain",
-    materials: ["100% Polyester", "Premium woven fabric"],
+    materials: ["woven-fabric"],
     careInstructions: "Machine washable (cold), tumble dry low",
     rating: 4.3,
     reviews: 89,
     isNew: false,
-    tags: ["minimalist", "solid", "versatile", "modern", "neutral", "scandinavian", "pastel"],
+    tags: ["minimalist", "solid", "versatile", "modern",],
     dimensions: {
       insertSize: "18×18 inches",
       pillowcaseSize: "19×19 inches"
     },
-    designStory: "Designed for simplicity and adaptability, these pillows complement any decor style—from boho to modern farmhouse. The muted tones add warmth without overpowering a space."
+    createdAt: "2023-08-05"
   },
+  // Grouped variant: Urban wave series
   {
     id: "urban-wave-series",
     name: "Urban Wave Throw Pillow Collection",
@@ -341,7 +377,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Wave-Design.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 7
+        stock: 7,
+        onSale: Math.random() < 0.3
       },
       {
         id: "33",
@@ -350,7 +387,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Wave-Design2.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 5
+        stock: 5,
+        onSale: Math.random() < 0.3
       },
       {
         id: "34",
@@ -359,7 +397,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Wave-Design3.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 6
+        stock: 6,
+        onSale: Math.random() < 0.3
       },
       {
         id: "41",
@@ -368,7 +407,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Wave-Design4.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 4
+        stock: 4,
+        onSale: Math.random() < 0.3
       },
       {
         id: "44",
@@ -377,17 +417,20 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Wave-Design5.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 3
+        stock: 3,
+        onSale: Math.random() < 0.3
       }
     ],
     description: "Fluid wave-inspired designs that bring movement and energy to your space. The organic patterns complement both modern and traditional decor styles.",
     category: "pillow",
-    subcategory: "abstract",
-    materials: ["Polyester blend"],
+    subcategory: "wavy-design",
+    materials: ["polyester"],
     rating: 4.3,
     reviews: 89,
-    tags: ["wave", "organic", "flowing", "modern"]
+    tags: ["wave", "organic", "flowing", "modern"],
+    createdAt: "2024-01-15"
   },
+  // Grouped variant: Scarlet Web series
   {
     id: "scarlet-web-series",
     name: "Scarlet Web Throw Pillow Collection",
@@ -399,7 +442,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Red-Scarlet-Web.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 10
+        stock: 10,
+        onSale: Math.random() < 0.3
       },
       {
         id: "16",
@@ -408,7 +452,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Red-Scarlet-Web2.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 8
+        stock: 8,
+        onSale: Math.random() < 0.3
       },
       {
         id: "17",
@@ -417,7 +462,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Red-Scarlet-Web3.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 6
+        stock: 6,
+        onSale: Math.random() < 0.3
       },
       {
         id: "18",
@@ -426,17 +472,20 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Black-Scarlet-Web.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 9
+        stock: 9,
+        onSale: Math.random() < 0.3
       }
     ],
     description: "Bold web-inspired geometric patterns that make dramatic statements. These high-contrast designs work particularly well in modern and industrial interiors.",
     category: "pillow",
     subcategory: "geometric",
-    materials: ["Polyester"],
+    materials: ["polyester"],
     rating: 4.6,
     reviews: 76,
-    tags: ["geometric", "bold", "contrast", "modern"]
+    tags: ["geometric", "bold", "contrast", "modern"],
+    createdAt: "2024-01-15"
   },
+  // Grouped variant: FLoral
   {
     id: "floral-series",
     name: "Botanical Floral Throw Pillow Collection",
@@ -449,7 +498,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 10
+        stock: 10,
+        onSale: Math.random() < 0.3
       },
       {
         id: "37",
@@ -459,7 +509,8 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design2.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 8
+        stock: 8,
+        onSale: Math.random() < 0.3
       },
       {
         id: "49",
@@ -469,14 +520,14 @@ export const products = [
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design3.webp",
         price: 300,
         sizes: ["18×18"],
-        stock: 6
+        stock: 6,
+        onSale: Math.random() < 0.3
       }
     ],
     description: "A vibrant collection of floral throw pillows featuring hand-drawn botanical prints. Each design brings a touch of nature indoors, perfect for adding a pop of color to sofas, beds, or reading nooks. Made with fade-resistant ink and plush fabric.",
     category: "pillow",
     subcategory: "floral",
-    materials: ["Polyester canvas", "Eco-friendly dyes"],
-    careInstructions: "Spot clean or dry clean only to preserve print vibrancy",
+    materials: ["polyester"],
     rating: 4.7,
     reviews: 145,
     isNew: true,
@@ -485,7 +536,7 @@ export const products = [
       insertSize: "18×18 inches",
       pillowcaseSize: "19×19 inches"
     },
-    designStory: "Inspired by English garden roses, tropical hibiscus, and watercolor illustrations. Each pillow is a wearable piece of art for your home."
+    createdAt: "2024-01-15"
   },
   {
     id: "26",
@@ -501,6 +552,8 @@ export const products = [
     rating: 4.4,
     reviews: 19,
     isNew: Math.random() < 0.5,
+    onSale: Math.random() < 0.3,
+    createdAt: "2024-01-15",
     stock: 11,
     tags: ["ethnic", "zigzag", "tribal", "warm tones"]
   },

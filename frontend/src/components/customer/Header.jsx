@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import { PillowsMegaMenu } from '../common/PillowsMegaMenu';
 
 const navigationLinks = [
-    { name: 'Shop all', href: "/products" },
+    { name: 'Shop all', href: "/products?category=all" },
     { name: 'Curtains', href: '/products?category=curtains' },
     { name: 'Collections', href: '/collections' },
-    { name: 'Pillows', href: '/products?category=pillows'},
+    { name: 'Pillows', href: '/products?category=pillow'},
 ]
 
 const promotions = [
