@@ -7,7 +7,7 @@ const navigationLinks = [
     { name: 'Shop all', href: "/products" },
     { name: 'Curtains', href: '/products?category=curtains' },
     { name: 'Collections', href: '/collections' },
-    { name: 'New Arrivals', href: '/products/new' }
+    { name: 'Pillows', href: '/products?category=pillows'},
 ]
 
 const promotions = [
@@ -170,7 +170,7 @@ const Header = () => {
             </div>
 
             {/* Promotional Banner with Animation */}
-            <div className="bg-[#c9755c] text-center py-2 text-sm !h-[50px] flex justify-center items-center">
+            <div className="bg-gradient-to-r from-pink-400 to-pink-500 text-center py-2 text-sm !h-[50px] flex justify-center items-center">
                 <div className={`transition-opacity duration-500 ${fade ? 'opacity-0' : 'opacity-100'}`}>
                     {promotions[currentPromoIndex]}
                 </div>
