@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const ProductGrid = () => {
     const accentChairs = [
         {
@@ -83,49 +85,85 @@ const ProductGrid = () => {
     return (
         <section className="py-16 bg-white">
             <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Three Category Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+                {/* Three Category Grid - Enhanced */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20 sm:px-0">
                     {/* Curtains Section */}
-                    <div className="relative group cursor-pointer">
-                        <div className="aspect-square bg-[#f6f2f0] relative overflow-hidden">
+                    <Link
+                        to="/products?category=curtains"
+                        className="relative group overflow-hidden rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
+                        aria-label="Browse Curtains Collection"
+                    >
+                        <div className="aspect-[4/5] bg-gradient-to-br from-pink-50 to-amber-50 relative">
                             <img
-                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/High-Quality-Square-Pillows-Cushions-Top-Grain-Leather-Sofa-Seats-Cushions.webp"
-                                alt="Sofas"
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/curtains/plain-brown-curtain.webp"
+                                alt="Luxury curtains collection"
+                                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                loading="lazy"
                             />
-                            <div className="absolute bottom-6 left-6">
-                                <h3 className="text-white text-3xl font-light mb-2">Sofas</h3>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <div className="absolute bottom-6 left-6 space-y-1">
+                                <h3 className="text-white text-2xl md:text-3xl font-medium">Curtains</h3>
+                                <p className="text-pink-200 text-sm font-light">Explore 12+ designs</p>
+                            </div>
+                            <div className="absolute top-4 right-4">
+                                <span className="bg-white/90 text-pink-600 px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
+                                    New Arrivals
+                                </span>
                             </div>
                         </div>
-                    </div>
+                    </Link>
 
-                    {/* Garden Section */}
-                    <div className="relative group cursor-pointer">
-                        <div className="aspect-square bg-[#f6f2f0] relative overflow-hidden">
+                    {/* Pillows Section */}
+                    <Link
+                        to="/products?category=pillow"
+                        className="relative group overflow-hidden rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
+                        aria-label="Browse Pillows Collection"
+                    >
+                        <div className="aspect-[4/5] bg-gradient-to-br from-blue-50 to-cyan-50 relative">
                             <img
-                                src="https://ext.same-assets.com/4184859447/3755256430.jpeg"
-                                alt="Garden"
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/pillow-cusions/Serenity-Blue-Luxe-Cushion.webp"
+                                alt="Premium pillow collection"
+                                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                loading="lazy"
                             />
-                            <div className="absolute bottom-6 left-6">
-                                <h3 className="text-white text-3xl font-light mb-2">Garden</h3>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <div className="absolute bottom-6 left-6 space-y-1">
+                                <h3 className="text-white text-2xl md:text-3xl font-medium">Pillows</h3>
+                                <p className="text-blue-200 text-sm font-light">24+ styles available</p>
+                            </div>
+                            <div className="absolute top-4 right-4">
+                                <span className="bg-white/90 text-blue-600 px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
+                                    Best Seller
+                                </span>
                             </div>
                         </div>
-                    </div>
+                    </Link>
 
-                    {/* Lighting Section */}
-                    <div className="relative group cursor-pointer">
-                        <div className="aspect-square bg-[#f6f2f0] relative overflow-hidden">
+                    {/* Knot Pillows Section */}
+                    <Link
+                        to="/products?subcategory=knot"
+                        className="relative group overflow-hidden rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
+                        aria-label="Browse Knot Pillows"
+                    >
+                        <div className="aspect-[4/5] bg-gradient-to-br from-amber-50 to-yellow-50 relative">
                             <img
-                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/High-Quality-Square-Pillows-Cushions-Top-Grain-Leather-Sofa-Seats-Cushions.webp"
-                                alt="Lighting"
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/pillow-cusions/White-Gold-Textured-Knot-Cushion.webp"
+                                alt="Designer knot pillows"
+                                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                loading="lazy"
                             />
-                            <div className="absolute bottom-6 left-6">
-                                <h3 className="text-white text-3xl font-light mb-2">Lighting</h3>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <div className="absolute bottom-6 left-6 space-y-1">
+                                <h3 className="text-white text-2xl md:text-3xl font-medium">Knot Pillows</h3>
+                                <p className="text-amber-200 text-sm font-light">Limited edition</p>
+                            </div>
+                            <div className="absolute top-4 right-4">
+                                <span className="bg-white/90 text-amber-600 px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
+                                    Exclusive
+                                </span>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
                 {/* Product Links */}
