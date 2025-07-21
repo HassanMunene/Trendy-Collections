@@ -76,8 +76,8 @@ const Footer = () => {
 
             {/* Account and Store Locator */}
             <div className="border-y border-gray-200">
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-2 gap-6'>
-                    <div className="flex items-center space-x-4">
+                <div className='cursor-pointer max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row gap-6'>
+                    <div className="flex items-center space-x-4 py-6">
                         <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center">
                             <User className="w-5 h-5 text-pink-600" />
                         </div>
@@ -87,7 +87,7 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    <div className="flex items-center space-x-4 md:border-l md:border-gray-200 md:pl-6">
+                    <div className="cursor-pointer flex items-center space-x-4 border-t md:border-l md:border-t-0 md:border-gray-200 md:pl-6 py-6">
                         <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center">
                             <MdOutlineStoreMallDirectory className="w-5 h-5 text-pink-600" />
                         </div>
@@ -104,7 +104,7 @@ const Footer = () => {
                 {/* Customer Service */}
                 <div>
                     <h6 className="font-bold text-gray-900 mb-4 text-base">CUSTOMER SERVICE</h6>
-                    <ul className="space-y-3">
+                    <ul className="space-y-3 p-0">
                         {helpLinks.map((link) => (
                             <li key={link}>
                                 <a
@@ -121,7 +121,7 @@ const Footer = () => {
                 {/* About Trendy */}
                 <div>
                     <h6 className="font-bold text-gray-900 mb-4 text-base">ABOUT TRENDY</h6>
-                    <ul className="space-y-3">
+                    <ul className="space-y-3 p-0">
                         {aboutLinks.map((link) => (
                             <li key={link}>
                                 <a
@@ -138,7 +138,7 @@ const Footer = () => {
                 {/* Shop */}
                 <div>
                     <h6 className="font-bold text-gray-900 mb-4 text-base">SHOP</h6>
-                    <ul className="space-y-3">
+                    <ul className="space-y-3 p-0">
                         {shopLinks.map((link) => (
                             <li key={link}>
                                 <a
