@@ -1,37 +1,37 @@
+import { FaWhatsappSquare } from "react-icons/fa";
+
 const Newsletter = () => {
     return (
         <section className="py-14 bg-white">
             <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md mx-auto text-center">
-                    <h2 className="text-2xl font-light text-gray-900 mb-4">Stay in the loop</h2>
+                    <div className="bg-[#25D366]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <FaWhatsappSquare className="w-8 h-8 text-[#25D366]" />
+                    </div>
+                    <h2 className="text-2xl font-light text-gray-900 mb-4">Join Our WhatsApp Community</h2>
                     <p className="text-gray-600 mb-6">
-                        Sign up to be the first to hear about new arrivals, offers and events.
+                        Get instant updates on new arrivals, exclusive offers and special prices directly on WhatsApp.
                     </p>
                     <p className="text-sm text-gray-500 mb-6">
-                        Enter your email address below to opt in to email marketing.
+                        Tap the button below to join - no email required!
                     </p>
 
-                    {/* Email Form */}
-                    <form className="space-y-4">
-                        <input
-                            type="email"
-                            placeholder="Email Address"
-                            className="w-full px-4 py-3 border border-gray-300 focus:border-[#9a6546] focus:outline-none text-sm"
-                        />
-                        <button
-                            type="submit"
-                            className="w-full bg-black text-white py-3 text-sm font-medium uppercase tracking-wide hover:bg-gray-800 transition-colors"
+                    {/* WhatsApp Button */}
+                    <div className="mb-2">
+                        <a
+                            href="https://wa.me/254712403671?text=I%20want%20to%20join%20Trendy%20Collections%20community"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block w-full bg-[#25D366] text-white py-3 px-4 text-sm font-medium uppercase tracking-wide hover:bg-[#128C7E] transition-colors flex items-center justify-center gap-2"
                         >
-                            Subscribe
-                        </button>
-                    </form>
+                            <FaWhatsappSquare className="w-5 h-5" />
+                            Join Now
+                        </a>
+                    </div>
 
                     {/* Legal Text */}
-                    <p className="text-xs text-gray-500 mt-4">
-                        See our full{' '}
-                        <a href="#" className="underline hover:no-underline">Terms and Conditions</a>,{' '}
-                        <a href="#" className="underline hover:no-underline">Privacy & Cookie Policy</a>{' '}
-                        to find out more.
+                    <p className="text-xs text-gray-500 mt-8">
+                        By joining, you agree to receive messages from Trendy Collections. <a href="#" className="underline hover:no-underline">Privacy Policy</a>
                     </p>
                 </div>
             </div>
@@ -39,4 +39,4 @@ const Newsletter = () => {
     )
 }
 
-export default Newsletter
+export default Newsletter;
