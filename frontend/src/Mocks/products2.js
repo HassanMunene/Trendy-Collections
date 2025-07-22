@@ -216,6 +216,52 @@ export const products = [
     stock: 20,
     tags: ["gold foil", "luxury", "minimalist"]
   },
+    {
+    id: "glossy-deep-blue-curtain-1",
+    name: "Glossy Deep Blue Plain Curtain Panel (Pair)",
+    description: "Set of 2 elegant glossy purple sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft purple hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
+    price: 2800,
+    originalPrice: 3200,
+    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-deep-purple-curtain.webp",
+    images: [
+      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-deep-purple-curtain.webp",
+      // Add more image URLs here
+    ],
+    colors: ["purple"],
+    colorNames: {
+      pink: "Purple"
+    },
+    materials: ["polyester"],
+    sizes: [
+      {
+        name: "Standard Pair",
+        panelWidth: "1.5m",
+        panelLength: "2m",
+        totalWidth: "3m",
+        price: 2800
+      }
+    ],
+    category: "curtains",
+    subcategory: "glossy",
+    collection: "Plain Elegance",
+    rating: 4.4,
+    reviews: 19,
+    isNew: true,
+    onOffer: true,
+    salePercentage: 13,
+    createdAt: "2024-01-15",
+    stock: 11,
+    tags: ["sheer-curtains", "purple", "modern", "bedroom", "living-room", "light-filtering"],
+    features: [
+      "Set of 2 curtain panels",
+      "Each panel: 1.5m wide x 2m long",
+      "100% polyester sheer fabric",
+      "Machine washable",
+      "Light filtering",
+      "Ready-to-hang"
+    ],
+    careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
+  },
   {
     id: "6",
     name: "Urban Grid Modern Throw Pillow",
@@ -672,6 +718,17 @@ export const products = [
         sizes: ["18×18"],
         stock: 6,
         onSale: Math.random() < 0.3
+      },
+      {
+        id: "floral-design-4",
+        name: "Vintage Flora Luxe Throw Pillow",
+        color: "Vibrant",
+        pattern: "Tropical Blooms",
+        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design4.webp",
+        price: 300,
+        sizes: ["18×18"],
+        stock: 6,
+        onSale: Math.random() < 0.3
       }
     ],
     description: "A vibrant collection of floral throw pillows featuring hand-drawn botanical prints. Each design brings a touch of nature indoors, perfect for adding a pop of color to sofas, beds, or reading nooks. Made with fade-resistant ink and plush fabric.",
@@ -708,3 +765,190 @@ export const products = [
     tags: ["ethnic", "zigzag", "tribal", "warm tones"]
   },
 ];
+
+export const curtains = [
+  {
+    id: "glossy-pink-curtain-1",
+    name: "Glossy Pink Plain Curtain Panel (Pair)",
+    description: "Set of 2 elegant glossy pink sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft pink hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
+    price: 2800,
+    originalPrice: 3200,
+    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/curtains/plain-pink-curtain.webp",
+    images: [
+      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/curtains/plain-pink-curtain.webp",
+      // Add more image URLs here
+    ],
+    colors: ["pink"],
+    colorNames: {
+      pink: "Blush Pink"
+    },
+    materials: ["polyester"],
+    sizes: [
+      {
+        name: "Standard Pair",
+        panelWidth: "1.5m",
+        panelLength: "2m",
+        totalWidth: "3m",
+        price: 2800
+      }
+    ],
+    category: "curtains",
+    subcategory: "glossy",
+    collection: "Plain Elegance",
+    rating: 4.4,
+    reviews: 19,
+    isNew: true,
+    onOffer: true,
+    salePercentage: 13,
+    createdAt: "2024-01-15",
+    stock: 11,
+    tags: ["sheer-curtains", "pink", "modern", "bedroom", "living-room", "light-filtering"],
+    features: [
+      "Set of 2 curtain panels",
+      "Each panel: 1.5m wide x 2m long",
+      "100% polyester sheer fabric",
+      "Machine washable",
+      "Light filtering",
+      "Ready-to-hang"
+    ],
+    careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
+  },
+  {
+    id: "glossy-yellow-curtain-1",
+    name: "Glossy Yellow Plain Curtain Panel (Pair)",
+    description: "Set of 2 elegant glossy yellow sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft yellow hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
+    price: 2800,
+    originalPrice: 3200,
+    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-yellow-curtain.webp",
+    images: [
+      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-yellow-curtain.webp",
+      // Add more image URLs here
+    ],
+    colors: ["yellow"],
+    colorNames: {
+      pink: "Blush Yellow"
+    },
+    materials: ["polyester"],
+    sizes: [
+      {
+        name: "Standard Pair",
+        panelWidth: "1.5m",
+        panelLength: "2m",
+        totalWidth: "3m",
+        price: 2800
+      }
+    ],
+    category: "curtains",
+    subcategory: "glossy",
+    collection: "Plain Elegance",
+    rating: 4.4,
+    reviews: 19,
+    isNew: true,
+    onOffer: true,
+    salePercentage: 13,
+    createdAt: "2024-01-15",
+    stock: 11,
+    tags: ["sheer-curtains", "yellow", "modern", "bedroom", "living-room", "light-filtering"],
+    features: [
+      "Set of 2 curtain panels",
+      "Each panel: 1.5m wide x 2m long",
+      "100% polyester sheer fabric",
+      "Machine washable",
+      "Light filtering",
+      "Ready-to-hang"
+    ],
+    careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
+  },
+  {
+    id: "glossy-brown-curtain-1",
+    name: "Glossy Brown Plain Curtain Panel (Pair)",
+    description: "Set of 2 elegant glossy brown sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft brown hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
+    price: 2800,
+    originalPrice: 3200,
+    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-brown-curtain.webp",
+    images: [
+      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-brown-curtain.webp",
+      // Add more image URLs here
+    ],
+    colors: ["brown"],
+    colorNames: {
+      pink: "Brown"
+    },
+    materials: ["polyester"],
+    sizes: [
+      {
+        name: "Standard Pair",
+        panelWidth: "1.5m",
+        panelLength: "2m",
+        totalWidth: "3m",
+        price: 2800
+      }
+    ],
+    category: "curtains",
+    subcategory: "glossy",
+    collection: "Plain Elegance",
+    rating: 4.4,
+    reviews: 19,
+    isNew: true,
+    onOffer: true,
+    salePercentage: 13,
+    createdAt: "2024-01-15",
+    stock: 11,
+    tags: ["sheer-curtains", "brown", "modern", "bedroom", "living-room", "light-filtering"],
+    features: [
+      "Set of 2 curtain panels",
+      "Each panel: 1.5m wide x 2m long",
+      "100% polyester sheer fabric",
+      "Machine washable",
+      "Light filtering",
+      "Ready-to-hang"
+    ],
+    careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
+  },
+  {
+    id: "glossy-deep-blue-curtain-1",
+    name: "Glossy Deep Blue Plain Curtain Panel (Pair)",
+    description: "Set of 2 elegant glossy purple sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft purple hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
+    price: 2800,
+    originalPrice: 3200,
+    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-deep-purple-curtain.webp",
+    images: [
+      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-deep-purple-curtain.webp",
+      // Add more image URLs here
+    ],
+    colors: ["purple"],
+    colorNames: {
+      pink: "Purple"
+    },
+    materials: ["polyester"],
+    sizes: [
+      {
+        name: "Standard Pair",
+        panelWidth: "1.5m",
+        panelLength: "2m",
+        totalWidth: "3m",
+        price: 2800
+      }
+    ],
+    category: "curtains",
+    subcategory: "glossy",
+    collection: "Plain Elegance",
+    rating: 4.4,
+    reviews: 19,
+    isNew: true,
+    onOffer: true,
+    salePercentage: 13,
+    createdAt: "2024-01-15",
+    stock: 11,
+    tags: ["sheer-curtains", "purple", "modern", "bedroom", "living-room", "light-filtering"],
+    features: [
+      "Set of 2 curtain panels",
+      "Each panel: 1.5m wide x 2m long",
+      "100% polyester sheer fabric",
+      "Machine washable",
+      "Light filtering",
+      "Ready-to-hang"
+    ],
+    careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
+  },
+]

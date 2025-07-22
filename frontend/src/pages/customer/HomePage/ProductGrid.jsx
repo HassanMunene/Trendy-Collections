@@ -213,7 +213,7 @@ const ProductGrid = () => {
                     {/* Flowery pillows */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {floralProducts.map((product) => (
-                            <div key={product.id} className="group cursor-pointer">
+                            <Link to={`/products/${product.id}`} key={product.id} className="group cursor-pointer">
                                 <div className="aspect-square bg-[#f6f2f0] mb-4 overflow-hidden">
                                     <img
                                         src={product.image}
@@ -223,7 +223,7 @@ const ProductGrid = () => {
                                 </div>
                                 <h4 className="font-medium text-gray-900 mb-1">{product.name}</h4>
                                 <p className="text-gray-600">{product.price}</p>
-                            </div>
+                            </Link>
                         ))}
                     </div>
 
