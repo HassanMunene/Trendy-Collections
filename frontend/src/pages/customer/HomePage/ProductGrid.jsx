@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
+import { products } from "@/src/Mocks/products2";
 
 const ProductGrid = () => {
     const accentChairs = [
@@ -82,6 +83,20 @@ const ProductGrid = () => {
             image: "https://ext.same-assets.com/4184859447/3319993950.jpeg"
         }
     ]
+
+    // First, filter products with floral subcategory and flatten their variants
+    const floralProducts = products
+        .filter(product => product.subcategory === "floral")
+        .flatMap(product =>
+            product.variants.map(variant => ({
+                ...variant,
+                category: product.category,
+                description: product.description,
+                rating: product.rating,
+                reviews: product.reviews,
+                isNew: product.isNew
+            }))
+        );
 
     return (
         <section className="py-16 bg-white">
@@ -195,9 +210,9 @@ const ProductGrid = () => {
 
                 {/* Product Grids */}
                 <div className="space-y-16">
-                    {/* Accent Chairs */}
+                    {/* Flowery pillows */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {accentChairs.map((product) => (
+                        {floralProducts.map((product) => (
                             <div key={product.id} className="group cursor-pointer">
                                 <div className="aspect-square bg-[#f6f2f0] mb-4 overflow-hidden">
                                     <img
@@ -212,7 +227,7 @@ const ProductGrid = () => {
                         ))}
                     </div>
 
-                    {/* Ceiling Lights */}
+                    {/* Geometric Lights */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {lighting.map((product) => (
                             <div key={product.id} className="group cursor-pointer">
@@ -229,7 +244,7 @@ const ProductGrid = () => {
                         ))}
                     </div>
 
-                    {/* Table Lamps */}
+                    {/* curtains Lamps */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {tableLamps.map((product) => (
                             <div key={product.id} className="group cursor-pointer">
