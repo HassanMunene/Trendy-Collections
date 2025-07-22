@@ -77,16 +77,6 @@ const Footer = () => {
             {/* Account and Store Locator */}
             <div className="border-y border-gray-200">
                 <div className='cursor-pointer max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row gap-6'>
-                    <div className="flex items-center space-x-4 py-6">
-                        <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center">
-                            <User className="w-5 h-5 text-pink-600" />
-                        </div>
-                        <div className='flex flex-col'>
-                            <span className="font-semibold text-gray-900">My Account</span>
-                            <span className="text-sm text-gray-600">Manage your orders and preferences</span>
-                        </div>
-                    </div>
-
                     <div className="cursor-pointer flex items-center space-x-4 border-t md:border-l md:border-t-0 md:border-gray-200 md:pl-6 py-6">
                         <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center">
                             <MdOutlineStoreMallDirectory className="w-5 h-5 text-pink-600" />
