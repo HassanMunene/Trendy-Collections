@@ -6,81 +6,110 @@ const ContactUs = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header with pink accent */}
                 <div className="text-center mb-12">
-                    <h1 className="text-3xl sm:text-4xl font-light text-pink-900 mb-4">
+                    <h4 className="text-3xl sm:text-4xl font-light text-pink-900 mb-4">
                         Connect With Us
-                    </h1>
+                    </h4>
                     <p className="text-pink-800/80 max-w-2xl mx-auto">
-                        We're here to help! Reach out for styling advice, product questions, or wholesale inquiries.
+                        We're here to help! Reach out for styling advice, product questions or wholesale inquiries.
                     </p>
                 </div>
 
-                {/* Pink-themed contact cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                    {/* Location */}
-                    <div className="bg-white p-6 rounded-lg border border-pink-100 hover:shadow-pink-100 hover:shadow-md transition-all">
-                        <div className="bg-pink-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <MapPin className="w-6 h-6 text-pink-600" />
-                        </div>
-                        <h3 className="text-lg font-medium text-pink-900 mb-2">Our Boutique</h3>
-                        <p className="text-pink-800/90">
-                            Royal Palm Mall, Second Floor<br />
-                            Shop BF31, Wing B<br />
-                            Ronald Ngala Street, Nairobi
-                        </p>
-                        <a
-                            href="https://maps.google.com/?q=Royal+Palm+Mall+Ronald+Ngala+Nairobi"
-                            target="_blank"
-                            className="inline-block mt-3 text-sm text-pink-600 hover:underline"
-                        >
-                            View on Map →
-                        </a>
-                    </div>
-
-                    {/* Phone/WhatsApp */}
-                    <div className="bg-white p-6 rounded-lg border border-pink-100 hover:shadow-pink-100 hover:shadow-md transition-all">
-                        <div className="bg-pink-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Phone className="w-6 h-6 text-pink-600" />
-                        </div>
-                        <h3 className="text-lg font-medium text-pink-900 mb-2">Call/WhatsApp</h3>
-                        <p className="text-pink-800/90 mb-2">
-                            <a href="tel:+254712403671" className="hover:text-pink-600 transition-colors">
-                                +254 712 403 671
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    {/* Location Card */}
+                    <div className="relative bg-white p-8 rounded-xl border border-pink-50 hover:border-pink-100 transition-all duration-300 group overflow-hidden hover:shadow-lg hover:shadow-pink-50">
+                        <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 to-pink-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                            <div className="bg-gradient-to-br from-pink-100 to-pink-200 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 shadow-pink-100/50">
+                                <MapPin className="w-6 h-6 text-pink-700" strokeWidth={1.5} />
+                            </div>
+                            <h4 className="text-md font-medium text-pink-900 mb-3 text-center">Our Shop</h4>
+                            <div className="space-y-2 text-center">
+                                <p className="text-pink-800/90">Royal Palm Mall, Second Floor</p>
+                                <p className="text-pink-800/90">Shop BF31, Wing B</p>
+                                <p className="text-pink-800/90">Ronald Ngala Street</p>
+                            </div>
+                            <a
+                                href="https://maps.google.com/?q=Royal+Palm+Mall+Ronald+Ngala+Nairobi"
+                                target="_blank"
+                                className="mt-4 mx-auto w-fit flex items-center text-sm font-medium text-pink-600 hover:text-pink-700 transition-colors group/link"
+                            >
+                                View on Map
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 ml-1 transition-transform group-hover/link:translate-x-1">
+                                    <path fillRule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clipRule="evenodd" />
+                                </svg>
                             </a>
-                        </p>
-                        <a
-                            href="https://wa.me/254712403671"
-                            className="inline-flex items-center text-sm text-white bg-[#25D366] px-3 py-1 rounded-full mt-1"
-                        >
-                            <MessageCircle className="w-4 h-4 mr-1" />
-                            Chat Now
-                        </a>
+                        </div>
                     </div>
 
-                    {/* Email */}
-                    <div className="bg-white p-6 rounded-lg border border-pink-100 hover:shadow-pink-100 hover:shadow-md transition-all">
-                        <div className="bg-pink-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Mail className="w-6 h-6 text-pink-600" />
+                    {/* Phone/WhatsApp Card */}
+                    <div className="relative bg-white p-8 rounded-xl border border-pink-50 hover:border-pink-100 transition-all duration-300 group overflow-hidden hover:shadow-lg hover:shadow-pink-50">
+                        <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 to-pink-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                            <div className="bg-gradient-to-br from-pink-100 to-pink-200 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 shadow-pink-100/50">
+                                <Phone className="w-6 h-6 text-pink-700" strokeWidth={1.5} />
+                            </div>
+                            <h4 className="text-md font-medium text-pink-900 mb-3 text-center">Call/WhatsApp</h4>
+                            <div className="space-y-3 text-center">
+                                <p className="text-pink-800/90">
+                                    <a href="tel:+254712403671" className="hover:text-pink-700 transition-colors font-medium">
+                                        +254 712 403 671
+                                    </a>
+                                </p>
+                                <a
+                                    href="https://wa.me/254712403671"
+                                    className="mx-auto w-fit inline-flex items-center text-sm font-medium text-white bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#128C7E] hover:to-[#25D366] px-4 py-2 rounded-full transition-all shadow-sm hover:shadow-md"
+                                >
+                                    <MessageCircle className="w-4 h-4 mr-2" strokeWidth={1.5} />
+                                    Chat Now
+                                </a>
+                            </div>
                         </div>
-                        <h3 className="text-lg font-medium text-pink-900 mb-2">Email Us</h3>
-                        <p className="text-pink-800/90">
-                            <a href="mailto:info@trendycollections.co.ke" className="hover:text-pink-600 transition-colors">
-                                info@trendycollections.co.ke
-                            </a>
-                        </p>
-                        <p className="text-xs text-pink-500 mt-2">Response within 24 hours</p>
                     </div>
 
-                    {/* Hours */}
-                    <div className="bg-white p-6 rounded-lg border border-pink-100 hover:shadow-pink-100 hover:shadow-md transition-all">
-                        <div className="bg-pink-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Clock className="w-6 h-6 text-pink-600" />
+                    {/* Email Card */}
+                    <div className="relative bg-white p-8 rounded-xl border border-pink-50 hover:border-pink-100 transition-all duration-300 group overflow-hidden hover:shadow-lg hover:shadow-pink-50">
+                        <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 to-pink-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                            <div className="bg-gradient-to-br from-pink-100 to-pink-200 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 shadow-pink-100/50">
+                                <Mail className="w-6 h-6 text-pink-700" strokeWidth={1.5} />
+                            </div>
+                            <h4 className="text-md font-medium text-pink-900 mb-3 text-center">Email Us</h4>
+                            <div className="space-y-3 text-center">
+                                <p className="text-pink-800/90">
+                                    <a href="mailto:info@trendycollections.co.ke" className="hover:text-pink-700 transition-colors font-medium">
+                                        info@trendycollections.co.ke
+                                    </a>
+                                </p>
+                                <div className="text-xs font-medium text-pink-500 bg-pink-50 inline-block px-2 py-1 rounded-full">
+                                    Response within 24 hours
+                                </div>
+                            </div>
                         </div>
-                        <h3 className="text-lg font-medium text-pink-900 mb-2">Visit Us</h3>
-                        <p className="text-pink-800/90">
-                            Mon-Fri: 9AM - 6PM<br />
-                            Saturday: 10AM - 4PM<br />
-                            Sunday: Closed
-                        </p>
+                    </div>
+
+                    {/* Hours Card */}
+                    <div className="relative bg-white p-8 rounded-xl border border-pink-50 hover:border-pink-100 transition-all duration-300 group overflow-hidden hover:shadow-lg hover:shadow-pink-50">
+                        <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 to-pink-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                            <div className="bg-gradient-to-br from-pink-100 to-pink-200 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 shadow-pink-100/50">
+                                <Clock className="w-6 h-6 text-pink-700" strokeWidth={1.5} />
+                            </div>
+                            <h4 className="text-md font-medium text-pink-900 mb-3 text-center">Visit Us</h4>
+                            <div className="space-y-2 text-center">
+                                <p className="text-pink-800/90 flex justify-between max-w-xs mx-auto">
+                                    <span className="text-pink-700 font-medium">Mon-Fri:</span>
+                                    <span>8AM - 6PM</span>
+                                </p>
+                                <p className="text-pink-800/90 flex justify-between max-w-xs mx-auto">
+                                    <span className="text-pink-700 font-medium">Saturday:</span>
+                                    <span>9AM - 5PM</span>
+                                </p>
+                                <p className="text-pink-800/90 flex justify-between max-w-xs mx-auto">
+                                    <span className="text-pink-700 font-medium">Sunday:</span>
+                                    <span>Closed</span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

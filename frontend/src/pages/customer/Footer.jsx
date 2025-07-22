@@ -6,14 +6,13 @@ import { MdOutlineStoreMallDirectory } from "react-icons/md";
 
 const Footer = () => {
     const helpLinks = [
-        "Contact Us",
-        "Shipping & Delivery",
-        "Returns & Exchanges",
-        "Product Care",
-        "FAQ",
-        "Track Order",
-        "Payment Options"
-    ]
+        { text: "Contact Us", path: "/Contact-us" },
+        { text: "Shipping & Delivery", path: "/shipping-delivery" },
+        { text: "Returns & Exchanges", path: "/returns-exchanges" },
+        { text: "Product Care", path: "/product-care" },
+        { text: "FAQ", path: "/faq" },
+        { text: "Payment Options", path: "/payment-options" }
+    ];
 
     const aboutLinks = [
         "Our Story",
@@ -96,12 +95,12 @@ const Footer = () => {
                     <h6 className="font-bold text-gray-900 mb-4 text-base">CUSTOMER SERVICE</h6>
                     <ul className="space-y-3 p-0">
                         {helpLinks.map((link) => (
-                            <li key={link}>
+                            <li key={link.text}>
                                 <a
-                                    href="#"
+                                    href={link.path}
                                     className="text-gray-600 hover:text-pink-600 transition-colors hover:underline"
                                 >
-                                    {link}
+                                    {link.text}
                                 </a>
                             </li>
                         ))}
