@@ -6,14 +6,13 @@ import { MdOutlineStoreMallDirectory } from "react-icons/md";
 
 const Footer = () => {
     const helpLinks = [
-        "Contact Us",
-        "Shipping & Delivery",
-        "Returns & Exchanges",
-        "Product Care",
-        "FAQ",
-        "Track Order",
-        "Payment Options"
-    ]
+        { text: "Contact Us", path: "/Contact-us" },
+        { text: "Shipping & Delivery", path: "/shipping-delivery" },
+        { text: "Returns & Exchanges", path: "/returns-exchanges" },
+        { text: "Product Care", path: "/product-care" },
+        { text: "FAQ", path: "/faq" },
+        { text: "Payment Options", path: "/payment-options" }
+    ];
 
     const aboutLinks = [
         "Our Story",
@@ -77,16 +76,6 @@ const Footer = () => {
             {/* Account and Store Locator */}
             <div className="border-y border-gray-200">
                 <div className='cursor-pointer max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row gap-6'>
-                    <div className="flex items-center space-x-4 py-6">
-                        <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center">
-                            <User className="w-5 h-5 text-pink-600" />
-                        </div>
-                        <div className='flex flex-col'>
-                            <span className="font-semibold text-gray-900">My Account</span>
-                            <span className="text-sm text-gray-600">Manage your orders and preferences</span>
-                        </div>
-                    </div>
-
                     <div className="cursor-pointer flex items-center space-x-4 border-t md:border-l md:border-t-0 md:border-gray-200 md:pl-6 py-6">
                         <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center">
                             <MdOutlineStoreMallDirectory className="w-5 h-5 text-pink-600" />
@@ -106,12 +95,12 @@ const Footer = () => {
                     <h6 className="font-bold text-gray-900 mb-4 text-base">CUSTOMER SERVICE</h6>
                     <ul className="space-y-3 p-0">
                         {helpLinks.map((link) => (
-                            <li key={link}>
+                            <li key={link.text}>
                                 <a
-                                    href="#"
+                                    href={link.path}
                                     className="text-gray-600 hover:text-pink-600 transition-colors hover:underline"
                                 >
-                                    {link}
+                                    {link.text}
                                 </a>
                             </li>
                         ))}
