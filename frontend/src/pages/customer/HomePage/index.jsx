@@ -1,6 +1,6 @@
 import Hero from "./Hero";
 import ProductGrid from "./ProductGrid";
-import BedroomSection from "./BedroomSection";
+import ProductCollage from "./ProductCollage";
 import Newsletter from "./Newsletter";
 
 const HomePage = () => {
@@ -8,7 +8,7 @@ const HomePage = () => {
         <>
             <Hero />
             <ProductGrid />
-            <BedroomSection />
+            <ProductCollage />
             <Newsletter />
         </>
     );
