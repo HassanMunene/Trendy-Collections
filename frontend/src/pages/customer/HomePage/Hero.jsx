@@ -1,5 +1,6 @@
 import TrendyHero from "../../../assets/images/TrendyHero.webp";
-import { ArrowRight } from "lucide-react"; // or any other arrow icon from your preferred library
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function HeroSection() {
     return (
@@ -31,9 +32,11 @@ export default function HeroSection() {
 
                             <div className="fade-in-up-delay-800">
                                 <button className="group relative flex items-center gap-2 bg-transparent text-white px-0 py-3 text-sm font-medium uppercase tracking-widest hover:text-white/80 transition-all duration-500 overflow-hidden">
-                                    <span className="relative z-10">Discover Collections</span>
-                                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                                    <span className="absolute bottom-0 left-0 h-px w-full bg-white origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
+                                    <a className="flex items-center gap-2 bg-transparent" href="/products?category=all">
+                                        <span className="relative z-10">Discover Collections</span>
+                                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                                        <span className="absolute bottom-0 left-0 h-px w-full bg-white origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
+                                    </a>
                                 </button>
                             </div>
                         </div>
