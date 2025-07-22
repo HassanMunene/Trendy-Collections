@@ -1,53 +1,53 @@
 import { Plus } from 'lucide-react'
 
-const BedroomSection = () => {
+const ProductCollage = () => {
     const hotspots = [
         {
             id: 1,
             name: "Patti rug",
-            price: "£160-380",
+            price: "ksh 160-380",
             top: "75%",
             left: "15%"
         },
         {
             id: 2,
             name: "Bern bedside",
-            price: "£249",
+            price: "ksh 249",
             top: "45%",
             left: "85%"
         },
         {
             id: 3,
             name: "Meiko bed",
-            price: "£649-849",
+            price: "ksh 649-849",
             top: "55%",
             left: "50%"
         },
         {
             id: 4,
             name: "Bern chest",
-            price: "£529",
+            price: "ksh 529",
             top: "65%",
             left: "75%"
         }
     ]
 
     return (
-        <section className="py-12 bg-white">
+        <section className="bg-white">
             <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="relative">
                     {/* Background Image */}
                     <div className="aspect-[16/9] md:aspect-[21/9] relative overflow-hidden bg-[#f6f2f0]">
                         <img
-                            src="https://ext.same-assets.com/4184859447/294472488.jpeg"
-                            alt="Shop bedroom"
+                            src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/TrendyHero2.webp"
+                            alt="Shop trendy"
                             className="w-full h-full object-cover"
                         />
 
                         {/* Shop Bedroom Button */}
                         <div className="absolute bottom-6 left-6">
                             <button className="bg-white bg-opacity-90 text-black px-4 py-2 text-sm font-medium hover:bg-opacity-100 transition-all">
-                                Shop bedroom
+                                Shop With us
                             </button>
                         </div>
 
@@ -82,4 +82,4 @@ const BedroomSection = () => {
     )
 }
 
-export default BedroomSection
+export default ProductCollage;

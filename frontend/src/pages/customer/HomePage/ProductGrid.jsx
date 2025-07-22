@@ -3,34 +3,6 @@ import { Fragment } from "react";
 import { products } from "@/src/Mocks/products2";
 
 const ProductGrid = () => {
-
-    const tableLamps = [
-        {
-            id: 9,
-            name: "Eero table lamp",
-            price: "ksh 99",
-            image: "https://ext.same-assets.com/4184859447/1819160200.jpeg"
-        },
-        {
-            id: 10,
-            name: "Lila pleated table lamp",
-            price: "ksh 169",
-            image: "https://ext.same-assets.com/4184859447/3259582105.jpeg"
-        },
-        {
-            id: 11,
-            name: "Piper table lamp",
-            price: "ksh 59",
-            image: "https://ext.same-assets.com/4184859447/1440530325.jpeg"
-        },
-        {
-            id: 12,
-            name: "Briz table lamp",
-            price: "ksh 59",
-            image: "https://ext.same-assets.com/4184859447/3319993950.jpeg"
-        }
-    ]
-
     // First, filter products with floral subcategory and flatten their variants
     const floralProducts = products
         .filter(product => product.subcategory === "floral")
@@ -49,7 +21,7 @@ const ProductGrid = () => {
     const knot_pillows = products.filter(product => product.category === "knot-pillows");
 
     return (
-        <section className="py-16 bg-white">
+        <section className="py-14 bg-white">
             <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Three Category Grid - Enhanced */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20 sm:px-0">
@@ -159,7 +131,7 @@ const ProductGrid = () => {
                 </div>
 
                 {/* Product Grids */}
-                <div className="space-y-16">
+                <div className="space-y-8">
                     {/* Flowery pillows */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {floralProducts.map((product) => (
