@@ -67,14 +67,14 @@ const Header = () => {
                             </button>
 
                             {/* Logo */}
-                            <Link
-                                to="/"
+                            <a
+                                href="/"
                                 className="flex items-center group transition-transform hover:scale-105"
                             >
                                 <span className="text-2xl md:text-3xl font-bold tracking-tighter bg-gradient-to-r from-pink-600 to-pink-400 bg-clip-text text-transparent">
                                     TRENDY
                                 </span>
-                            </Link>
+                            </a>
                         </div>
 
                         {/* Center Section - Desktop Navigation */}
