@@ -3,59 +3,6 @@ import { Fragment } from "react";
 import { products } from "@/src/Mocks/products2";
 
 const ProductGrid = () => {
-    const accentChairs = [
-        {
-            id: 1,
-            name: "Wexler chair",
-            price: "ksh 450",
-            image: "https://ext.same-assets.com/4184859447/3939488370.jpeg"
-        },
-        {
-            id: 2,
-            name: "Thea chair",
-            price: "ksh 299",
-            image: "https://ext.same-assets.com/4184859447/1822223879.jpeg"
-        },
-        {
-            id: 3,
-            name: "Rhye chair",
-            price: "ksh 399",
-            image: "https://ext.same-assets.com/4184859447/2465237693.jpeg"
-        },
-        {
-            id: 4,
-            name: "Eva chair",
-            price: "ksh 275",
-            image: "https://ext.same-assets.com/4184859447/224701922.jpeg"
-        }
-    ]
-
-    const lighting = [
-        {
-            id: 5,
-            name: "Briz flush ceiling light",
-            price: "ksh 79",
-            image: "https://ext.same-assets.com/4184859447/494289311.jpeg"
-        },
-        {
-            id: 6,
-            name: "Sydney ceiling light",
-            price: "ksh 69",
-            image: "https://ext.same-assets.com/4184859447/2078189019.jpeg"
-        },
-        {
-            id: 7,
-            name: "Layla ceiling light",
-            price: "ks 329",
-            image: "https://ext.same-assets.com/4184859447/4133126367.jpeg"
-        },
-        {
-            id: 8,
-            name: "Globe ceiling light",
-            price: "ksh 79",
-            image: "https://ext.same-assets.com/4184859447/3996853176.jpeg"
-        }
-    ]
 
     const tableLamps = [
         {
@@ -97,6 +44,9 @@ const ProductGrid = () => {
                 isNew: product.isNew
             }))
         );
+
+    const curtains = products.filter(product => product.category === "curtains");
+    const knot_pillows = products.filter(product => product.category === "knot-pillows");
 
     return (
         <section className="py-16 bg-white">
@@ -227,10 +177,10 @@ const ProductGrid = () => {
                         ))}
                     </div>
 
-                    {/* Geometric Lights */}
+                    {/* Curtains */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {lighting.map((product) => (
-                            <div key={product.id} className="group cursor-pointer">
+                        {curtains.map((product) => (
+                            <Link to={`/products/${product.id}`} key={product.id} className="group cursor-pointer">
                                 <div className="aspect-square bg-[#f6f2f0] mb-4 overflow-hidden">
                                     <img
                                         src={product.image}
@@ -240,14 +190,14 @@ const ProductGrid = () => {
                                 </div>
                                 <h4 className="font-medium text-gray-900 mb-1">{product.name}</h4>
                                 <p className="text-gray-600">{product.price}</p>
-                            </div>
+                            </Link>
                         ))}
                     </div>
 
-                    {/* curtains Lamps */}
+                    {/* Knot Pillows */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {tableLamps.map((product) => (
-                            <div key={product.id} className="group cursor-pointer">
+                        {knot_pillows.map((product) => (
+                            <Link to={`/products/${product.id}`} key={product.id} className="group cursor-pointer">
                                 <div className="aspect-square bg-[#f6f2f0] mb-4 overflow-hidden">
                                     <img
                                         src={product.image}
@@ -257,7 +207,7 @@ const ProductGrid = () => {
                                 </div>
                                 <h4 className="font-medium text-gray-900 mb-1">{product.name}</h4>
                                 <p className="text-gray-600">{product.price}</p>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
