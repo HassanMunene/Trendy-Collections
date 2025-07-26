@@ -66,6 +66,55 @@ export const products = [
     ],
     careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
   },
+  // White fabric curtain with purple prints
+  {
+    id: "white-fabric-curtain-with-purple-prints-1",
+    name: "White Fabric Curtain with Purple Botanical Prints",
+    description: "Elevate your space with this set of 2 premium white curtains featuring elegant purple floral prints. Made from 100% breathable cotton, these curtains combine style with functionality - offering maximum light filtration while maintaining privacy. Each panel measures 1.5m wide (3m total width) with a 2m drop length, perfect for standard windows. The digitally printed design ensures color vibrancy that lasts through multiple washes. Includes matching tie-backs and all necessary hanging hardware for easy installation.",
+    price: 3500,
+    originalPrice: 4000,
+    image: "/images/curtains/white-fabric-curtain-with-purple-prints.webp",
+    images: [
+      "/images/curtains/white-fabric-curtain-with-purple-prints.webp",
+      "/images/curtains/white-fabric-curtain-with-purple-prints2.webp",
+    ],
+    colors: ["white"],
+    colorNames: {
+      white: "Classic White"
+    },
+    materials: ["cotton"],
+    sizes: [
+      {
+        name: "Standard Pair",
+        panelWidth: "1.5m",
+        panelLength: "2m",
+        totalWidth: "3m",
+        price: 3500
+      },
+    ],
+    category: "curtains",
+    subcategory: "printed-curtains",
+    collection: "Botanical Elegance",
+    rating: 4.4,
+    reviews: 19,
+    isNew: true,
+    onOffer: true,
+    salePercentage: 12.5,
+    createdAt: "2024-01-15",
+    stock: 11,
+    tags: ["cotton-curtains", "white-curtains", "purple-print", "botanical", "bedroom", "living-room", "light-filtering", "ready-to-hang"],
+    features: [
+      "Set of 2 premium printed curtain panels",
+      "1.5m width per panel (3m total when hung)",
+      "2m drop length (standard) or 2.5m (extra long)",
+      "100% premium cotton fabric for breathability",
+      "Digital printing ensures fade-resistant colors",
+      "Includes matching fabric tie-backs",
+      "Pre-attached hanging hooks for easy installation",
+      "Blocks 85% of light while maintaining privacy"
+    ],
+    careInstructions: "Machine wash cold (max 30°C) with mild detergent. Tumble dry on low heat. Iron on cotton setting if needed. Do not bleach. For longest life, wash separately before first use.",
+  },
   {
     id: "matte-marigold-knot-pillow-1",
     name: "Matte Marigold Knot Pillow",
@@ -1072,6 +1121,54 @@ export const curtains = [
       "Ready-to-hang"
     ],
     careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
+  },
+  {
+    id: "white-fabric-curtain-with-purple-prints-1",
+    name: "White Fabric Curtain with Purple Botanical Prints",
+    description: "Elevate your space with this set of 2 premium white curtains featuring elegant purple floral prints. Made from 100% breathable cotton, these curtains combine style with functionality - offering maximum light filtration while maintaining privacy. Each panel measures 1.5m wide (3m total width) with a 2m drop length, perfect for standard windows. The digitally printed design ensures color vibrancy that lasts through multiple washes. Includes matching tie-backs and all necessary hanging hardware for easy installation.",
+    price: 3500,
+    originalPrice: 4000,
+    image: "/images/curtains/white-fabric-curtain-with-purple-prints.webp",
+    images: [
+      "/images/curtains/white-fabric-curtain-with-purple-prints.webp",
+      "/images/curtains/white-fabric-curtain-with-purple-prints2.webp",
+    ],
+    colors: ["white"],
+    colorNames: {
+      white: "Classic White"
+    },
+    materials: ["cotton"],
+    sizes: [
+      {
+        name: "Standard Pair",
+        panelWidth: "1.5m",
+        panelLength: "2m",
+        totalWidth: "3m",
+        price: 3500
+      },
+    ],
+    category: "curtains",
+    subcategory: "printed-curtains",
+    collection: "Botanical Elegance",
+    rating: 4.4,
+    reviews: 19,
+    isNew: true,
+    onOffer: true,
+    salePercentage: 12.5,
+    createdAt: "2024-01-15",
+    stock: 11,
+    tags: ["cotton-curtains", "white-curtains", "purple-print", "botanical", "bedroom", "living-room", "light-filtering", "ready-to-hang"],
+    features: [
+      "Set of 2 premium printed curtain panels",
+      "1.5m width per panel (3m total when hung)",
+      "2m drop length (standard) or 2.5m (extra long)",
+      "100% premium cotton fabric for breathability",
+      "Digital printing ensures fade-resistant colors",
+      "Includes matching fabric tie-backs",
+      "Pre-attached hanging hooks for easy installation",
+      "Blocks 85% of light while maintaining privacy"
+    ],
+    careInstructions: "Machine wash cold (max 30°C) with mild detergent. Tumble dry on low heat. Iron on cotton setting if needed. Do not bleach. For longest life, wash separately before first use.",
   },
 ]
 

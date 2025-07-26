@@ -1,6 +1,10 @@
-import { Search, User, Heart, ShoppingBag, X, ChevronRight, AlignJustify } from 'lucide-react'
-import { Link } from "react-router-dom";
+import { User, ShoppingCart, X, ChevronRight, AlignJustify } from 'lucide-react'
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react';
+import { FaFacebookSquare } from "react-icons/fa";
+import { AiFillTikTok } from "react-icons/ai";
+import { FaSquareInstagram } from "react-icons/fa6";
+import { useCart } from '@/src/context/CartContext';
 
 const navigationLinks = [
     { name: 'Shop all', href: "/products?category=all" },
@@ -13,6 +17,9 @@ const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const bodyRef = useRef(document.body);
+    const navigate = useNavigate();
+    const { cartCount, cartItems, cartTotal } = useCart();
+    const [showCartDropdown, setShowCartDropdown] = useState(false);
 
     // Scroll effect for header
     useEffect(() => {
@@ -36,13 +43,24 @@ const Header = () => {
         }
     }, [mobileMenuOpen]);
 
+    const handleWhatsAppOrder = () => {
+        const phoneNumber = '254712403671';
+        const message = `I want to order these items:\n\n${cartItems.map(item =>
+            `${item.name} (${item.quantity} x KSh ${item.price.toLocaleString()})`
+        ).join('\n')
+            }\n\nTotal: KSh ${cartTotal.toLocaleString()}`;
+
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    };
+
     return (
         <>
             {/* Announcement Bar */}
             <div className="bg-gradient-to-r from-pink-600 to-pink-500 py-2 text-center text-white text-xs md:text-sm">
                 <div className="container mx-auto px-4 overflow-hidden">
                     <p className="inline-flex items-center justify-center gap-2 w-full">
-                        <span className="hidden sm:inline">🚚 Free countrywide delivery</span>
+                        <span className="hidden sm:inline">🚚 Countrywide delivery</span>
                         <a href="tel:0712403671" className="underline hover:text-pink-200 font-medium">
                             Call us: 0712403671
                         </a>
@@ -56,10 +74,10 @@ const Header = () => {
                     {/* Top Row */}
                     <div className="flex items-center justify-between h-16 md:h-20">
                         {/* Left Section - Mobile Menu & Logo */}
-                        <div className="flex items-center gap-4 md:gap-8">
+                        <div className="flex items-center gap-2 md:gap-8">
                             {/* Mobile Menu Button */}
                             <button
-                                className="md:hidden text-gray-700 p-2 rounded-md hover:bg-pink-50 transition-colors"
+                                className="md:hidden text-gray-700 p-2 !rounded-md hover:bg-pink-50 transition-colors"
                                 onClick={() => setMobileMenuOpen(true)}
                                 aria-label="Open menu"
                             >
@@ -96,43 +114,59 @@ const Header = () => {
                         {/* Right Section - Icons */}
                         <div className="flex items-center gap-3 md:gap-5">
                             {/* Search - Desktop */}
-                            <button
-                                className="hidden md:flex items-center p-2 rounded-full hover:bg-pink-50 transition-colors"
-                                onClick={() => setSearchOpen(true)}
-                                aria-label="Search"
-                            >
-                                <Search className="h-5 w-5 text-gray-600 hover:text-pink-600" />
+                            <button className='flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors'>
+                                <a
+                                    href="https://www.facebook.com/profile.php?id=61551260480648"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-600 hover:text-pink-500 transition-colors"
+                                    aria-label="Facebook"
+                                >
+                                    <FaFacebookSquare className="w-5 h-5" />
+                                </a>
                             </button>
-
-                            {/* Account */}
-                            <Link
-                                to="/account"
-                                className="p-2 rounded-full hover:bg-pink-50 transition-colors"
-                                aria-label="Account"
-                            >
-                                <User className="h-5 w-5 text-gray-600 hover:text-pink-600" />
-                            </Link>
-
-                            {/* Favorites */}
-                            <Link
-                                to="/wishlist"
-                                className="p-2 rounded-full hover:bg-pink-50 transition-colors relative"
-                                aria-label="Wishlist"
-                            >
-                                <Heart className="h-5 w-5 text-gray-600 hover:text-pink-600" />
-                            </Link>
-
-                            {/* Cart */}
-                            <Link
-                                to="/cart"
-                                className="p-2 rounded-full hover:bg-pink-50 transition-colors relative"
-                                aria-label="Cart"
-                            >
-                                <ShoppingBag className="h-5 w-5 text-gray-600 hover:text-pink-600" />
-                                <span className="absolute -top-1 -right-1 bg-pink-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                                    0
-                                </span>
-                            </Link>
+                            <button className='flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors'>
+                                <a
+                                    href="https://www.tiktok.com/@trendy.collections01?_t=ZM-8yDf1B90px0&_r=1"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-600 hover:text-pink-500 transition-colors"
+                                    aria-label="TikTok"
+                                >
+                                    <AiFillTikTok className="w-6 h-6" />
+                                </a>
+                            </button>
+                            <button className='hidden lg:flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors'>
+                                <a
+                                    href="https://www.instagram.com/trendy.collection01/?hl=en"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-600 hover:text-pink-500 transition-colors"
+                                    aria-label="Instagram"
+                                >
+                                    <FaSquareInstagram className="w-5 h-5" />
+                                </a>
+                            </button>
+                            {/* Cart with Dropdown */}
+                            <div className="relative">
+                                <button
+                                    className="flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors relative"
+                                    onClick={() => {
+                                        setShowCartDropdown(!showCartDropdown);
+                                        if (cartCount > 0) {
+                                            navigate('/cart');
+                                        }
+                                    }}
+                                    aria-label="Cart"
+                                >
+                                    <ShoppingCart className="h-5 w-5 text-gray-700" />
+                                    {cartCount > 0 && (
+                                        <span className="absolute -top-1 -right-1 bg-pink-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                                            {cartCount}
+                                        </span>
+                                    )}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

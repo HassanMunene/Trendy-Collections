@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 import './App.css';
 
@@ -35,6 +36,17 @@ function App() {
 	return (
 		<BrowserRouter>
 			<AuthProvider>
+				<Toaster
+					position="bottom-right"
+					toastOptions={{
+						duration: 3000,
+						style: {
+							border: '1px solid #e5e7eb',
+							padding: '16px',
+							color: '#1f2937',
+						},
+					}}
+				/>
 				<CartProvider>
 					<MobileProvider>
 						{/* Suspense is used to show a fallback loading while the component is being loaded */}
