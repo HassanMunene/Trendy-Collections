@@ -1,4 +1,4 @@
-![trendy collections ](https://github.com/user-attachments/assets/90244f11-8a95-4eb7-a7f4-a6cd8afca158)
+![trendy collections ](https://github.com/user-attachments/assets/977cf649-9110-4552-b5a3-7dbf4f984a50)
 
 
 # BACKEND ARCHITECTURE DECISIONS
