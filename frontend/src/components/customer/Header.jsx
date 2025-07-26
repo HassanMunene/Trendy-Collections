@@ -60,7 +60,7 @@ const Header = () => {
             <div className="bg-gradient-to-r from-pink-600 to-pink-500 py-2 text-center text-white text-xs md:text-sm">
                 <div className="container mx-auto px-4 overflow-hidden">
                     <p className="inline-flex items-center justify-center gap-2 w-full">
-                        <span className="hidden sm:inline">🚚 Free countrywide delivery</span>
+                        <span className="hidden sm:inline">🚚 Countrywide delivery</span>
                         <a href="tel:0712403671" className="underline hover:text-pink-200 font-medium">
                             Call us: 0712403671
                         </a>
