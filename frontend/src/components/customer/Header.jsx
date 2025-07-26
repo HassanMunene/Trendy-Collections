@@ -1,6 +1,9 @@
-import { Search, User, Heart, ShoppingBag, X, ChevronRight, AlignJustify } from 'lucide-react'
+import { User, Heart, ShoppingBag, X, ChevronRight, AlignJustify } from 'lucide-react'
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react';
+import { FaFacebookSquare } from "react-icons/fa";
+import { AiFillTikTok } from "react-icons/ai";
+import { FaSquareInstagram } from "react-icons/fa6";
 
 const navigationLinks = [
     { name: 'Shop all', href: "/products?category=all" },
@@ -56,10 +59,10 @@ const Header = () => {
                     {/* Top Row */}
                     <div className="flex items-center justify-between h-16 md:h-20">
                         {/* Left Section - Mobile Menu & Logo */}
-                        <div className="flex items-center gap-4 md:gap-8">
+                        <div className="flex items-center gap-2 md:gap-8">
                             {/* Mobile Menu Button */}
                             <button
-                                className="md:hidden text-gray-700 p-2 rounded-md hover:bg-pink-50 transition-colors"
+                                className="md:hidden text-gray-700 p-2 !rounded-md hover:bg-pink-50 transition-colors"
                                 onClick={() => setMobileMenuOpen(true)}
                                 aria-label="Open menu"
                             >
@@ -96,43 +99,39 @@ const Header = () => {
                         {/* Right Section - Icons */}
                         <div className="flex items-center gap-3 md:gap-5">
                             {/* Search - Desktop */}
-                            <button
-                                className="hidden md:flex items-center p-2 rounded-full hover:bg-pink-50 transition-colors"
-                                onClick={() => setSearchOpen(true)}
-                                aria-label="Search"
-                            >
-                                <Search className="h-5 w-5 text-gray-600 hover:text-pink-600" />
+                            <button className='flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors'>
+                                <a
+                                    href="https://www.facebook.com/profile.php?id=61551260480648"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-600 hover:text-pink-500 transition-colors"
+                                    aria-label="Facebook"
+                                >
+                                    <FaFacebookSquare className="w-5 h-5" />
+                                </a>
                             </button>
-
-                            {/* Account */}
-                            <Link
-                                to="/account"
-                                className="p-2 rounded-full hover:bg-pink-50 transition-colors"
-                                aria-label="Account"
-                            >
-                                <User className="h-5 w-5 text-gray-600 hover:text-pink-600" />
-                            </Link>
-
-                            {/* Favorites */}
-                            <Link
-                                to="/wishlist"
-                                className="p-2 rounded-full hover:bg-pink-50 transition-colors relative"
-                                aria-label="Wishlist"
-                            >
-                                <Heart className="h-5 w-5 text-gray-600 hover:text-pink-600" />
-                            </Link>
-
-                            {/* Cart */}
-                            <Link
-                                to="/cart"
-                                className="p-2 rounded-full hover:bg-pink-50 transition-colors relative"
-                                aria-label="Cart"
-                            >
-                                <ShoppingBag className="h-5 w-5 text-gray-600 hover:text-pink-600" />
-                                <span className="absolute -top-1 -right-1 bg-pink-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                                    0
-                                </span>
-                            </Link>
+                            <button className='flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors'>
+                                <a
+                                    href="https://www.tiktok.com/@trendy.collections01?_t=ZM-8yDf1B90px0&_r=1"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-600 hover:text-pink-500 transition-colors"
+                                    aria-label="TikTok"
+                                >
+                                    <AiFillTikTok className="w-6 h-6" />
+                                </a>
+                            </button>
+                            <button className='flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors'>
+                                <a
+                                    href="https://www.instagram.com/trendy.collection01/?hl=en"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-600 hover:text-pink-500 transition-colors"
+                                    aria-label="Instagram"
+                                >
+                                    <FaSquareInstagram className="w-5 h-5" />
+                                </a>
+                            </button>
                         </div>
                     </div>
                 </div>

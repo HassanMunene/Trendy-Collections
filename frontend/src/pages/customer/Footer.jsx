@@ -1,4 +1,3 @@
-import { User } from 'lucide-react'
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { AiFillTikTok } from "react-icons/ai";
