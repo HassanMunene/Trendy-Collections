@@ -30,7 +30,6 @@ export function CartProvider({ children }) {
         return [...prevItems, { ...product, quantity }];
       }
     });
-    toast.success("product added to cart!");
   };
 
   const removeFromCart = (productId) => {

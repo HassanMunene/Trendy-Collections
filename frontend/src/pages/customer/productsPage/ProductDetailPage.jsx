@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Heart, Star, Minus, Plus, Share2, MessageCircle, Check, ChevronDown, Truck, Clock, RefreshCw } from 'lucide-react';
+import { ArrowLeft, Heart, Star, Minus, Plus, Share2, MessageCircle, Check, ChevronDown } from 'lucide-react';
+import { FaWhatsappSquare } from "react-icons/fa";
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/src/context/CartContext';
 import { products } from '@/src/Mocks/products2';
@@ -24,7 +25,6 @@ export default function ProductDetail() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isZoomOpen, setIsZoomOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('description');
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false);
   const [copiedToClipboard, setCopiedToClipboard] = useState(false);
@@ -389,7 +389,7 @@ export default function ProductDetail() {
               className="w-full h-12 text-lg border-green-600 text-green-600 hover:bg-green-50"
               onClick={() => setShowWhatsAppPopup(true)}
             >
-              <MessageCircle className="h-5 w-5 mr-2" />
+              <FaWhatsappSquare className="h-6 w-6 mr-2" />
               Chat with Seller
             </Button>
 
@@ -542,7 +542,7 @@ export default function ProductDetail() {
             className="h-12 border-green-600 text-green-600 hover:bg-green-50"
             onClick={() => setShowWhatsAppPopup(true)}
           >
-            <MessageCircle className="h-5 w-5" />
+            <FaWhatsappSquare className="h-7 w-7" />
           </Button>
         </div>
       </div>
