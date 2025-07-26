@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { products } from "@/src/Mocks/products2";
-import { Heart, Star } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 const ProductGrid = () => {
     // First, filter products with floral subcategory and flatten their variants
@@ -134,101 +134,80 @@ const ProductGrid = () => {
                 {/* Product Grids */}
                 <div className="space-y-8">
                     {/* Flowery pillows */}
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
                         {floralProducts.map((product) => (
-                            <Link to={`/products/${product.id}`} key={product.id} className="group relative block overflow-hidden" aria-label={`View ${product.name}`}>
-                                {/* Image Container with Hover Effects */}
-                                <div className="relative aspect-square bg-gray-50 rounded-lg overflow-hidden mb-3">
-                                    <img
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-                                        loading="lazy"
-                                        width={400}
-                                        height={400}
-                                    />
+                            <div key={product.id} className="group relative">
+                                <Link
+                                    to={`/products/${product.id}`}
+                                    className="block"
+                                    aria-label={`View ${product.name}`}
+                                >
+                                    {/* Image Container */}
+                                    <div className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden mb-4 shadow-sm hover:shadow-md transition-all duration-300">
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            loading="lazy"
+                                            width={400}
+                                            height={400}
+                                        />
 
-                                    {/* Quick Actions (Wishlist, View) */}
-                                    <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/10">
-                                        <button
-                                            className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                // Add to wishlist logic
-                                            }}
-                                            aria-label="Add to wishlist"
-                                        >
-                                            <Heart className="w-4 h-4 text-gray-700" />
-                                        </button>
+                                        {/* Badges */}
+                                        <div className="absolute top-3 left-3 space-y-2">
+                                            {product.isNew && (
+                                                <span className="inline-block bg-white px-2.5 py-1 rounded-full text-xs font-bold shadow-md text-gray-900">
+                                                    New Arrival
+                                                </span>
+                                            )}
+                                            {product.discount && (
+                                                <span className="inline-block bg-gradient-to-r from-red-500 to-red-600 text-white px-2.5 py-1 rounded-full text-xs font-bold shadow-md">
+                                                    -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
 
-                                    {/* Badges */}
-                                    {product.isNew && (
-                                        <span className="absolute top-2 left-2 bg-white px-2 py-1 rounded-full text-xs font-bold shadow-sm">
-                                            New
-                                        </span>
-                                    )}
-                                    {product.discount && (
-                                        <span className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full text-xs font-bold">
-                                            -{product.discount}%
-                                        </span>
-                                    )}
-                                </div>
+                                    {/* Product Info */}
+                                    <div className="px-1">
+                                        <h4 className="font-medium text-gray-900 mb-2 line-clamp-2 min-h-[3rem] text-lg leading-tight">
+                                            {product.name}
+                                        </h4>
 
-                                {/* Product Info */}
-                                <div className="p-1">
-                                    <h4 className="font-medium text-gray-900 mb-1 line-clamp-2 min-h-[2.5rem]">
-                                        {product.name}
-                                    </h4>
-
-                                    <div className="flex items-center gap-2">
-                                        {product.originalPrice ? (
-                                            <>
-                                                <span className="text-gray-900 font-bold">
+                                        {/* Price */}
+                                        <div className="mb-3">
+                                            {product.originalPrice ? (
+                                                <div className="flex items-baseline gap-2">
+                                                    <span className="text-gray-900 font-bold text-xl">
+                                                        KSh {product.price.toLocaleString()}
+                                                    </span>
+                                                    <span className="text-gray-400 text-sm line-through">
+                                                        KSh {product.originalPrice.toLocaleString()}
+                                                    </span>
+                                                </div>
+                                            ) : (
+                                                <span className="text-gray-900 font-bold text-xl">
                                                     KSh {product.price.toLocaleString()}
                                                 </span>
-                                                <span className="text-gray-400 text-sm line-through">
-                                                    KSh {product.originalPrice.toLocaleString()}
-                                                </span>
-                                            </>
-                                        ) : (
-                                            <span className="text-gray-900 font-bold">
-                                                KSh {product.price.toLocaleString()}
-                                            </span>
-                                        )}
-                                    </div>
-
-                                    {/* Rating */}
-                                    {product.rating && (
-                                        <div className="flex items-center mt-1">
-                                            {[...Array(5)].map((_, i) => (
-                                                <Star
-                                                    key={i}
-                                                    className={`w-3 h-3 ${i < Math.floor(product.rating)
-                                                        ? 'text-yellow-400 fill-current'
-                                                        : 'text-gray-300'}`}
-                                                />
-                                            ))}
-                                            <span className="text-xs text-gray-500 ml-1">
-                                                ({product.reviewCount || 0})
-                                            </span>
+                                            )}
                                         </div>
-                                    )}
-                                </div>
+                                    </div>
+                                </Link>
 
-                                {/* Add to Cart Button (Appears on hover) */}
-                                <div className="absolute bottom-16 left-0 right-0 px-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <button
-                                        className="w-full bg-black text-white py-2 text-sm rounded-md hover:bg-gray-800 transition-colors"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            // Add to cart logic
-                                        }}
-                                    >
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </Link>
+                                {/* WhatsApp Button */}
+                                <button
+                                    className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors duration-300 shadow hover:shadow-md"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        // WhatsApp order logic
+                                        const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
+                                        window.open(`https://wa.me/254712345678?text=${encodeURIComponent(message)}`, '_blank');
+                                    }}
+                                >
+                                    <FaWhatsapp className="h-5 w-5" />
+                                    <span>Order via WhatsApp</span>
+                                </button>
+                            </div>
                         ))}
                     </div>
 

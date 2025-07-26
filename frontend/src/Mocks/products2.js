@@ -1,5 +1,6 @@
 // We could make images an Array. 
 export const products = [
+  //blue velvet Pillow
   {
     id: "1",
     name: "Serenity Blue Luxe Velvet Pillow",
@@ -20,6 +21,7 @@ export const products = [
     createdAt: "2023-10-15",
     tags: ["velvet", "luxury", "living-room", "bedroom"]
   },
+  // glossy pink curtain
   {
     id: "glossy-pink-curtain-1",
     name: "Glossy Pink Plain Curtain Panel (Pair)",
@@ -115,6 +117,7 @@ export const products = [
     ],
     careInstructions: "Machine wash cold (max 30°C) with mild detergent. Tumble dry on low heat. Iron on cotton setting if needed. Do not bleach. For longest life, wash separately before first use.",
   },
+  // Mate marigold pillow
   {
     id: "matte-marigold-knot-pillow-1",
     name: "Matte Marigold Knot Pillow",
@@ -149,6 +152,7 @@ export const products = [
       "Lightweight and plush feel"
     ]
   },
+  // Emerald green Knot pillow
   {
     id: "2",
     name: "Emerald Green Art Splash Knot Pillow",
@@ -168,6 +172,7 @@ export const products = [
     stock: 8,
     tags: ["artistic", "handmade", "accent-piece"]
   },
+  // glossy yellow curtain
   {
     id: "glossy-yellow-curtain-1",
     name: "Glossy Yellow Plain Curtain Panel (Pair)",
@@ -214,6 +219,7 @@ export const products = [
     ],
     careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
   },
+  // earth tone knot pillow
   {
     id: "earthtone-knot-pillow-1",
     name: "Earthtone Knot Pillow",
@@ -248,6 +254,7 @@ export const products = [
       "Ideal for sofas, beds, or chairs"
     ],
   },
+  // golden mist pillow
   {
     id: "3",
     name: "Golden Mist Luxury Velvet Pillow",
@@ -267,6 +274,7 @@ export const products = [
     stock: 12,
     tags: ["velvet", "luxury", "golden", "statement"]
   },
+  // glossy brown curtain
   {
     id: "glossy-brown-curtain-1",
     name: "Glossy Brown Plain Curtain Panel (Pair)",
@@ -313,6 +321,7 @@ export const products = [
     ],
     careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
   },
+  // golden bronze knot pillow
   {
     id: "golden-bronze-knot-pillow-1",
     name: "Golden Bronze Knot Pillow",
@@ -348,6 +357,7 @@ export const products = [
       "Ideal for sofas, beds, or reading corners"
     ],
   },
+  // white pillow with gold foils
   {
     id: "5",
     name: "Luxury White Pillow with Gold Foil Stripes",
@@ -367,6 +377,7 @@ export const products = [
     stock: 20,
     tags: ["gold foil", "luxury", "minimalist"]
   },
+  // glossy deep blue curtain
   {
     id: "glossy-deep-blue-curtain-1",
     name: "Glossy Deep Blue Plain Curtain Panel (Pair)",
@@ -413,6 +424,7 @@ export const products = [
     ],
     careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
   },
+  // Urban grid throw pillow
   {
     id: "6",
     name: "Urban Grid Modern Throw Pillow",
@@ -432,6 +444,7 @@ export const products = [
     stock: 14,
     tags: ["modern", "geometric", "urban", "contemporary"]
   },
+  // Multiple color knot pillow
   {
     id: "7",
     name: "Multiple Colors Knot Pillows",
@@ -471,6 +484,7 @@ export const products = [
       "Ideal for sofas, beds, or chairs"
     ],
   },
+  // Royal Blue Pillow
   {
     id: "8",
     name: "Royal Azure Velvet Throw Pillow",
@@ -490,6 +504,7 @@ export const products = [
     stock: 5,
     tags: ["velvet", "blue", "luxury", "statement"]
   },
+  // Black pillow with gold stripes
   {
     id: "11",
     name: "Luxury Black Pillow with Gold Foil Stripes",
@@ -509,117 +524,149 @@ export const products = [
     stock: 3,
     tags: ["premium", "gold foil", "luxury", "statement"]
   },
-  // Grouped variants: Urban Geometry Series:
+  // Multicolor Geometry design pillow
   {
-    id: "urban-geometry-series",
-    name: "Urban Geometry Throw Pillow Collection",
-    variants: [
-      {
-        id: "22",
-        name: "Urban Geometry Multicolor Pillow",
-        color: "Multicolor",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 8,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "24",
-        name: "Urban Geometry Red Pillow",
-        color: "Red",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design2.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 6,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "25",
-        name: "Urban Geometry Dark Red Pillow",
-        color: "Dark Red",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design3.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 5,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "28",
-        name: "Urban Geometry White Pillow",
-        color: "White",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design4.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 10,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "29",
-        name: "Urban Geometry White/Grey Pillow",
-        color: "White/Grey",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design5.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 7,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "32",
-        name: "Urban Geometry White/Black Pillow",
-        color: "White/Black",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design6.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 9,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "36",
-        name: "Urban Geometry Abstract Pillow",
-        color: "Multicolor Abstract",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design7.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 4,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "39",
-        name: "Urban Geometry White/Geometric Pillow",
-        color: "White/Geometric",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design8.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 6,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "40",
-        name: "Urban Geometry Black/White Pillow",
-        color: "Black/White",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Geometry-Design9.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 8,
-        onSale: Math.random() < 0.3
-      }
+    id: "Multicolor-Geometry-Throw-Pillow",
+    name: "Multicolor Geometry Pillow",
+    description: "This premium throw pillow features a bold multicolor geometric pattern with subtle gold foil accents. Designed to elevate modern and luxury interiors, it's perfect for adding a statement touch to sofas, chairs, or beds. Made from soft polyester for both style and comfort.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Multicolor-Geometry-Pillow.webp",
+    images: [
+      "/images/pillows/Multicolor-Geometry-Pillow.webp"
     ],
-    description: "Modern geometric design pillow collection featuring contemporary abstract patterns. These versatile throw pillows add artistic flair to sofas, beds, or accent chairs. Made with durable, colorfast polyester that maintains its vibrant look.",
+    colors: ["brown", "gold", "white", "blue"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
     category: "pillow",
-    subcategory: "geometric",
-    materials: ["polyester", "cotton"],
-    careInstructions: "Spot clean or dry clean only",
-    rating: 4.5,
-    reviews: 112,
+    subcategory: "luxury",
+    rating: 5.0,
+    reviews: 10,
     isNew: false,
-    onSale: false,
-    tags: ["modern", "geometric", "abstract",],
-    dimensions: {
-      insertSize: "18×18 inches",
-      pillowcaseSize: "19×19 inches"
-    },
-    createdAt: "2023-09-10"
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "gold foil", "luxury", "statement", "modern", "geometric"]
+  },
+  // Red Geometry design Pillow
+  {
+    id: "Red-Geometry-Throw-Pillow",
+    name: "Red Geometry Design Pillow",
+    description: "This premium throw pillow features a bold red geometric pattern with subtle gold foil accents. Designed to elevate modern and luxury interiors, it's perfect for adding a statement touch to sofas, chairs, or beds. Made from soft polyester for both style and comfort.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Red-Geometry-Pillow.webp",
+    images: [
+      "/images/pillows/Red-Geometry-Pillow2.webp",
+      "/images/pillows/Red-Geometry-Pillow3.webp",
+      "/images/pillows/Red-Geometry-Pillow4.webp"
+    ],
+    colors: ["brown", "red", "white", "blue"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "luxury",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "luxury", "statement", "modern", "geometric"]
+  },
+  // White Geometry design Pillow
+  {
+    id: "White-Geometry-Throw-Pillow",
+    name: "White Geometry Design Pillow",
+    description: "This premium throw pillow features a bold white geometric patterns. Designed to elevate modern and luxury interiors, it's perfect for adding a statement touch to sofas, chairs, or beds. Made from soft polyester for both style and comfort.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/White-Geometry-Pillow.webp",
+    images: [
+      "/images/pillows/White-Geometry-Pillow2.webp",
+      "/images/pillows/White-Geometry-Pillow4.webp"
+    ],
+    colors: ["brown", "white"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "luxury",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "luxury", "statement", "modern", "geometric"]
+  },
+  // White Gold Geometry Design
+  {
+    id: "White-Gold-Geometry-Throw-Pillow",
+    name: "White Gold Geometry Design Pillow",
+    description: "This premium throw pillow features a bold white gold geometric patterns. Designed to elevate modern and luxury interiors, it's perfect for adding a statement touch to sofas, chairs, or beds. Made from soft polyester for both style and comfort.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/White-Gold-Geometry-Pillow.webp",
+    images: [
+      "/images/pillows/White-Gold-Geometry-Pillow2.webp",
+      "/images/pillows/White-Gold-Geometry-Pillow3.webp"
+    ],
+    colors: ["brown", "white", "gold"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "luxury",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "luxury", "statement", "modern", "geometric"]
+  },
+  // White Blue Geometry Design
+  {
+    id: "White-Blue-Geometry-Throw-Pillow",
+    name: "White Blue Geometry Design Pillow",
+    description: "This premium throw pillow features a bold white Blue geometric patterns. Designed to elevate modern and luxury interiors, it's perfect for adding a statement touch to sofas, chairs, or beds. Made from soft polyester for both style and comfort.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/White-Blue-Geometry-Pillow.webp",
+    images: [
+      "/images/pillows/White-Blue-Geometry-Pillow2.webp",
+      "/images/pillows/White-Blue-Geometry-Pillow3.webp"
+    ],
+    colors: ["brown", "white", "blue"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "luxury",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "luxury", "statement", "modern", "geometric"]
+  },
+  // Gold Blue Geometry Design
+  {
+    id: "Gold-Geometry-Throw-Pillow",
+    name: "Gold Geometry Design Pillow",
+    description: "This premium throw pillow features a bold gold geometric patterns. Designed to elevate modern and luxury interiors, it's perfect for adding a statement touch to sofas, chairs, or beds. Made from soft polyester for both style and comfort.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Gold-Geometry-Design.webp",
+    images: [
+      "/images/pillows/Gold-Geometry-Design2.webp",
+      "/images/pillows/Gold-Geometry-Design3.webp"
+    ],
+    colors: ["brown", "white", "blue"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "luxury",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "luxury", "statement", "modern", "geometric"]
   },
   // Grouped variant: Plain series
   {
