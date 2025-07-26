@@ -1,4 +1,4 @@
-import { User, Heart, ShoppingBag, X, ChevronRight, AlignJustify } from 'lucide-react'
+import { User, ShoppingCart, X, ChevronRight, AlignJustify } from 'lucide-react'
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react';
 import { FaFacebookSquare } from "react-icons/fa";
@@ -159,7 +159,7 @@ const Header = () => {
                                     }}
                                     aria-label="Cart"
                                 >
-                                    <ShoppingBag className="h-5 w-5 text-gray-700" />
+                                    <ShoppingCart className="h-5 w-5 text-gray-700" />
                                     {cartCount > 0 && (
                                         <span className="absolute -top-1 -right-1 bg-pink-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                                             {cartCount}
