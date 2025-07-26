@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Heart, Star, Minus, Plus, Share2, MessageCircle, Check, ChevronDown } from 'lucide-react';
+import { ArrowLeft, Heart, Star, Minus, Plus, Share2, MessageCircle, Check, ChevronDown, Truck, Clock, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '../../../context/CartContext';
 import { products } from '@/src/Mocks/products2';
@@ -8,6 +8,7 @@ import { ProductCard } from '@/src/components/common/ProductCard';
 import Breadcrumbs from '@/src/components/common/Breadcrumbs';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionItem } from '@/components/ui/accordion';
+
 
 export default function ProductDetail() {
   const { productId } = useParams();
@@ -140,17 +141,17 @@ export default function ProductDetail() {
               {/* Badges */}
               <div className="absolute top-4 left-4 space-y-2">
                 {product.isNew && (
-                  <Badge variant="new" className="shadow-sm">
+                  <Badge variant="success" className="shadow-sm rounded-sm">
                     New Arrival
                   </Badge>
                 )}
                 {product.onOffer && (
-                  <Badge variant="sale" className="shadow-sm">
+                  <Badge variant="info" className="shadow-sm rounded-sm ml-2">
                     {product.salePercentage}% OFF
                   </Badge>
                 )}
                 {product.stock <= 5 && (
-                  <Badge variant="stock" className="shadow-sm">
+                  <Badge variant="destructive" className="shadow-sm rounded-sm">
                     Only {product.stock} left
                   </Badge>
                 )}
