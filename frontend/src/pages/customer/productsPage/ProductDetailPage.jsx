@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Heart, Star, Minus, Plus, Share2, Facebook, Twitter, Instagram } from 'lucide-react';
+import { ArrowLeft, Heart, Star, Minus, Plus, Share2, MessageCircle, Check, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '../../../context/CartContext';
 import { products } from '@/src/Mocks/products2';
 import { ProductCard } from '@/src/components/common/ProductCard';
+import Breadcrumbs from '@/src/components/common/Breadcrumbs';
+import { Badge } from '@/components/ui/badge';
+import { Accordion, AccordionItem } from '@/components/ui/accordion';
 
 export default function ProductDetail() {
   const { productId } = useParams();
@@ -21,6 +24,12 @@ export default function ProductDetail() {
   const [isZoomOpen, setIsZoomOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('description');
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false);
+  const [copiedToClipboard, setCopiedToClipboard] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [productId]);
 
   if (!product) {
     return (
@@ -33,99 +42,148 @@ export default function ProductDetail() {
     );
   }
 
-  const formatPrice = (price) => `ksh ${price.toLocaleString()}`;
+  const formatPrice = (price) => `KSh ${price.toLocaleString()}`;
+  const whatsappMessage = `Hi, I'm interested in your ${product.name} (${product.id}). Could you tell me more about it?`;
+  const whatsappUrl = `https://wa.me/254712345678?text=${encodeURIComponent(whatsappMessage)}`;
 
   const productImages = [
     product.image,
-    ...(product.additionalImages || []),
+    ...(product.images || []),
   ];
 
-  const getColorDots = (colors) => {
-    const colorMap = {
-      'Grey': '#6B7280',
-      'Grey Stripe': '#9CA3AF',
-      'White': '#FFFFFF',
-      'Off White': '#F9FAFB',
-      'Off White Boucle': '#F3F4F6',
-      'Natural Oak': '#D2B48C',
-      'Dark Oak': '#8B4513',
-      'Blue': '#3B82F6',
-      'Forest Green': '#16A34A',
-      'Navy': '#1E3A8A',
-      'Natural': '#F5F5DC',
-      'Light Grey': '#E5E7EB',
-      'Natural Wood': '#CD853F',
-      'Cream': '#FFFDD0',
-      'Pink': '#EC4899',
-      'Light Natural': '#FAF7F0'
-    };
-
-    return colors.map((color) => (
-      <button
-        key={color}
-        onClick={() => setSelectedColor(color)}
-        className={`w-8 h-8 rounded-full border-2 ${selectedColor === color ? 'border-gray-900' : 'border-gray-300'
-          }`}
-        style={{ backgroundColor: colorMap[color] || '#D1D5DB' }}
-        title={color}
-        aria-label={`Select color ${color}`}
-      />
-    ));
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopiedToClipboard(true);
+    setTimeout(() => setCopiedToClipboard(false), 2000);
   };
 
   const handleAddToCart = async () => {
     setIsAddingToCart(true);
     try {
-      for (let i = 0; i < quantity; i++) {
-        await addItem({ ...product, selectedColor });
-      }
-      // In a real app, you might show a toast notification here
+      await addItem({
+        ...product,
+        selectedColor,
+        quantity
+      });
+      // Show success notification
     } finally {
       setIsAddingToCart(false);
     }
   };
 
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={`h-5 w-5 ${i < Math.floor(rating || 0)
+          ? 'text-yellow-400 fill-current'
+          : 'text-gray-300'
+          }`}
+      />
+    ));
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
-            aria-label="Back to products"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Products
-          </button>
-        </div>
-      </div>
+      {/* Premium Header with Breadcrumbs */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <button
+              onClick={() => navigate(-1)}
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+              aria-label="Back to products"
+            >
+              <ArrowLeft className="h-5 w-5" />
+              <span className="hidden sm:inline">Back</span>
+            </button>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+            <Breadcrumbs
+              items={[
+                { name: 'Home', href: '/' },
+                { name: product.category, href: `/${product.category}` },
+                { name: product.name, current: true }
+              ]}
+              className="hidden md:flex"
+            />
+
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setIsFavorite(!isFavorite)}
+                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+              >
+                <Heart
+                  className={`h-5 w-5 ${isFavorite ? 'text-red-500 fill-current' : 'text-gray-400'}`}
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Product Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Product Images */}
+          {/* Product Gallery - Premium Version */}
           <div className="space-y-4">
-            <div className="aspect-square bg-white rounded-lg overflow-hidden relative group">
+            {/* Main Image with Floating Badges */}
+            <div className="relative aspect-square bg-gray-100 rounded-xl overflow-hidden group">
               <img
                 src={productImages[selectedImageIndex]}
                 alt={product.name}
-                className="w-full h-full object-cover cursor-zoom-in"
+                className="w-full h-full object-cover transition-opacity duration-300 cursor-zoom-in"
                 onClick={() => setIsZoomOpen(true)}
-                loading="lazy"
+                loading="eager"
               />
-              {product.isNew && (
-                <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded">
-                  NEW
-                </span>
-              )}
+
+              {/* Badges */}
+              <div className="absolute top-4 left-4 space-y-2">
+                {product.isNew && (
+                  <Badge variant="new" className="shadow-sm">
+                    New Arrival
+                  </Badge>
+                )}
+                {product.onOffer && (
+                  <Badge variant="sale" className="shadow-sm">
+                    {product.salePercentage}% OFF
+                  </Badge>
+                )}
+                {product.stock <= 5 && (
+                  <Badge variant="stock" className="shadow-sm">
+                    Only {product.stock} left
+                  </Badge>
+                )}
+              </div>
+
+              {/* Quick Actions */}
+              <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  onClick={() => setShowWhatsAppPopup(true)}
+                  className="bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-colors"
+                  aria-label="Contact seller"
+                >
+                  <MessageCircle className="h-5 w-5 text-green-600" />
+                </button>
+                <button
+                  onClick={handleCopyLink}
+                  className="bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-colors"
+                  aria-label="Share product"
+                >
+                  <Share2 className="h-5 w-5 text-gray-700" />
+                </button>
+              </div>
             </div>
 
-            <div className="flex gap-3 overflow-x-auto pb-2">
+            {/* Thumbnail Gallery */}
+            <div className="grid grid-cols-5 gap-3">
               {productImages.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImageIndex(index)}
-                  className={`flex-shrink-0 w-20 h-20 bg-white rounded-md overflow-hidden border-2 ${selectedImageIndex === index ? 'border-black' : 'border-transparent'
+                  className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${selectedImageIndex === index
+                    ? 'border-black scale-105 shadow-sm'
+                    : 'border-transparent hover:border-gray-300'
                     }`}
                   aria-label={`View image ${index + 1}`}
                 >
@@ -139,52 +197,51 @@ export default function ProductDetail() {
               ))}
             </div>
 
+            {/* Image Zoom Modal */}
             {isZoomOpen && (
               <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
                 <button
                   onClick={() => setIsZoomOpen(false)}
-                  className="absolute top-4 right-4 text-white p-2"
+                  className="absolute top-6 right-6 text-white p-2 hover:bg-white hover:bg-opacity-10 rounded-full"
                   aria-label="Close zoom"
                 >
                   ✕
                 </button>
                 <img
                   src={productImages[selectedImageIndex]}
-                  className="max-w-full max-h-full"
+                  className="max-w-[90vw] max-h-[90vh] object-contain"
                   alt={`Zoomed view of ${product.name}`}
                 />
               </div>
             )}
           </div>
 
-          {/* Product Info */}
+          {/* Product Info - Premium Layout */}
           <div className="space-y-6">
+            {/* Title and Rating */}
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
-
-              {/* Rating */}
-              {product.rating && (
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="flex items-center">
-                    {Array.from({ length: 5 }, (_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-4 w-4 ${i < Math.floor(product.rating || 0)
-                            ? 'text-yellow-400 fill-current'
-                            : 'text-gray-300'
-                          }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm text-gray-600">{product.rating.toFixed(1)}</span>
-                  <span className="text-sm text-gray-400">(127 reviews)</span>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center gap-1">
+                  {renderStars(product.rating)}
+                  <span className="ml-1 text-sm font-medium text-gray-600">
+                    {product.rating.toFixed(1)}
+                  </span>
                 </div>
-              )}
+                <span className="text-sm text-gray-500">
+                  {product.reviews} reviews
+                </span>
+                <span className="text-sm text-gray-500">
+                  {product.stock} in stock
+                </span>
+              </div>
+            </div>
 
-              {/* Price */}
-              <div className="flex items-center gap-3 mb-6">
+            {/* Price Section */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <div className="flex items-baseline gap-3">
                 {product.originalPrice && (
-                  <span className="text-xl text-gray-400 line-through">
+                  <span className="text-lg text-gray-400 line-through">
                     {formatPrice(product.originalPrice)}
                   </span>
                 )}
@@ -192,158 +249,301 @@ export default function ProductDetail() {
                   {formatPrice(product.price)}
                 </span>
                 {product.originalPrice && (
-                  <span className="bg-red-100 text-red-800 text-sm font-medium px-2 py-1 rounded">
+                  <Badge variant="sale" className="ml-2">
                     Save {formatPrice(product.originalPrice - product.price)}
-                  </span>
+                  </Badge>
                 )}
               </div>
 
-              {/* Stock indicator */}
-              {product.stock <= 10 && product.stock > 0 ? (
-                <div className="text-sm text-orange-600 mb-4">
-                  Only {product.stock} left in stock!
-                </div>
-              ) : product.stock === 0 ? (
-                <div className="text-sm text-red-600 mb-4">Out of stock</div>
-              ) : null}
-            </div>
-
-            {/* Tabbed interface */}
-            <div className="border-b border-gray-200">
-              <nav className="flex -mb-px">
-                {['description', 'specifications', 'reviews', 'delivery'].map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`py-4 px-6 font-medium text-sm border-b-2 ${activeTab === tab
-                        ? 'border-black text-black'
-                        : 'border-transparent text-gray-500 hover:text-gray-700'
-                      }`}
-                  >
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                ))}
-              </nav>
-            </div>
-
-            <div className="py-6">
-              {activeTab === 'description' && (
-                <div className="prose prose-sm">
-                  <p>{product.description}</p>
-                  <ul className="space-y-2 mt-4">
-                    {product.features?.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {activeTab === 'specifications' && (
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <h4 className="font-medium mb-2">Dimensions</h4>
-                    <p>Height: {product.dimensions?.height || 'N/A'}</p>
-                    <p>Width: {product.dimensions?.width || 'N/A'}</p>
-                    <p>Depth: {product.dimensions?.depth || 'N/A'}</p>
+              {product.stock <= 10 && (
+                <div className="mt-2">
+                  <div className="w-full bg-gray-200 rounded-full h-2.5">
+                    <div
+                      className="bg-green-600 h-2.5 rounded-full"
+                      style={{ width: `${(product.stock / 10) * 100}%` }}
+                    ></div>
                   </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Materials</h4>
-                    <p>{product.materials?.join(', ') || 'N/A'}</p>
-                  </div>
-                </div>
-              )}
-
-              {activeTab === 'reviews' && (
-                <div>
-                  <p>Reviews coming soon</p>
-                </div>
-              )}
-
-              {activeTab === 'delivery' && (
-                <div className="space-y-3">
-                  <p>Standard delivery: 3-5 working days</p>
-                  <p>Express delivery available</p>
-                  <p>Free shipping on orders over £50</p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {product.stock} items left
+                  </p>
                 </div>
               )}
             </div>
 
             {/* Color Selection */}
-            {product.colors.length > 1 && (
+            {product.colors?.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold">Color: {selectedColor}</h3>
-                <div className="flex items-center gap-3">
-                  {getColorDots(product.colors)}
+                <h3 className="text-lg font-semibold">Color: <span className="font-normal">{selectedColor}</span></h3>
+                <div className="flex flex-wrap gap-2">
+                  {product.colors.map((color) => (
+                    <button
+                      key={color}
+                      onClick={() => setSelectedColor(color)}
+                      className={`px-4 py-2 rounded-full border-2 flex items-center gap-2 ${selectedColor === color
+                        ? 'border-black bg-black text-white'
+                        : 'border-gray-300 bg-white hover:bg-gray-50'
+                        }`}
+                    >
+                      {selectedColor === color && <Check className="h-4 w-4" />}
+                      {color}
+                    </button>
+                  ))}
                 </div>
               </div>
             )}
 
-            {/* Social Sharing */}
-            <div className="flex gap-3 pt-4 border-t border-gray-200">
-              <button className="text-gray-500 hover:text-blue-500" aria-label="Share on Facebook">
-                <Facebook className="h-5 w-5" />
-              </button>
-              <button className="text-gray-500 hover:text-pink-500" aria-label="Share on Instagram">
-                <Instagram className="h-5 w-5" />
-              </button>
-              <button className="text-gray-500 hover:text-blue-400" aria-label="Share on Twitter">
-                <Twitter className="h-5 w-5" />
-              </button>
-              <button className="text-gray-500 hover:text-gray-700" aria-label="Share product">
-                <Share2 className="h-5 w-5" />
-              </button>
+            {/* Size Selection */}
+            {product.sizes?.length > 1 && (
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold">Size</h3>
+                <div className="grid grid-cols-3 gap-3">
+                  {product.sizes.map((size) => (
+                    <button
+                      key={size.name}
+                      className={`p-3 rounded-lg border-2 flex flex-col items-center ${selectedSize === size.name
+                          ? 'border-black bg-black text-white'
+                          : 'border-gray-300 bg-white hover:bg-gray-50'
+                        }`}
+                    >
+                      <span className="font-medium">{size.name}</span>
+                      <span className="text-sm text-gray-500">{size.dimensions}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Quantity and Add to Cart */}
+            <div className="flex gap-4 pt-4">
+              <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                <button
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="px-3 py-3 hover:bg-gray-100 transition-colors"
+                  aria-label="Decrease quantity"
+                >
+                  <Minus className="h-4 w-4" />
+                </button>
+                <span className="px-4 py-2 border-x border-gray-300 text-center w-12">
+                  {quantity}
+                </span>
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="px-3 py-3 hover:bg-gray-100 transition-colors"
+                  aria-label="Increase quantity"
+                >
+                  <Plus className="h-4 w-4" />
+                </button>
+              </div>
+
+              <Button
+                onClick={handleAddToCart}
+                className="flex-1 bg-black hover:bg-gray-800 h-12 text-lg"
+                disabled={isAddingToCart || product.stock === 0}
+                size="lg"
+              >
+                {isAddingToCart ? 'Adding...' : 'Add to Cart'}
+              </Button>
             </div>
+
+            {/* WhatsApp Quick Action */}
+            <Button
+              variant="outline"
+              className="w-full h-12 text-lg border-green-600 text-green-600 hover:bg-green-50"
+              onClick={() => setShowWhatsAppPopup(true)}
+            >
+              <MessageCircle className="h-5 w-5 mr-2" />
+              Chat with Seller
+            </Button>
+
+            {/* Product Details Accordion */}
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="description">
+                <div className="flex items-center justify-between w-full py-4 font-medium">
+                  <span>Description</span>
+                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                </div>
+                <div className="pb-4 pt-0">
+                  <p className="text-gray-700 mb-4">{product.description}</p>
+                  <ul className="space-y-3">
+                    {product.features?.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <Check className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </AccordionItem>
+
+              <AccordionItem value="specifications">
+                <div className="flex items-center justify-between w-full py-4 font-medium">
+                  <span>Specifications</span>
+                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                </div>
+                <div className="pb-4 pt-0">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-2">Dimensions</h4>
+                      {product.sizes?.map((size, i) => (
+                        <p key={i} className="text-gray-600 mb-1">
+                          {size.name}: {size.panelWidth} x {size.panelLength}
+                        </p>
+                      ))}
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-2">Materials</h4>
+                      <p className="text-gray-600">{product.materials?.join(', ')}</p>
+                    </div>
+                  </div>
+                </div>
+              </AccordionItem>
+
+              <AccordionItem value="delivery">
+                <div className="flex items-center justify-between w-full py-4 font-medium">
+                  <span>Delivery & Returns</span>
+                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                </div>
+                <div className="pb-4 pt-0">
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <div className="bg-blue-100 p-2 rounded-full">
+                        <Truck className="h-5 w-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">Free Shipping</h4>
+                        <p className="text-gray-600">On orders over KSh 8,000</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="bg-green-100 p-2 rounded-full">
+                        <Clock className="h-5 w-5 text-green-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">Delivery Time</h4>
+                        <p className="text-gray-600">3-5 working days in Nairobi</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="bg-purple-100 p-2 rounded-full">
+                        <RefreshCw className="h-5 w-5 text-purple-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">Easy Returns</h4>
+                        <p className="text-gray-600">14-day return policy</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
 
-        {/* Related Products */}
+        {/* Related Products Section */}
         {relatedProducts.length > 0 && (
-          <div className="mt-16">
-            <h3 className="text-xl font-bold mb-6">You may also like</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <section className="mt-16">
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-2xl font-bold">You may also like</h3>
+              <Button
+                variant="link"
+                onClick={() => navigate(`/${product.category}`)}
+                className="text-gray-600 hover:text-black"
+              >
+                View all
+              </Button>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {relatedProducts.map(product => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
-          </div>
+          </section>
         )}
-      </div>
+      </main>
 
-      {/* Sticky Add to Cart */}
-      <div className="sticky bottom-0 bg-white border-t border-gray-200 py-4 px-4 shadow-lg lg:hidden">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="flex gap-3">
-            <div className="flex border border-gray-300 rounded-md">
+      {/* WhatsApp Popup */}
+      {showWhatsAppPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl max-w-md w-full p-6 shadow-xl">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold">Contact Seller</h3>
               <button
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="px-3 py-2 hover:bg-gray-50"
-                aria-label="Decrease quantity"
+                onClick={() => setShowWhatsAppPopup(false)}
+                className="text-gray-500 hover:text-gray-700"
               >
-                <Minus className="h-4 w-4" />
-              </button>
-              <span className="px-4 py-2 border-x border-gray-300 text-center">
-                {quantity}
-              </span>
-              <button
-                onClick={() => setQuantity(quantity + 1)}
-                className="px-3 py-2 hover:bg-gray-50"
-                aria-label="Increase quantity"
-              >
-                <Plus className="h-4 w-4" />
+                ✕
               </button>
             </div>
 
-            <Button
-              onClick={handleAddToCart}
-              className="flex-1 bg-black hover:bg-gray-800 h-12 text-lg"
-              disabled={isAddingToCart || product.stock === 0}
-            >
-              {isAddingToCart ? 'Adding...' : 'Add to Cart'}
-            </Button>
+            <div className="space-y-4">
+              <p className="text-gray-700">
+                You're about to contact the seller about:<br />
+                <strong>{product.name}</strong>
+              </p>
+
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <p className="text-sm text-gray-600 mb-2">Your message will include:</p>
+                <p className="text-gray-700">{whatsappMessage}</p>
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => setShowWhatsAppPopup(false)}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  className="flex-1 bg-green-600 hover:bg-green-700"
+                  onClick={() => window.open(whatsappUrl, '_blank')}
+                >
+                  Open WhatsApp
+                </Button>
+              </div>
+            </div>
           </div>
+        </div>
+      )}
+
+      {/* Sticky Bottom Bar (Mobile) */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-4 shadow-lg lg:hidden z-40">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              className="px-3 py-2 hover:bg-gray-100"
+              aria-label="Decrease quantity"
+            >
+              <Minus className="h-4 w-4" />
+            </button>
+            <span className="px-3 py-2 border-x border-gray-300 text-center w-10">
+              {quantity}
+            </span>
+            <button
+              onClick={() => setQuantity(quantity + 1)}
+              className="px-3 py-2 hover:bg-gray-100"
+              aria-label="Increase quantity"
+            >
+              <Plus className="h-4 w-4" />
+            </button>
+          </div>
+
+          <Button
+            onClick={handleAddToCart}
+            className="flex-1 bg-black hover:bg-gray-800 h-12"
+            disabled={isAddingToCart || product.stock === 0}
+          >
+            {isAddingToCart ? 'Adding...' : 'Add to Cart'}
+          </Button>
+
+          <Button
+            variant="outline"
+            className="h-12 border-green-600 text-green-600 hover:bg-green-50"
+            onClick={() => setShowWhatsAppPopup(true)}
+          >
+            <MessageCircle className="h-5 w-5" />
+          </Button>
         </div>
       </div>
     </div>

@@ -1,5 +1,3 @@
-import { Plus } from 'lucide-react'
-
 const ProductCollage = () => {
     return (
         <section className="bg-white">
