@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Heart, Star, Minus, Plus, Share2, MessageCircle, Check, ChevronDown } from 'lucide-react';
+import { Star, Share2, MessageCircle, Check, ChevronDown, ChevronLeft } from 'lucide-react';
 import { FaWhatsappSquare } from "react-icons/fa";
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/src/context/CartContext';
 import { products } from '@/src/Mocks/products2';
 import { ProductCard } from '@/src/components/common/ProductCard';
-import Breadcrumbs from '@/src/components/common/Breadcrumbs';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionItem } from '@/components/ui/accordion';
 import toast from 'react-hot-toast';
@@ -23,7 +22,6 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(product?.colors[0] || '');
   const [quantity, setQuantity] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
   const [isZoomOpen, setIsZoomOpen] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false);
@@ -115,35 +113,10 @@ export default function ProductDetail() {
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <button
-              onClick={() => navigate(-1)}
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-              aria-label="Back to products"
-            >
-              <ArrowLeft className="h-5 w-5" />
-              <span className="hidden sm:inline">Back</span>
+            <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors" aria-label="Back to products">
+              <ChevronLeft className="h-5 w-5" />
+              <span className="inline">Back</span>
             </button>
-
-            <Breadcrumbs
-              items={[
-                { name: 'Home', href: '/' },
-                { name: product.category, href: `/${product.category}` },
-                { name: product.name, current: true }
-              ]}
-              className="hidden md:flex"
-            />
-
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setIsFavorite(!isFavorite)}
-                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-                aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
-              >
-                <Heart
-                  className={`h-5 w-5 ${isFavorite ? 'text-red-500 fill-current' : 'text-gray-400'}`}
-                />
-              </button>
-            </div>
           </div>
         </div>
       </header>
@@ -341,26 +314,6 @@ export default function ProductDetail() {
 
             {/* Quantity and Add to Cart */}
             <div className="flex gap-4 pt-4">
-              <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="px-3 py-3 hover:bg-gray-100 transition-colors"
-                  aria-label="Decrease quantity"
-                >
-                  <Minus className="h-4 w-4" />
-                </button>
-                <span className="px-4 py-2 border-x border-gray-300 text-center w-12">
-                  {quantity}
-                </span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="px-3 py-3 hover:bg-gray-100 transition-colors"
-                  aria-label="Increase quantity"
-                >
-                  <Plus className="h-4 w-4" />
-                </button>
-              </div>
-
               <Button
                 onClick={handleAddToCart}
                 className="flex-1 bg-black hover:bg-gray-800 h-12 text-lg relative overflow-hidden"
@@ -390,7 +343,7 @@ export default function ProductDetail() {
               onClick={() => setShowWhatsAppPopup(true)}
             >
               <FaWhatsappSquare className="h-6 w-6 mr-2" />
-              Chat with Seller
+              Whatsapp Seller
             </Button>
 
             {/* Product Details Accordion */}
@@ -509,26 +462,6 @@ export default function ProductDetail() {
       {/* Sticky Bottom Bar (Mobile) */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-4 shadow-lg lg:hidden z-40">
         <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
-            <button
-              onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="px-3 py-2 hover:bg-gray-100"
-              aria-label="Decrease quantity"
-            >
-              <Minus className="h-4 w-4" />
-            </button>
-            <span className="px-3 py-2 border-x border-gray-300 text-center w-10">
-              {quantity}
-            </span>
-            <button
-              onClick={() => setQuantity(quantity + 1)}
-              className="px-3 py-2 hover:bg-gray-100"
-              aria-label="Increase quantity"
-            >
-              <Plus className="h-4 w-4" />
-            </button>
-          </div>
-
           <Button
             onClick={handleAddToCart}
             className="flex-1 bg-black hover:bg-gray-800 h-12"
@@ -539,10 +472,11 @@ export default function ProductDetail() {
 
           <Button
             variant="outline"
-            className="h-12 border-green-600 text-green-600 hover:bg-green-50"
+            className="flex-1 flex h-12 border-green-600 text-green-600 hover:bg-green-50"
             onClick={() => setShowWhatsAppPopup(true)}
           >
             <FaWhatsappSquare className="h-7 w-7" />
+            <span>Whatsapp</span>
           </Button>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { products } from "@/src/Mocks/products2";
+import { FaWhatsapp } from "react-icons/fa";
 
 const ProductGrid = () => {
     // First, filter products with floral subcategory and flatten their variants
@@ -33,7 +34,7 @@ const ProductGrid = () => {
                     >
                         <div className="aspect-[4/5] bg-gradient-to-br from-pink-50 to-amber-50 relative">
                             <img
-                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/curtains/plain-brown-curtain.webp"
+                                src="/images/curtains/plain-brown-curtain.webp"
                                 alt="Luxury curtains collection"
                                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                 loading="lazy"
@@ -59,7 +60,7 @@ const ProductGrid = () => {
                     >
                         <div className="aspect-[4/5] bg-gradient-to-br from-blue-50 to-cyan-50 relative">
                             <img
-                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/pillow-cusions/Serenity-Blue-Luxe-Cushion.webp"
+                                src="/images/pillows/Royal-Azure.webp"
                                 alt="Premium pillow collection"
                                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                 loading="lazy"
@@ -85,7 +86,7 @@ const ProductGrid = () => {
                     >
                         <div className="aspect-[4/5] bg-gradient-to-br from-amber-50 to-yellow-50 relative">
                             <img
-                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/pillow-cusions/White-Gold-Textured-Knot-Cushion.webp"
+                                src="/images/knot-pillows/brown-black-knot-pillows.webp"
                                 alt="Designer knot pillows"
                                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                 loading="lazy"
@@ -93,7 +94,7 @@ const ProductGrid = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                             <div className="absolute bottom-6 left-6 space-y-1">
                                 <h3 className="text-white text-2xl md:text-3xl font-medium">Knot Pillows</h3>
-                                <p className="text-amber-200 text-sm font-light">Limited edition</p>
+                                <p className="text-amber-200 text-sm font-light">Limited</p>
                             </div>
                             <div className="absolute top-4 right-4">
                                 <span className="bg-white/90 text-amber-600 px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
@@ -133,19 +134,80 @@ const ProductGrid = () => {
                 {/* Product Grids */}
                 <div className="space-y-8">
                     {/* Flowery pillows */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
                         {floralProducts.map((product) => (
-                            <Link to={`/products/${product.id}`} key={product.id} className="group cursor-pointer">
-                                <div className="aspect-square bg-[#f6f2f0] mb-4 overflow-hidden">
-                                    <img
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                    />
-                                </div>
-                                <h4 className="font-medium text-gray-900 mb-1">{product.name}</h4>
-                                <p className="text-gray-600">{product.price}</p>
-                            </Link>
+                            <div key={product.id} className="group relative">
+                                <Link
+                                    to={`/products/${product.id}`}
+                                    className="block"
+                                    aria-label={`View ${product.name}`}
+                                >
+                                    {/* Image Container */}
+                                    <div className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden mb-4 shadow-sm hover:shadow-md transition-all duration-300">
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            loading="lazy"
+                                            width={400}
+                                            height={400}
+                                        />
+
+                                        {/* Badges */}
+                                        <div className="absolute top-3 left-3 space-y-2">
+                                            {product.isNew && (
+                                                <span className="inline-block bg-white px-2.5 py-1 rounded-full text-xs font-bold shadow-md text-gray-900">
+                                                    New Arrival
+                                                </span>
+                                            )}
+                                            {product.discount && (
+                                                <span className="inline-block bg-gradient-to-r from-red-500 to-red-600 text-white px-2.5 py-1 rounded-full text-xs font-bold shadow-md">
+                                                    -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Product Info */}
+                                    <div className="px-1">
+                                        <h4 className="font-medium text-gray-900 mb-2 line-clamp-2 min-h-[3rem] text-lg leading-tight">
+                                            {product.name}
+                                        </h4>
+
+                                        {/* Price */}
+                                        <div className="mb-3">
+                                            {product.originalPrice ? (
+                                                <div className="flex items-baseline gap-2">
+                                                    <span className="text-gray-900 font-bold text-xl">
+                                                        KSh {product.price.toLocaleString()}
+                                                    </span>
+                                                    <span className="text-gray-400 text-sm line-through">
+                                                        KSh {product.originalPrice.toLocaleString()}
+                                                    </span>
+                                                </div>
+                                            ) : (
+                                                <span className="text-gray-900 font-bold text-xl">
+                                                    KSh {product.price.toLocaleString()}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </Link>
+
+                                {/* WhatsApp Button */}
+                                <button
+                                    className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors duration-300 shadow hover:shadow-md"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        // WhatsApp order logic
+                                        const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
+                                        window.open(`https://wa.me/254712345678?text=${encodeURIComponent(message)}`, '_blank');
+                                    }}
+                                >
+                                    <FaWhatsapp className="h-5 w-5" />
+                                    <span>Order via WhatsApp</span>
+                                </button>
+                            </div>
                         ))}
                     </div>
 
