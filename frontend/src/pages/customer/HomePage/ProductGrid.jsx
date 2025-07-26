@@ -33,7 +33,7 @@ const ProductGrid = () => {
                     >
                         <div className="aspect-[4/5] bg-gradient-to-br from-pink-50 to-amber-50 relative">
                             <img
-                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/curtains/plain-brown-curtain.webp"
+                                src="/images/curtains/plain-brown-curtain.webp"
                                 alt="Luxury curtains collection"
                                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                 loading="lazy"
@@ -59,7 +59,7 @@ const ProductGrid = () => {
                     >
                         <div className="aspect-[4/5] bg-gradient-to-br from-blue-50 to-cyan-50 relative">
                             <img
-                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/pillow-cusions/Serenity-Blue-Luxe-Cushion.webp"
+                                src="/images/pillows/Royal-Azure.webp"
                                 alt="Premium pillow collection"
                                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                 loading="lazy"
@@ -85,7 +85,7 @@ const ProductGrid = () => {
                     >
                         <div className="aspect-[4/5] bg-gradient-to-br from-amber-50 to-yellow-50 relative">
                             <img
-                                src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/pillow-cusions/White-Gold-Textured-Knot-Cushion.webp"
+                                src="/images/knot-pillows/brown-black-knot-pillows.webp"
                                 alt="Designer knot pillows"
                                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                 loading="lazy"
@@ -93,7 +93,7 @@ const ProductGrid = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                             <div className="absolute bottom-6 left-6 space-y-1">
                                 <h3 className="text-white text-2xl md:text-3xl font-medium">Knot Pillows</h3>
-                                <p className="text-amber-200 text-sm font-light">Limited edition</p>
+                                <p className="text-amber-200 text-sm font-light">Limited</p>
                             </div>
                             <div className="absolute top-4 right-4">
                                 <span className="bg-white/90 text-amber-600 px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
