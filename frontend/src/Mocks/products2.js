@@ -547,6 +547,29 @@ export const products = [
     stock: 20,
     tags: ["premium", "gold foil", "luxury", "statement", "modern", "geometric"]
   },
+  // Multicolor Geometry design pillow 2
+  {
+    id: "Multicolor-Geometry-Throw-Pillow-2",
+    name: "Multicolor Design Pillow",
+    description: "This premium throw pillow features a bold multicolor geometric patterns. Designed to elevate modern and luxury interiors, it's perfect for adding a statement touch to sofas, chairs, or beds. Made from soft polyester for both style and comfort.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Multicolor-design-Pillow2.webp",
+    images: [
+      "/images/pillows/Multicolor-design-Pillow3.webp"
+    ],
+    colors: ["brown", "gold", "white",],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "luxury",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "gold foil", "luxury", "statement", "modern", "geometric"]
+  },
   // Red Geometry design Pillow
   {
     id: "Red-Geometry-Throw-Pillow",
@@ -608,7 +631,7 @@ export const products = [
       "/images/pillows/White-Gold-Geometry-Pillow2.webp",
       "/images/pillows/White-Gold-Geometry-Pillow3.webp"
     ],
-    colors: ["brown", "white", "gold"],
+    colors: ["Mustered Yellow", "white", "gold"],
     materials: ["polyester"],
     sizes: ["20×20"],
     category: "pillow",
@@ -667,6 +690,153 @@ export const products = [
     createdAt: "2023-10-15",
     stock: 20,
     tags: ["premium", "luxury", "statement", "modern", "geometric"]
+  },
+  // Amber Glow Geometric Pillow
+  {
+    id: "Amber-Glow-Geometric-Pillow",
+    name: "Amber Glow Geometric Pillow",
+    description: "Add a bold pop of color and pattern to your space with the Amber Glow Geometric Pillow. Featuring a striking yellow and grey ikat-inspired design on a crisp white background, this pillow blends modern aesthetics with a touch of global charm. Crafted from soft and durable polyester, it's perfect for brightening up sofas, beds, or accent chairs while offering lasting comfort.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Amber-Glow-Geometric-Pillow.webp",
+    images: [
+      "/images/pillows/Amber-Glow-Geometric-Pillow2.webp",
+      "/images/pillows/Amber-Glow-Geometric-Pillow3.webp",
+      "/images/pillows/Amber-Glow-Geometric-Pillow4.webp"
+    ],
+    colors: ["yellow", "grey", "white"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "geometric",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "geometric", "ikat", "modern", "bold"]
+  },
+  // Rustic Pines Design Throw Pillow
+  {
+    id: "rustic-pines-throw-pillow",
+    name: "Rustic Pines Throw Pillow",
+    description: "Bring a touch of the wilderness indoors with this earth-toned throw pillow, featuring a painterly forest motif that adds rustic charm to any space. Crafted from soft, durable polyester, it’s perfect for cozying up on chilly evenings.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/rustic-pines-design.webp",
+    images: [
+      "/images/pillows/rustic-pines-design-2.webp",
+      "/images/pillows/rustic-pines-design-3.webp",
+    ],
+    colors: ["brown", "beige", "gold"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "nature",
+    rating: 4.8,
+    reviews: 8,
+    isNew: true,
+    createdAt: "2025-07-26",
+    stock: 15,
+    tags: ["rustic", "nature-inspired", "earthy", "cozy"]
+  },
+  // Tropical Floral Desing Design
+  {
+    id: "Tropical-Floral-Throw-Pillow",
+    name: "Tropical Floral Throw Pillow",
+    description: "Featuring a vibrant floral pattern set against a crisp white backdrop, this pillow instantly brightens up any space with a fresh, botanical vibe. Made from soft yet durable polyester, it offers both comfort and long-lasting quality.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Tropical-Floral-Throw-Pillow.webp",
+    images: [
+      "/images/pillows/Tropical-Floral-Throw-Pillow2.webp",
+      "/images/pillows/Tropical-Floral-Throw-Pillow.webp",
+      "/images/pillows/Tropical-Floral-Throw-Pillow3.webp"
+    ],
+    colors: ["white"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "floral",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "floral", "statement", "modern"]
+  },
+  // Classical Floral Desing Design
+  {
+    id: "Classical-Floral-Throw-Pillow",
+    name: "Classical Floral Throw Pillow",
+    description: "Featuring a vibrant floral pattern set against a crisp white backdrop, this pillow instantly brightens up any space with a fresh, botanical vibe. Made from soft yet durable polyester, it offers both comfort and long-lasting quality.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Classical-Floral-Throw-Pillow.webp",
+    images: [
+      "/images/pillows/Classical-Floral-Throw-Pillow2.webp",
+      "/images/pillows/Classical-Floral-Throw-Pillow3.webp",
+      "/images/pillows/Classical-Floral-Throw-Pillow4.webp",
+    ],
+    colors: [""],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "floral",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "floral", "statement", "modern"]
+  },
+  // water color floral design Throw pillow
+  {
+    id: "Water-Color-floral-Throw-Pillow",
+    name: "Water Color Floral Throw Pillow",
+    description: "Featuring a vibrant floral pattern set against a crisp white backdrop, this pillow instantly brightens up any space with a fresh, botanical vibe. Made from soft yet durable polyester, it offers both comfort and long-lasting quality.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Water-Color-floral-design.webp",
+    images: [
+      "/images/pillows/Water-Color-floral-design2.webp",
+      "/images/pillows/Water-Color-floral-design3.webp",
+    ],
+    colors: [""],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "floral",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "floral", "statement", "modern"]
+  },
+  // Vintage floral design Throw pillow
+  {
+    id: "Vintage-floral-Throw-Pillow",
+    name: "Vintage Floral Throw Pillow",
+    description: "Featuring a vibrant floral pattern set against a crisp white backdrop, this pillow instantly brightens up any space with a fresh, botanical vibe. Made from soft yet durable polyester, it offers both comfort and long-lasting quality.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Vintage-floral-Throw-Pillow.webp",
+    images: [
+      "/images/pillows/Vintage-floral-Throw-Pillow2.webp",
+      "/images/pillows/Vintage-floral-Throw-Pillow3.webp",
+    ],
+    colors: [""],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "floral",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "floral", "statement", "modern"]
   },
   // Grouped variant: Plain series
   {
@@ -899,76 +1069,7 @@ export const products = [
     tags: ["geometric", "bold", "contrast", "modern"],
     createdAt: "2024-01-15"
   },
-  // Grouped variant: FLoral
-  {
-    id: "floral-series",
-    name: "Botanical Floral Throw Pillow Collection",
-    variants: [
-      {
-        id: "Tropical-Floral-Throw-Pillow",
-        name: "Tropical Floral Throw Pillow",
-        color: "Multicolor",
-        pattern: "Traditional Floral",
-        image: "/images/pillows/Tropical-Floral-Throw-Pillow.webp",
-        images: [
-          "/images/pillows/Tropical-Floral-Throw-Pillow2.webp",
-          "/images/pillows/Tropical-Floral-Throw-Pillow.webp",
-          "/images/pillows/Tropical-Floral-Throw-Pillow3.webp"
-        ],
-        price: 300,
-        originalPrice: 400,
-        sizes: ["18×18"],
-        stock: 10,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "37",
-        name: "Classic Floral Throw Pillow",
-        color: "Pastel",
-        pattern: "Abstract Floral",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design2.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 8,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "49",
-        name: "Water-Color Floral Throw Pillow",
-        color: "Vibrant",
-        pattern: "Tropical Blooms",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design3.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 6,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "floral-design-4",
-        name: "Vintage Flora Luxe Throw Pillow",
-        color: "Vibrant",
-        pattern: "Tropical Blooms",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design4.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 6,
-        onSale: Math.random() < 0.3
-      }
-    ],
-    description: "A vibrant collection of floral throw pillows featuring hand-drawn botanical prints. Each design brings a touch of nature indoors, perfect for adding a pop of color to sofas, beds, or reading nooks. Made with fade-resistant ink and plush fabric.",
-    category: "pillow",
-    subcategory: "floral",
-    materials: ["polyester"],
-    rating: 4.7,
-    reviews: 145,
-    isNew: true,
-    tags: ["botanical", "blooms", "garden", "vintage", "romantic", "spring", "tropical"],
-    dimensions: {
-      insertSize: "18×18 inches",
-      pillowcaseSize: "19×19 inches"
-    },
-    createdAt: "2024-01-15"
-  },
+
   {
     id: "26",
     name: "Savanna Sunset Zigzag Pillow",
