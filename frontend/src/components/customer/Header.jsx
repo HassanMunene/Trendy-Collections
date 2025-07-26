@@ -166,53 +166,6 @@ const Header = () => {
                                         </span>
                                     )}
                                 </button>
-
-                                {showCartDropdown && cartItems.length > 0 && (
-                                    <div className="absolute right-0 mt-2 w-72 md:w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
-                                        <div className="p-4">
-                                            <h3 className="font-bold text-lg mb-2">Your Cart ({cartCount})</h3>
-                                            <div className="max-h-60 overflow-y-auto">
-                                                {cartItems.map(item => (
-                                                    <div key={item.id} className="flex items-center py-2 border-b border-gray-100">
-                                                        <img
-                                                            src={item.image}
-                                                            alt={item.name}
-                                                            className="w-12 h-12 object-cover rounded"
-                                                        />
-                                                        <div className="ml-3 flex-1">
-                                                            <h4 className="text-sm font-medium">{item.name}</h4>
-                                                            <p className="text-xs text-gray-500">
-                                                                {item.quantity} × KSh {item.price.toLocaleString()}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                            <div className="mt-3 flex justify-between items-center border-t border-gray-200 pt-3">
-                                                <span className="font-bold">Total:</span>
-                                                <span className="font-bold">KSh {cartTotal.toLocaleString()}</span>
-                                            </div>
-                                            <div className="mt-3 grid grid-cols-2 gap-2">
-                                                <button
-                                                    onClick={() => {
-                                                        navigate('/cart');
-                                                        setShowCartDropdown(false);
-                                                    }}
-                                                    className="bg-pink-600 text-white py-2 rounded-md text-sm hover:bg-pink-700 transition-colors"
-                                                >
-                                                    View Cart
-                                                </button>
-                                                <button
-                                                    onClick={handleWhatsAppOrder}
-                                                    className="bg-green-600 text-white py-2 rounded-md text-sm hover:bg-green-700 transition-colors flex items-center justify-center gap-1"
-                                                >
-                                                    <MessageCircle className="h-4 w-4" />
-                                                    Order Now
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
                             </div>
                         </div>
                     </div>
