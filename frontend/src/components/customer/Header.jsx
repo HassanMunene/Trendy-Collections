@@ -1,9 +1,10 @@
 import { User, Heart, ShoppingBag, X, ChevronRight, AlignJustify } from 'lucide-react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react';
 import { FaFacebookSquare } from "react-icons/fa";
 import { AiFillTikTok } from "react-icons/ai";
 import { FaSquareInstagram } from "react-icons/fa6";
+import { useCart } from '@/src/context/CartContext';
 
 const navigationLinks = [
     { name: 'Shop all', href: "/products?category=all" },
@@ -16,6 +17,9 @@ const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const bodyRef = useRef(document.body);
+    const navigate = useNavigate();
+    const { cartCount, cartItems, cartTotal } = useCart();
+    const [showCartDropdown, setShowCartDropdown] = useState(false);
 
     // Scroll effect for header
     useEffect(() => {
@@ -38,6 +42,17 @@ const Header = () => {
             bodyRef.current.style.width = '';
         }
     }, [mobileMenuOpen]);
+
+    const handleWhatsAppOrder = () => {
+        const phoneNumber = '254712403671';
+        const message = `I want to order these items:\n\n${cartItems.map(item =>
+            `${item.name} (${item.quantity} x KSh ${item.price.toLocaleString()})`
+        ).join('\n')
+            }\n\nTotal: KSh ${cartTotal.toLocaleString()}`;
+
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    };
 
     return (
         <>
@@ -121,7 +136,7 @@ const Header = () => {
                                     <AiFillTikTok className="w-6 h-6" />
                                 </a>
                             </button>
-                            <button className='flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors'>
+                            <button className='hidden lg:flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors'>
                                 <a
                                     href="https://www.instagram.com/trendy.collection01/?hl=en"
                                     target="_blank"
@@ -132,6 +147,73 @@ const Header = () => {
                                     <FaSquareInstagram className="w-5 h-5" />
                                 </a>
                             </button>
+                            {/* Cart with Dropdown */}
+                            <div className="relative">
+                                <button
+                                    className="flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors relative"
+                                    onClick={() => {
+                                        setShowCartDropdown(!showCartDropdown);
+                                        if (cartCount > 0) {
+                                            navigate('/cart');
+                                        }
+                                    }}
+                                    aria-label="Cart"
+                                >
+                                    <ShoppingBag className="h-5 w-5 text-gray-700" />
+                                    {cartCount > 0 && (
+                                        <span className="absolute -top-1 -right-1 bg-pink-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                                            {cartCount}
+                                        </span>
+                                    )}
+                                </button>
+
+                                {showCartDropdown && cartItems.length > 0 && (
+                                    <div className="absolute right-0 mt-2 w-72 md:w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
+                                        <div className="p-4">
+                                            <h3 className="font-bold text-lg mb-2">Your Cart ({cartCount})</h3>
+                                            <div className="max-h-60 overflow-y-auto">
+                                                {cartItems.map(item => (
+                                                    <div key={item.id} className="flex items-center py-2 border-b border-gray-100">
+                                                        <img
+                                                            src={item.image}
+                                                            alt={item.name}
+                                                            className="w-12 h-12 object-cover rounded"
+                                                        />
+                                                        <div className="ml-3 flex-1">
+                                                            <h4 className="text-sm font-medium">{item.name}</h4>
+                                                            <p className="text-xs text-gray-500">
+                                                                {item.quantity} × KSh {item.price.toLocaleString()}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className="mt-3 flex justify-between items-center border-t border-gray-200 pt-3">
+                                                <span className="font-bold">Total:</span>
+                                                <span className="font-bold">KSh {cartTotal.toLocaleString()}</span>
+                                            </div>
+                                            <div className="mt-3 grid grid-cols-2 gap-2">
+                                                <button
+                                                    onClick={() => {
+                                                        navigate('/cart');
+                                                        setShowCartDropdown(false);
+                                                    }}
+                                                    className="bg-pink-600 text-white py-2 rounded-md text-sm hover:bg-pink-700 transition-colors"
+                                                >
+                                                    View Cart
+                                                </button>
+                                                <button
+                                                    onClick={handleWhatsAppOrder}
+                                                    className="bg-green-600 text-white py-2 rounded-md text-sm hover:bg-green-700 transition-colors flex items-center justify-center gap-1"
+                                                >
+                                                    <MessageCircle className="h-4 w-4" />
+                                                    Order Now
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
