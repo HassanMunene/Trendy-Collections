@@ -18,9 +18,7 @@ const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     const bodyRef = useRef(document.body);
     const navigate = useNavigate();
-    const { cartCount, cartItems, cartTotal } = useCart();
-    const [showCartDropdown, setShowCartDropdown] = useState(false);
-
+    const { cartCount } = useCart();
     // Scroll effect for header
     useEffect(() => {
         const handleScroll = () => {
@@ -42,17 +40,6 @@ const Header = () => {
             bodyRef.current.style.width = '';
         }
     }, [mobileMenuOpen]);
-
-    const handleWhatsAppOrder = () => {
-        const phoneNumber = '254712403671';
-        const message = `I want to order these items:\n\n${cartItems.map(item =>
-            `${item.name} (${item.quantity} x KSh ${item.price.toLocaleString()})`
-        ).join('\n')
-            }\n\nTotal: KSh ${cartTotal.toLocaleString()}`;
-
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-    };
 
     return (
         <>
@@ -151,12 +138,7 @@ const Header = () => {
                             <div className="relative">
                                 <button
                                     className="flex items-center p-2 !rounded-full hover:bg-pink-50 transition-colors relative"
-                                    onClick={() => {
-                                        setShowCartDropdown(!showCartDropdown);
-                                        if (cartCount > 0) {
-                                            navigate('/cart');
-                                        }
-                                    }}
+                                    onClick={() => navigate('/cart')}
                                     aria-label="Cart"
                                 >
                                     <ShoppingCart className="h-5 w-5 text-gray-700" />
@@ -212,7 +194,7 @@ const Header = () => {
                             {/* Account Links */}
                             <div className="mt-8 pt-6 border-t border-pink-100">
                                 <Link
-                                    to="/account"
+                                    to="#"
                                     className="flex items-center justify-center py-3 px-4 text-gray-700 hover:bg-pink-50 rounded-md font-medium"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
