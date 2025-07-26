@@ -1,4 +1,4 @@
-import { User, ShoppingCart, X, ChevronRight, AlignJustify } from 'lucide-react'
+import { User, ShoppingCart, X, ChevronRight, AlignJustify, MessageCircle } from 'lucide-react'
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react';
 import { FaFacebookSquare } from "react-icons/fa";
