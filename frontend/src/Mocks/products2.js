@@ -858,19 +858,25 @@ export const products = [
     name: "Botanical Floral Throw Pillow Collection",
     variants: [
       {
-        id: "35",
-        name: "Classic Floral Throw Pillow",
+        id: "Tropical-Floral-Throw-Pillow",
+        name: "Tropical Floral Throw Pillow",
         color: "Multicolor",
         pattern: "Traditional Floral",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design.webp",
+        image: "/images/pillows/Tropical-Floral-Throw-Pillow.webp",
+        images: [
+          "/images/pillows/Tropical-Floral-Throw-Pillow2.webp",
+          "/images/pillows/Tropical-Floral-Throw-Pillow.webp",
+          "/images/pillows/Tropical-Floral-Throw-Pillow3.webp"
+        ],
         price: 300,
+        originalPrice: 400,
         sizes: ["18×18"],
         stock: 10,
         onSale: Math.random() < 0.3
       },
       {
         id: "37",
-        name: "Watercolor Floral Throw Pillow",
+        name: "Classic Floral Throw Pillow",
         color: "Pastel",
         pattern: "Abstract Floral",
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design2.webp",
@@ -881,7 +887,7 @@ export const products = [
       },
       {
         id: "49",
-        name: "Tropical Floral Throw Pillow",
+        name: "Water-Color Floral Throw Pillow",
         color: "Vibrant",
         pattern: "Tropical Blooms",
         image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Floral-Design3.webp",

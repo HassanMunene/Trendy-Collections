@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { products } from "@/src/Mocks/products2";
+import { Heart, Star } from "lucide-react";
 
 const ProductGrid = () => {
     // First, filter products with floral subcategory and flatten their variants
@@ -133,18 +134,100 @@ const ProductGrid = () => {
                 {/* Product Grids */}
                 <div className="space-y-8">
                     {/* Flowery pillows */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                         {floralProducts.map((product) => (
-                            <Link to={`/products/${product.id}`} key={product.id} className="group cursor-pointer">
-                                <div className="aspect-square bg-[#f6f2f0] mb-4 overflow-hidden">
+                            <Link to={`/products/${product.id}`} key={product.id} className="group relative block overflow-hidden" aria-label={`View ${product.name}`}>
+                                {/* Image Container with Hover Effects */}
+                                <div className="relative aspect-square bg-gray-50 rounded-lg overflow-hidden mb-3">
                                     <img
                                         src={product.image}
                                         alt={product.name}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                                        loading="lazy"
+                                        width={400}
+                                        height={400}
                                     />
+
+                                    {/* Quick Actions (Wishlist, View) */}
+                                    <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/10">
+                                        <button
+                                            className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                // Add to wishlist logic
+                                            }}
+                                            aria-label="Add to wishlist"
+                                        >
+                                            <Heart className="w-4 h-4 text-gray-700" />
+                                        </button>
+                                    </div>
+
+                                    {/* Badges */}
+                                    {product.isNew && (
+                                        <span className="absolute top-2 left-2 bg-white px-2 py-1 rounded-full text-xs font-bold shadow-sm">
+                                            New
+                                        </span>
+                                    )}
+                                    {product.discount && (
+                                        <span className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full text-xs font-bold">
+                                            -{product.discount}%
+                                        </span>
+                                    )}
                                 </div>
-                                <h4 className="font-medium text-gray-900 mb-1">{product.name}</h4>
-                                <p className="text-gray-600">{product.price}</p>
+
+                                {/* Product Info */}
+                                <div className="p-1">
+                                    <h4 className="font-medium text-gray-900 mb-1 line-clamp-2 min-h-[2.5rem]">
+                                        {product.name}
+                                    </h4>
+
+                                    <div className="flex items-center gap-2">
+                                        {product.originalPrice ? (
+                                            <>
+                                                <span className="text-gray-900 font-bold">
+                                                    KSh {product.price.toLocaleString()}
+                                                </span>
+                                                <span className="text-gray-400 text-sm line-through">
+                                                    KSh {product.originalPrice.toLocaleString()}
+                                                </span>
+                                            </>
+                                        ) : (
+                                            <span className="text-gray-900 font-bold">
+                                                KSh {product.price.toLocaleString()}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* Rating */}
+                                    {product.rating && (
+                                        <div className="flex items-center mt-1">
+                                            {[...Array(5)].map((_, i) => (
+                                                <Star
+                                                    key={i}
+                                                    className={`w-3 h-3 ${i < Math.floor(product.rating)
+                                                        ? 'text-yellow-400 fill-current'
+                                                        : 'text-gray-300'}`}
+                                                />
+                                            ))}
+                                            <span className="text-xs text-gray-500 ml-1">
+                                                ({product.reviewCount || 0})
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Add to Cart Button (Appears on hover) */}
+                                <div className="absolute bottom-16 left-0 right-0 px-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <button
+                                        className="w-full bg-black text-white py-2 text-sm rounded-md hover:bg-gray-800 transition-colors"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            // Add to cart logic
+                                        }}
+                                    >
+                                        Add to Cart
+                                    </button>
+                                </div>
                             </Link>
                         ))}
                     </div>
