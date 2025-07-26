@@ -2,18 +2,19 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Heart, Star, Minus, Plus, Share2, MessageCircle, Check, ChevronDown, Truck, Clock, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCart } from '../../../context/CartContext';
+import { useCart } from '@/src/context/CartContext';
 import { products } from '@/src/Mocks/products2';
 import { ProductCard } from '@/src/components/common/ProductCard';
 import Breadcrumbs from '@/src/components/common/Breadcrumbs';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionItem } from '@/components/ui/accordion';
+import toast from 'react-hot-toast';
 
 
 export default function ProductDetail() {
   const { productId } = useParams();
   const navigate = useNavigate();
-  const { addItem } = useCart();
+  const { addToCart } = useCart();
 
   const product = products.find(p => p.id === productId);
   const relatedProducts = products.filter(p => p.category === product?.category && p.id !== productId).slice(0, 4);
@@ -61,12 +62,36 @@ export default function ProductDetail() {
   const handleAddToCart = async () => {
     setIsAddingToCart(true);
     try {
-      await addItem({
-        ...product,
-        selectedColor,
-        quantity
-      });
-      // Show success notification
+      await addToCart({ ...product, selectedColor, quantity, image: productImages[0], price: product.price, name: product.name, id: product.id });
+      // Show success toast with product image and details
+      toast.success(
+        <div className="flex items-center gap-3">
+          <img
+            src={productImages[0]}
+            alt={product.name}
+            className="w-10 h-10 rounded object-cover"
+          />
+          <div>
+            <p className="font-medium">{product.name}</p>
+            <p className="text-sm">
+              Added to cart ({quantity} × KSh {product.price.toLocaleString()})
+            </p>
+          </div>
+        </div>,
+        {
+          duration: 3000,
+          position: 'bottom-right',
+        }
+      );
+
+      // Optional: Trigger a small animation on the cart icon
+      const cartIcon = document.querySelector('[aria-label="Cart"]');
+      if (cartIcon) {
+        cartIcon.classList.add('animate-bounce');
+        setTimeout(() => cartIcon.classList.remove('animate-bounce'), 1000);
+      }
+    } catch (error) {
+      toast.error('Failed to add item to cart');
     } finally {
       setIsAddingToCart(false);
     }
@@ -157,8 +182,8 @@ export default function ProductDetail() {
                 )}
               </div>
 
-              {/* Quick Actions */}
-              <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              {/* Quick Actions send whatsapp and share link */}
+              <div className="absolute bottom-4 right-4 flex gap-2 opacity-1 group-hover:opacity-100 transition-opacity">
                 <button
                   onClick={() => setShowWhatsAppPopup(true)}
                   className="bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-colors"
@@ -203,7 +228,7 @@ export default function ProductDetail() {
               <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
                 <button
                   onClick={() => setIsZoomOpen(false)}
-                  className="absolute top-6 right-6 text-white p-2 hover:bg-white hover:bg-opacity-10 rounded-full"
+                  className="absolute top-6 right-6 text-white p-2 hover:bg-opacity-10 !rounded-full"
                   aria-label="Close zoom"
                 >
                   ✕
@@ -242,7 +267,7 @@ export default function ProductDetail() {
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="flex items-baseline gap-3">
                 {product.originalPrice && (
-                  <span className="text-lg text-gray-400 line-through">
+                  <span className="text-lg text-red-400 line-through">
                     {formatPrice(product.originalPrice)}
                   </span>
                 )}
@@ -250,7 +275,7 @@ export default function ProductDetail() {
                   {formatPrice(product.price)}
                 </span>
                 {product.originalPrice && (
-                  <Badge variant="sale" className="ml-2">
+                  <Badge variant="destructive" className="ml-2 rounded-md border-0">
                     Save {formatPrice(product.originalPrice - product.price)}
                   </Badge>
                 )}
@@ -302,8 +327,8 @@ export default function ProductDetail() {
                     <button
                       key={size.name}
                       className={`p-3 rounded-lg border-2 flex flex-col items-center ${selectedSize === size.name
-                          ? 'border-black bg-black text-white'
-                          : 'border-gray-300 bg-white hover:bg-gray-50'
+                        ? 'border-black bg-black text-white'
+                        : 'border-gray-300 bg-white hover:bg-gray-50'
                         }`}
                     >
                       <span className="font-medium">{size.name}</span>
@@ -338,11 +363,23 @@ export default function ProductDetail() {
 
               <Button
                 onClick={handleAddToCart}
-                className="flex-1 bg-black hover:bg-gray-800 h-12 text-lg"
+                className="flex-1 bg-black hover:bg-gray-800 h-12 text-lg relative overflow-hidden"
                 disabled={isAddingToCart || product.stock === 0}
                 size="lg"
               >
-                {isAddingToCart ? 'Adding...' : 'Add to Cart'}
+                {isAddingToCart ? (
+                  <>
+                    <span className="absolute inset-0 flex items-center justify-center">
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    </span>
+                    <span className="invisible">Adding...</span>
+                  </>
+                ) : (
+                  'Add to Cart'
+                )}
               </Button>
             </div>
 
@@ -394,44 +431,6 @@ export default function ProductDetail() {
                     <div>
                       <h4 className="font-medium text-gray-900 mb-2">Materials</h4>
                       <p className="text-gray-600">{product.materials?.join(', ')}</p>
-                    </div>
-                  </div>
-                </div>
-              </AccordionItem>
-
-              <AccordionItem value="delivery">
-                <div className="flex items-center justify-between w-full py-4 font-medium">
-                  <span>Delivery & Returns</span>
-                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
-                </div>
-                <div className="pb-4 pt-0">
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3">
-                      <div className="bg-blue-100 p-2 rounded-full">
-                        <Truck className="h-5 w-5 text-blue-600" />
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-gray-900">Free Shipping</h4>
-                        <p className="text-gray-600">On orders over KSh 8,000</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="bg-green-100 p-2 rounded-full">
-                        <Clock className="h-5 w-5 text-green-600" />
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-gray-900">Delivery Time</h4>
-                        <p className="text-gray-600">3-5 working days in Nairobi</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="bg-purple-100 p-2 rounded-full">
-                        <RefreshCw className="h-5 w-5 text-purple-600" />
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-gray-900">Easy Returns</h4>
-                        <p className="text-gray-600">14-day return policy</p>
-                      </div>
                     </div>
                   </div>
                 </div>
