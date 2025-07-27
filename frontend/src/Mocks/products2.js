@@ -198,7 +198,7 @@ export const products = [
       "Ideal for living spaces, bedrooms, or nurseries",
       "Lightweight and plush feel"
     ]
-  }, 
+  },
   // Urban Texture grey curtain
   {
     "id": "urban-texture-grey-curtain-1",
@@ -265,6 +265,54 @@ export const products = [
     createdAt: "2023-10-15",
     stock: 8,
     tags: ["artistic", "handmade", "accent-piece"]
+  },
+  // White curtain with rustic feather prints
+  {
+    "id": "feather-rustic-white-curtain-1",
+    "name": "Rustic White Curtain with Feather Prints",
+    "description": "Bring the charm of nature indoors with the Feather Rustic White Curtain. Adorned with elegant feather-inspired prints in earthy tones on a soft white background, this curtain strikes a perfect balance between organic style and everyday practicality. Made from a durable polyester blend, it's ideal for bedrooms, reading nooks, or nature-themed interiors, offering light filtering and a cozy, grounded feel.",
+    "price": 3400,
+    "originalPrice": 3900,
+    "image": "/images/curtains/feather-rustic-white-curtain.webp",
+    "images": [
+      "/images/curtains/feather-rustic-white-curtain1.webp"
+    ],
+    "colors": ["white", "brown"],
+    "colorNames": {
+      "white": "Off White",
+      "brown": "Earth Brown"
+    },
+    "materials": ["polyester blend"],
+    "sizes": [
+      {
+        "name": "Standard Pair",
+        "panelWidth": "1.5m",
+        "panelLength": "2.1m",
+        "totalWidth": "3m",
+        "price": 3400
+      }
+    ],
+    "category": "curtains",
+    "subcategory": "patterned-curtains",
+    "collection": "Nature Retreat",
+    "rating": 4.5,
+    "reviews": 11,
+    "isNew": true,
+    "onOffer": true,
+    "salePercentage": 12.8,
+    "createdAt": "2024-07-27",
+    "stock": 15,
+    "tags": ["nature-inspired", "feather-print", "earthy-decor", "light-filtering", "polyester-blend", "ready-to-hang"],
+    "features": [
+      "Set of 2 feather-print curtain panels",
+      "1.5m width per panel (3m total width)",
+      "2.1m length for full coverage",
+      "Polyester blend for easy maintenance",
+      "Rustic feather design in natural tones",
+      "Grommet top for simple installation",
+      "Ideal for earthy, rustic, or nature-inspired interiors"
+    ],
+    "careInstructions": "Machine wash cold on gentle cycle. Hang to dry or tumble dry on low. Iron on low setting if needed. Do not bleach."
   },
   // glossy yellow curtain
   {
@@ -367,6 +415,54 @@ export const products = [
     createdAt: "2023-10-15",
     stock: 12,
     tags: ["velvet", "luxury", "golden", "statement"]
+  },
+  // White curtain with blue feather prints
+  {
+    "id": "serene-feather-blue-curtain-1",
+    "name": "White Serene Curtain with Blue Feather prints",
+    "description": "Create a tranquil and airy atmosphere with the Serene Feather Blue Curtain. Featuring a soft white backdrop with floating blue feather prints, this curtain brings a touch of nature’s calm into any room. Its lightweight yet privacy-enhancing fabric makes it perfect for bedrooms, lounges, or minimalist spaces. A subtle textured finish adds to its serene appeal while the grommet top ensures effortless hanging.",
+    "price": 3500,
+    "originalPrice": 4000,
+    "image": "/images/curtains/serene-feather-blue-curtain.webp",
+    "images": [
+      "/images/curtains/serene-feather-blue-curtain1.webp"
+    ],
+    "colors": ["white", "blue"],
+    "colorNames": {
+      "white": "Cloud White",
+      "blue": "Sky Blue"
+    },
+    "materials": ["polyester blend"],
+    "sizes": [
+      {
+        "name": "Standard Pair",
+        "panelWidth": "1.5m",
+        "panelLength": "2.1m",
+        "totalWidth": "3m",
+        "price": 3400
+      }
+    ],
+    "category": "curtains",
+    "subcategory": "patterned-curtains",
+    "collection": "Nature Retreat",
+    "rating": 4.6,
+    "reviews": 13,
+    "isNew": true,
+    "onOffer": true,
+    "salePercentage": 12.8,
+    "createdAt": "2024-07-27",
+    "stock": 14,
+    "tags": ["blue-curtains", "feather-print", "calming-decor", "light-filtering", "polyester-blend", "ready-to-hang", "nature-inspired"],
+    "features": [
+      "Set of 2 feather-print curtain panels",
+      "1.5m width per panel (3m total width)",
+      "2.1m length for standard windows",
+      "Polyester blend with soft finish",
+      "Floating feather design in cool blue tones",
+      "Grommet top for quick setup",
+      "Ideal for relaxed, minimalist, or nature-inspired themes"
+    ],
+    "careInstructions": "Machine wash cold with like colors. Tumble dry low or hang to dry. Cool iron if needed. Avoid bleach to preserve color."
   },
   // glossy brown curtain
   {
@@ -1369,6 +1465,100 @@ export const curtains = [
       "Ideal for urban, industrial, or contemporary spaces"
     ],
     "careInstructions": "Machine wash cold on gentle cycle. Do not bleach. Tumble dry low or hang to dry. Iron on low heat if necessary."
+  },
+  {
+    "id": "feather-rustic-white-curtain-1",
+    "name": "Rustic White Curtain with Feather Prints",
+    "description": "Bring the charm of nature indoors with the Feather Rustic White Curtain. Adorned with elegant feather-inspired prints in earthy tones on a soft white background, this curtain strikes a perfect balance between organic style and everyday practicality. Made from a durable polyester blend, it's ideal for bedrooms, reading nooks, or nature-themed interiors, offering light filtering and a cozy, grounded feel.",
+    "price": 3400,
+    "originalPrice": 3900,
+    "image": "/images/curtains/feather-rustic-white-curtain.webp",
+    "images": [
+      "/images/curtains/feather-rustic-white-curtain1.webp"
+    ],
+    "colors": ["white", "brown"],
+    "colorNames": {
+      "white": "Off White",
+      "brown": "Earth Brown"
+    },
+    "materials": ["polyester blend"],
+    "sizes": [
+      {
+        "name": "Standard Pair",
+        "panelWidth": "1.5m",
+        "panelLength": "2.1m",
+        "totalWidth": "3m",
+        "price": 3400
+      }
+    ],
+    "category": "curtains",
+    "subcategory": "patterned-curtains",
+    "collection": "Nature Retreat",
+    "rating": 4.5,
+    "reviews": 11,
+    "isNew": true,
+    "onOffer": true,
+    "salePercentage": 12.8,
+    "createdAt": "2024-07-27",
+    "stock": 15,
+    "tags": ["nature-inspired", "feather-print", "earthy-decor", "light-filtering", "polyester-blend", "ready-to-hang"],
+    "features": [
+      "Set of 2 feather-print curtain panels",
+      "1.5m width per panel (3m total width)",
+      "2.1m length for full coverage",
+      "Polyester blend for easy maintenance",
+      "Rustic feather design in natural tones",
+      "Grommet top for simple installation",
+      "Ideal for earthy, rustic, or nature-inspired interiors"
+    ],
+    "careInstructions": "Machine wash cold on gentle cycle. Hang to dry or tumble dry on low. Iron on low setting if needed. Do not bleach."
+  },
+  {
+    "id": "serene-feather-blue-curtain-1",
+    "name": "White Serene Curtain with Blue Feather prints",
+    "description": "Create a tranquil and airy atmosphere with the Serene Feather Blue Curtain. Featuring a soft white backdrop with floating blue feather prints, this curtain brings a touch of nature’s calm into any room. Its lightweight yet privacy-enhancing fabric makes it perfect for bedrooms, lounges, or minimalist spaces. A subtle textured finish adds to its serene appeal while the grommet top ensures effortless hanging.",
+    "price": 3500,
+    "originalPrice": 4000,
+    "image": "/images/curtains/serene-feather-blue-curtain.webp",
+    "images": [
+      "/images/curtains/serene-feather-blue-curtain1.webp"
+    ],
+    "colors": ["white", "blue"],
+    "colorNames": {
+      "white": "Cloud White",
+      "blue": "Sky Blue"
+    },
+    "materials": ["polyester blend"],
+    "sizes": [
+      {
+        "name": "Standard Pair",
+        "panelWidth": "1.5m",
+        "panelLength": "2.1m",
+        "totalWidth": "3m",
+        "price": 3400
+      }
+    ],
+    "category": "curtains",
+    "subcategory": "patterned-curtains",
+    "collection": "Nature Retreat",
+    "rating": 4.6,
+    "reviews": 13,
+    "isNew": true,
+    "onOffer": true,
+    "salePercentage": 12.8,
+    "createdAt": "2024-07-27",
+    "stock": 14,
+    "tags": ["blue-curtains", "feather-print", "calming-decor", "light-filtering", "polyester-blend", "ready-to-hang", "nature-inspired"],
+    "features": [
+      "Set of 2 feather-print curtain panels",
+      "1.5m width per panel (3m total width)",
+      "2.1m length for standard windows",
+      "Polyester blend with soft finish",
+      "Floating feather design in cool blue tones",
+      "Grommet top for quick setup",
+      "Ideal for relaxed, minimalist, or nature-inspired themes"
+    ],
+    "careInstructions": "Machine wash cold with like colors. Tumble dry low or hang to dry. Cool iron if needed. Avoid bleach to preserve color."
   }
 ]
 

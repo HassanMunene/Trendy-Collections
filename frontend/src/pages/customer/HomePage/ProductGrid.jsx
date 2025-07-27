@@ -279,19 +279,68 @@ const ProductGrid = () => {
                     </div>
 
                     {/* Knot Pillows */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {knot_pillows.map((product) => (
-                            <Link to={`/products/${product.id}`} key={product.id} className="group cursor-pointer">
-                                <div className="aspect-square bg-[#f6f2f0] mb-4 overflow-hidden">
-                                    <img
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                    />
+                            <div key={product.id} className="group relative rounded-lg transition-all duration-300 overflow-hidden">
+                                {/* Badges */}
+                                {product.isNew && (
+                                    <div className="absolute top-3 left-3 z-10">
+                                        <span className="inline-block bg-white px-2.5 py-1 rounded-full text-xs font-bold shadow-md text-gray-900">
+                                            New Arrival
+                                        </span>
+                                    </div>
+                                )}
+
+                                {/* Image - Square aspect for pillows */}
+                                <Link to={`/products/${product.id}`} className="block">
+                                    <div className="aspect-square bg-gray-50 overflow-hidden">
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                </Link>
+
+                                {/* Product Info */}
+                                <div className="p-4">
+                                    <h4 className="font-medium text-gray-900 mb-2 line-clamp-2 min-h-[3rem]">
+                                        {product.name}
+                                    </h4>
+
+                                    {/* Price */}
+                                    <div className="mb-3">
+                                        {product.originalPrice ? (
+                                            <div className="flex items-baseline gap-2">
+                                                <span className="text-gray-900 font-bold text-lg">
+                                                    KSh {product.price.toLocaleString()}
+                                                </span>
+                                                <span className="text-gray-400 text-sm line-through">
+                                                    KSh {product.originalPrice.toLocaleString()}
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            <span className="text-gray-900 font-bold text-lg">
+                                                KSh {product.price.toLocaleString()}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* WhatsApp Button */}
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
+                                            window.open(`https://wa.me/254712345678?text=${encodeURIComponent(message)}`, '_blank');
+                                        }}
+                                        className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors duration-300 text-sm"
+                                    >
+                                        <FaWhatsapp className="h-4 w-4" />
+                                        <span>Order Now</span>
+                                    </button>
                                 </div>
-                                <h4 className="font-medium text-gray-900 mb-1">{product.name}</h4>
-                                <p className="text-gray-600">{product.price}</p>
-                            </Link>
+                            </div>
                         ))}
                     </div>
                 </div>
