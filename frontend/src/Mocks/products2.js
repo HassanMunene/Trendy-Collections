@@ -912,8 +912,9 @@ export const products = [
     description: "A radiant burst of sunshine in any room, the Golden Glow Pillow brings warmth and vibrance with its rich yellow hue. Its smooth finish and minimalist design make it a versatile accent for modern, boho, or cozy-chic spaces.",
     price: 350,
     originalPrice: 450,
-    image: "/images/pillows/Golden-Glow-Pillow.webp",
+    image: "/images/pillows/Golden-Glow-Pillow3.webp",
     images: [
+      "/images/pillows/Golden-Glow-Pillow.webp",
       "/images/pillows/Golden-Glow-Pillow2.webp",
     ],
     colors: ["yellow", "gold"],
@@ -928,209 +929,7 @@ export const products = [
     stock: 20,
     tags: ["minimalist", "cozy", "bright", "yellow", "versatile"]
   },
-
-  // Grouped variant: Plain series
-  {
-    id: "plain-series",
-    name: "Minimalist Plain Throw Pillow Collection",
-    variants: [
-      {
-        id: "48",
-        name: "Mustard Yellow Plain Throw Pillow",
-        color: "Mustard Yellow",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Yellow-plain-design2.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 7,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "46",
-        name: "Light Purple Plain Throw Pillow",
-        color: "Lavender",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Light-purple-plain-design.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 9,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "47",
-        name: "Light Beige Plain Throw Pillow",
-        color: "Oatmeal",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Light-beige-plain-design.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 15,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "brown-plain-pillow1",
-        name: "Brown Plain Throw Pillow",
-        color: "brown",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Brown-plain-design.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 15,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "red-plain-pillow2",
-        name: "Red Plain Throw Pillow",
-        color: "red",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Red-plain-design2.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 8,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "yellow-plain-pillow3",
-        name: "Yellow Plain Throw Pillow",
-        color: "yellow",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Yellow-plain-design3.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 7,
-        onSale: Math.random() < 0.3
-      },
-    ],
-    description: "A timeless collection of solid-color throw pillows for a clean, versatile look. Perfect for layering with patterned pillows or standalone minimalism. Made with ultra-soft, durable fabric that resists fading.",
-    category: "pillow",
-    subcategory: "plain",
-    materials: ["woven-fabric"],
-    careInstructions: "Machine washable (cold), tumble dry low",
-    rating: 4.3,
-    reviews: 89,
-    isNew: false,
-    tags: ["minimalist", "solid", "versatile", "modern",],
-    dimensions: {
-      insertSize: "18×18 inches",
-      pillowcaseSize: "19×19 inches"
-    },
-    createdAt: "2023-08-05"
-  },
-  // Grouped variant: Urban wave series
-  {
-    id: "urban-wave-series",
-    name: "Urban Wave Throw Pillow Collection",
-    variants: [
-      {
-        id: "30",
-        name: "Urban Wave Blue Pillow",
-        color: "Navy Blue",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Wave-Design.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 7,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "33",
-        name: "Urban Wave Grey Pillow",
-        color: "Charcoal Grey",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Wave-Design2.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 5,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "34",
-        name: "Urban Wave Multicolor Pillow",
-        color: "Multicolor",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Wave-Design3.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 6,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "41",
-        name: "Urban Wave Pastel Pillow",
-        color: "Pastel Colors",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Wave-Design4.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 4,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "44",
-        name: "Urban Wave Red Pillow",
-        color: "Burgundy Red",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Wave-Design5.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 3,
-        onSale: Math.random() < 0.3
-      }
-    ],
-    description: "Fluid wave-inspired designs that bring movement and energy to your space. The organic patterns complement both modern and traditional decor styles.",
-    category: "pillow",
-    subcategory: "wavy-design",
-    materials: ["polyester"],
-    rating: 4.3,
-    reviews: 89,
-    tags: ["wave", "organic", "flowing", "modern"],
-    createdAt: "2024-01-15"
-  },
-  // Grouped variant: Scarlet Web series
-  {
-    id: "scarlet-web-series",
-    name: "Scarlet Web Throw Pillow Collection",
-    variants: [
-      {
-        id: "4",
-        name: "Scarlet Web Red Pillow",
-        color: "Scarlet Red",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Red-Scarlet-Web.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 10,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "16",
-        name: "Scarlet Web Red Pattern Pillow",
-        color: "Red/White",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Red-Scarlet-Web2.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 8,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "17",
-        name: "Scarlet Web Red Geometric Pillow",
-        color: "Red/Black",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Red-Scarlet-Web3.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 6,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "18",
-        name: "Scarlet Web Black Pillow",
-        color: "Black/White",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Black-Scarlet-Web.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 9,
-        onSale: Math.random() < 0.3
-      }
-    ],
-    description: "Bold web-inspired geometric patterns that make dramatic statements. These high-contrast designs work particularly well in modern and industrial interiors.",
-    category: "pillow",
-    subcategory: "geometric",
-    materials: ["polyester"],
-    rating: 4.6,
-    reviews: 76,
-    tags: ["geometric", "bold", "contrast", "modern"],
-    createdAt: "2024-01-15"
-  },
-
+  // Savanna Sunset zigzag throw pillow
   {
     id: "26",
     name: "Savanna Sunset Zigzag Pillow",
@@ -1532,5 +1331,4 @@ export const knot_pillows = [
       "Lightweight and plush feel"
     ]
   }
-
 ]
