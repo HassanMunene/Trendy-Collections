@@ -838,41 +838,102 @@ export const products = [
     stock: 20,
     tags: ["premium", "floral", "statement", "modern"]
   },
+  // Green orange plain throw pillow
+  {
+    id: "green-orange-plain-Throw-Pillow",
+    name: "Green and Orange plain Throw Pillow",
+    description: "A timeless collection of solid-color throw pillows for a clean, versatile look. Perfect for layering with patterned pillows or standalone minimalism. Made with ultra-soft, durable fabric that resists fading.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Green-Orange-plain-Pillow.webp",
+    images: [],
+    colors: ["green", "orange"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "plain",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "plain", "statement", "modern"]
+  },
+  // Crimson Red Throw Pillow
+  {
+    id: "crimson-red-throw-pillow",
+    name: "Crimson Red Throw Pillow",
+    description: "A timeless collection of solid-color throw pillows for a clean, versatile look. The Crimson Red shade adds a bold, modern touch to any space. Perfect for layering or making a statement on its own. Made with ultra-soft, durable fabric that resists fading.",
+    price: 300,
+    originalPrice: 400,
+    image: "/images/pillows/Crimson-Red-Plain-Pillow.webp",
+    images: [
+      "/images/pillows/Crimson-Red-Plain-Pillow2.webp",
+      "/images/pillows/Crimson-Red-Plain-Pillow3.webp",
+      "/images/pillows/Crimson-Red-Plain-Pillow4.webp",
+    ],
+    colors: ["crimson", "red"],
+    materials: ["polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "plain",
+    rating: 5.0,
+    reviews: 10,
+    isNew: false,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["premium", "plain", "bold", "modern"]
+  },
+  // Red Garnet Grid Throw Pillow
+  {
+    id: "-red-garnet-grid-throw-pillow",
+    name: "Red Garnet Grid Throw Pillow",
+    description: "Featuring a bold garnet red hue and a unique textured grid pattern, this throw pillow adds dimension and richness to any space. Ideal for both modern and classic interiors, it offers a tactile charm and refined simplicity.",
+    price: 350,
+    originalPrice: 450,
+    image: "/images/pillows/Red-Garnet-Grid-Pillow.webp",
+    images: [],
+    colors: ["garnet", "red"],
+    materials: ["textured polyester"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "plain",
+    rating: 4.9,
+    reviews: 8,
+    isNew: true,
+    createdAt: "2024-07-27",
+    stock: 15,
+    tags: ["textured", "modern", "statement", "garnet"]
+  },
+  // Golden Glow plain throw pillo
+  {
+    id: "golden-glow-pillow",
+    name: "Golden Glow Pillow",
+    description: "A radiant burst of sunshine in any room, the Golden Glow Pillow brings warmth and vibrance with its rich yellow hue. Its smooth finish and minimalist design make it a versatile accent for modern, boho, or cozy-chic spaces.",
+    price: 350,
+    originalPrice: 450,
+    image: "/images/pillows/Golden-Glow-Pillow.webp",
+    images: [
+      "/images/pillows/Golden-Glow-Pillow2.webp",
+    ],
+    colors: ["yellow", "gold"],
+    materials: ["cotton blend"],
+    sizes: ["20×20"],
+    category: "pillow",
+    subcategory: "plain",
+    rating: 4.8,
+    reviews: 10,
+    isNew: true,
+    createdAt: "2024-07-27",
+    stock: 20,
+    tags: ["minimalist", "cozy", "bright", "yellow", "versatile"]
+  },
+
   // Grouped variant: Plain series
   {
     id: "plain-series",
     name: "Minimalist Plain Throw Pillow Collection",
     variants: [
-      {
-        id: "42",
-        name: "Multicolor Plain Throw Pillow",
-        color: "Multicolor",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/plain-design.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 12,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "43",
-        name: "Red Plain Throw Pillow",
-        color: "Red",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Red-plain-design.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 8,
-        onSale: Math.random() < 0.3
-      },
-      {
-        id: "45",
-        name: "Yellow Plain Throw Pillow",
-        color: "Yellow",
-        image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Yellow-plain-design.webp",
-        price: 300,
-        sizes: ["18×18"],
-        stock: 10,
-        onSale: Math.random() < 0.3
-      },
       {
         id: "48",
         name: "Mustard Yellow Plain Throw Pillow",
