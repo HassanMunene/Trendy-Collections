@@ -71,7 +71,7 @@ export const products = [
   // White fabric curtain with purple prints
   {
     id: "white-fabric-curtain-with-purple-prints-1",
-    name: "White Fabric Curtain with Purple Botanical Prints",
+    name: "White Fabric Curtain with Maroon Botanical Prints",
     description: "Elevate your space with this set of 2 premium white curtains featuring elegant purple floral prints. Made from 100% breathable cotton, these curtains combine style with functionality - offering maximum light filtration while maintaining privacy. Each panel measures 1.5m wide (3m total width) with a 2m drop length, perfect for standard windows. The digitally printed design ensures color vibrancy that lasts through multiple washes. Includes matching tie-backs and all necessary hanging hardware for easy installation.",
     price: 3500,
     originalPrice: 4000,
@@ -117,6 +117,53 @@ export const products = [
     ],
     careInstructions: "Machine wash cold (max 30°C) with mild detergent. Tumble dry on low heat. Iron on cotton setting if needed. Do not bleach. For longest life, wash separately before first use.",
   },
+  // Plain White Curtain
+  {
+    id: "classic-serenity-white-curtain-1",
+    name: "Classic Serenity White Curtain",
+    description: "Bring timeless elegance into your home with the Classic Serenity White Curtain. Designed with soft textured detailing on pure white fabric, this curtain offers a clean, minimalist look ideal for modern, Scandinavian, or cozy home interiors. Its semi-thick cotton blend ensures privacy while still allowing natural light to flow through. Perfect for living rooms, bedrooms, or office spaces.",
+    price: 3500,
+    originalPrice: 4000,
+    image: "/images/curtains/classic-serenity-white-curtain.webp",
+    images: [
+      "/images/curtains/classic-serenity-white-curtain1.webp"
+    ],
+    colors: ["white"],
+    colorNames: {
+      white: "Pure White"
+    },
+    materials: ["cotton blend"],
+    sizes: [
+      {
+        name: "Standard Pair",
+        panelWidth: "1.5m",
+        panelLength: "2m",
+        totalWidth: "3m",
+        price: 3200
+      }
+    ],
+    category: "curtains",
+    subcategory: "plain-curtains",
+    collection: "Modern Essentials",
+    rating: 4.6,
+    reviews: 14,
+    isNew: true,
+    onOffer: true,
+    salePercentage: 11.1,
+    createdAt: "2024-07-27",
+    stock: 12,
+    tags: ["white-curtains", "minimalist", "light-filtering", "cotton-blend", "ready-to-hang", "living-room", "bedroom"],
+    features: [
+      "Set of 2 plain curtain panels",
+      "1.5m width per panel (3m total width)",
+      "2m drop length fits standard windows",
+      "Soft cotton-blend fabric with subtle texture",
+      "Grommet top for easy hanging",
+      "Semi-light filtering for privacy and brightness",
+      "Ideal for minimal or modern décor themes"
+    ],
+    careInstructions: "Machine wash cold on gentle cycle. Tumble dry low or hang to dry. Iron on low heat if needed. Avoid bleach to preserve texture and color."
+  },
   // Mate marigold pillow
   {
     id: "matte-marigold-knot-pillow-1",
@@ -151,6 +198,53 @@ export const products = [
       "Ideal for living spaces, bedrooms, or nurseries",
       "Lightweight and plush feel"
     ]
+  }, 
+  // Urban Texture grey curtain
+  {
+    "id": "urban-texture-grey-curtain-1",
+    "name": "Urban Texture Grey Curtain",
+    "description": "Add a modern industrial flair to your space with the Urban Texture Grey Curtain. Featuring a subtle 3D cube pattern in monochrome tones, this curtain offers a unique textured look that complements contemporary and geometric-themed interiors. Made with a durable polyester blend, it filters light while maintaining privacy, making it ideal for studios, offices, and modern homes.",
+    "price": 3500,
+    "originalPrice": 4000,
+    "image": "/images/curtains/urban-texture-grey-curtain.webp",
+    "images": [
+      "/images/curtains/urban-texture-grey-curtain1.webp"
+    ],
+    "colors": ["grey"],
+    "colorNames": {
+      "grey": "Textured Grey"
+    },
+    "materials": ["polyester blend"],
+    "sizes": [
+      {
+        "name": "Standard Pair",
+        "panelWidth": "1.5m",
+        "panelLength": "2.1m",
+        "totalWidth": "3m",
+        "price": 3600
+      }
+    ],
+    "category": "curtains",
+    "subcategory": "patterned-curtains",
+    "collection": "Urban Geometry",
+    "rating": 4.7,
+    "reviews": 18,
+    "isNew": true,
+    "onOffer": true,
+    "salePercentage": 14.3,
+    "createdAt": "2024-07-27",
+    "stock": 9,
+    "tags": ["grey-curtains", "geometric", "light-filtering", "polyester", "modern-decor", "ready-to-hang"],
+    "features": [
+      "Set of 2 patterned curtain panels",
+      "1.5m width per panel (3m total width)",
+      "2.1m drop length for full window coverage",
+      "Durable polyester-blend fabric with geometric cube texture",
+      "Grommet top for hassle-free hanging",
+      "Semi-light filtering for privacy and ambient light",
+      "Ideal for urban, industrial, or contemporary spaces"
+    ],
+    "careInstructions": "Machine wash cold on gentle cycle. Do not bleach. Tumble dry low or hang to dry. Iron on low heat if necessary."
   },
   // Emerald green Knot pillow
   {
@@ -1138,7 +1232,7 @@ export const curtains = [
   },
   {
     id: "white-fabric-curtain-with-purple-prints-1",
-    name: "White Fabric Curtain with Purple Botanical Prints",
+    name: "White Fabric Curtain with Maroon Botanical Prints",
     description: "Elevate your space with this set of 2 premium white curtains featuring elegant purple floral prints. Made from 100% breathable cotton, these curtains combine style with functionality - offering maximum light filtration while maintaining privacy. Each panel measures 1.5m wide (3m total width) with a 2m drop length, perfect for standard windows. The digitally printed design ensures color vibrancy that lasts through multiple washes. Includes matching tie-backs and all necessary hanging hardware for easy installation.",
     price: 3500,
     originalPrice: 4000,
@@ -1184,6 +1278,98 @@ export const curtains = [
     ],
     careInstructions: "Machine wash cold (max 30°C) with mild detergent. Tumble dry on low heat. Iron on cotton setting if needed. Do not bleach. For longest life, wash separately before first use.",
   },
+  {
+    id: "classic-serenity-white-curtain-1",
+    name: "Classic Serenity White Curtain",
+    description: "Bring timeless elegance into your home with the Classic Serenity White Curtain. Designed with soft textured detailing on pure white fabric, this curtain offers a clean, minimalist look ideal for modern, Scandinavian, or cozy home interiors. Its semi-thick cotton blend ensures privacy while still allowing natural light to flow through. Perfect for living rooms, bedrooms, or office spaces.",
+    price: 3500,
+    originalPrice: 4000,
+    image: "/images/curtains/classic-serenity-white-curtain.webp",
+    images: [
+      "/images/curtains/classic-serenity-white-curtain1.webp"
+    ],
+    colors: ["white"],
+    colorNames: {
+      white: "Pure White"
+    },
+    materials: ["cotton blend"],
+    sizes: [
+      {
+        name: "Standard Pair",
+        panelWidth: "1.5m",
+        panelLength: "2m",
+        totalWidth: "3m",
+        price: 3200
+      }
+    ],
+    category: "curtains",
+    subcategory: "plain-curtains",
+    collection: "Modern Essentials",
+    rating: 4.6,
+    reviews: 14,
+    isNew: true,
+    onOffer: true,
+    salePercentage: 11.1,
+    createdAt: "2024-07-27",
+    stock: 12,
+    tags: ["white-curtains", "minimalist", "light-filtering", "cotton-blend", "ready-to-hang", "living-room", "bedroom"],
+    features: [
+      "Set of 2 plain curtain panels",
+      "1.5m width per panel (3m total width)",
+      "2m drop length fits standard windows",
+      "Soft cotton-blend fabric with subtle texture",
+      "Grommet top for easy hanging",
+      "Semi-light filtering for privacy and brightness",
+      "Ideal for minimal or modern décor themes"
+    ],
+    careInstructions: "Machine wash cold on gentle cycle. Tumble dry low or hang to dry. Iron on low heat if needed. Avoid bleach to preserve texture and color."
+  },
+  {
+    "id": "urban-texture-grey-curtain-1",
+    "name": "Urban Texture Grey Curtain",
+    "description": "Add a modern industrial flair to your space with the Urban Texture Grey Curtain. Featuring a subtle 3D cube pattern in monochrome tones, this curtain offers a unique textured look that complements contemporary and geometric-themed interiors. Made with a durable polyester blend, it filters light while maintaining privacy, making it ideal for studios, offices, and modern homes.",
+    "price": 3500,
+    "originalPrice": 4000,
+    "image": "/images/curtains/urban-texture-grey-curtain.webp",
+    "images": [
+      "/images/curtains/urban-texture-grey-curtain1.webp"
+    ],
+    "colors": ["grey"],
+    "colorNames": {
+      "grey": "Textured Grey"
+    },
+    "materials": ["polyester blend"],
+    "sizes": [
+      {
+        "name": "Standard Pair",
+        "panelWidth": "1.5m",
+        "panelLength": "2.1m",
+        "totalWidth": "3m",
+        "price": 3600
+      }
+    ],
+    "category": "curtains",
+    "subcategory": "patterned-curtains",
+    "collection": "Urban Geometry",
+    "rating": 4.7,
+    "reviews": 18,
+    "isNew": true,
+    "onOffer": true,
+    "salePercentage": 14.3,
+    "createdAt": "2024-07-27",
+    "stock": 9,
+    "tags": ["grey-curtains", "geometric", "light-filtering", "polyester", "modern-decor", "ready-to-hang"],
+    "features": [
+      "Set of 2 patterned curtain panels",
+      "1.5m width per panel (3m total width)",
+      "2.1m drop length for full window coverage",
+      "Durable polyester-blend fabric with geometric cube texture",
+      "Grommet top for hassle-free hanging",
+      "Semi-light filtering for privacy and ambient light",
+      "Ideal for urban, industrial, or contemporary spaces"
+    ],
+    "careInstructions": "Machine wash cold on gentle cycle. Do not bleach. Tumble dry low or hang to dry. Iron on low heat if necessary."
+  }
 ]
 
 export const knot_pillows = [
