@@ -5,18 +5,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const ProductGrid = () => {
     // First, filter products with floral subcategory and flatten their variants
-    const floralProducts = products
-        .filter(product => product.subcategory === "floral")
-        .flatMap(product =>
-            product.variants.map(variant => ({
-                ...variant,
-                category: product.category,
-                description: product.description,
-                rating: product.rating,
-                reviews: product.reviews,
-                isNew: product.isNew
-            }))
-        );
+    const floralProducts = products.filter(product => product.subcategory === "floral");
 
     const curtains = products.filter(product => product.category === "curtains");
     const knot_pillows = products.filter(product => product.category === "knot-pillows");
