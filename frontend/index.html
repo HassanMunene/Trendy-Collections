@@ -11,10 +11,11 @@
 	<meta name="theme-color" content="#ffffff" />
 
 	<!-- Favicon (Modern format) -->
-	<link rel="icon" type="image/svg+xml" href="/favicon.ico" sizes="any" />
-	<link rel="icon" href="/icon.svg" type="image/svg+xml" />
+	<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
+
 
 	<!-- SEO TAGS -->
 	<title>Trendy Collections Kenya | Premium Curtains, Pillows & Home Decor </title>
@@ -32,7 +33,7 @@
 		!function (f, b, e, v, n, t, s) {
 			if (f.fbq) return; n = f.fbq = function () {
 				n.callMethod ?
-				n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+					n.callMethod.apply(n, arguments) : n.queue.push(arguments)
 			};
 			if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
 			n.queue = []; t = b.createElement(e); t.async = !0;
@@ -45,6 +46,58 @@
 		fbq('track', 'PageView');
 		fbq('track', 'ViewContent');
 	</script>
+
+	<!-- Establish early connections to these ones -->
+	<link rel="preconnect" href="https://connect.facebook.net" crossorigin />
+	<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+	<link rel="preload" href="/src/main.jsx" as="script" fetchpriority="high" />
+	<link rel="preload" href="/images/TrendyHero.webp" as="image" imagesrcset="...">
+
+	<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HomeGoodsStore",
+      "@id": "https://trendycollections.co.ke",
+      "name": "Trendy Collections Kenya",
+      "description": "Nairobi's premier destination for luxury home furnishings",
+      "url": "https://trendycollections.co.ke",
+      "logo": "https://trendycollections.co.ke/logo.webp",
+      "telephone": "+254712403671",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ronald Ngala Street, Royal Palm Mall",
+        "addressLocality": "Nairobi",
+        "addressRegion": "Nairobi",
+        "postalCode": "00100",
+        "addressCountry": "KE"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      "priceRange": "ksh",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Current Promotions",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Luxury Silk Curtains",
+              "description": "Handmade in Nairobi with premium fabrics",
+              "brand": { "@type": "Brand", "name": "Trendy Collections" }
+            },
+            "price": "3500",
+            "priceCurrency": "KES"
+          }
+        ]
+      }
+    }
+  </script>
 
 </head>
 
