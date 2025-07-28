@@ -406,7 +406,7 @@ export const products = [
     name: "Earthtone Knot Pillow",
     description: "A beautifully hand-crafted knot pillow in a rich earthtone brown-orange shade. Perfect for adding a cozy, modern accent to any room.",
     price: 500,
-    originalPrice: 500,
+    originalPrice: 600,
     image: "/images/knot-pillows/Earthtone-knot-pillow2.webp",
     images: [
       "/images/knot-pillows/Earthtone-knot-pillow.webp",
@@ -437,11 +437,15 @@ export const products = [
   },
   // golden mist pillow
   {
-    id: "3",
+    id: "Golden-Mist-Luxury-Velvet-Pillow",
     name: "Golden Mist Luxury Velvet Pillow",
     description: "Opulent golden velvet pillow that adds warmth to any decor",
     price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Golden-Mist-Cushion.webp",
+    image: "/images/pillows/Golden-Mist-Cushion3.webp",
+    images: [
+      "/images/pillows/Golden-Mist-Cushion.webp",
+       "/images/pillows/Golden-Mist-Cushion2.webp"
+    ],
     colors: ["Blue", "Grey Stripe", "Off White", "White"],
     materials: ["Velvet"],
     sizes: ["18×18", "20×20"],
