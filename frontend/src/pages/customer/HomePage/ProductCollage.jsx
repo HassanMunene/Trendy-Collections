@@ -6,7 +6,7 @@ const ProductCollage = () => {
                     {/* Background Image */}
                     <div className="aspect-[16/9] md:aspect-[21/9] relative overflow-hidden bg-[#f6f2f0]">
                         <img
-                            src="https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/TrendyHero2.webp"
+                            src="/images/TrendyHero2.webp"
                             alt="Shop trendy"
                             className="w-full h-full object-cover"
                         />

@@ -1,6 +1,13 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import ReactPixel from 'react-facebook-pixel';
+
+const advancedMatching = {}; // Optional: For advanced user data matching
+const options = {
+	autoConfig: true, // Set pixel's autoConfig (default: true)
+	debug: false,    // Enable debugging logs (default: false)
+};
 
 import './App.css';
 
@@ -33,6 +40,10 @@ const CustomersPage = lazy(() => import('./pages/admin/CustomersPage'));
 const CategoriesPage = lazy(() => import('./pages/admin/CategoriesPage'));
 
 function App() {
+	useEffect(() => {
+		ReactPixel.init('1115284690514936', advancedMatching, options); // Replace with your Pixel ID
+		ReactPixel.pageView(); // Track initial pageview
+	}, []);
 	return (
 		<BrowserRouter>
 			<AuthProvider>
