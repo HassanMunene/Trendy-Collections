@@ -190,7 +190,7 @@ const ProductGrid = () => {
                                         e.preventDefault();
                                         // WhatsApp order logic
                                         const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
-                                        window.open(`https://wa.me/254712345678?text=${encodeURIComponent(message)}`, '_blank');
+                                        window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
                                     }}
                                 >
                                     <FaWhatsapp className="h-5 w-5" />
@@ -268,7 +268,7 @@ const ProductGrid = () => {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
-                                        window.open(`https://wa.me/254712345678?text=${encodeURIComponent(message)}`, '_blank');
+                                        window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
                                     }}
                                 >
                                     <FaWhatsapp className="h-5 w-5" />
@@ -332,7 +332,7 @@ const ProductGrid = () => {
                                         onClick={(e) => {
                                             e.preventDefault();
                                             const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
-                                            window.open(`https://wa.me/254712345678?text=${encodeURIComponent(message)}`, '_blank');
+                                            window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
                                         }}
                                         className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors duration-300 text-sm"
                                     >
