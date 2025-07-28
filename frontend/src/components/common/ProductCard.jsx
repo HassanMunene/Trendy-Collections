@@ -4,7 +4,17 @@ import { FaWhatsapp } from 'react-icons/fa';
 
 export function ProductCard({ product }) {
     const formatPrice = (price) => `KSh ${price?.toLocaleString() ?? ''}`;
-    const discountPercentage = product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100 ): 0;
+    const discountPercentage = product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
+
+    const handleWhatsAppClick = (e) => {
+        e.preventDefault();
+
+        // Create the message with product details
+        const message = `I'm interested in ${product.name} (${product.id}) for ${formatPrice(product.price)}\n\nProduct Link: ${window.location.origin}/products/${product.id}`;
+
+        // Open WhatsApp with the message
+        window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
+    };
 
     return (
         <div className="group relative bg-white rounded-md hover:shadow-md transition-all duration-300 overflow-hidden">
@@ -78,13 +88,9 @@ export function ProductCard({ product }) {
                     </div>
                 )}
 
-                {/* WhatsApp Button - Replaces heart button */}
+                {/* WhatsApp Button */}
                 <button
-                    onClick={(e) => {
-                        e.preventDefault();
-                        const message = `I'm interested in ${product.name} (${product.id}) for ${formatPrice(product.price)}`;
-                        window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
-                    }}
+                    onClick={handleWhatsAppClick}
                     className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors duration-300 shadow hover:shadow-md"
                 >
                     <FaWhatsapp className="h-5 w-5" />
