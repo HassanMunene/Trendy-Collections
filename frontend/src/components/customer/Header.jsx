@@ -9,7 +9,7 @@ import { useCart } from '@/src/context/CartContext';
 const navigationLinks = [
     { name: 'Shop all', href: "/products?category=all" },
     { name: 'Curtains', href: '/products?category=curtains' },
-    { name: 'Collections', href: '/collections' },
+    { name: 'Collections', href: '#' },
     { name: 'Pillows', href: '/products?category=pillow' },
 ]
 
