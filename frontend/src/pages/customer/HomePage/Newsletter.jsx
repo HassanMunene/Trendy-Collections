@@ -22,7 +22,7 @@ const Newsletter = () => {
                             href="https://wa.me/254712403671?text=I%20want%20to%20join%20Trendy%20Collections%20community"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="block w-full bg-[#25D366] text-white py-3 px-4 text-sm font-medium uppercase tracking-wide hover:bg-[#128C7E] transition-colors flex items-center justify-center gap-2"
+                            className="w-full bg-[#25D366] text-white py-3 px-4 text-sm font-medium uppercase tracking-wide hover:bg-[#128C7E] transition-colors flex items-center justify-center gap-2"
                         >
                             <FaWhatsappSquare className="w-5 h-5" />
                             Join Now
