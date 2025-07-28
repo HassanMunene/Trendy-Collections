@@ -8,10 +8,8 @@ export function ProductCard({ product }) {
 
     const handleWhatsAppClick = (e) => {
         e.preventDefault();
-
         // Create the message with product details
         const message = `I'm interested in ${product.name} (${product.id}) for ${formatPrice(product.price)}\n\nProduct Link: ${window.location.origin}/products/${product.id}`;
-
         // Open WhatsApp with the message
         window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
     };

@@ -6,9 +6,18 @@ import { FaWhatsapp } from "react-icons/fa";
 const ProductGrid = () => {
     // First, filter products with floral subcategory and flatten their variants
     const floralProducts = products.filter(product => product.subcategory === "floral");
+    const formatPrice = (price) => `KSh ${price?.toLocaleString() ?? ''}`;
 
     const curtains = products.filter(product => product.category === "curtains");
     const knot_pillows = products.filter(product => product.category === "knot-pillows");
+
+    const handleWhatsAppClick = (e, product) => {
+        e.preventDefault();
+        // Create the message with product details
+        const message = `I'm interested in ${product.name} (${product.id}) for ${formatPrice(product.price)}\n\nProduct Link: ${window.location.origin}/products/${product.id}`;
+        // Open WhatsApp with the message
+        window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
+    };
 
     return (
         <section className="py-14 bg-white">
@@ -126,8 +135,8 @@ const ProductGrid = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
                         {floralProducts.map((product) => (
                             <div key={product.id} className="group relative">
-                                <Link
-                                    to={`/products/${product.id}`}
+                                <a
+                                    href={`/products/${product.id}`}
                                     className="block"
                                     aria-label={`View ${product.name}`}
                                 >
@@ -181,17 +190,12 @@ const ProductGrid = () => {
                                             )}
                                         </div>
                                     </div>
-                                </Link>
+                                </a>
 
                                 {/* WhatsApp Button */}
                                 <button
                                     className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors duration-300 shadow hover:shadow-md"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        // WhatsApp order logic
-                                        const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
-                                        window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
-                                    }}
+                                    onClick={(e) => handleWhatsAppClick(e, product)}
                                 >
                                     <FaWhatsapp className="h-5 w-5" />
                                     <span>Order via WhatsApp</span>
@@ -204,8 +208,8 @@ const ProductGrid = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {curtains.map((product) => (
                             <div key={product.id} className="group relative">
-                                <Link
-                                    to={`/products/${product.id}`}
+                                <a
+                                    href={`/products/${product.id}`}
                                     className="block"
                                     aria-label={`View ${product.name}`}
                                 >
@@ -260,16 +264,12 @@ const ProductGrid = () => {
                                             )}
                                         </div>
                                     </div>
-                                </Link>
+                                </a>
 
                                 {/* WhatsApp Button */}
                                 <button
                                     className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors duration-300 shadow hover:shadow-md"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
-                                        window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
-                                    }}
+                                    onClick={(e) => handleWhatsAppClick(e, product)}
                                 >
                                     <FaWhatsapp className="h-5 w-5" />
                                     <span>Order via WhatsApp</span>
@@ -292,7 +292,7 @@ const ProductGrid = () => {
                                 )}
 
                                 {/* Image - Square aspect for pillows */}
-                                <Link to={`/products/${product.id}`} className="block">
+                                <a href={`/products/${product.id}`} className="block">
                                     <div className="aspect-square bg-gray-50 overflow-hidden">
                                         <img
                                             src={product.image}
@@ -301,7 +301,7 @@ const ProductGrid = () => {
                                             loading="lazy"
                                         />
                                     </div>
-                                </Link>
+                                </a>
 
                                 {/* Product Info */}
                                 <div className="p-4">
@@ -329,11 +329,7 @@ const ProductGrid = () => {
 
                                     {/* WhatsApp Button */}
                                     <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
-                                            window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
-                                        }}
+                                        onClick={(e) => handleWhatsAppClick(e, product)}
                                         className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors duration-300 text-sm"
                                     >
                                         <FaWhatsapp className="h-4 w-4" />
