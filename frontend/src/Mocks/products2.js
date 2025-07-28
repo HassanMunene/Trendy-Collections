@@ -291,7 +291,7 @@ export const products = [
     name: "Emerald Green Art Splash Knot Pillow",
     description: "Handcrafted knot pillow with vibrant emerald green splash design",
     price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Art-Splash-emerald-green-knot.webp",
+    image: "/images/knot-pillows/Art-Splash-emerald-green-knot.webp",
     colors: ["Emerald Green"],
     materials: ["Textured Polyester"],
     sizes: ["16×16"],
@@ -302,7 +302,7 @@ export const products = [
     isNew: true,
     onSale: Math.random() < 0.3,
     createdAt: "2023-10-15",
-    stock: 8,
+    stock: 20,
     tags: ["artistic", "handmade", "accent-piece"]
   },
   // White curtain with rustic feather prints
@@ -360,9 +360,9 @@ export const products = [
     description: "Set of 2 elegant glossy yellow sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft yellow hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
     price: 2800,
     originalPrice: 3200,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-yellow-curtain.webp",
+    image: "/images/curtains/plain-yellow-curtain.webp",
     images: [
-      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-yellow-curtain.webp",
+      "/images/curtains/plain-yellow-curtain.webp",
       // Add more image URLs here
     ],
     colors: ["yellow"],
@@ -407,10 +407,10 @@ export const products = [
     description: "A beautifully hand-crafted knot pillow in a rich earthtone brown-orange shade. Perfect for adding a cozy, modern accent to any room.",
     price: 500,
     originalPrice: 500,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/knot-pillows/Earthtone-knot-pillow.webp",
+    image: "/images/knot-pillows/Earthtone-knot-pillow2.webp",
     images: [
-      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/knot-pillows/Earthtone-knot-pillow.webp"
-      // Add more angles if available
+      "/images/knot-pillows/Earthtone-knot-pillow.webp",
+      "/images/knot-pillows/Earthtone-knot-pillow3.webp",
     ],
     colors: ["brown"],
     colorNames: {
