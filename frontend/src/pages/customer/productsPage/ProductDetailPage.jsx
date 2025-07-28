@@ -426,10 +426,7 @@ export default function ProductDetail() {
                 >
                   Cancel
                 </Button>
-                <Button
-                  className="flex-1 bg-green-600 hover:bg-green-700"
-                  onClick={() => window.open(whatsappUrl, '_blank')}
-                >
+                <Button className="flex-1 bg-green-600 hover:bg-green-700" onClick={() => window.open(whatsappUrl, '_blank')}>
                   Open WhatsApp
                 </Button>
               </div>
