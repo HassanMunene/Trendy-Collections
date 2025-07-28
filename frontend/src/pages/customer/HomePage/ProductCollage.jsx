@@ -13,9 +13,11 @@ const ProductCollage = () => {
 
                         {/* Shop Bedroom Button */}
                         <div className="absolute bottom-6 left-6">
-                            <button className="bg-white bg-opacity-90 text-black px-4 py-2 text-sm font-medium hover:bg-opacity-100 transition-all">
-                                Shop With us
-                            </button>
+                            <a href="/products?category=all">
+                                <button className="bg-white bg-opacity-90 text-black px-4 py-2 text-sm font-medium hover:bg-opacity-100 transition-all">
+                                    Shop With us
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
