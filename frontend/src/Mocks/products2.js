@@ -6,7 +6,10 @@ export const products = [
     name: "Serenity Blue Luxe Velvet Pillow",
     description: "Premium velvet pillow with elegant blue hue, perfect for modern living spaces",
     price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Serenity-Blue-Luxe-Cushion.webp",
+    image: "/images/pillows/Serenity-Blue-Luxe-Cushion.webp",
+    images: [
+      "/images/pillows/Serenity-Blue-Luxe-Cushion.webp",
+    ],
     colors: ["Grey Stripe", "Grey", "Off White Boucle", "White"],
     materials: ["Velvet", "Linen"],
     sizes: ["18×18", "20×20"],
@@ -28,9 +31,9 @@ export const products = [
     description: "Set of 2 elegant glossy pink sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft pink hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
     price: 2800,
     originalPrice: 3200,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/curtains/plain-pink-curtain.webp",
+    image: "/images/curtains/plain-pink-curtain.webp",
     images: [
-      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/main/ecommerce-images/curtains/plain-pink-curtain.webp",
+      "/images/curtains/plain-pink-curtain.webp",
       // Add more image URLs here
     ],
     colors: ["pink"],
@@ -164,16 +167,17 @@ export const products = [
     ],
     careInstructions: "Machine wash cold on gentle cycle. Tumble dry low or hang to dry. Iron on low heat if needed. Avoid bleach to preserve texture and color."
   },
-  // Mate marigold pillow
+  // Mate marigold Knot pillow
   {
     id: "matte-marigold-knot-pillow-1",
     name: "Matte Marigold Knot Pillow",
     description: "A bold and cheerful hand-crafted knot pillow in a soft matte marigold yellow. Its sculptural shape and vivid color add instant charm to any modern or playful interior.",
     price: 500,
     originalPrice: 500,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/knot-pillows/matte-marigold-knot-pillow.webp",
+    image: "/images/knot-pillows/matte-marigold-knot-pillow2.webp",
     images: [
-      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/knot-pillows/matte-marigold-knot-pillow.webp"
+      "/images/knot-pillows/matte-marigold-knot-pillow.webp",
+      "/images/knot-pillows/matte-marigold-knot-pillow3.webp"
     ],
     colors: ["yellow"],
     colorNames: {
@@ -191,6 +195,41 @@ export const products = [
     createdAt: "2024-01-22",
     stock: 15,
     tags: ["yellow pillow", "knot decor", "marigold", "modern cushion", "bold accent"],
+    features: [
+      "Handmade knot structure",
+      "Soft matte cotton-blend texture",
+      "Bright marigold yellow finish",
+      "Ideal for living spaces, bedrooms, or nurseries",
+      "Lightweight and plush feel"
+    ]
+  },
+  // Turquoise green Knot pillow
+  {
+    id: "turquoise-green-knot-pillow-1",
+    name: "Turquoise green Knot Pillow",
+    description: "A bold and cheerful hand-crafted knot pillow in a soft green. Its sculptural shape and vivid color add instant charm to any modern or playful interior.",
+    price: 500,
+    originalPrice: 500,
+    image: "/images/knot-pillows/turquoise-green-knot-pillow.webp",
+    images: [
+      "/images/knot-pillows/turquoise-green-knot-pillow2.webp",
+    ],
+    colors: ["green"],
+    colorNames: {
+      green: "Turquoise green"
+    },
+    materials: ["soft cotton blend"],
+    category: "knot-pillows",
+    subcategory: "decorative",
+    collection: "Bright Tones",
+    rating: 4.5,
+    reviews: 12,
+    isNew: true,
+    onOffer: false,
+    salePercentage: 0,
+    createdAt: "2024-01-22",
+    stock: 15,
+    tags: ["green pillow", "knot decor", "modern cushion", "bold accent"],
     features: [
       "Handmade knot structure",
       "Soft matte cotton-blend texture",
@@ -252,7 +291,7 @@ export const products = [
     name: "Emerald Green Art Splash Knot Pillow",
     description: "Handcrafted knot pillow with vibrant emerald green splash design",
     price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Art-Splash-emerald-green-knot.webp",
+    image: "/images/knot-pillows/Art-Splash-emerald-green-knot.webp",
     colors: ["Emerald Green"],
     materials: ["Textured Polyester"],
     sizes: ["16×16"],
@@ -263,7 +302,7 @@ export const products = [
     isNew: true,
     onSale: Math.random() < 0.3,
     createdAt: "2023-10-15",
-    stock: 8,
+    stock: 20,
     tags: ["artistic", "handmade", "accent-piece"]
   },
   // White curtain with rustic feather prints
@@ -321,9 +360,9 @@ export const products = [
     description: "Set of 2 elegant glossy yellow sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft yellow hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
     price: 2800,
     originalPrice: 3200,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-yellow-curtain.webp",
+    image: "/images/curtains/plain-yellow-curtain.webp",
     images: [
-      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-yellow-curtain.webp",
+      "/images/curtains/plain-yellow-curtain.webp",
       // Add more image URLs here
     ],
     colors: ["yellow"],
@@ -367,11 +406,11 @@ export const products = [
     name: "Earthtone Knot Pillow",
     description: "A beautifully hand-crafted knot pillow in a rich earthtone brown-orange shade. Perfect for adding a cozy, modern accent to any room.",
     price: 500,
-    originalPrice: 500,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/knot-pillows/Earthtone-knot-pillow.webp",
+    originalPrice: 600,
+    image: "/images/knot-pillows/Earthtone-knot-pillow2.webp",
     images: [
-      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/knot-pillows/Earthtone-knot-pillow.webp"
-      // Add more angles if available
+      "/images/knot-pillows/Earthtone-knot-pillow.webp",
+      "/images/knot-pillows/Earthtone-knot-pillow3.webp",
     ],
     colors: ["brown"],
     colorNames: {
@@ -398,11 +437,15 @@ export const products = [
   },
   // golden mist pillow
   {
-    id: "3",
+    id: "Golden-Mist-Luxury-Velvet-Pillow",
     name: "Golden Mist Luxury Velvet Pillow",
     description: "Opulent golden velvet pillow that adds warmth to any decor",
     price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Golden-Mist-Cushion.webp",
+    image: "/images/pillows/Golden-Mist-Cushion3.webp",
+    images: [
+      "/images/pillows/Golden-Mist-Cushion.webp",
+       "/images/pillows/Golden-Mist-Cushion2.webp"
+    ],
     colors: ["Blue", "Grey Stripe", "Off White", "White"],
     materials: ["Velvet"],
     sizes: ["18×18", "20×20"],

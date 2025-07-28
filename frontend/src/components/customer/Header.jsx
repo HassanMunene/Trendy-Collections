@@ -9,7 +9,7 @@ import { useCart } from '@/src/context/CartContext';
 const navigationLinks = [
     { name: 'Shop all', href: "/products?category=all" },
     { name: 'Curtains', href: '/products?category=curtains' },
-    { name: 'Collections', href: '/collections' },
+    { name: 'Collections', href: '#' },
     { name: 'Pillows', href: '/products?category=pillow' },
 ]
 
@@ -86,14 +86,14 @@ const Header = () => {
                         <nav className="hidden md:flex items-center justify-center flex-1 max-w-2xl">
                             <div className="flex space-x-6 lg:space-x-8">
                                 {navigationLinks.map((item) => (
-                                    <Link
+                                    <a
                                         key={item.name}
-                                        to={item.href}
+                                        href={item.href}
                                         className="relative px-1 py-2 text-sm font-medium text-gray-700 hover:text-pink-600 transition-colors group"
                                     >
                                         {item.name}
                                         <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-pink-500 transition-all duration-300 group-hover:w-full"></span>
-                                    </Link>
+                                    </a>
                                 ))}
                             </div>
                         </nav>

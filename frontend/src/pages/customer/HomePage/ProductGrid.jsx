@@ -16,8 +16,8 @@ const ProductGrid = () => {
                 {/* Three Category Grid - Enhanced */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20 sm:px-0">
                     {/* Curtains Section */}
-                    <Link
-                        to="/products?category=curtains"
+                    <a
+                        href="/products?category=curtains"
                         className="relative group overflow-hidden rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
                         aria-label="Browse Curtains Collection"
                     >
@@ -39,11 +39,11 @@ const ProductGrid = () => {
                                 </span>
                             </div>
                         </div>
-                    </Link>
+                    </a>
 
                     {/* Pillows Section */}
-                    <Link
-                        to="/products?category=pillow"
+                    <a
+                        href="/products?category=pillow"
                         className="relative group overflow-hidden rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
                         aria-label="Browse Pillows Collection"
                     >
@@ -65,11 +65,11 @@ const ProductGrid = () => {
                                 </span>
                             </div>
                         </div>
-                    </Link>
+                    </a>
 
                     {/* Knot Pillows Section */}
-                    <Link
-                        to="/products?subcategory=knot-pillows"
+                    <a
+                        href="/products?subcategory=knot-pillows"
                         className="relative group overflow-hidden rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
                         aria-label="Browse Knot Pillows"
                     >
@@ -91,7 +91,7 @@ const ProductGrid = () => {
                                 </span>
                             </div>
                         </div>
-                    </Link>
+                    </a>
                 </div>
 
                 {/* Enhanced Product Quick Links - Mobile Friendly */}
@@ -190,7 +190,7 @@ const ProductGrid = () => {
                                         e.preventDefault();
                                         // WhatsApp order logic
                                         const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
-                                        window.open(`https://wa.me/254712345678?text=${encodeURIComponent(message)}`, '_blank');
+                                        window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
                                     }}
                                 >
                                     <FaWhatsapp className="h-5 w-5" />
@@ -268,7 +268,7 @@ const ProductGrid = () => {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
-                                        window.open(`https://wa.me/254712345678?text=${encodeURIComponent(message)}`, '_blank');
+                                        window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
                                     }}
                                 >
                                     <FaWhatsapp className="h-5 w-5" />
@@ -332,7 +332,7 @@ const ProductGrid = () => {
                                         onClick={(e) => {
                                             e.preventDefault();
                                             const message = `I'm interested in ${product.name} (${product.id}) for KSh ${product.price.toLocaleString()}`;
-                                            window.open(`https://wa.me/254712345678?text=${encodeURIComponent(message)}`, '_blank');
+                                            window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
                                         }}
                                         className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors duration-300 text-sm"
                                     >

@@ -81,7 +81,7 @@ export default function HeroSection() {
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.6, delay: 0.9 }}
                             >
-                                <Link to="/products?category=all">
+                                <a href="/products?category=all">
                                     <button className="group relative inline-flex items-center overflow-hidden rounded-full border-2 border-white/30 px-8 py-3 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-transparent transition-all duration-300 hover:border-white/60 hover:bg-white/10">
                                         <span className="relative z-10 text-sm font-medium uppercase tracking-widest">
                                             Discover Collections
@@ -91,7 +91,7 @@ export default function HeroSection() {
                                         </span>
                                         <span className="absolute inset-0 bg-gradient-to-r from-pink-600 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     </button>
-                                </Link>
+                                </a>
                             </motion.div>
 
                             {/* Featured product tags */}
