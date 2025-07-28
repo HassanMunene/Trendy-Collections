@@ -16,8 +16,8 @@ const ProductGrid = () => {
                 {/* Three Category Grid - Enhanced */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20 sm:px-0">
                     {/* Curtains Section */}
-                    <Link
-                        to="/products?category=curtains"
+                    <a
+                        href="/products?category=curtains"
                         className="relative group overflow-hidden rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
                         aria-label="Browse Curtains Collection"
                     >
@@ -39,11 +39,11 @@ const ProductGrid = () => {
                                 </span>
                             </div>
                         </div>
-                    </Link>
+                    </a>
 
                     {/* Pillows Section */}
-                    <Link
-                        to="/products?category=pillow"
+                    <a
+                        href="/products?category=pillow"
                         className="relative group overflow-hidden rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
                         aria-label="Browse Pillows Collection"
                     >
@@ -65,11 +65,11 @@ const ProductGrid = () => {
                                 </span>
                             </div>
                         </div>
-                    </Link>
+                    </a>
 
                     {/* Knot Pillows Section */}
-                    <Link
-                        to="/products?subcategory=knot-pillows"
+                    <a
+                        href="/products?subcategory=knot-pillows"
                         className="relative group overflow-hidden rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
                         aria-label="Browse Knot Pillows"
                     >
@@ -91,7 +91,7 @@ const ProductGrid = () => {
                                 </span>
                             </div>
                         </div>
-                    </Link>
+                    </a>
                 </div>
 
                 {/* Enhanced Product Quick Links - Mobile Friendly */}

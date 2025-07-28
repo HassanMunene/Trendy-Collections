@@ -291,27 +291,6 @@ export default function ProductDetail() {
               </div>
             )}
 
-            {/* Size Selection */}
-            {product.sizes?.length > 1 && (
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold">Size</h3>
-                <div className="grid grid-cols-3 gap-3">
-                  {product.sizes.map((size) => (
-                    <button
-                      key={size.name}
-                      className={`p-3 rounded-lg border-2 flex flex-col items-center ${selectedSize === size.name
-                        ? 'border-black bg-black text-white'
-                        : 'border-gray-300 bg-white hover:bg-gray-50'
-                        }`}
-                    >
-                      <span className="font-medium">{size.name}</span>
-                      <span className="text-sm text-gray-500">{size.dimensions}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
             {/* Quantity and Add to Cart */}
             <div className="flex gap-4 pt-4">
               <Button
@@ -399,7 +378,7 @@ export default function ProductDetail() {
               <h3 className="text-2xl font-bold">You may also like</h3>
               <Button
                 variant="link"
-                onClick={() => navigate(`/${product.category}`)}
+                onClick={() => navigate(`/products?category=${product.category}`)}
                 className="text-gray-600 hover:text-black"
               >
                 View all
