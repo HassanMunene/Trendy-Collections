@@ -29,7 +29,7 @@ export const products = [
     id: "glossy-pink-curtain-1",
     name: "Glossy Pink Plain Curtain Panel (Pair)",
     description: "Set of 2 elegant glossy pink sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft pink hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
-    price: 2800,
+    price: 2600,
     originalPrice: 3200,
     image: "/images/curtains/plain-pink-curtain.webp",
     images: [
@@ -76,7 +76,7 @@ export const products = [
     id: "white-fabric-curtain-with-purple-prints-1",
     name: "White Fabric Curtain with Maroon Botanical Prints",
     description: "Elevate your space with this set of 2 premium white curtains featuring elegant purple floral prints. Made from 100% breathable cotton, these curtains combine style with functionality - offering maximum light filtration while maintaining privacy. Each panel measures 1.5m wide (3m total width) with a 2m drop length, perfect for standard windows. The digitally printed design ensures color vibrancy that lasts through multiple washes. Includes matching tie-backs and all necessary hanging hardware for easy installation.",
-    price: 3500,
+    price: 3800,
     originalPrice: 4000,
     image: "/images/curtains/white-fabric-curtain-with-purple-prints.webp",
     images: [
@@ -125,7 +125,7 @@ export const products = [
     id: "classic-serenity-white-curtain-1",
     name: "Classic Serenity White Curtain",
     description: "Bring timeless elegance into your home with the Classic Serenity White Curtain. Designed with soft textured detailing on pure white fabric, this curtain offers a clean, minimalist look ideal for modern, Scandinavian, or cozy home interiors. Its semi-thick cotton blend ensures privacy while still allowing natural light to flow through. Perfect for living rooms, bedrooms, or office spaces.",
-    price: 3500,
+    price: 3800,
     originalPrice: 4000,
     image: "/images/curtains/classic-serenity-white-curtain.webp",
     images: [
@@ -172,8 +172,8 @@ export const products = [
     id: "matte-marigold-knot-pillow-1",
     name: "Matte Marigold Knot Pillow",
     description: "A bold and cheerful hand-crafted knot pillow in a soft matte marigold yellow. Its sculptural shape and vivid color add instant charm to any modern or playful interior.",
-    price: 500,
-    originalPrice: 500,
+    price: 600,
+    originalPrice: 700,
     image: "/images/knot-pillows/matte-marigold-knot-pillow2.webp",
     images: [
       "/images/knot-pillows/matte-marigold-knot-pillow.webp",
@@ -208,8 +208,7 @@ export const products = [
     id: "turquoise-green-knot-pillow-1",
     name: "Turquoise green Knot Pillow",
     description: "A bold and cheerful hand-crafted knot pillow in a soft green. Its sculptural shape and vivid color add instant charm to any modern or playful interior.",
-    price: 500,
-    originalPrice: 500,
+    price: 600,
     image: "/images/knot-pillows/turquoise-green-knot-pillow.webp",
     images: [
       "/images/knot-pillows/turquoise-green-knot-pillow2.webp",
@@ -243,7 +242,7 @@ export const products = [
     "id": "urban-texture-grey-curtain-1",
     "name": "Urban Texture Grey Curtain",
     "description": "Add a modern industrial flair to your space with the Urban Texture Grey Curtain. Featuring a subtle 3D cube pattern in monochrome tones, this curtain offers a unique textured look that complements contemporary and geometric-themed interiors. Made with a durable polyester blend, it filters light while maintaining privacy, making it ideal for studios, offices, and modern homes.",
-    "price": 3500,
+    "price": 3800,
     "originalPrice": 4000,
     "image": "/images/curtains/urban-texture-grey-curtain.webp",
     "images": [
@@ -290,7 +289,7 @@ export const products = [
     id: "2",
     name: "Emerald Green Art Splash Knot Pillow",
     description: "Handcrafted knot pillow with vibrant emerald green splash design",
-    price: 300,
+    price: 600,
     image: "/images/knot-pillows/Art-Splash-emerald-green-knot.webp",
     colors: ["Emerald Green"],
     materials: ["Textured Polyester"],
@@ -358,7 +357,7 @@ export const products = [
     id: "glossy-yellow-curtain-1",
     name: "Glossy Yellow Plain Curtain Panel (Pair)",
     description: "Set of 2 elegant glossy yellow sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft yellow hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
-    price: 2800,
+    price: 2600,
     originalPrice: 3200,
     image: "/images/curtains/plain-yellow-curtain.webp",
     images: [
@@ -405,8 +404,7 @@ export const products = [
     id: "earthtone-knot-pillow-1",
     name: "Earthtone Knot Pillow",
     description: "A beautifully hand-crafted knot pillow in a rich earthtone brown-orange shade. Perfect for adding a cozy, modern accent to any room.",
-    price: 500,
-    originalPrice: 600,
+    price: 600,
     image: "/images/knot-pillows/Earthtone-knot-pillow2.webp",
     images: [
       "/images/knot-pillows/Earthtone-knot-pillow.webp",
@@ -464,7 +462,7 @@ export const products = [
     "id": "serene-feather-blue-curtain-1",
     "name": "White Serene Curtain with Blue Feather prints",
     "description": "Create a tranquil and airy atmosphere with the Serene Feather Blue Curtain. Featuring a soft white backdrop with floating blue feather prints, this curtain brings a touch of nature’s calm into any room. Its lightweight yet privacy-enhancing fabric makes it perfect for bedrooms, lounges, or minimalist spaces. A subtle textured finish adds to its serene appeal while the grommet top ensures effortless hanging.",
-    "price": 3500,
+    "price": 3800,
     "originalPrice": 4000,
     "image": "/images/curtains/serene-feather-blue-curtain.webp",
     "images": [
@@ -512,11 +510,11 @@ export const products = [
     id: "glossy-brown-curtain-1",
     name: "Glossy Brown Plain Curtain Panel (Pair)",
     description: "Set of 2 elegant glossy brown sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft brown hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
-    price: 2800,
+    price: 2600,
     originalPrice: 3200,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-brown-curtain.webp",
+    image: "/images/curtains/plain-brown-curtain.webp",
     images: [
-      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-brown-curtain.webp",
+      "/images/curtains/plain-brown-curtain.webp",
       // Add more image URLs here
     ],
     colors: ["brown"],
@@ -559,11 +557,10 @@ export const products = [
     id: "golden-bronze-knot-pillow-1",
     name: "Golden Bronze Knot Pillow",
     description: "A luxurious hand-crafted knot pillow made from soft, shiny velvet in a rich golden bronze color. Its elegant sheen and unique design make it the perfect statement piece for sofas, beds, or reading corners.",
-    price: 500,
-    originalPrice: 500,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/knot-pillows/golden-bronze-knot-pillow.webp",
+    price: 600,
+    image: "/images/knot-pillows/golden-bronze-knot-pillow.webp",
     images: [
-      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/knot-pillows/golden-bronze-knot-pillow.webp"
+      "/images/knot-pillows/golden-bronze-knot-pillow.webp"
       // Add more images if needed
     ],
     colors: ["gold"],

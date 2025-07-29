@@ -27,22 +27,12 @@ export default function ProductsPage() {
 	const [mobileSortOpen, setMobileSortOpen] = useState(false);
 	const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-	// Combine all products and their variants
-	const allItems = products.flatMap(product =>
-		product.variants
-			? product.variants.map(variant => ({
-				...variant,
-				parentProduct: product,
-				isVariant: true
-			}))
-			: [{ ...product, isVariant: false }]
-	);
-
-	const filteredItems = allItems.filter(item => {
+	const filteredItems = products.filter(item => {
 		const parent = item.isVariant ? item.parentProduct : item;
+
 		return (
-			(filters.category === 'all' || parent.category === filters.category) &&
-			(!filters.subcategory || parent.subcategory === filters.subcategory) &&
+			(filters.category === 'all' || item.category === filters.category) &&
+			(!filters.subcategory) &&
 			(!filters.price || (
 				(filters.price === "500" && item.price < 500) ||
 				(filters.price === "1000" && item.price >= 500 && item.price <= 1000) ||
@@ -54,6 +44,7 @@ export default function ProductsPage() {
 			(!onOfferChecked || item.onSale)
 		);
 	});
+
 
 	const sortedItems = [...filteredItems].sort((a, b) => {
 		const parentA = a.isVariant ? a.parentProduct : a;
