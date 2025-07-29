@@ -56,7 +56,7 @@ export function ProductCard({ product }) {
                                 {formatPrice(product.price)}
                             </span>
                             <span className="text-sm text-gray-400 line-through">
-                                {formatPrice(product.originalPrice)}
+                                {formatPrice(product?.originalPrice)}
                             </span>
                         </div>
                     ) : (
@@ -81,7 +81,7 @@ export function ProductCard({ product }) {
                             ))}
                         </div>
                         <span className="text-xs text-gray-500">
-                            ({product.reviewCount || 0} reviews)
+                            ({product.reviews || 0} reviews)
                         </span>
                     </div>
                 )}
