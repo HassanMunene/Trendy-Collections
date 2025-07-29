@@ -2,7 +2,7 @@
 export const products = [
   //blue velvet Pillow
   {
-    id: "1",
+    id: "Serenity-Blue-Luxe-Velvet-Pillow",
     name: "Serenity Blue Luxe Velvet Pillow",
     description: "Premium velvet pillow with elegant blue hue, perfect for modern living spaces",
     price: 300,
@@ -286,7 +286,7 @@ export const products = [
   },
   // Emerald green Knot pillow
   {
-    id: "2",
+    id: "Emerald-Green-Art-Splash-Knot-Pillow",
     name: "Emerald Green Art Splash Knot Pillow",
     description: "Handcrafted knot pillow with vibrant emerald green splash design",
     price: 600,
@@ -304,13 +304,33 @@ export const products = [
     stock: 20,
     tags: ["artistic", "handmade", "accent-piece"]
   },
+  // Emerald green pillow
+  {
+    id: "Emerald-Green-Pillow-1",
+    name: "Emerald Green Pillow With Gold stripes",
+    description: "Handcrafted throw pillow with vibrant emerald green splash design",
+    price: 300,
+    image: "/images/pillows/emerald-green-pillow.webp",
+    colors: ["Emerald Green"],
+    materials: ["Textured Polyester"],
+    sizes: ["16×16"],
+    category: "pillow",
+    subcategory: "statement",
+    rating: 4.2,
+    reviews: 6,
+    isNew: true,
+    onSale: Math.random() < 0.3,
+    createdAt: "2023-10-15",
+    stock: 20,
+    tags: ["artistic", "handmade", "accent-piece"]
+  },
   // White curtain with rustic feather prints
   {
     "id": "feather-rustic-white-curtain-1",
     "name": "Rustic White Curtain with Feather Prints",
     "description": "Bring the charm of nature indoors with the Feather Rustic White Curtain. Adorned with elegant feather-inspired prints in earthy tones on a soft white background, this curtain strikes a perfect balance between organic style and everyday practicality. Made from a durable polyester blend, it's ideal for bedrooms, reading nooks, or nature-themed interiors, offering light filtering and a cozy, grounded feel.",
-    "price": 3400,
-    "originalPrice": 3900,
+    "price": 3800,
+    "originalPrice": 4000,
     "image": "/images/curtains/feather-rustic-white-curtain.webp",
     "images": [
       "/images/curtains/feather-rustic-white-curtain1.webp"
@@ -442,7 +462,7 @@ export const products = [
     image: "/images/pillows/Golden-Mist-Cushion3.webp",
     images: [
       "/images/pillows/Golden-Mist-Cushion.webp",
-       "/images/pillows/Golden-Mist-Cushion2.webp"
+      "/images/pillows/Golden-Mist-Cushion2.webp"
     ],
     colors: ["Blue", "Grey Stripe", "Off White", "White"],
     materials: ["Velvet"],
@@ -589,11 +609,14 @@ export const products = [
   },
   // white pillow with gold foils
   {
-    id: "5",
+    id: "Luxury-White-Pillow-with-Gold-Foil-Stripes",
     name: "Luxury White Pillow with Gold Foil Stripes",
     description: "Elegant white cushion with metallic gold foil stripe detailing",
     price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Luxury-White-Cushion-with-Gold-Foil.webp",
+    image: "/images/pillows/Luxury-White-Cushion-with-Gold-Foil2.webp",
+    images: [
+      "/images/pillows/Luxury-White-Cushion-with-Gold-Foil.webp",
+    ],
     colors: ["White/Gold"],
     materials: ["Cotton Blend", "Metallic Foil"],
     sizes: ["18×18"],
@@ -612,11 +635,11 @@ export const products = [
     id: "glossy-deep-blue-curtain-1",
     name: "Glossy Deep Blue Plain Curtain Panel (Pair)",
     description: "Set of 2 elegant glossy purple sheer curtains made from high-quality polyester fabric. Each panel measures 1.5m wide with 2m sheer length (total 3m when hung). Provides excellent light filtration while adding a soft purple hue to your room. Perfect for bedrooms and living spaces seeking modern elegance.",
-    price: 2800,
+    price: 2600,
     originalPrice: 3200,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-deep-purple-curtain.webp",
+    image: "/images/curtains/plain-deep-purple-curtain.webp",
     images: [
-      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/curtains/plain-deep-purple-curtain.webp",
+      "/images/curtains/plain-deep-purple-curtain.webp",
       // Add more image URLs here
     ],
     colors: ["purple"],
@@ -654,36 +677,16 @@ export const products = [
     ],
     careInstructions: "Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.",
   },
-  // Urban grid throw pillow
-  {
-    id: "6",
-    name: "Urban Grid Modern Throw Pillow",
-    description: "Contemporary grid design pillow for urban-inspired interiors",
-    price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Urban-Grid-Throw-Pillow.webp",
-    colors: ["Black/White"],
-    materials: ["Polyester"],
-    sizes: ["18×18"],
-    category: "pillow",
-    subcategory: "geometric",
-    rating: 4.0,
-    reviews: 15,
-    isNew: Math.random() < 0.5,
-    onSale: Math.random() < 0.3,
-    createdAt: "2023-10-15",
-    stock: 14,
-    tags: ["modern", "geometric", "urban", "contemporary"]
-  },
   // Multiple color knot pillow
   {
-    id: "7",
+    id: "Multiple-Colors-Knot-Pillows-1",
     name: "Multiple Colors Knot Pillows",
     description: "A collection of vibrant, hand-crafted knot pillows made from soft velvet in multiple colors. Perfect for adding a playful and cozy accent to any space. Whether it's for your sofa, bed, or reading corner, these colorful knot pillows bring both comfort and style.",
-    price: 500,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/knot-pillows/MultiColor-knot-pillow.webp",
+    price: 600,
+    image: "/images/knot-pillows/MultiColor-knot-pillow.webp",
     images: [
-      "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/knot-pillows/MultiColor-knot-pillow.webp"
-      // Add more angles or color variations if available
+      "/images/knot-pillows/matte-marigold-knot-pillow3.webp",
+      "/images/knot-pillows/turquoise-green-knot-pillow.webp"
     ],
     colors: ["brown", "red", "gold", "yellow", "blue", "black", "white"],
     colorNames: {
@@ -704,7 +707,7 @@ export const products = [
     isNew: Math.random() < 0.5,
     onSale: Math.random() < 0.3,
     createdAt: "2023-10-15",
-    stock: 7,
+    stock: 12,
     tags: ["multicolor", "knot pillow", "velvet", "cozy decor", "playful accent"],
     features: [
       "Handmade knot design",
@@ -716,11 +719,11 @@ export const products = [
   },
   // Royal Blue Pillow
   {
-    id: "8",
+    id: "Royal-Azure-Velvet-Throw-Pillow-1",
     name: "Royal Azure Velvet Throw Pillow",
     description: "Rich azure blue velvet pillow for regal elegance",
     price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Royal-Azure.webp",
+    image: "/images/pillows/Royal-Azure.webp",
     colors: ["Azure Blue"],
     materials: ["Velvet"],
     sizes: ["18×18"],
@@ -731,27 +734,27 @@ export const products = [
     isNew: Math.random() < 0.5,
     onSale: Math.random() < 0.3,
     createdAt: "2023-10-15",
-    stock: 5,
+    stock: 12,
     tags: ["velvet", "blue", "luxury", "statement"]
   },
   // Black pillow with gold stripes
   {
-    id: "11",
+    id: "black-pillow-with-gold-stripes",
     name: "Luxury Black Pillow with Gold Foil Stripes",
     description: "Dramatic black cushion with striking gold foil stripes",
     price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Luxury-Black-Cushion-with-Gold-Foil.webp",
+    image: "/images/pillows/Luxury-Black-Cushion-with-Gold-Foil.webp",
     colors: ["Black/Gold"],
     materials: ["Cotton Blend", "Metallic Foil"],
     sizes: ["20×20"],
     category: "pillow",
     subcategory: "luxury",
-    rating: 5.0,
-    reviews: 56,
+    rating: 4.0,
+    reviews: 6,
     isNew: Math.random() < 0.5,
     onSale: Math.random() < 0.3,
     createdAt: "2023-10-15",
-    stock: 3,
+    stock: 13,
     tags: ["premium", "gold foil", "luxury", "statement"]
   },
   // Multicolor Geometry design pillow
@@ -1119,8 +1122,8 @@ export const products = [
     id: "-red-garnet-grid-throw-pillow",
     name: "Red Garnet Grid Throw Pillow",
     description: "Featuring a bold garnet red hue and a unique textured grid pattern, this throw pillow adds dimension and richness to any space. Ideal for both modern and classic interiors, it offers a tactile charm and refined simplicity.",
-    price: 350,
-    originalPrice: 450,
+    price: 300,
+    originalPrice: 400,
     image: "/images/pillows/Red-Garnet-Grid-Pillow.webp",
     images: [],
     colors: ["garnet", "red"],
@@ -1140,8 +1143,8 @@ export const products = [
     id: "golden-glow-pillow",
     name: "Golden Glow Pillow",
     description: "A radiant burst of sunshine in any room, the Golden Glow Pillow brings warmth and vibrance with its rich yellow hue. Its smooth finish and minimalist design make it a versatile accent for modern, boho, or cozy-chic spaces.",
-    price: 350,
-    originalPrice: 450,
+    price: 300,
+    originalPrice: 4-0,
     image: "/images/pillows/Golden-Glow-Pillow3.webp",
     images: [
       "/images/pillows/Golden-Glow-Pillow.webp",
@@ -1161,11 +1164,11 @@ export const products = [
   },
   // Savanna Sunset zigzag throw pillow
   {
-    id: "26",
+    id: "savanna-sunset-zigzag-pillow",
     name: "Savanna Sunset Zigzag Pillow",
     description: "Warm-toned zigzag pattern inspired by African sunsets",
     price: 300,
-    image: "https://raw.githubusercontent.com/HassanMunene/trendy-frontend/refs/heads/main/ecommerce-images/pillow-cusions/Savanna-Sunset-Zigzag-Design.webp",
+    image: "/images/pillows/Savanna-Sunset-Zigzag-Design.webp",
     colors: ["Terracotta", "Mustard", "Cream"],
     materials: ["Polyester"],
     sizes: ["18×18"],
