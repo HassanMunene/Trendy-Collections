@@ -1,5 +1,5 @@
 import { User, ShoppingCart, X, ChevronRight, AlignJustify } from 'lucide-react'
-import { Link, useNavigate } from "react-router-dom";
+import { href, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react';
 import { FaFacebookSquare } from "react-icons/fa";
 import { AiFillTikTok } from "react-icons/ai";
@@ -9,7 +9,7 @@ import { useCart } from '@/src/context/CartContext';
 const navigationLinks = [
     { name: 'Shop all', href: "/products?category=all" },
     { name: 'Curtains', href: '/products?category=curtains' },
-    { name: 'Collections', href: '#' },
+    { name: 'Knot Pillows', href: '/products?category=knot-pillows'},
     { name: 'Pillows', href: '/products?category=pillow' },
 ]
 

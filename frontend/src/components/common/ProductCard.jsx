@@ -8,10 +8,11 @@ export function ProductCard({ product }) {
 
     const handleWhatsAppClick = (e) => {
         e.preventDefault();
-        // Create the message with product details
-        const message = `I'm interested in ${product.name} (${product.id}) for ${formatPrice(product.price)}\n\nProduct Link: ${window.location.origin}/products/${product.id}`;
-        // Open WhatsApp with the message
-        window.open(`https://wa.me/254712403671?text=${encodeURIComponent(message)}`, '_blank');
+        const message = `Hello Trendy Collections! \n\nI'm interested in:\n\n*${product.name}*\nPrice: *${formatPrice(product.price)}\n\n[View Product](${window.location.origin}/products/${product.id})`;
+
+        // Improved WhatsApp URL with fallback
+        const phone = '254712403671'; // Kenyan format
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
     };
 
     return (
@@ -23,11 +24,6 @@ export function ProductCard({ product }) {
                         New Arrival
                     </span>
                 )}
-                {product.discount && (
-                    <span className="bg-gradient-to-r from-red-500 to-red-600 text-white px-2.5 py-1 rounded-full text-xs font-bold shadow-md">
-                        -{discountPercentage}% OFF
-                    </span>
-                )}
             </div>
 
             {/* Image - Taller aspect ratio for curtains */}
@@ -35,7 +31,7 @@ export function ProductCard({ product }) {
                 <Link to={`/products/${product.id}`} className="block">
                     <img
                         src={product.image}
-                        alt={product.name}
+                        alt={`${product.name} - Trendy Collections Kenya`}
                         className="w-full h-80 object-cover object-top group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                     />
@@ -80,19 +76,16 @@ export function ProductCard({ product }) {
                                 />
                             ))}
                         </div>
-                        <span className="text-xs text-gray-500">
-                            ({product.reviews || 0} reviews)
-                        </span>
                     </div>
                 )}
 
                 {/* WhatsApp Button */}
                 <button
                     onClick={handleWhatsAppClick}
-                    className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors duration-300 shadow hover:shadow-md"
+                    className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white py-3 px-4 rounded-lg transition-colors duration-300 shadow hover:shadow-md mt-2"
                 >
                     <FaWhatsapp className="h-5 w-5" />
-                    <span>Order on WhatsApp</span>
+                    <span className="font-medium">Order on WhatsApp</span>
                 </button>
             </div>
         </div>
