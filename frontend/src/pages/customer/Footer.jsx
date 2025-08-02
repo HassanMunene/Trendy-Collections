@@ -8,10 +8,8 @@ const Footer = () => {
     const helpLinks = [
         { text: "Contact Us", path: "/Contact-us" },
         { text: "Shipping & Delivery", path: "/shipping-delivery" },
-        { text: "Returns & Exchanges", path: "/returns-exchanges" },
         { text: "Product Care", path: "/product-care" },
         { text: "FAQ", path: "/faq" },
-        { text: "Payment Options", path: "/payment-options" }
     ];
 
     const aboutLinks = [
