@@ -15,19 +15,16 @@ const Footer = () => {
     const aboutLinks = [
         { text: "Our Story", path: "/our-story" },
         { text: "Privacy Policy", path: "/privacy-policy" },
-        { text: "Terms of Service", path: "/terms of service" },
-        { text: "Careers", path: "/careers" },
-        { text: "Wholesale Inquiries", path: "/wholesale-inquiries" }
+        { text: "Terms of Service", path: "/terms_of_service" },
     ];
 
     const shopLinks = [
-        "New Arrivals",
-        "Best Sellers",
-        "Pillows",
-        "Curtains",
-        "Bedding",
-        "Home Decor",
-        "Collections"
+        { text: "New Arrivals", path: "/products?category=new-arrivals" },
+        { text: "Best Sellers", path: "/products?category=best-sellers" },
+        { text: "Pillows", path: "/products?category=pillow" },
+        { text: "Curtains", path: "/products?category=curtains" },
+        { text: "Knot Pillows", path: "/products?category=knot-pillows" },
+        { text: "Sausage Pillows", path: "/products?category=sausage-pillows" }
     ]
 
     return (
@@ -127,12 +124,12 @@ const Footer = () => {
                         <h6 className="font-bold text-gray-900 mb-4 text-base">SHOP</h6>
                         <ul className="space-y-3 p-0">
                             {shopLinks.map((link) => (
-                                <li key={link}>
+                                <li key={link.text}>
                                     <a
-                                        href="#"
+                                        href={link.path}
                                         className="text-gray-600 hover:text-pink-600 transition-colors hover:underline"
                                     >
-                                        {link}
+                                        {link.text}
                                     </a>
                                 </li>
                             ))}
