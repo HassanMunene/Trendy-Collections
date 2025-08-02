@@ -24,6 +24,7 @@ const ProductsPage = lazy(() => import('./pages/customer/productsPage/ProductsPa
 const ProductDetailPage = lazy(() => import('./pages/customer/productsPage/ProductDetailPage'));
 const CartPage = lazy(() => import('./pages/customer/CartPage'));
 const ContactUs = lazy(() => import('./pages/customer/ContactUs'));
+const ShippingDeliveryPage = lazy(() => import('./pages/customer/ShippingDeliveryPage'));
 
 // Login and Register pages
 const LoginPage = lazy(() => import('./pages/authentication/LoginPage'));
@@ -70,6 +71,7 @@ function App() {
 									<Route path="products/:productId" element={<ProductDetailPage />} />
 									<Route path="/cart" element={<CartPage />} />
 									<Route path="/Contact-Us" element={<ContactUs />} />
+									<Route path="/shipping-delivery" element={<ShippingDeliveryPage />} />
 								</Route>
 
 								{/* Authentication Routes */}
