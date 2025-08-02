@@ -227,17 +227,11 @@ export default function ProductDetail() {
                     {product.rating.toFixed(1)}
                   </span>
                 </div>
-                <span className="text-sm text-gray-500">
-                  {product.reviews} reviews
-                </span>
-                <span className="text-sm text-gray-500">
-                  {product.stock} in stock
-                </span>
               </div>
             </div>
 
             {/* Price Section */}
-            <div className="bg-gray-50 p-4 rounded-lg">
+            <div className="bg-gray-50 py-2 rounded-lg">
               <div className="flex items-baseline gap-3">
                 {product.originalPrice && (
                   <span className="text-lg text-red-400 line-through">
@@ -253,26 +247,11 @@ export default function ProductDetail() {
                   </Badge>
                 )}
               </div>
-
-              {product.stock <= 10 && (
-                <div className="mt-2">
-                  <div className="w-full bg-gray-200 rounded-full h-2.5">
-                    <div
-                      className="bg-green-600 h-2.5 rounded-full"
-                      style={{ width: `${(product.stock / 10) * 100}%` }}
-                    ></div>
-                  </div>
-                  <p className="text-sm text-gray-600 mt-1">
-                    {product.stock} items left
-                  </p>
-                </div>
-              )}
             </div>
 
             {/* Color Selection */}
-            {product.colors?.length > 0 && (
+            {product?.colors?.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold">Color: <span className="font-normal">{selectedColor}</span></h3>
                 <div className="flex flex-wrap gap-2">
                   {product.colors.map((color) => (
                     <button
@@ -344,7 +323,6 @@ export default function ProductDetail() {
                   </ul>
                 </div>
               </AccordionItem>
-
               <AccordionItem value="specifications">
                 <div className="flex items-center justify-between w-full py-4 font-medium">
                   <span>Specifications</span>
@@ -352,19 +330,48 @@ export default function ProductDetail() {
                 </div>
                 <div className="pb-4 pt-0">
                   <div className="grid grid-cols-2 gap-4">
+                    {/* ========= DIMENSIONS SECTION ========= */}
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Dimensions</h4>
-                      {product.sizes?.map((size, i) => (
+                      <h4 className="font-medium text-gray-900 mb-2">
+                        {product.category === 'knot-pillows' ? 'Design' : 'Dimensions'}
+                      </h4>
+
+                      {product.category === 'pillow' && product.sizes?.map((size, i) => (
                         <p key={i} className="text-gray-600 mb-1">
-                          {size.name}: {size.panelWidth} x {size.panelLength}
+                          {size.name}: {size.size}
                         </p>
                       ))}
+
+                      {product.category === 'curtains' && product.sizes?.map((size, i) => (
+                        <div key={i} className="text-gray-600 mb-1 space-y-1">
+                          <p>Panel: {size.size}</p>
+                          <p>Drop: {size.sizeHeight}</p>
+                          {size.sheer && <p>Sheer: {size.sheer}</p>}
+                          {size.totalWidth && <p>Total Width: {size.totalWidth}</p>}
+                        </div>
+                      ))}
+
+                      {product.category === 'knot-pillows' && (
+                        <p className="text-gray-600">One-size sculptural design</p>
+                      )}
                     </div>
+
+                    {/* ========= MATERIALS & FEATURES SECTION ========= */}
                     <div>
                       <h4 className="font-medium text-gray-900 mb-2">Materials</h4>
-                      <p className="text-gray-600">{product.materials?.join(', ')}</p>
+                      <p className="text-gray-600">
+                        {product.materials?.join(', ')}
+                      </p>
                     </div>
                   </div>
+
+                  {/* ========= ADDITIONAL INFO FOR CURTAINS ========= */}
+                  {product.category === 'curtains' && product.careInstructions && (
+                    <div className="mt-4">
+                      <h4 className="font-medium text-gray-900 mb-2">Care Instructions</h4>
+                      <p className="text-gray-600">{product.careInstructions}</p>
+                    </div>
+                  )}
                 </div>
               </AccordionItem>
             </Accordion>
