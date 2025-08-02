@@ -27,6 +27,7 @@ const ContactUs = lazy(() => import('./pages/customer/ContactUs'));
 const ShippingDeliveryPage = lazy(() => import('./pages/customer/ShippingDeliveryPage'));
 const ProductCarePage = lazy(() => import('./pages/customer/ProductCarePage'));
 const FAQPage = lazy(() => import('./pages/customer/FAQPage'));
+const OurStoryPage = lazy(() => import('./pages/customer/OurStoryPage'));
 
 // Login and Register pages
 const LoginPage = lazy(() => import('./pages/authentication/LoginPage'));
@@ -76,6 +77,7 @@ function App() {
 									<Route path="/shipping-delivery" element={<ShippingDeliveryPage />} />
 									<Route path="/product-care" element={<ProductCarePage />} />
 									<Route path="/faq" element={<FAQPage />} />
+									<Route path="/our-story" element={<OurStoryPage />} />
 								</Route>
 
 								{/* Authentication Routes */}

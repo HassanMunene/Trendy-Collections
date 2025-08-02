@@ -8,21 +8,18 @@ const Footer = () => {
     const helpLinks = [
         { text: "Contact Us", path: "/Contact-us" },
         { text: "Shipping & Delivery", path: "/shipping-delivery" },
-        { text: "Returns & Exchanges", path: "/returns-exchanges" },
         { text: "Product Care", path: "/product-care" },
         { text: "FAQ", path: "/faq" },
-        { text: "Payment Options", path: "/payment-options" }
     ];
 
     const aboutLinks = [
-        "Our Story",
-        "Sustainability",
-        "Privacy Policy",
-        "Terms of Service",
-        "Careers",
-        "Wholesale Inquiries",
-        "Press"
-    ]
+        { text: "Our Story", path: "/our-story" },
+        { text: "Sustainability", path: "/sustainability" },
+        { text: "Privacy Policy", path: "/privacy-policy" },
+        { text: "Terms of Service", path: "/terms of service" },
+        { text: "Careers", path: "/careers" },
+        { text: "Wholesale Inquiries", path: "/wholesale-inquiries" }
+    ];
 
     const shopLinks = [
         "New Arrivals",
@@ -114,12 +111,12 @@ const Footer = () => {
                         <h6 className="font-bold text-gray-900 mb-4 text-base">ABOUT TRENDY</h6>
                         <ul className="space-y-3 p-0">
                             {aboutLinks.map((link) => (
-                                <li key={link}>
+                                <li key={link.text}>
                                     <a
-                                        href="#"
+                                        href={link.path}
                                         className="text-gray-600 hover:text-pink-600 transition-colors hover:underline"
                                     >
-                                        {link}
+                                        {link.text}
                                     </a>
                                 </li>
                             ))}
