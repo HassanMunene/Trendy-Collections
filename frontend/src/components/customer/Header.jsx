@@ -9,8 +9,10 @@ import { useCart } from '@/src/context/CartContext';
 const navigationLinks = [
     { name: 'Shop all', href: "/products?category=all" },
     { name: 'Curtains', href: '/products?category=curtains' },
-    { name: 'Knot Pillows', href: '/products?category=knot-pillows'},
+    { name: 'Knot Pillows', href: '/products?category=knot-pillows' },
     { name: 'Pillows', href: '/products?category=pillow' },
+    { name: 'Our Story', href: '/our-story' },
+
 ]
 
 const Header = () => {

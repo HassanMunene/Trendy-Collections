@@ -13,23 +13,18 @@ const Footer = () => {
     ];
 
     const aboutLinks = [
-        "Our Story",
-        "Sustainability",
-        "Privacy Policy",
-        "Terms of Service",
-        "Careers",
-        "Wholesale Inquiries",
-        "Press"
-    ]
+        { text: "Our Story", path: "/our-story" },
+        { text: "Privacy Policy", path: "/privacy-policy" },
+        { text: "Terms of Service", path: "/terms_of_service" },
+    ];
 
     const shopLinks = [
-        "New Arrivals",
-        "Best Sellers",
-        "Pillows",
-        "Curtains",
-        "Bedding",
-        "Home Decor",
-        "Collections"
+        { text: "New Arrivals", path: "/products?category=new-arrivals" },
+        { text: "Best Sellers", path: "/products?category=best-sellers" },
+        { text: "Pillows", path: "/products?category=pillow" },
+        { text: "Curtains", path: "/products?category=curtains" },
+        { text: "Knot Pillows", path: "/products?category=knot-pillows" },
+        { text: "Sausage Pillows", path: "/products?category=sausage-pillows" }
     ]
 
     return (
@@ -112,12 +107,12 @@ const Footer = () => {
                         <h6 className="font-bold text-gray-900 mb-4 text-base">ABOUT TRENDY</h6>
                         <ul className="space-y-3 p-0">
                             {aboutLinks.map((link) => (
-                                <li key={link}>
+                                <li key={link.text}>
                                     <a
-                                        href="#"
+                                        href={link.path}
                                         className="text-gray-600 hover:text-pink-600 transition-colors hover:underline"
                                     >
-                                        {link}
+                                        {link.text}
                                     </a>
                                 </li>
                             ))}
@@ -129,12 +124,12 @@ const Footer = () => {
                         <h6 className="font-bold text-gray-900 mb-4 text-base">SHOP</h6>
                         <ul className="space-y-3 p-0">
                             {shopLinks.map((link) => (
-                                <li key={link}>
+                                <li key={link.text}>
                                     <a
-                                        href="#"
+                                        href={link.path}
                                         className="text-gray-600 hover:text-pink-600 transition-colors hover:underline"
                                     >
-                                        {link}
+                                        {link.text}
                                     </a>
                                 </li>
                             ))}
@@ -146,7 +141,7 @@ const Footer = () => {
                 <div className="py-6 text-center text-gray-500 text-sm border-t border-gray-200">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <p>© {new Date().getFullYear()} Trendy Home Collections. All rights reserved.</p>
-                        <p className="mt-2">Nairobi, Kenya | info@trendycollections.com</p>
+                        <p className="mt-2">Nairobi, Kenya | info@trendycollections.co.ke</p>
                     </div>
                 </div>
             </footer>
