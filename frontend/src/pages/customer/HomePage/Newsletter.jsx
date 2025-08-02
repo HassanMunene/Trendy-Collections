@@ -19,7 +19,7 @@ const Newsletter = () => {
                     {/* WhatsApp Button */}
                     <div className="mb-2">
                         <a
-                            href="https://wa.me/254712403671?text=I%20want%20to%20join%20Trendy%20Collections%20community"
+                            href="https://chat.whatsapp.com/E7EgHRTF4aQ6O5Ouj4tvUq?mode=ac_t"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-full bg-[#25D366] text-white py-3 px-4 text-sm font-medium uppercase tracking-wide hover:bg-[#128C7E] transition-colors flex items-center justify-center gap-2"
