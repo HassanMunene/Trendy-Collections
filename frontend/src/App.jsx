@@ -28,6 +28,7 @@ const ShippingDeliveryPage = lazy(() => import('./pages/customer/ShippingDeliver
 const ProductCarePage = lazy(() => import('./pages/customer/ProductCarePage'));
 const FAQPage = lazy(() => import('./pages/customer/FAQPage'));
 const OurStoryPage = lazy(() => import('./pages/customer/OurStoryPage'));
+const PrivacyPolicyPage = lazy(() => import('./pages/customer/PrivacyPolicyPage'));
 
 // Login and Register pages
 const LoginPage = lazy(() => import('./pages/authentication/LoginPage'));
@@ -78,6 +79,7 @@ function App() {
 									<Route path="/product-care" element={<ProductCarePage />} />
 									<Route path="/faq" element={<FAQPage />} />
 									<Route path="/our-story" element={<OurStoryPage />} />
+									<Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
 								</Route>
 
 								{/* Authentication Routes */}

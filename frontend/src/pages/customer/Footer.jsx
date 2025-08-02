@@ -14,7 +14,6 @@ const Footer = () => {
 
     const aboutLinks = [
         { text: "Our Story", path: "/our-story" },
-        { text: "Sustainability", path: "/sustainability" },
         { text: "Privacy Policy", path: "/privacy-policy" },
         { text: "Terms of Service", path: "/terms of service" },
         { text: "Careers", path: "/careers" },
@@ -145,7 +144,7 @@ const Footer = () => {
                 <div className="py-6 text-center text-gray-500 text-sm border-t border-gray-200">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <p>© {new Date().getFullYear()} Trendy Home Collections. All rights reserved.</p>
-                        <p className="mt-2">Nairobi, Kenya | info@trendycollections.com</p>
+                        <p className="mt-2">Nairobi, Kenya | info@trendycollections.co.ke</p>
                     </div>
                 </div>
             </footer>
