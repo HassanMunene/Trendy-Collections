@@ -279,10 +279,7 @@ export default function ProductsPage() {
 
 				{/* Mobile Filter Sheet */}
 				<Sheet open={mobileFilterOpen} onOpenChange={setMobileFilterOpen}>
-					<SheetContent
-						side="right"
-						className="w-full sm:w-[420px] overflow-y-auto p-0 bg-white"
-					>
+					<SheetContent side="right" className="w-full sm:w-[420px] overflow-y-auto p-0 bg-white">
 						{/* Header with close button */}
 						<div className="sticky top-0 z-10 bg-white border-b border-gray-200 px-2">
 							<div className="flex items-center justify-between">
