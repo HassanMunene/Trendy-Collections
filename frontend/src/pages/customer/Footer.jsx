@@ -19,7 +19,7 @@ const Footer = () => {
     ];
 
     const shopLinks = [
-        { text: "New Arrivals", path: "/products?category=new-arrivals" },
+        { text: "New Arrivals", path: "/products?category=all" },
         { text: "Best Sellers", path: "/products?category=best-sellers" },
         { text: "Pillows", path: "/products?category=pillow" },
         { text: "Curtains", path: "/products?category=curtains" },

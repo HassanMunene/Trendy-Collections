@@ -46,14 +46,49 @@ const Header = () => {
     return (
         <>
             {/* Announcement Bar */}
+            {/* Announcement Bar - Updated with Custom Curtain Offer */}
+            {/* Announcement Bar - Clear Custom Curtain Offer */}
             <div className="bg-gradient-to-r from-pink-600 to-pink-500 py-2 text-center text-white text-xs md:text-sm">
                 <div className="container mx-auto px-4 overflow-hidden">
-                    <p className="inline-flex items-center justify-center gap-2 w-full">
-                        <span className="hidden sm:inline">🚚 Countrywide delivery</span>
-                        <a href="tel:0712403671" className="underline hover:text-pink-200 font-medium">
-                            Call us: 0712403671
-                        </a>
-                    </p>
+                    <div className="marquee w-full overflow-hidden whitespace-nowrap">
+                        <div className="marquee-content inline-flex items-center justify-center gap-4 animate-scroll">
+                            {/* Custom Curtains Message */}
+                            <span className="inline-flex items-center gap-2 mr-8">
+                                ✂️ <span className="font-medium">BESPOKE CURTAINS:</span>
+                                Pay only <strong>70% upfront</strong> |
+                                Professional measuring service (<strong>Ksh 1,500</strong> fully refundable after purchase)
+                            </span>
+
+                            {/* Delivery Info */}
+                            <span className="inline-flex items-center gap-2 mr-8">
+                                🚛 <strong>C.O.D delivery within Nairobi</strong> | Countrywide shipping available
+                            </span>
+
+                            {/* Contact Info */}
+                            <span className="inline-flex items-center gap-2">
+                                📞 <a href="tel:0712403671" className="underline hover:text-pink-200 font-medium">
+                                    Order now: 0712 403671
+                                </a>
+                            </span>
+                        </div>
+
+                        {/* Duplicate for seamless looping (accessibility hidden) */}
+                        <div className="marquee-content inline-flex items-center justify-center gap-4 animate-scroll" aria-hidden="true">
+                            <span className="inline-flex items-center gap-2 mr-8">
+                                ✂️ <span className="font-medium">BESPOKE CURTAINS:</span>
+                                Pay only <strong>70% upfront</strong> |
+                                Professional measuring service (<strong>Ksh 1,500</strong> fully refundable after purchase)
+                            </span>
+                            <span className="inline-flex items-center gap-2 mr-8">
+                                🚛 <strong>Free Nairobi delivery</strong> | Countrywide shipping available
+                            </span>
+                            <span className="inline-flex items-center gap-2">
+                                📞 <a href="tel:0712403671" className="underline hover:text-pink-200 font-medium">
+                                    Order now: 0712 403671
+                                </a>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
