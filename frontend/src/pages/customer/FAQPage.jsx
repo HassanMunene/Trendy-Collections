@@ -261,18 +261,6 @@ const FAQPage = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* CTA */}
-                <div className="mt-12 text-center">
-                    <a
-                        href="https://wa.me/254712403671"
-                        className="inline-flex items-center bg-gradient-to-r from-pink-600 to-pink-500 text-white px-8 py-4 rounded-full hover:from-pink-700 hover:to-pink-600 transition-colors shadow-lg hover:shadow-xl"
-                        aria-label="Chat with Trendy Collections on WhatsApp"
-                    >
-                        <MessageCircle className="w-5 h-5 mr-2" />
-                        Still have questions? WhatsApp Us Now
-                    </a>
-                </div>
             </div>
         </section>
     );
